@@ -1,4 +1,4 @@
-# NSDEV React Template
+# Oftal pro client dashboard
 
 ## Code Style
 

@@ -75,7 +75,7 @@ const Signin: FC = () => {
             backgroundColor="transparent"
             placeholder="John Doe"
             focus={{
-              borderColor: 'focus',
+              borderColor: '#4763E4',
             }}
           />
           <Box
@@ -105,7 +105,7 @@ const Signin: FC = () => {
             backgroundColor="transparent"
             placeholder="johndoe@oftalpro.com"
             focus={{
-              borderColor: 'focus',
+              borderColor: '#4763E4',
             }}
           />
           <Box
@@ -149,7 +149,7 @@ const Signin: FC = () => {
               width={500}
               placeholder="***************"
               focus={{
-                borderColor: 'focus',
+                borderColor: '#4763E4',
                 borderSize: '1px',
                 borderStyle: 'solid',
               }}
@@ -166,7 +166,9 @@ const Signin: FC = () => {
               )}
             </Box>
           </Box>
-          <Typography padding="1rem">Próximo passo</Typography>
+          <Typography padding="1rem" marginTop="1rem">
+            Próximo passo
+          </Typography>
           <Button
             p="L"
             type="submit"
@@ -175,8 +177,6 @@ const Signin: FC = () => {
             disabled=""
             variant="primary"
             fontWeight="bold"
-            lineHeight="1.7rem"
-            letterSpacing={1.09}
             color="#FFF"
             width={500}
             borderRadius="M"
@@ -196,6 +196,7 @@ const Signin: FC = () => {
           justifyContent="center"
           alignItems="center"
           alignContent="center"
+          marginTop="1rem"
         >
           <Typography padding="0.5rem">Já tem uma conta?</Typography>
           <Link padding="0.5rem" href={RoutePaths[RoutesEnum.Home]}>

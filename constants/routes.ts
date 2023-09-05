@@ -7,6 +7,10 @@ export enum RoutesEnum {
   SignIn = 'sign-in',
   ResetPassword = 'reset-password',
   ResetPasswordNotification = 'reset-password-notification',
+  Dashboard = 'dashboard',
+  Request = 'request',
+  Account = 'account',
+  Setting = 'setting',
 }
 
 /**
@@ -18,6 +22,10 @@ export const RoutePaths: Record<RoutesEnum, string> = {
   [RoutesEnum.SignIn]: '/sign-in',
   [RoutesEnum.ResetPassword]: '/reset-password',
   [RoutesEnum.ResetPasswordNotification]: '/reset-password-notification',
+  [RoutesEnum.Dashboard]: '/dashboard',
+  [RoutesEnum.Request]: '/request',
+  [RoutesEnum.Account]: '/account',
+  [RoutesEnum.Setting]: '/setting',
 };
 
 export const routesList = Object.keys(RoutePaths) as ReadonlyArray<RoutesEnum>;

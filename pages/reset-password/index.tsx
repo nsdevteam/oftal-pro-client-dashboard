@@ -72,7 +72,7 @@ const ResetPassword: FC = () => {
             backgroundColor="transparent"
             placeholder="johndoe@oftalpro.com"
             focus={{
-              borderColor: 'focus',
+              borderColor: '#4763E4',
             }}
           />
           <Button
@@ -83,8 +83,6 @@ const ResetPassword: FC = () => {
             disabled=""
             variant="primary"
             fontWeight="bold"
-            lineHeight="1.7rem"
-            letterSpacing={1.09}
             color="#FFF"
             width={500}
             borderRadius="M"
@@ -107,6 +105,7 @@ const ResetPassword: FC = () => {
           justifyContent="center"
           alignItems="center"
           alignContent="center"
+          marginTop="1rem"
         >
           <Link padding="0.5rem" href={RoutePaths[RoutesEnum.Home]}>
             Voltar para a página de login

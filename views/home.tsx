@@ -76,7 +76,9 @@ const Home: FC = () => {
               backgroundColor="transparent"
               placeholder="johndoe@oftalpro.com"
               focus={{
-                borderColor: 'focus',
+                borderColor: '#4763E4',
+                borderSize: '1px',
+                borderStyle: 'solid',
               }}
             />
             <Box
@@ -120,7 +122,7 @@ const Home: FC = () => {
                 width={500}
                 placeholder="***************"
                 focus={{
-                  borderColor: 'focus',
+                  borderColor: '#4763E4',
                   borderSize: '1px',
                   borderStyle: 'solid',
                 }}
@@ -143,6 +145,8 @@ const Home: FC = () => {
               justifyContent="center"
               alignItems="center"
               alignContent="center"
+              marginTop="1rem"
+              marginBottom="1rem"
             >
               <Typography padding="0.5rem">Não tem uma conta?</Typography>
               <Link padding="0.5rem" href={RoutePaths[RoutesEnum.SignIn]}>
@@ -157,8 +161,6 @@ const Home: FC = () => {
               disabled=""
               variant="primary"
               fontWeight="bold"
-              lineHeight="1.7rem"
-              letterSpacing={1.09}
               color="#FFF"
               width={500}
               borderRadius="M"
@@ -178,6 +180,7 @@ const Home: FC = () => {
             justifyContent="center"
             alignItems="center"
             alignContent="center"
+            marginTop="1rem"
           >
             <Typography padding="0.5rem">Esqueceu a sua senha?</Typography>
             <Link padding="0.5rem" href={RoutePaths[RoutesEnum.ResetPassword]}>

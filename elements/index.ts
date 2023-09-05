@@ -7,3 +7,4 @@ export { default as Modal } from './modal';
 export { default as ResponsiveImage } from './responsive-image';
 export { default as Table } from './table';
 export { default as Typography } from './typography';
+export { default as Rotate } from './rotate';
