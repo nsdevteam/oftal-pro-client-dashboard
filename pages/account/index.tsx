@@ -21,12 +21,12 @@ const Account: FC = () => (
     >
       <Typography padding="0.5rem">Dados do usuário</Typography>
       <Box as="div" width="80%" padding="0.5rem" marginTop="2rem">
-        <Typography padding="0.5rem">Actualizar os seus dados</Typography>
+        <Typography padding="1rem">Actualizar os seus dados</Typography>
         <Box
           as="form"
           width="100%"
           display="flex"
-          gap="1rem"
+          flexDirection="column"
           alignItems="flex-start"
           justifyContent="flex-start"
           onSubmit=""
@@ -35,10 +35,81 @@ const Account: FC = () => (
             as="div"
             width="100vw"
             display="flex"
+            alignItems="flex-start"
+            justifyContent="flex-start"
+          >
+            <Box
+              as="div"
+              width={500}
+              margin="0.5rem"
+              display="flex"
+              flexDirection="column"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+            >
+              <Typography textAlign="left" padding="0.5rem">
+                Primeiro nome
+              </Typography>
+              <Input
+                p="L"
+                type="text"
+                bg="outline"
+                border="none"
+                outline="none"
+                borderRadius="M"
+                borderSize="1px"
+                borderStyle="solid"
+                borderColor="#E4E4E7"
+                marginLeft="0.5rem"
+                color="textInverted"
+                width={490}
+                backgroundColor="transparent"
+                placeholder="john"
+                focus={{
+                  borderColor: '#4763E4',
+                }}
+              />
+            </Box>
+            <Box
+              as="div"
+              width={500}
+              margin="0.5rem"
+              display="flex"
+              flexDirection="column"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+            >
+              <Typography textAlign="left" padding="0.5rem">
+                Sobrenome
+              </Typography>
+              <Input
+                p="L"
+                type="text"
+                bg="outline"
+                border="none"
+                outline="none"
+                borderRadius="M"
+                borderSize="1px"
+                borderStyle="solid"
+                borderColor="#E4E4E7"
+                marginLeft="0.5rem"
+                color="textInverted"
+                width={490}
+                backgroundColor="transparent"
+                placeholder="Doe"
+                focus={{
+                  borderColor: '#4763E4',
+                }}
+              />
+            </Box>
+          </Box>
+          <Box
+            as="div"
+            width="100vw"
+            display="flex"
             gap="1rem"
             alignItems="flex-start"
             justifyContent="flex-start"
-            onSubmit=""
           >
             <Box
               as="div"
@@ -54,7 +125,7 @@ const Account: FC = () => (
               </Typography>
               <Input
                 p="L"
-                type="text"
+                type="email"
                 bg="outline"
                 border="none"
                 outline="none"
@@ -86,7 +157,7 @@ const Account: FC = () => (
               </Typography>
               <Input
                 p="L"
-                type="text"
+                type="number"
                 bg="outline"
                 border="none"
                 outline="none"
@@ -105,6 +176,101 @@ const Account: FC = () => (
               />
             </Box>
           </Box>
+          <Box
+            as="div"
+            width="100vw"
+            display="flex"
+            gap="1rem"
+            alignItems="flex-start"
+            justifyContent="flex-start"
+          >
+            <Box
+              as="div"
+              width={500}
+              margin="0.5rem"
+              display="flex"
+              flexDirection="column"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+            >
+              <Typography textAlign="left" padding="0.5rem">
+                Data de criação de conta
+              </Typography>
+              <Input
+                p="L"
+                type="date"
+                bg="outline"
+                border="none"
+                outline="none"
+                borderRadius="M"
+                borderSize="1px"
+                borderStyle="solid"
+                borderColor="#E4E4E7"
+                marginLeft="0.5rem"
+                color="textInverted"
+                width={490}
+                backgroundColor="transparent"
+                placeholder="10-02-2019"
+                focus={{
+                  borderColor: '#4763E4',
+                }}
+              />
+            </Box>
+            <Box
+              as="div"
+              width={500}
+              margin="0.5rem"
+              display="flex"
+              flexDirection="column"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+            >
+              <Typography textAlign="left" padding="0.5rem">
+                Última data de login
+              </Typography>
+              <Input
+                p="L"
+                type="date"
+                bg="outline"
+                border="none"
+                outline="none"
+                borderRadius="M"
+                borderSize="1px"
+                borderStyle="solid"
+                borderColor="#E4E4E7"
+                marginLeft="0.5rem"
+                color="textInverted"
+                width={490}
+                backgroundColor="transparent"
+                placeholder="20-03-2020"
+                focus={{
+                  borderColor: '#4763E4',
+                }}
+              />
+            </Box>
+          </Box>
+          <Button
+            p="L"
+            type="submit"
+            effect="hover"
+            display="flex"
+            disabled=""
+            variant="primary"
+            fontWeight="bold"
+            color="#FFF"
+            width={100}
+            borderRadius="M"
+            border="none"
+            bg="#4763E4"
+            marginLeft="1rem"
+            marginTop="2rem"
+            justifyContent="center"
+            minWidth={['100%', '10rem']}
+            textTransform="uppercase"
+            alignItems="center"
+          >
+            Salvar
+          </Button>
         </Box>
       </Box>
     </Box>

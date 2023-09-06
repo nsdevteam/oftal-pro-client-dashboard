@@ -37,7 +37,7 @@ const Request: FC = () => (
           outline="none"
           mr={['NONE', 'S']}
           color="textInverted"
-          width="80%"
+          width="77%"
           backgroundColor="foreground"
           borderRadius="M"
           borderSize="1px"
