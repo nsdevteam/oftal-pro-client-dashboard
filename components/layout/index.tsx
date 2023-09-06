@@ -3,6 +3,8 @@ import { FC } from 'react';
 
 import { Box } from '../../elements';
 import { LayoutProps } from './layout.types';
+import Header from './header';
+import Sidebar from './sidebar';
 
 const Layout: FC<LayoutProps> = ({ pageTitle = '', children }) => {
   const title = `${pageTitle} | Dashboard do cliente`;
@@ -14,7 +16,28 @@ const Layout: FC<LayoutProps> = ({ pageTitle = '', children }) => {
         <title>{title}</title>
       </Head>
       <Box minHeight="100vh" display="flex" flexDirection="column">
-        {children}
+        <Box
+          as="div"
+          height="100vh"
+          display="flex"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          alignContent="center"
+        >
+          <Sidebar />
+          <Box
+            as="div"
+            height="100vh"
+            width="100vw"
+            display="flex"
+            flexDirection="column"
+            justifyContent="flex-start"
+            alignItems="center"
+          >
+            <Header />
+            <Box as="main">{children}</Box>
+          </Box>
+        </Box>
       </Box>
     </>
   );

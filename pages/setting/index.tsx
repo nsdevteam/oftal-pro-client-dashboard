@@ -7,17 +7,29 @@ import { RoutePaths, RoutesEnum } from '../../constants/routes';
 import { Box, Button, Input, Typography } from '../../elements';
 
 const Setting: FC = () => (
-  <Layout pageTitle="Oftal Pro">
+  <Layout pageTitle="Configurações">
     <Box
       as="div"
-      height="100vh"
+      height="90vh"
+      width="80vw"
       display="flex"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
       alignContent="center"
     >
-      <Typography padding="0.5rem">Setting page</Typography>
+      <Box
+        as="div"
+        height="100%"
+        width="100%"
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        alignContent="center"
+      >
+        <Typography padding="0.5rem">Setting page</Typography>
+      </Box>
     </Box>
   </Layout>
 );

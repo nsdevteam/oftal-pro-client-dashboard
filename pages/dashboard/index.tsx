@@ -1,39 +1,26 @@
-import Link from 'next/link';
 import { FC } from 'react';
 
-import { Eye, EyeSlash } from '../../components/image-svg';
 import Header from '../../components/layout/header';
 import Sidebar from '../../components/layout/sidebar';
-import { Loading } from '../../components/svg';
-import LogoSVG from '../../components/svg/logo';
-import { RoutePaths, RoutesEnum } from '../../constants/routes';
-import { Box, Button, Input, Typography } from '../../elements';
-import { Layout } from '../components';
+import { Box, Typography } from '../../elements';
+import Layout from '../../components/Layout';
 
 const Dashboard: FC = ({ children }) => {
   return (
-    <Box
-      as="div"
-      height="100vh"
-      display="flex"
-      justifyContent="flex-start"
-      alignItems="flex-start"
-      alignContent="center"
-    >
-      <Sidebar />
+    <Layout pageTitle="Dashboard">
       <Box
         as="div"
-        height="100vh"
-        width="100vw"
+        height="100%"
+        height="100%"
         display="flex"
         flexDirection="column"
-        justifyContent="flex-start"
+        justifyContent="center"
         alignItems="center"
+        alignContent="center"
       >
-        <Header />
-        {children}
+        <Typography as="h3">Bem-vindo Mário Batalha</Typography>
       </Box>
-    </Box>
+    </Layout>
   );
 };
 

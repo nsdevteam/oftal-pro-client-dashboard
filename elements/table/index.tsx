@@ -13,6 +13,7 @@ import {
   TableLoadingProps,
   TableRowProps,
 } from './table.types';
+import { data } from '../../api';
 
 const Cell: FC<CellProps> = ({ as, tip, children }) => (
   <Box

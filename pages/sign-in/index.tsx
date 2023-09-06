@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 
-import { Layout } from '../components';
 import { Eye, EyeSlash } from '../../components/image-svg';
 import LogoSVG from '../../components/svg/logo';
 import { RoutePaths, RoutesEnum } from '../../constants/routes';
@@ -10,6 +10,8 @@ import { Box, Typography, Button, Input } from '../../elements';
 const Signin: FC = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -52,118 +54,121 @@ const Signin: FC = () => {
             as="div"
             width="100%"
             display="flex"
+            flexDirection="column"
             justifyContent="flex-start"
             alignItems="flex-start"
           >
             <Typography textAlign="left" padding="0.5rem">
               Nome completo
             </Typography>
+            <Input
+              p="L"
+              type="text"
+              bg="outline"
+              border="none"
+              outline="none"
+              borderRadius="M"
+              borderSize="1px"
+              borderStyle="solid"
+              borderColor="#E4E4E7"
+              mr={['NONE', 'S']}
+              color="textInverted"
+              width={500}
+              backgroundColor="transparent"
+              placeholder="John Doe"
+              focus={{
+                borderColor: '#4763E4',
+              }}
+            />
           </Box>
-          <Input
-            p="L"
-            type="text"
-            bg="outline"
-            border="none"
-            outline="none"
-            borderRadius="M"
-            borderSize="1px"
-            borderStyle="solid"
-            borderColor="#E4E4E7"
-            mr={['NONE', 'S']}
-            color="textInverted"
-            width={500}
-            backgroundColor="transparent"
-            placeholder="John Doe"
-            focus={{
-              borderColor: '#4763E4',
-            }}
-          />
           <Box
             as="div"
             width="100%"
             display="flex"
+            flexDirection="column"
             justifyContent="flex-start"
             alignItems="flex-start"
           >
             <Typography textAlign="left" padding="0.5rem">
               Email
             </Typography>
+            <Input
+              p="L"
+              type="email"
+              bg="outline"
+              border="none"
+              outline="none"
+              borderRadius="M"
+              borderSize="1px"
+              borderStyle="solid"
+              borderColor="#E4E4E7"
+              mr={['NONE', 'S']}
+              color="textInverted"
+              width={500}
+              backgroundColor="transparent"
+              placeholder="johndoe@oftalpro.com"
+              focus={{
+                borderColor: '#4763E4',
+              }}
+            />
           </Box>
-          <Input
-            p="L"
-            type="email"
-            bg="outline"
-            border="none"
-            outline="none"
-            borderRadius="M"
-            borderSize="1px"
-            borderStyle="solid"
-            borderColor="#E4E4E7"
-            mr={['NONE', 'S']}
-            color="textInverted"
-            width={500}
-            backgroundColor="transparent"
-            placeholder="johndoe@oftalpro.com"
-            focus={{
-              borderColor: '#4763E4',
-            }}
-          />
           <Box
             as="div"
             width="100%"
             display="flex"
+            flexDirection="column"
             justifyContent="flex-start"
             alignItems="flex-start"
           >
             <Typography textAlign="left" padding="0.5rem">
               Senha
             </Typography>
-          </Box>
-          <Box
-            bg="outline"
-            border="none"
-            outline="none"
-            mr={['NONE', 'S']}
-            color="textInverted"
-            width={500}
-            backgroundColor="foreground"
-            borderRadius="M"
-            borderSize="1px"
-            borderStyle="solid"
-            borderColor="#E4E4E7"
-            display="flex"
-            flexWrap="nowrap"
-            overflow="hidden"
-            alignItems="center"
-            justifyContent="sstretch"
-          >
-            <Input
-              p="L"
-              type={showPassword ? 'text' : 'password'}
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              border="none"
-              borderRadius="M"
-              outline="none"
-              backgroundColor="transparent"
-              width={500}
-              placeholder="***************"
-              focus={{
-                borderColor: '#4763E4',
-                borderSize: '1px',
-                borderStyle: 'solid',
-              }}
-            />
             <Box
-              onClick={togglePasswordVisibility}
-              cursor="pointer"
-              margin="0.5rem"
+              bg="outline"
+              border="none"
+              outline="none"
+              mr={['NONE', 'S']}
+              color="textInverted"
+              width={500}
+              backgroundColor="foreground"
+              borderRadius="M"
+              borderSize="1px"
+              borderStyle="solid"
+              borderColor="#E4E4E7"
+              display="flex"
+              flexWrap="nowrap"
+              overflow="hidden"
+              alignItems="center"
+              justifyContent="sstretch"
             >
-              {showPassword ? (
-                <Eye width={16} height={16} />
-              ) : (
-                <EyeSlash width={16} height={16} />
-              )}
+              <Input
+                p="L"
+                type={showPassword ? 'text' : 'password'}
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                border="none"
+                borderRadius="M"
+                outline="none"
+                backgroundColor="transparent"
+                width={500}
+                placeholder="***************"
+                focus={{
+                  borderColor: '#4763E4',
+                  borderSize: '1px',
+                  borderStyle: 'solid',
+                }}
+              />
+              <Box
+                onClick={togglePasswordVisibility}
+                cursor="pointer"
+                margin="0.5rem"
+              >
+                {showPassword ? (
+                  <Eye width={16} height={16} />
+                ) : (
+                  <EyeSlash width={16} height={16} />
+                )}
+              </Box>
             </Box>
           </Box>
           <Typography padding="1rem" marginTop="1rem">
@@ -186,6 +191,7 @@ const Signin: FC = () => {
             minWidth={['100%', '10rem']}
             textTransform="uppercase"
             alignItems="center"
+            onClick={() => router.push('/dashboard')}
           >
             Criar conta &rarr;
           </Button>
