@@ -57,7 +57,7 @@ export const notification: Notification = [
   },
   {
     id: 5,
-    title: 'Compra entreggue',
+    title: 'Compra entregue',
     description: 'Olá Maria, sua compra foi entregue.',
     createdAt: 'Quinta-feira, 17:05',
     currentDate: 'Aug 23, 2024',

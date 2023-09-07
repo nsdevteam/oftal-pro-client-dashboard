@@ -41,6 +41,7 @@ const Sidebar: FC = () => {
         as="div"
         height="100%"
         width="100%"
+        padding="0.5rem"
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
@@ -50,12 +51,10 @@ const Sidebar: FC = () => {
           {menuLink.map((link) => {
             const { id, url, title, icon, submenu } = link;
             return (
-              <Box as="div" display="flex" flexDirection="column">
+              <Box as="div" display="flex" flexDirection="column" key={id}>
                 <Typography
                   as="li"
-                  key={id}
                   width="100%"
-                  padding="0.5rem"
                   display="flex"
                   justifyContent="space-between"
                   alignItems="center"
@@ -72,41 +71,51 @@ const Sidebar: FC = () => {
                     {icon}
                     {title}
                   </Link>
-                  {isDropDown ? (
-                    <FiChevronDown
-                      size={18}
-                      color="#FFF"
-                      onClick={() => setIsDropDown(!isDropDown)}
-                    />
-                  ) : (
-                    <FiChevronUp
-                      size={18}
-                      color="#FFF"
-                      onClick={() => setIsDropDown(!isDropDown)}
-                    />
-                  )}
-                </Typography>
-                {isDropDown && (
-                  <Link
-                    href="#"
-                    style={{
-                      padding: '0.8rem',
-                      margin: '0.5rem',
-                      marginLeft: '2rem',
-                      width: '80%',
-                      borderRadius: '10px',
-                      display: 'flex',
-                      justifyContent: 'flex-start',
-                      alignItems: 'flex-start',
-                      color: '#FFF',
-                      '&:active': {
-                        backgroundColor: '#4256D0',
-                      },
-                    }}
+                  <Button
+                    type="button"
+                    disabled=""
+                    variant="primary"
+                    borderRadius="M"
+                    border="none"
+                    bg="transparent"
+                    display="flex"
+                    justifyContent="center"
+                    textTransform="uppercase"
+                    alignItems="center"
+                    onClick={() => setIsDropDown(!isDropDown)}
                   >
-                    {submenu}
-                  </Link>
-                )}
+                    {isDropDown ? (
+                      <FiChevronDown size={18} color="#FFF" />
+                    ) : (
+                      <FiChevronUp size={18} color="#FFF" />
+                    )}
+                  </Button>
+                </Typography>
+                <Typography as="ul" listStyle="none">
+                  <Typography as="li">
+                    {isDropDown && (
+                      <Link
+                        href="#"
+                        style={{
+                          padding: '0.5rem',
+                          margin: '0.5rem',
+                          marginLeft: '2rem',
+                          width: '80%',
+                          borderRadius: '10px',
+                          display: 'flex',
+                          justifyContent: 'flex-start',
+                          alignItems: 'flex-start',
+                          color: '#FFF',
+                          '&:active': {
+                            backgroundColor: '#4256D0',
+                          },
+                        }}
+                      >
+                        {submenu}
+                      </Link>
+                    )}
+                  </Typography>
+                </Typography>
               </Box>
             );
           })}
