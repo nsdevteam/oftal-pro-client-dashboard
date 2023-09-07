@@ -16,3 +16,13 @@ export interface Links {
   icon: ReactNode;
   submenu?: unknown;
 }
+
+export interface Notification {
+  map(arg0: (socialIcon: any) => JSX.Element): import('react').ReactNode;
+  map(arg0: (link: any) => JSX.Element): import('react').ReactNode;
+  id: number;
+  title: string;
+  description: string;
+  createdAt: ReactNode;
+  currentDate: unknown;
+}

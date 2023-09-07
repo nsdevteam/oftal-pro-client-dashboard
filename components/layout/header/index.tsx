@@ -1,11 +1,19 @@
 import { FC, useState } from 'react';
 
-import { Box, Typography } from '../../../elements';
-import { FiChevronRight, FiBell } from 'react-icons/fi';
-import Modal from '../../../elements/modal';
+import { Box, Typography, ModalNotification } from '../../../elements';
+import { FiChevronRight, FiBell, FiX } from 'react-icons/fi';
+import { notification } from '../../../api';
 
 const Header: FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <Box
@@ -30,15 +38,61 @@ const Header: FC = () => {
       </Box>
       <Box as="div">
         <Typography as="span" padding="0.5rem">
-          <FiBell
-            size={30}
-            color="#000"
-            onClick={() => setIsModalOpen(!isModalOpen)}
-          />
+          <FiBell size={30} color="#000" onClick={openModal} />
           {isModalOpen ? (
-            <Modal background="#c2c2c2">
-              <Typography>Notificações</Typography>
-            </Modal>
+            <ModalNotification isOpen={isModalOpen} onClose={closeModal}>
+              <Box
+                as="div"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography as="h3">Notificações</Typography>
+                <FiX size={20} color="#A1A1AA" onClick={closeModal} />
+              </Box>
+              {notification.map((item) => {
+                const { id, title, description, createdAt, currentDate } = item;
+                return (
+                  <Box
+                    as="div"
+                    key={id}
+                    border="1px solid #E4E4E7"
+                    borderRadius="0.5rem"
+                    padding="0.3rem"
+                    marginTop="0.5rem"
+                    active={{
+                      background: '#F2F2F2',
+                      border: 'none',
+                    }}
+                  >
+                    <Typography as="h5" padding="0.2rem">
+                      {title}
+                    </Typography>
+                    <Typography
+                      as="p"
+                      padding="0.2rem"
+                      fontSize="10pt"
+                      color="#A1A1AA"
+                    >
+                      {description}
+                    </Typography>
+                    <Box
+                      as="div"
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      <Typography as="p" fontSize="8pt" padding="0.2rem">
+                        {createdAt}
+                      </Typography>
+                      <Typography as="p" fontSize="8pt" padding="0.2rem">
+                        {currentDate}
+                      </Typography>
+                    </Box>
+                  </Box>
+                );
+              })}
+            </ModalNotification>
           ) : (
             ''
           )}

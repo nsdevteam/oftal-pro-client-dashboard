@@ -7,23 +7,29 @@ const ModalBackdrop = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-start;
   z-index: 1000;
 `;
 
 const ModalContent = styled.div`
+  max-width: 80%;
+  max-height: 80%;
+  width: 25rem;
+  height: 31rem;
+  margin-top: 2rem;
+  margin-right: 3rem;
   background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: scroll;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  max-width: 80%;
 `;
 
-const Modal = ({ isOpen, onClose, children }) => {
+const ModalNofitication = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
@@ -35,4 +41,4 @@ const Modal = ({ isOpen, onClose, children }) => {
   );
 };
 
-export default Modal;
+export default ModalNofitication;
