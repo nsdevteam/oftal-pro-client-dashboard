@@ -37,7 +37,17 @@ const Header: FC = () => {
         </Typography>
       </Box>
       <Box as="div">
-        <Typography as="span" padding="0.5rem">
+        <Typography
+          as="span"
+          padding="0.5rem"
+          borderRadius={25}
+          display="flex"
+          hover={{
+            background: '#E5E5E5',
+            transition: 'all 1s ease-out',
+          }}
+          justifyContent="center"
+        >
           <FiBell size={30} color="#000" onClick={openModal} />
           {isModalOpen ? (
             <ModalNotification isOpen={isModalOpen} onClose={closeModal}>

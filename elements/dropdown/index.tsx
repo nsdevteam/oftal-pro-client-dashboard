@@ -5,14 +5,17 @@ import styled from '@emotion/styled';
 const DropdownContainer = styled.div`
   position: relative;
   display: inline-block;
+  margin: 0.5rem;
 `;
 
 const DropdownButton = styled.button`
   background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
+  border: 1.5px solid #e4e4e7;
+  border-radius: 0.5rem;
+  padding: 1rem;
   cursor: pointer;
+  height: 50px;
+  width: 100px;
 `;
 
 const DropdownMenu = styled.ul`
@@ -28,11 +31,13 @@ const DropdownMenu = styled.ul`
   border-radius: 0 0 4px 4px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   display: ${(props) => (props.isOpen ? 'block' : 'none')};
+  z-index: 999;
 `;
 
 const DropdownItem = styled.li`
   padding: 10px;
   cursor: pointer;
+  width: 100px;
 
   &:hover {
     background-color: #f5f5f5;
@@ -44,7 +49,8 @@ const Dropdown = ({ options, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (e) => {
+    e.preventDefault();
     setIsOpen(!isOpen);
   };
 
@@ -57,7 +63,7 @@ const Dropdown = ({ options, onSelect }) => {
   return (
     <DropdownContainer>
       <DropdownButton onClick={toggleDropdown}>
-        {selectedOption || 'Escolha uma opção'}
+        {selectedOption || '0.60'}
       </DropdownButton>
       <DropdownMenu isOpen={isOpen}>
         {options.map((option) => (

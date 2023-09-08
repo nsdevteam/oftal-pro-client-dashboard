@@ -26,7 +26,18 @@ import {
 const Request: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('Menu');
-  const options = ['Eixo', 'Cilindro', 'Esférico'];
+  const espherical = [
+    '-0.50',
+    '-0.60',
+    '-0.70',
+    '0',
+    '0.50',
+    '0.60',
+    '0.70',
+    '0.80',
+  ];
+  const cylinder = ['-0.50', '-0.60', '-0.70'];
+  const axis = ['0', '45', '90', '180', '270', '360'];
 
   const handleSelect = (option) => {
     setSelectedOption(option);
@@ -90,7 +101,7 @@ const Request: FC = () => {
           </Box>
           <Button
             p="L"
-            type="submit"
+            type="button"
             effect="hover"
             display="flex"
             disabled=""
@@ -136,7 +147,6 @@ const Request: FC = () => {
                   flexDirection="column"
                   alignItems="flex-start"
                   justifyContent="flex-start"
-                  onSubmit=""
                 >
                   <Typography padding="0.5rem">Olho direito</Typography>
                   <Box
@@ -147,94 +157,9 @@ const Request: FC = () => {
                     alignItems="flex-start"
                     justifyContent="flex-start"
                   >
-                    <Box
-                      as="div"
-                      margin="0.5rem"
-                      display="flex"
-                      width={100}
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      alignItems="flex-start"
-                    >
-                      <Input
-                        p="L"
-                        type="text"
-                        bg="outline"
-                        border="none"
-                        outline="none"
-                        borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
-                        color="textInverted"
-                        width={80}
-                        backgroundColor="transparent"
-                        placeholder="Cilíndro"
-                        focus={{
-                          borderColor: '#4763E4',
-                        }}
-                      />
-                    </Box>
-                    <Box
-                      as="div"
-                      width={100}
-                      margin="0.5rem"
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      alignItems="flex-start"
-                    >
-                      <Input
-                        p="L"
-                        type="text"
-                        bg="outline"
-                        border="none"
-                        outline="none"
-                        borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
-                        color="textInverted"
-                        width={80}
-                        backgroundColor="transparent"
-                        placeholder="Esférico"
-                        focus={{
-                          borderColor: '#4763E4',
-                        }}
-                      />
-                    </Box>
-
-                    <Box
-                      as="div"
-                      width={100}
-                      margin="0.5rem"
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      alignItems="flex-start"
-                    >
-                      <Input
-                        p="L"
-                        type="text"
-                        bg="outline"
-                        border="none"
-                        outline="none"
-                        borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
-                        color="textInverted"
-                        width={80}
-                        backgroundColor="transparent"
-                        placeholder="Eixo"
-                        focus={{
-                          borderColor: '#4763E4',
-                        }}
-                      />
-                    </Box>
+                    <Dropdown options={espherical} onSelect={handleSelect} />
+                    <Dropdown options={cylinder} onSelect={handleSelect} />
+                    <Dropdown options={axis} onSelect={handleSelect} />
                   </Box>
                   <Typography padding="0.5rem">Olho esquerdo</Typography>
                   <Box
@@ -245,93 +170,9 @@ const Request: FC = () => {
                     alignItems="flex-start"
                     justifyContent="flex-start"
                   >
-                    <Box
-                      as="div"
-                      margin="0.5rem"
-                      display="flex"
-                      width={100}
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      alignItems="flex-start"
-                    >
-                      <Input
-                        p="L"
-                        type="text"
-                        bg="outline"
-                        border="none"
-                        outline="none"
-                        borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
-                        color="textInverted"
-                        width={80}
-                        backgroundColor="transparent"
-                        placeholder="Cilíndro"
-                        focus={{
-                          borderColor: '#4763E4',
-                        }}
-                      />
-                    </Box>
-                    <Box
-                      as="div"
-                      margin="0.5rem"
-                      display="flex"
-                      width={100}
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      alignItems="flex-start"
-                    >
-                      <Input
-                        p="L"
-                        type="text"
-                        bg="outline"
-                        border="none"
-                        outline="none"
-                        borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
-                        color="textInverted"
-                        width={80}
-                        backgroundColor="transparent"
-                        placeholder="Esférico"
-                        focus={{
-                          borderColor: '#4763E4',
-                        }}
-                      />
-                    </Box>
-                    <Box
-                      as="div"
-                      margin="0.5rem"
-                      display="flex"
-                      width={100}
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      alignItems="flex-start"
-                    >
-                      <Input
-                        p="L"
-                        type="text"
-                        bg="outline"
-                        border="none"
-                        outline="none"
-                        borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
-                        color="textInverted"
-                        width={80}
-                        backgroundColor="transparent"
-                        placeholder="Eixo"
-                        focus={{
-                          borderColor: '#4763E4',
-                        }}
-                      />
-                    </Box>
+                    <Dropdown options={espherical} onSelect={handleSelect} />
+                    <Dropdown options={cylinder} onSelect={handleSelect} />
+                    <Dropdown options={axis} onSelect={handleSelect} />
                   </Box>
                   <Box
                     as="div"
@@ -488,7 +329,7 @@ const Request: FC = () => {
                   >
                     <Button
                       p="L"
-                      type="submit"
+                      type="butto "
                       effect="hover"
                       display="flex"
                       disabled=""
@@ -544,9 +385,8 @@ const Request: FC = () => {
               >
                 <Button
                   p="0.8rem"
-                  type="submit"
+                  type="button"
                   effect="hover"
-                  disabled=""
                   display="flex"
                   outline="none"
                   width={10}
@@ -569,11 +409,12 @@ const Request: FC = () => {
                     <FiChevronLeft size={16} color="#27272A" />
                   </Typography>
                 </Button>
-                {[1, 2, 3, 4, 5, 6, , 7, 8, 9].map((pag) => {
+                {[1, 2, 3, 4, 5, 6, , 7, 8, 9].map((pag, index) => {
                   return (
                     <Button
                       p="0.8rem"
-                      type="submit"
+                      type="button"
+                      key={index}
                       effect="hover"
                       display="flex"
                       disabled=""
@@ -600,11 +441,10 @@ const Request: FC = () => {
                 })}
                 <Button
                   p="0.8rem"
-                  type="submit"
+                  type="button"
                   effect="hover"
                   display="flex"
                   disabled=""
-                  outline="none"
                   width={10}
                   height={10}
                   variant="primary"
