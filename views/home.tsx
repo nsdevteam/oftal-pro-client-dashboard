@@ -48,7 +48,6 @@ const Home: FC = () => {
             width="100%"
             display="flex"
             alignItems="center"
-            onSubmit=""
             mt={['XL', 'XL', 'XL', 'NONE']}
             flexDirection="column"
             justifyContent="center"
@@ -161,7 +160,7 @@ const Home: FC = () => {
             </Box>
             <Button
               p="L"
-              type="submit"
+              type="button"
               effect="hover"
               display="flex"
               disabled=""

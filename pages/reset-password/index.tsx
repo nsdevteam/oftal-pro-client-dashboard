@@ -7,10 +7,7 @@ import { RoutePaths, RoutesEnum } from '../../constants/routes';
 import { Box, Button, Input, Typography } from '../../elements';
 
 const ResetPassword: FC = () => {
-  const { push } = useRouter();
-  const handleNavigation = () => {
-    push(RoutePaths[RoutesEnum.ResetPasswordNotification]);
-  };
+  const router = useRouter();
   return (
     <Box
       as="div"
@@ -77,7 +74,7 @@ const ResetPassword: FC = () => {
           />
           <Button
             p="L"
-            type="submit"
+            type="button"
             effect="hover"
             display="flex"
             disabled=""
@@ -94,7 +91,7 @@ const ResetPassword: FC = () => {
             minWidth={['100%', '10rem']}
             textTransform="uppercase"
             alignItems="center"
-            onClick={handleNavigation}
+            onClick={() => router.push('/reset-password-notification')}
           >
             Prosseguir &rarr;
           </Button>

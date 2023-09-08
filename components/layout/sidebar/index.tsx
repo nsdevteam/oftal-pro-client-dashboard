@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { FC } from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
@@ -12,6 +13,7 @@ import { RoutePaths, RoutesEnum } from '../constants/routes';
 
 const Sidebar: FC = () => {
   const [isDropDown, setIsDropDown] = useState(false);
+  const router = useRouter();
 
   return (
     <Box
@@ -132,7 +134,7 @@ const Sidebar: FC = () => {
           <Typography padding="0.5rem">Mario Batalha</Typography>
           <Typography padding="0.5rem">mariobatalha@gmail.com</Typography>
           <Button
-            type="submit"
+            type="button"
             effect="hover"
             display="flex"
             disabled=""
@@ -148,6 +150,7 @@ const Sidebar: FC = () => {
             justifyContent="center"
             textTransform="uppercase"
             alignItems="center"
+            onClick={() => router.push('/')}
           >
             Terminar a sessão
           </Button>

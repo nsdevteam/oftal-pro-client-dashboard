@@ -1,126 +1,72 @@
-import { FC, useState } from 'react';
+import React, { useState } from 'react';
+import styled from '@emotion/styled';
 
-import Box from '../box';
-import { DropdownProps } from './dropdown.types';
-import DropdownList from './dropdown-list';
+// Styled components
+const DropdownContainer = styled.div`
+  position: relative;
+  display: inline-block;
+`;
 
-const dropdownWrapperId = 'dropdown-wrapper';
+const DropdownButton = styled.button`
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+`;
 
-const Dropdown: FC<DropdownProps> = ({
-  bg,
-  data,
-  mode,
-  title,
-  header,
-  search,
-  bottom,
-  suffix,
-  footer,
-  callback,
-  minWidth,
-  fromRight,
-  bgSelected,
-  buttonMode,
-  customTitle,
-  customItems,
-  emptyMessage,
-  defaultValue,
-  staticPosition,
-}) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedIndex, setSelectedIndex] = useState<number>(
-    data.findIndex(({ value }) => value === defaultValue)
-  );
+const DropdownMenu = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  display: ${(props) => (props.isOpen ? 'block' : 'none')};
+`;
 
-  const toggleDropdown = () =>
-    setIsOpen((state) => {
-      callback?.(!state);
-      return !state;
-    });
+const DropdownItem = styled.li`
+  padding: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+`;
+
+// Dropdown component
+const Dropdown = ({ options, onSelect }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setIsOpen(false);
+    onSelect(option);
+  };
 
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      position={staticPosition ? 'static' : 'relative'}
-      id={dropdownWrapperId}
-      zIndex={mode === 'menu' ? 5 : 4}
-    >
-      {mode === 'select' && selectedIndex !== -1 && customTitle ? (
-        <Box
-          width="100%"
-          cursor="pointer"
-          alignItems="center"
-          whiteSpace="nowrap"
-          display="inline-flex"
-          onClick={toggleDropdown}
-        >
-          {data[selectedIndex].displayTitle ||
-            data[selectedIndex].displayOption}
-          {suffix}
-        </Box>
-      ) : buttonMode ? (
-        <Box
-          mx="S"
-          px="0.7rem"
-          py="0.7rem"
-          width="100%"
-          height="100%"
-          cursor="pointer"
-          borderRadius="M"
-          alignItems="center"
-          display="inline-flex"
-          onClick={toggleDropdown}
-          bg={isOpen ? bg || 'accentActive' : 'bottomBackground'}
-          hover={{
-            bg: bg || 'accent',
-          }}
-          active={{
-            bg: bgSelected || 'accentActive',
-          }}
-        >
-          {mode === 'select' && selectedIndex !== -1
-            ? data[selectedIndex].displayTitle ||
-              data[selectedIndex].displayOption
-            : title}
-          {suffix && <Box as="span" px="S" display="inline-block" />}
-          {suffix}
-        </Box>
-      ) : (
-        <Box
-          width="100%"
-          cursor="pointer"
-          whiteSpace="nowrap"
-          onClick={toggleDropdown}
-          color={isOpen ? bg || 'accent' : 'text'}
-        >
-          {mode === 'select' && selectedIndex !== -1
-            ? data[selectedIndex].displayTitle ||
-              data[selectedIndex].displayOption
-            : title}
-          {suffix}
-        </Box>
-      )}
-      <DropdownList
-        bg={bg}
-        data={data}
-        isOpen={isOpen}
-        header={header}
-        search={search}
-        bottom={bottom}
-        footer={footer}
-        minWidth={minWidth}
-        fromRight={fromRight}
-        setIsOpen={setIsOpen}
-        bgSelected={bgSelected}
-        customItems={customItems}
-        emptyMessage={emptyMessage}
-        selectedIndex={selectedIndex}
-        toggleDropdown={toggleDropdown}
-        setSelectedIndex={setSelectedIndex}
-        dropdownWrapperId={dropdownWrapperId}
-      />
-    </Box>
+    <DropdownContainer>
+      <DropdownButton onClick={toggleDropdown}>
+        {selectedOption || 'Escolha uma opção'}
+      </DropdownButton>
+      <DropdownMenu isOpen={isOpen}>
+        {options.map((option) => (
+          <DropdownItem key={option} onClick={() => handleOptionClick(option)}>
+            {option}
+          </DropdownItem>
+        ))}
+      </DropdownMenu>
+    </DropdownContainer>
   );
 };
 

@@ -15,12 +15,15 @@ const ModalBackdrop = styled.div`
 `;
 
 const ModalContent = styled.div`
+  max-width: 90%;
+  max-height: 80%;
+  width: 80%;
+  height: 100%;
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  max-width: 80%;
 `;
 
 const Modal = ({ isOpen, onClose, children }) => {
