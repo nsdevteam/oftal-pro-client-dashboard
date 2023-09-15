@@ -175,7 +175,7 @@ const Home: FC = () => {
               minWidth={['100%', '10rem']}
               textTransform="uppercase"
               alignItems="center"
-              onClick={() => router.push('/dashboard')}
+              onClick={() => router.push('/request')}
             >
               Entrar &rarr;
             </Button>

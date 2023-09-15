@@ -26,3 +26,16 @@ export interface Notification {
   createdAt: ReactNode;
   currentDate: unknown;
 }
+
+export interface Address {
+  id: number;
+  province: string;
+  city?: string;
+  street?: string;
+  apt?: string;
+}
+
+export interface Refraction {
+  id: number;
+  value: string;
+}

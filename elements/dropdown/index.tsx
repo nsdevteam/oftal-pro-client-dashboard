@@ -9,13 +9,16 @@ const DropdownContainer = styled.div`
 `;
 
 const DropdownButton = styled.button`
+  display: flex;
+  justifycontent: flex-start;
+  alignitems: flex-start;
   background-color: #fff;
   border: 1.5px solid #e4e4e7;
   border-radius: 0.5rem;
   padding: 1rem;
   cursor: pointer;
   height: 50px;
-  width: 100px;
+  width: 120px;
 `;
 
 const DropdownMenu = styled.ul`
@@ -40,7 +43,8 @@ const DropdownItem = styled.li`
   width: 100px;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: #60bcf6;
+    color: #fff;
   }
 `;
 
