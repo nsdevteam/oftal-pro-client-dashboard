@@ -28,6 +28,7 @@ const Request: FC = () => {
   const [selectedOption, setSelectedOption] = useState('Menu');
   const [showSelectAddress, setShowSelectAddress] = useState(false);
   const [selected, setSelected] = useState(false);
+  const [addNewAddress, setAddNewAddress] = useState(false);
 
   const espherical = [
     '-0.50',
@@ -46,6 +47,16 @@ const Request: FC = () => {
 
   const handleAddressSelected = (id) => {
     setSelected(id);
+  };
+
+  const handleSelectAddress = () => {
+    setShowSelectAddress(!showSelectAddress);
+    setModalOpen(false);
+  };
+
+  const handleAddNewAddress = () => {
+    setAddNewAddress(!addNewAddress);
+    setShowSelectAddress(false);
   };
 
   const handleSelect = (option) => {
@@ -449,7 +460,6 @@ const Request: FC = () => {
                       </Box>
                     </Box>
                   </Box>
-
                   <Box
                     as="div"
                     width="100vw"
@@ -618,7 +628,7 @@ const Request: FC = () => {
                       minWidth={['100%', '10rem']}
                       textTransform="uppercase"
                       alignItems="center"
-                      onClick={() => setShowSelectAddress(!showSelectAddress)}
+                      onClick={handleSelectAddress}
                     >
                       Prosseguir
                     </Button>
@@ -730,15 +740,315 @@ const Request: FC = () => {
                   >
                     Prosseguir
                   </Button>
-                  <Typography
-                    padding="0.5rem"
-                    marginLeft="3rem"
+                  <Button
+                    p="L"
+                    type="button"
+                    effect="hover"
+                    display="flex"
+                    disabled=""
+                    variant="primary"
+                    color="#4763E4"
+                    width={250}
+                    borderRadius="M"
+                    border="none"
+                    bg="transparent"
+                    marginLeft="0.5rem"
                     marginTop="1rem"
-                    as="a"
-                    href="/"
+                    justifyContent="center"
+                    minWidth={['100%', '10rem']}
+                    textTransform="uppercase"
+                    alignItems="center"
+                    onClick={handleAddNewAddress}
                   >
                     + Novo endereço de entrega
+                  </Button>
+                </Box>
+              </Box>
+            </Modal>
+          )}
+          {addNewAddress && (
+            <Modal
+              isOpen={() => setAddNewAddress(true)}
+              onClose={() => setAddNewAddress(false)}
+            >
+              <Box paddingLeft="1rem">
+                <Box
+                  as="div"
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Typography as="h4" padding="0.5rem">
+                    Novo endereço de entrega
                   </Typography>
+                  <FiX
+                    size={20}
+                    color="#A1A1AA"
+                    onClick={() => setAddNewAddress(false)}
+                  />
+                </Box>
+                <Box
+                  as="div"
+                  width="100vw"
+                  display="flex"
+                  marginTop="2rem"
+                  alignItems="flex-start"
+                  justifyContent="flex-start"
+                >
+                  <Box
+                    as="div"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                  >
+                    <Typography textAlign="left" padding="0.5rem">
+                      Província
+                    </Typography>
+                    <Input
+                      p="L"
+                      type="text"
+                      bg="outline"
+                      border="none"
+                      outline="none"
+                      borderRadius="M"
+                      borderSize="1px"
+                      borderStyle="solid"
+                      borderColor="#E4E4E7"
+                      marginLeft="0.5rem"
+                      color="textInverted"
+                      width={390}
+                      backgroundColor="transparent"
+                      placeholder="Benguela"
+                      focus={{
+                        borderColor: '#4763E4',
+                      }}
+                    />
+                  </Box>
+                  <Box
+                    as="div"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                    marginLeft="3.5rem"
+                  >
+                    <Typography textAlign="left" padding="0.5rem">
+                      Município
+                    </Typography>
+                    <Input
+                      p="L"
+                      type="text"
+                      bg="outline"
+                      border="none"
+                      outline="none"
+                      borderRadius="M"
+                      borderSize="1px"
+                      borderStyle="solid"
+                      borderColor="#E4E4E7"
+                      marginLeft="0.5rem"
+                      color="textInverted"
+                      width={560}
+                      backgroundColor="transparent"
+                      placeholder="Lobito"
+                      focus={{
+                        borderColor: '#4763E4',
+                      }}
+                    />
+                  </Box>
+                </Box>
+                <Box
+                  as="div"
+                  width="100vw"
+                  display="flex"
+                  alignItems="flex-start"
+                  justifyContent="flex-start"
+                >
+                  <Box
+                    as="div"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                  >
+                    <Typography textAlign="left" padding="0.5rem">
+                      Bairro
+                    </Typography>
+                    <Input
+                      p="L"
+                      type="text"
+                      bg="outline"
+                      border="none"
+                      outline="none"
+                      borderRadius="M"
+                      borderSize="1px"
+                      borderStyle="solid"
+                      borderColor="#E4E4E7"
+                      marginLeft="0.5rem"
+                      color="textInverted"
+                      width={1015}
+                      backgroundColor="transparent"
+                      placeholder="Bairro da Camunda"
+                      focus={{
+                        borderColor: '#4763E4',
+                      }}
+                    />
+                  </Box>
+                </Box>
+                <Box
+                  as="div"
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="flex-start"
+                  alignItems="flex-start"
+                >
+                  <Typography textAlign="left" padding="0.5rem">
+                    Rua
+                  </Typography>
+                  <Input
+                    p="L"
+                    type="text"
+                    bg="outline"
+                    border="none"
+                    outline="none"
+                    borderRadius="M"
+                    borderSize="1px"
+                    borderStyle="solid"
+                    borderColor="#E4E4E7"
+                    marginLeft="0.5rem"
+                    color="textInverted"
+                    width={1015}
+                    backgroundColor="transparent"
+                    placeholder="Rua das casas amarelas"
+                    focus={{
+                      borderColor: '#4763E4',
+                    }}
+                  />
+                </Box>
+                <Box
+                  as="div"
+                  width="100vw"
+                  display="flex"
+                  alignItems="flex-start"
+                  justifyContent="flex-start"
+                >
+                  <Box
+                    as="div"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                  >
+                    <Typography textAlign="left" padding="0.5rem">
+                      Casa/Apartamento
+                    </Typography>
+                    <Input
+                      p="L"
+                      type="text"
+                      bg="outline"
+                      border="none"
+                      outline="none"
+                      borderRadius="M"
+                      borderSize="1px"
+                      borderStyle="solid"
+                      borderColor="#E4E4E7"
+                      marginLeft="0.5rem"
+                      color="textInverted"
+                      width={390}
+                      backgroundColor="transparent"
+                      placeholder="Casa S/N"
+                      focus={{
+                        borderColor: '#4763E4',
+                      }}
+                    />
+                  </Box>
+                  <Box
+                    as="div"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                    marginLeft="3.5rem"
+                  >
+                    <Typography textAlign="left" padding="0.5rem">
+                      Edifício
+                    </Typography>
+                    <Input
+                      p="L"
+                      type="text"
+                      bg="outline"
+                      border="none"
+                      outline="none"
+                      borderRadius="M"
+                      borderSize="1px"
+                      borderStyle="solid"
+                      borderColor="#E4E4E7"
+                      marginLeft="0.5rem"
+                      color="textInverted"
+                      width={560}
+                      backgroundColor="transparent"
+                      placeholder="Antiga sede da ENDE"
+                      focus={{
+                        borderColor: '#4763E4',
+                      }}
+                    />
+                  </Box>
+                </Box>
+                <Box
+                  as="div"
+                  width="95%"
+                  display="flex"
+                  justifyContent="flex-start"
+                  alignItems="center"
+                  marginTop="2rem"
+                >
+                  <Button
+                    p="L"
+                    type="button"
+                    effect="hover"
+                    display="flex"
+                    disabled=""
+                    variant="primary"
+                    color="#000"
+                    width={80}
+                    borderRadius="M"
+                    border="1px solid #E4E4E7"
+                    bg="transparent"
+                    marginLeft="0.5rem"
+                    marginTop="1rem"
+                    justifyContent="center"
+                    minWidth={['100%', '10rem']}
+                    textTransform="uppercase"
+                    alignItems="center"
+                    cursor="pointer"
+                    onClick={() => setAddNewAddress(false)}
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    p="L"
+                    type="button"
+                    effect="hover"
+                    display="flex"
+                    disabled=""
+                    variant="primary"
+                    fontWeight="bold"
+                    color="#FFF"
+                    width={200}
+                    borderRadius="M"
+                    border="none"
+                    bg="#4763E4"
+                    marginLeft="0.5rem"
+                    marginTop="1rem"
+                    justifyContent="center"
+                    minWidth={['100%', '10rem']}
+                    textTransform="uppercase"
+                    alignItems="center"
+                    cursor="pointer"
+                    onClick={() => setAddNewAddress(false)}
+                  >
+                    Usar este endereço
+                  </Button>
                 </Box>
               </Box>
             </Modal>
