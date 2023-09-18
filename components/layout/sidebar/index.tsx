@@ -13,6 +13,13 @@ import { RoutePaths, RoutesEnum } from '../constants/routes';
 
 const Sidebar: FC = () => {
   const [isDropDown, setIsDropDown] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState(false);
+
+  const handleShowDropDownMenu = (id) => {
+    setSelectedMenu(id);
+    setIsDropDown(!isDropDown);
+  };
+
   const router = useRouter();
 
   return (
@@ -84,9 +91,9 @@ const Sidebar: FC = () => {
                     justifyContent="center"
                     textTransform="uppercase"
                     alignItems="center"
-                    onClick={() => setIsDropDown(!isDropDown)}
+                    onClick={() => handleShowDropDownMenu(id)}
                   >
-                    {isDropDown ? (
+                    {selectedMenu === id && isDropDown ? (
                       <FiChevronDown size={18} color="#FFF" />
                     ) : (
                       <FiChevronUp size={18} color="#FFF" />
@@ -95,24 +102,8 @@ const Sidebar: FC = () => {
                 </Typography>
                 <Typography as="ul" listStyle="none">
                   <Typography as="li">
-                    {isDropDown && (
-                      <Link
-                        href="#"
-                        style={{
-                          padding: '0.5rem',
-                          margin: '0.5rem',
-                          marginLeft: '2rem',
-                          width: '80%',
-                          borderRadius: '10px',
-                          display: 'flex',
-                          justifyContent: 'flex-start',
-                          alignItems: 'flex-start',
-                          color: '#FFF',
-                          '&:active': {
-                            backgroundColor: '#4256D0',
-                          },
-                        }}
-                      >
+                    {selectedMenu === id && isDropDown && (
+                      <Link href="#" className="dropDownLink">
                         {submenu}
                       </Link>
                     )}

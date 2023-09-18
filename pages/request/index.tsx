@@ -44,7 +44,7 @@ const Request: FC = () => {
 
   const colors = ['Branco', 'Fotocromática', 'Transições', 'Polarizada'];
 
-  const handleItemClick = (id) => {
+  const handleAddressSelected = (id) => {
     setSelected(id);
   };
 
@@ -658,7 +658,7 @@ const Request: FC = () => {
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
-                        onClick={() => handleItemClick(id)}
+                        onClick={() => handleAddressSelected(id)}
                       >
                         <Box
                           as="div"

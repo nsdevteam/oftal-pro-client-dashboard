@@ -16,6 +16,22 @@ const GlobalStyles = css`
   a {
     text-decoration: none;
   }
+
+  .dropDownLink {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    margin-left: 2rem;
+    width: 80%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: #fff;
+
+    &:active {
+      background-color: #4256d0;
+    }
+  }
 `;
 
 export default GlobalStyles;
