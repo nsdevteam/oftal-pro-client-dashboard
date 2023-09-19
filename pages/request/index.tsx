@@ -12,6 +12,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { address, indiceOfRefraction, geometry } from '../../api';
 import { Layout } from '../../components';
+
+import { RoutesEnum } from '../../constants/routes';
+import colors from '../../design-system/common/primitive-colors';
+import styles from './styles.module.css';
 import {
   Box,
   Button,
@@ -253,7 +257,7 @@ const Request: FC = () => {
                       alignItems="flex-start"
                       justifyContent="flex-start"
                     >
-                      <Typography padding="0.5rem">Olho direito</Typography>
+                      <Typography padding="0.5rem">Olho esquerdo</Typography>
                       <Box
                         as="div"
                         display="flex"
@@ -1484,8 +1488,23 @@ const Request: FC = () => {
               justifyContent="center"
               alignItems="center"
             >
-              <Typography as="h4">Obrigado pela sua compra.</Typography>
-              <Typography color="#BBBBBB">
+              <Image
+                src="/success.svg"
+                alt="icon de operação bem sucedida "
+                width={100}
+                height={100}
+                style={{ margin: '0.5rem' }}
+              />
+              <Typography as="h4" margin="0.5rem">
+                Obrigado pela sua compra.
+              </Typography>
+              <Typography
+                color="#BBBBBB"
+                padding="0.5rem"
+                margin="0.5rem"
+                width="40rem"
+                textAlign="center"
+              >
                 O seu pedido está aguardando o processamento do pagamento, serás
                 notificado por mensagem e na plataforma brevemente.
               </Typography>
