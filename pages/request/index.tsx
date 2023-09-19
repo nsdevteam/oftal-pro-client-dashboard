@@ -13,6 +13,7 @@ import { address, indiceOfRefraction, geometry } from '../../api';
 import { Layout } from '../../components';
 import { RoutesEnum } from '../../constants/routes';
 import colors from '../../design-system/common/primitive-colors';
+import styles from './styles.module.css';
 import {
   Box,
   Button,
@@ -176,7 +177,7 @@ const Request: FC = () => {
                       alignItems="flex-start"
                       justifyContent="flex-start"
                     >
-                      <Typography padding="0.5rem">Olho direito</Typography>
+                      <Typography padding="0.5rem">Olho esquerdo</Typography>
                       <Box
                         as="div"
                         display="flex"
