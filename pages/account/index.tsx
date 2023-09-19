@@ -1,8 +1,6 @@
-import Link from 'next/link';
 import { FC } from 'react';
 
 import { Layout } from '../../components';
-import { RoutePaths, RoutesEnum } from '../../constants/routes';
 import { Box, Button, Input, Typography } from '../../elements';
 
 const Account: FC = () => (

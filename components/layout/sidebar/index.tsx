@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -9,7 +8,6 @@ import { menuLink } from '../../../api';
 import colors from '../../../design-system/light-theme/colors';
 import { Box, Button, Typography } from '../../../elements';
 import LogoSVG from '../../svg/logo';
-import { RoutePaths, RoutesEnum } from '../constants/routes';
 
 const Sidebar: FC = () => {
   const [isDropDown, setIsDropDown] = useState(false);

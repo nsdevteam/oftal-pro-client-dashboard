@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import Link from 'next/link';
 
-import { Box, Typography } from '../../../elements';
+import { Box } from '../../../elements';
 
-const Footer: FC = ({ key, submenu }) => (
+const Footer: FC = () => (
   <Box as="footer">
     <Link href="#">submenu</Link>
   </Box>

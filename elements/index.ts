@@ -4,6 +4,7 @@ export { default as Dropdown } from './dropdown';
 export { default as DropdownTable } from './dropdown-table';
 export { default as Input } from './input';
 export { default as Modal } from './modal';
+export { default as ModalAddress } from './modal-address';
 export { default as ModalNotification } from './modal-notification';
 export { default as ResponsiveImage } from './responsive-image';
 export { default as Rotate } from './rotate';

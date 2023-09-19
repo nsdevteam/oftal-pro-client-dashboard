@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Image from 'next/image';
 import { FC, useState } from 'react';
 import {
   FiChevronLeft,
@@ -7,21 +7,22 @@ import {
   FiSearch,
   FiX,
 } from 'react-icons/fi';
-import { v4 } from 'uuid';
+
+import { v4 as uuidv4 } from 'uuid';
 
 import { address, indiceOfRefraction, geometry } from '../../api';
 import { Layout } from '../../components';
-import { RoutesEnum } from '../../constants/routes';
-import colors from '../../design-system/common/primitive-colors';
 import {
   Box,
   Button,
   Input,
   Modal,
-  Table,
+  ModalAddress,
   Typography,
   Dropdown,
 } from '../../elements';
+
+import { Express, PaymentReference } from '../../components/image-svg';
 
 const Request: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -29,6 +30,16 @@ const Request: FC = () => {
   const [showSelectAddress, setShowSelectAddress] = useState(false);
   const [selected, setSelected] = useState(false);
   const [addNewAddress, setAddNewAddress] = useState(false);
+  const [newAddress, setNewAddress] = useState(address);
+  const [province, setProvince] = useState('');
+  const [city, setCity] = useState('');
+  const [street, setStreet] = useState('');
+  const [apt, setApt] = useState('');
+  const [paymentModal, setPaymentModal] = useState(false);
+  const [paymentByReference, setPaymentByReference] = useState(false);
+  const [paymentByExpress, setPaymentByExpress] = useState(false);
+  const [paymentSucceed, setPaymentSucceed] = useState(false);
+  const id = uuidv4();
 
   const espherical = [
     '-0.50',
@@ -59,6 +70,35 @@ const Request: FC = () => {
     setShowSelectAddress(false);
   };
 
+  const handleUseAddress = () => {
+    setShowSelectAddress(true);
+    setAddNewAddress(false);
+
+    const newLocation = address.push({
+      id,
+      province,
+      city,
+      street,
+      apt,
+    });
+
+    setNewAddress(newLocation);
+    setProvince('');
+    setCity('');
+    setStreet('');
+    setApt('');
+  };
+
+  const handlePaymentModal = () => {
+    setPaymentModal(false);
+    setShowSelectAddress(false);
+  };
+
+  const handleCancel = () => {
+    setShowSelectAddress(true);
+    setAddNewAddress(false);
+  };
+
   const handleSelect = (option) => {
     setSelectedOption(option);
   };
@@ -69,6 +109,32 @@ const Request: FC = () => {
 
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  const handleOpenPaymentModal = () => {
+    setPaymentModal(true);
+    setModalOpen(false);
+    setShowSelectAddress(false);
+    setPaymentByReference(true);
+  };
+
+  const handlePaymentByReference = () => {
+    setPaymentByReference(true);
+    setPaymentByExpress(false);
+  };
+
+  const handlePaymentByExpress = () => {
+    setPaymentByExpress(true);
+    setPaymentByReference(false);
+  };
+
+  const handleCancelPayment = () => {
+    setPaymentModal(false);
+  };
+
+  const handlePaymentSucceed = () => {
+    setPaymentSucceed(true);
+    setPaymentModal(false);
   };
   return (
     <Layout pageTitle="Pedidos">
@@ -638,7 +704,7 @@ const Request: FC = () => {
             </Modal>
           )}
           {showSelectAddress && (
-            <Modal
+            <ModalAddress
               isOpen={() => setShowSelectAddress(true)}
               onClose={() => setShowSelectAddress(false)}
             >
@@ -658,7 +724,7 @@ const Request: FC = () => {
                     onClick={() => setShowSelectAddress(false)}
                   />
                 </Box>
-                <Box marginTop={['S', 'XXL']}>
+                <Box as="div" marginTop={['S', 'XXL']}>
                   {address.map((addressItem) => {
                     const { id, province, city, street, apt } = addressItem;
                     return (
@@ -668,6 +734,7 @@ const Request: FC = () => {
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
+                        className="address-list"
                         onClick={() => handleAddressSelected(id)}
                       >
                         <Box
@@ -737,6 +804,7 @@ const Request: FC = () => {
                     minWidth={['100%', '10rem']}
                     textTransform="uppercase"
                     alignItems="center"
+                    onClick={handleOpenPaymentModal}
                   >
                     Prosseguir
                   </Button>
@@ -764,7 +832,7 @@ const Request: FC = () => {
                   </Button>
                 </Box>
               </Box>
-            </Modal>
+            </ModalAddress>
           )}
           {addNewAddress && (
             <Modal
@@ -808,6 +876,7 @@ const Request: FC = () => {
                     <Input
                       p="L"
                       type="text"
+                      value={province}
                       bg="outline"
                       border="none"
                       outline="none"
@@ -820,6 +889,7 @@ const Request: FC = () => {
                       width={390}
                       backgroundColor="transparent"
                       placeholder="Benguela"
+                      onChange={(e) => setProvince(e.target.value)}
                       focus={{
                         borderColor: '#4763E4',
                       }}
@@ -877,6 +947,7 @@ const Request: FC = () => {
                     <Input
                       p="L"
                       type="text"
+                      value={city}
                       bg="outline"
                       border="none"
                       outline="none"
@@ -888,6 +959,7 @@ const Request: FC = () => {
                       color="textInverted"
                       width={1015}
                       backgroundColor="transparent"
+                      onChange={(e) => setCity(e.target.value)}
                       placeholder="Bairro da Camunda"
                       focus={{
                         borderColor: '#4763E4',
@@ -908,6 +980,7 @@ const Request: FC = () => {
                   <Input
                     p="L"
                     type="text"
+                    value={street}
                     bg="outline"
                     border="none"
                     outline="none"
@@ -920,6 +993,7 @@ const Request: FC = () => {
                     width={1015}
                     backgroundColor="transparent"
                     placeholder="Rua das casas amarelas"
+                    onChange={(e) => setStreet(e.target.value)}
                     focus={{
                       borderColor: '#4763E4',
                     }}
@@ -946,6 +1020,7 @@ const Request: FC = () => {
                       p="L"
                       type="text"
                       bg="outline"
+                      value={apt}
                       border="none"
                       outline="none"
                       borderRadius="M"
@@ -956,6 +1031,7 @@ const Request: FC = () => {
                       color="textInverted"
                       width={390}
                       backgroundColor="transparent"
+                      onChange={(e) => setApt(e.target.value)}
                       placeholder="Casa S/N"
                       focus={{
                         borderColor: '#4763E4',
@@ -1004,7 +1080,7 @@ const Request: FC = () => {
                 >
                   <Button
                     p="L"
-                    type="button"
+                    type="submit"
                     effect="hover"
                     display="flex"
                     disabled=""
@@ -1021,13 +1097,13 @@ const Request: FC = () => {
                     textTransform="uppercase"
                     alignItems="center"
                     cursor="pointer"
-                    onClick={() => setAddNewAddress(false)}
+                    onClick={handleCancel}
                   >
                     Cancelar
                   </Button>
                   <Button
                     p="L"
-                    type="button"
+                    type="submit"
                     effect="hover"
                     display="flex"
                     disabled=""
@@ -1045,7 +1121,7 @@ const Request: FC = () => {
                     textTransform="uppercase"
                     alignItems="center"
                     cursor="pointer"
-                    onClick={() => setAddNewAddress(false)}
+                    onClick={handleUseAddress}
                   >
                     Usar este endereço
                   </Button>
@@ -1054,6 +1130,368 @@ const Request: FC = () => {
             </Modal>
           )}
         </Box>
+        {paymentModal && (
+          <Modal
+            isOpen={() => setPaymentModal(true)}
+            onClose={handlePaymentModal}
+          >
+            <Box paddingLeft="1rem">
+              <Box
+                as="div"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography as="h4" padding="0.5rem">
+                  Pagamento
+                </Typography>
+                <FiX size={20} color="#A1A1AA" onClick={handlePaymentModal} />
+              </Box>
+              <Box as="div" marginTop="2rem" padding="0.5rem">
+                <Typography>Como deseja pagar?</Typography>
+                <Box
+                  as="div"
+                  display="flex"
+                  justifyContent="flex-start"
+                  alignItems="center"
+                  marginTop="2rem"
+                >
+                  <Box
+                    as="div"
+                    display="flex"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    padding="1rem"
+                    border="none"
+                    outline="none"
+                    borderRadius="M"
+                    borderSize="1px"
+                    borderStyle="solid"
+                    borderColor={paymentByReference ? '#4763E4' : '#E4E4E7'}
+                    width="500px"
+                    height="80px"
+                    backgroundColor="transparent"
+                    name="paymentByReference"
+                    onClick={handlePaymentByReference}
+                  >
+                    <Image
+                      src="/reference-payment.svg"
+                      height={50}
+                      width={50}
+                    />
+                    <Typography>Pagamento por referência</Typography>
+                  </Box>
+                  <Box
+                    as="div"
+                    m="S"
+                    display="flex"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    padding="1rem"
+                    border="none"
+                    outline="none"
+                    borderRadius="M"
+                    borderSize="1px"
+                    borderStyle="solid"
+                    borderColor={paymentByExpress ? '#4763E4' : '#E4E4E7'}
+                    width="500px"
+                    height="80px"
+                    backgroundColor="transparent"
+                    name="paymentByExpress"
+                    onClick={handlePaymentByExpress}
+                  >
+                    <Image
+                      src="/express.svg"
+                      height={30}
+                      width={30}
+                      style={{ margin: '0.5rem' }}
+                    />
+                    <Typography>Multicaixa Express</Typography>
+                  </Box>
+                </Box>
+              </Box>
+              {paymentByReference && (
+                <Box>
+                  <Box
+                    as="div"
+                    width="100vw"
+                    display="flex"
+                    marginTop="2rem"
+                    alignItems="flex-start"
+                    justifyContent="flex-start"
+                  >
+                    <Box
+                      as="div"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                    >
+                      <Typography textAlign="left" padding="0.5rem">
+                        Entidade
+                      </Typography>
+                      <Input
+                        p="L"
+                        type="text"
+                        bg="outline"
+                        border="none"
+                        outline="none"
+                        borderRadius="M"
+                        borderSize="1px"
+                        borderStyle="solid"
+                        borderColor="#E4E4E7"
+                        marginLeft="0.5rem"
+                        color="textInverted"
+                        width={390}
+                        backgroundColor="transparent"
+                        placeholder="491 Oftal Pro"
+                        onChange={(e) => setProvince(e.target.value)}
+                        focus={{
+                          borderColor: '#4763E4',
+                        }}
+                      />
+                    </Box>
+                    <Box
+                      as="div"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                      marginLeft="3.5rem"
+                    >
+                      <Typography textAlign="left" padding="0.5rem">
+                        Referência
+                      </Typography>
+                      <Input
+                        p="L"
+                        type="text"
+                        bg="outline"
+                        border="none"
+                        outline="none"
+                        borderRadius="M"
+                        borderSize="1px"
+                        borderStyle="solid"
+                        borderColor="#E4E4E7"
+                        marginLeft="0.5rem"
+                        color="textInverted"
+                        width={560}
+                        backgroundColor="transparent"
+                        placeholder="001437785"
+                        focus={{
+                          borderColor: '#4763E4',
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                  <Box
+                    as="div"
+                    width="100vw"
+                    display="flex"
+                    alignItems="flex-start"
+                    justifyContent="flex-start"
+                  >
+                    <Box
+                      as="div"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                    >
+                      <Typography textAlign="left" padding="0.5rem">
+                        Montante
+                      </Typography>
+                      <Input
+                        p="L"
+                        type="text"
+                        bg="outline"
+                        border="none"
+                        outline="none"
+                        borderRadius="M"
+                        borderSize="1px"
+                        borderStyle="solid"
+                        borderColor="#E4E4E7"
+                        marginLeft="0.5rem"
+                        color="textInverted"
+                        width={1015}
+                        backgroundColor="transparent"
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder="1.000.000,00"
+                        focus={{
+                          borderColor: '#4763E4',
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+              )}
+              {paymentByExpress && (
+                <Box>
+                  <Box
+                    as="div"
+                    width="100vw"
+                    display="flex"
+                    marginTop="2rem"
+                    alignItems="flex-start"
+                    justifyContent="flex-start"
+                  >
+                    <Box
+                      as="div"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                    >
+                      <Typography textAlign="left" padding="0.5rem">
+                        Número de telefone
+                      </Typography>
+                      <Input
+                        p="L"
+                        type="text"
+                        bg="outline"
+                        border="none"
+                        outline="none"
+                        borderRadius="M"
+                        borderSize="1px"
+                        borderStyle="solid"
+                        borderColor="#E4E4E7"
+                        marginLeft="0.5rem"
+                        color="textInverted"
+                        width={390}
+                        backgroundColor="transparent"
+                        placeholder="923 009 161"
+                        focus={{
+                          borderColor: '#4763E4',
+                        }}
+                      />
+                    </Box>
+                    <Box
+                      as="div"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                      marginLeft="3.5rem"
+                    >
+                      <Typography textAlign="left" padding="0.5rem">
+                        Montante
+                      </Typography>
+                      <Input
+                        p="L"
+                        type="text"
+                        bg="outline"
+                        border="none"
+                        outline="none"
+                        borderRadius="M"
+                        borderSize="1px"
+                        borderStyle="solid"
+                        borderColor="#E4E4E7"
+                        marginLeft="0.5rem"
+                        color="textInverted"
+                        width={560}
+                        backgroundColor="transparent"
+                        placeholder="3.000.000,00"
+                        focus={{
+                          borderColor: '#4763E4',
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+              )}
+              <Box
+                as="div"
+                width="95%"
+                display="flex"
+                justifyContent="flex-start"
+                alignItems="center"
+                marginTop="S"
+              >
+                <Button
+                  p="L"
+                  type="submit"
+                  effect="hover"
+                  display="flex"
+                  disabled=""
+                  variant="primary"
+                  color="#000"
+                  width={80}
+                  borderRadius="M"
+                  border="1px solid #E4E4E7"
+                  bg="transparent"
+                  marginLeft="0.5rem"
+                  marginTop="1rem"
+                  justifyContent="center"
+                  minWidth={['100%', '10rem']}
+                  textTransform="uppercase"
+                  alignItems="center"
+                  cursor="pointer"
+                  onClick={handleCancelPayment}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  p="L"
+                  type="submit"
+                  effect="hover"
+                  display="flex"
+                  disabled=""
+                  variant="primary"
+                  fontWeight="bold"
+                  color="#FFF"
+                  width={200}
+                  borderRadius="M"
+                  border="none"
+                  bg="#4763E4"
+                  marginLeft="0.5rem"
+                  marginTop="1rem"
+                  justifyContent="center"
+                  minWidth={['100%', '10rem']}
+                  textTransform="uppercase"
+                  alignItems="center"
+                  cursor="pointer"
+                  onClick={handlePaymentSucceed}
+                >
+                  Concluír pagamento
+                </Button>
+              </Box>
+            </Box>
+          </Modal>
+        )}
+        {paymentSucceed && (
+          <Modal
+            isOpen={() => setAddNewAddress(true)}
+            onClose={() => setAddNewAddress(false)}
+          >
+            <Box
+              as="div"
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography as="h4" padding="0.5rem"></Typography>
+              <FiX
+                size={20}
+                color="#A1A1AA"
+                onClick={() => setPaymentSucceed(false)}
+              />
+            </Box>
+            <Box
+              as="div"
+              height="100%"
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Typography as="h4">Obrigado pela sua compra.</Typography>
+              <Typography color="#BBBBBB">
+                O seu pedido está aguardando o processamento do pagamento, serás
+                notificado por mensagem e na plataforma brevemente.
+              </Typography>
+            </Box>
+          </Modal>
+        )}
         <Box
           as="div"
           padding="0.5rem"

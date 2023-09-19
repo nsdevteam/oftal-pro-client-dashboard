@@ -1,10 +1,7 @@
-import Link from 'next/link';
 import { FC } from 'react';
 
 import { Layout } from '../../components';
-import LogoSVG from '../../components/svg/logo';
-import { RoutePaths, RoutesEnum } from '../../constants/routes';
-import { Box, Button, Input, Typography } from '../../elements';
+import { Box, Typography } from '../../elements';
 
 const Setting: FC = () => (
   <Layout pageTitle="Configurações">
