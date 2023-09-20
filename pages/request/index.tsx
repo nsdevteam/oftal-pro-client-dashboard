@@ -57,6 +57,7 @@ const Request: FC = () => {
   ];
   const cylinder = ['-0.50', '-0.60', '-0.70'];
   const axis = ['0', '45', '90', '180', '270', '360'];
+  const threatment = ['HMC', 'SHMC', 'UC', 'HC'];
 
   const colors = ['Branco', 'Fotocromática', 'Transições', 'Polarizada'];
 
@@ -291,7 +292,9 @@ const Request: FC = () => {
                         justifyContent="flex-start"
                         marginLeft="3rem"
                       >
-                        <Typography padding="0.5rem">Tratamento</Typography>
+                        <Typography padding="0.5rem">
+                          Geometria/Superfície
+                        </Typography>
                         <Box
                           as="div"
                           display="flex"
@@ -308,7 +311,7 @@ const Request: FC = () => {
                             minWidth={['100%', '10rem']}
                             width={['16.5rem']}
                             p="L"
-                            border="none"
+                            bg="outline"
                             outline="none"
                             borderRadius="M"
                             borderSize="1px"
@@ -320,19 +323,23 @@ const Request: FC = () => {
                               borderColor: '#4763E4',
                             }}
                           >
-                            <Typography as="option" value="HMC">
-                              HMC
-                            </Typography>
-                            <Typography
-                              as="option"
-                              padding="0.5rem"
-                              value="HMC"
-                            >
-                              SHMC
-                            </Typography>
+                            {geometry.map((geo) => {
+                              const { id, value } = geo;
+                              return (
+                                <Typography
+                                  as="option"
+                                  padding="0.5rem"
+                                  key={id}
+                                  value={value}
+                                >
+                                  {value}
+                                </Typography>
+                              );
+                            })}
                           </Button>
                         </Box>
                       </Box>
+
                       <Box
                         as="div"
                         width="auto"
@@ -486,9 +493,7 @@ const Request: FC = () => {
                         alignItems="flex-start"
                         justifyContent="flex-start"
                       >
-                        <Typography padding="0.5rem">
-                          Geometria/Superfície
-                        </Typography>
+                        <Typography padding="0.5rem">Tratamento</Typography>
                         <Box
                           as="div"
                           display="flex"
@@ -505,7 +510,7 @@ const Request: FC = () => {
                             minWidth={['100%', '10rem']}
                             width={['16.5rem']}
                             p="L"
-                            bg="outline"
+                            border="none"
                             outline="none"
                             borderRadius="M"
                             borderSize="1px"
@@ -517,16 +522,10 @@ const Request: FC = () => {
                               borderColor: '#4763E4',
                             }}
                           >
-                            {geometry.map((geo) => {
-                              const { id, value } = geo;
+                            {threatment.map((item) => {
                               return (
-                                <Typography
-                                  as="option"
-                                  padding="0.5rem"
-                                  key={id}
-                                  value={value}
-                                >
-                                  {value}
+                                <Typography as="option" value={item}>
+                                  {item}
                                 </Typography>
                               );
                             })}
@@ -575,18 +574,18 @@ const Request: FC = () => {
                     </Box>
                     <Box
                       as="div"
+                      marginLeft="3.5rem"
                       display="flex"
                       flexDirection="column"
                       justifyContent="flex-start"
                       alignItems="flex-start"
-                      marginLeft="3.5rem"
                     >
                       <Typography textAlign="left" padding="0.5rem">
-                        Tipo de lente
+                        Diâmetro da lente
                       </Typography>
                       <Input
                         p="L"
-                        type="text"
+                        type="number"
                         border="none"
                         outline="none"
                         borderRadius="M"
@@ -599,7 +598,7 @@ const Request: FC = () => {
                         minWidth={['100%', '10rem']}
                         width={['34.5rem']}
                         bg="transparent"
-                        placeholder="Vidro"
+                        placeholder="-0.50"
                         focus={{
                           borderColor: '#4763E4',
                         }}
@@ -646,18 +645,22 @@ const Request: FC = () => {
                     </Box>
                     <Box
                       as="div"
-                      marginLeft="3.5rem"
                       display="flex"
                       flexDirection="column"
                       justifyContent="flex-start"
                       alignItems="flex-start"
+                      marginLeft="3.5rem"
                     >
                       <Typography textAlign="left" padding="0.5rem">
-                        Diâmetro da lente
+                        Observações
                       </Typography>
-                      <Input
+                      <Box
+                        as="textarea"
                         p="L"
-                        type="number"
+                        rows="4"
+                        cols="50"
+                        resize="none"
+                        maxlength={50}
                         border="none"
                         outline="none"
                         borderRadius="M"
@@ -670,7 +673,7 @@ const Request: FC = () => {
                         minWidth={['100%', '10rem']}
                         width={['34.5rem']}
                         bg="transparent"
-                        placeholder="-0.50"
+                        placeholder="Deixa aqui as suas observações"
                         focus={{
                           borderColor: '#4763E4',
                         }}
@@ -682,7 +685,7 @@ const Request: FC = () => {
                   </Typography>
                   <Box
                     as="div"
-                    width="95%"
+                    width="88.5%"
                     display="flex"
                     justifyContent="flex-end"
                     alignItems="center"

@@ -17,8 +17,8 @@ const ModalBackdrop = styled.div`
 const ModalContent = styled.div`
   max-width: 100%;
   max-height: 100%;
-  width: 80%;
-  height: 80%;
+  width: 85%;
+  height: 85%;
   background-color: #fff;
   border-radius: 0.5rem;
   padding: 20px;
