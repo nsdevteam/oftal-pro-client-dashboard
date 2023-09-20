@@ -56,7 +56,7 @@ const ResetPassword: FC = () => {
           <Input
             p="L"
             type="email"
-            bg="outline"
+            bg="transparent"
             border="none"
             outline="none"
             borderRadius="M"
@@ -65,8 +65,10 @@ const ResetPassword: FC = () => {
             borderColor="#E4E4E7"
             mr={['NONE', 'S']}
             color="textInverted"
-            width={500}
-            backgroundColor="transparent"
+            mr={['NONE', 'S']}
+            ml={['NONE', 'S']}
+            minWidth={['100%', '10rem']}
+            width={['30rem']}
             placeholder="johndoe@oftalpro.com"
             focus={{
               borderColor: '#4763E4',
@@ -81,7 +83,7 @@ const ResetPassword: FC = () => {
             variant="primary"
             fontWeight="bold"
             color="#FFF"
-            width={500}
+            width={['30rem', 'NONE']}
             borderRadius="M"
             border="none"
             mt={['L', 'NONE']}

@@ -38,7 +38,6 @@ const Account: FC = () => (
           >
             <Box
               as="div"
-              width={500}
               margin="0.5rem"
               display="flex"
               flexDirection="column"
@@ -51,7 +50,6 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="text"
-                bg="outline"
                 border="none"
                 outline="none"
                 borderRadius="M"
@@ -60,8 +58,11 @@ const Account: FC = () => (
                 borderColor="#E4E4E7"
                 marginLeft="0.5rem"
                 color="textInverted"
-                width={490}
-                backgroundColor="transparent"
+                mr={['NONE', 'S']}
+                ml={['NONE', 'S']}
+                minWidth={['100%', '10rem']}
+                width={['30rem', 'NONE']}
+                bg="transparent"
                 placeholder="john"
                 focus={{
                   borderColor: '#4763E4',
@@ -70,7 +71,6 @@ const Account: FC = () => (
             </Box>
             <Box
               as="div"
-              width={500}
               margin="0.5rem"
               display="flex"
               flexDirection="column"
@@ -83,17 +83,18 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="text"
-                bg="outline"
                 border="none"
                 outline="none"
                 borderRadius="M"
                 borderSize="1px"
                 borderStyle="solid"
                 borderColor="#E4E4E7"
-                marginLeft="0.5rem"
                 color="textInverted"
-                width={490}
-                backgroundColor="transparent"
+                bg="transparent"
+                mr={['NONE', 'S']}
+                ml={['NONE', 'S']}
+                minWidth={['100%', '10rem']}
+                width={['30rem']}
                 placeholder="Doe"
                 focus={{
                   borderColor: '#4763E4',
@@ -103,7 +104,6 @@ const Account: FC = () => (
           </Box>
           <Box
             as="div"
-            width="100vw"
             display="flex"
             gap="1rem"
             alignItems="flex-start"
@@ -111,7 +111,6 @@ const Account: FC = () => (
           >
             <Box
               as="div"
-              width={500}
               margin="0.5rem"
               display="flex"
               flexDirection="column"
@@ -124,17 +123,18 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="email"
-                bg="outline"
                 border="none"
                 outline="none"
                 borderRadius="M"
                 borderSize="1px"
                 borderStyle="solid"
                 borderColor="#E4E4E7"
-                marginLeft="0.5rem"
                 color="textInverted"
-                width={490}
-                backgroundColor="transparent"
+                mr={['NONE', 'S']}
+                ml={['NONE', 'S']}
+                minWidth={['100%', '10rem']}
+                width={['30rem']}
+                bg="transparent"
                 placeholder="johndoe@oftalpro.com"
                 focus={{
                   borderColor: '#4763E4',
@@ -143,7 +143,6 @@ const Account: FC = () => (
             </Box>
             <Box
               as="div"
-              width={500}
               margin="0.5rem"
               display="flex"
               flexDirection="column"
@@ -156,17 +155,18 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="number"
-                bg="outline"
                 border="none"
                 outline="none"
                 borderRadius="M"
                 borderSize="1px"
                 borderStyle="solid"
                 borderColor="#E4E4E7"
-                marginLeft="0.5rem"
                 color="textInverted"
-                width={490}
-                backgroundColor="transparent"
+                mr={['NONE', 'S']}
+                ml={['NONE', 'S']}
+                minWidth={['100%', '10rem']}
+                width={['30rem']}
+                bg="transparent"
                 placeholder="(+244) 945 000 000"
                 focus={{
                   borderColor: '#4763E4',
@@ -176,7 +176,6 @@ const Account: FC = () => (
           </Box>
           <Box
             as="div"
-            width="100vw"
             display="flex"
             gap="1rem"
             alignItems="flex-start"
@@ -184,7 +183,6 @@ const Account: FC = () => (
           >
             <Box
               as="div"
-              width={500}
               margin="0.5rem"
               display="flex"
               flexDirection="column"
@@ -197,17 +195,18 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="date"
-                bg="outline"
                 border="none"
                 outline="none"
                 borderRadius="M"
                 borderSize="1px"
                 borderStyle="solid"
                 borderColor="#E4E4E7"
-                marginLeft="0.5rem"
                 color="textInverted"
-                width={490}
-                backgroundColor="transparent"
+                mr={['NONE', 'S']}
+                ml={['NONE', 'S']}
+                minWidth={['100%', '10rem']}
+                width={['30rem']}
+                bg="transparent"
                 placeholder="10-02-2019"
                 focus={{
                   borderColor: '#4763E4',
@@ -216,7 +215,6 @@ const Account: FC = () => (
             </Box>
             <Box
               as="div"
-              width={500}
               margin="0.5rem"
               display="flex"
               flexDirection="column"
@@ -229,7 +227,6 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="date"
-                bg="outline"
                 border="none"
                 outline="none"
                 borderRadius="M"
@@ -238,8 +235,11 @@ const Account: FC = () => (
                 borderColor="#E4E4E7"
                 marginLeft="0.5rem"
                 color="textInverted"
-                width={490}
-                backgroundColor="transparent"
+                mr={['NONE', 'S']}
+                ml={['NONE', 'S']}
+                minWidth={['100%', '10rem']}
+                width={['30rem']}
+                bg="transparent"
                 placeholder="20-03-2020"
                 focus={{
                   borderColor: '#4763E4',
@@ -256,7 +256,7 @@ const Account: FC = () => (
             variant="primary"
             fontWeight="bold"
             color="#FFF"
-            width={100}
+            width={['10rem', 'NONE']}
             borderRadius="M"
             border="none"
             bg="#4763E4"

@@ -38,6 +38,8 @@ const Home: FC = () => {
           justifyContent="center"
           alignItems="center"
           alignContent="center"
+          ml={['NONE', 'S']}
+          mr={['NONE', 'S']}
         >
           <LogoSVG margin="0.5rem" />
           <Typography padding="0.5rem">
@@ -66,6 +68,10 @@ const Home: FC = () => {
               <Input
                 p="L"
                 type="email"
+                mr={['NONE', 'S']}
+                ml={['NONE', 'S']}
+                minWidth={['100%', '10rem']}
+                width={['30rem']}
                 bg="outline"
                 border="none"
                 outline="none"
@@ -74,8 +80,7 @@ const Home: FC = () => {
                 borderStyle="solid"
                 borderColor="#E4E4E7"
                 color="textInverted"
-                width={500}
-                backgroundColor="transparent"
+                bg="transparent"
                 placeholder="johndoe@oftalpro.com"
                 focus={{
                   borderColor: '#4763E4',
@@ -87,7 +92,6 @@ const Home: FC = () => {
             <Box
               as="div"
               width="100%"
-              width="100%"
               display="flex"
               flexDirection="column"
               justifyContent="flex-start"
@@ -97,17 +101,18 @@ const Home: FC = () => {
                 Senha
               </Typography>
               <Box
-                bg="outline"
                 border="none"
-                outline="none"
                 mr={['NONE', 'S']}
+                ml={['NONE', 'S']}
+                minWidth={['100%', '10rem']}
+                width={['30rem']}
                 color="textInverted"
-                width={500}
                 backgroundColor="foreground"
                 borderRadius="M"
                 borderSize="1px"
                 borderStyle="solid"
                 borderColor="#E4E4E7"
+                bg="transparent"
                 display="flex"
                 flexWrap="nowrap"
                 overflow="hidden"
@@ -119,11 +124,13 @@ const Home: FC = () => {
                   type={showPassword ? 'text' : 'password'}
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
+                  bg="transparent"
                   border="none"
                   borderRadius="M"
                   outline="none"
                   backgroundColor="transparent"
-                  width={500}
+                  minWidth={['100%', '10rem']}
+                  width={['50rem']}
                   placeholder="***************"
                   focus={{
                     borderColor: '#4763E4',
@@ -147,6 +154,7 @@ const Home: FC = () => {
             <Box
               as="div"
               display="flex"
+              width="100%"
               justifyContent="center"
               alignItems="center"
               alignContent="center"
@@ -163,16 +171,17 @@ const Home: FC = () => {
               type="button"
               effect="hover"
               display="flex"
-              disabled=""
               variant="primary"
               fontWeight="bold"
               color="#FFF"
-              width={500}
+              mr={['NONE', 'S']}
+              ml={['NONE', 'S']}
+              minWidth={['100%', '10rem']}
+              width={['30rem', 'NONE']}
               borderRadius="M"
               border="none"
               bg="#4763E4"
               justifyContent="center"
-              minWidth={['100%', '10rem']}
               textTransform="uppercase"
               alignItems="center"
               onClick={() => router.push('/request')}

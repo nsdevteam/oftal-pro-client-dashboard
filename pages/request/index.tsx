@@ -158,13 +158,12 @@ const Request: FC = () => {
         <Typography padding="0.5rem">Pedidos</Typography>
         <Box as="div" width="100vw" padding="0.5rem">
           <Box
-            bg="outline"
+            bg="transparent"
             border="none"
             outline="none"
             mr={['NONE', 'S']}
             color="textInverted"
             width="77%"
-            backgroundColor="foreground"
             borderRadius="M"
             borderSize="1px"
             borderStyle="solid"
@@ -185,7 +184,10 @@ const Request: FC = () => {
               borderRadius="M"
               outline="none"
               backgroundColor="transparent"
-              width={500}
+              mr={['NONE', 'S']}
+              ml={['NONE', 'S']}
+              minWidth={['100%', '10rem']}
+              width={['30rem']}
               placeholder="Procurar por pedidos..."
             />
           </Box>
@@ -194,18 +196,17 @@ const Request: FC = () => {
             type="button"
             effect="hover"
             display="flex"
-            disabled=""
             variant="primary"
             fontWeight="bold"
             color="#FFF"
-            width={150}
+            width={['10rem', 'NONE']}
+            minWidth={['100%', '10rem']}
             borderRadius="M"
             marginTop="M"
             marginBottom="M"
             border="none"
             bg="#4763E4"
             justifyContent="center"
-            minWidth={['100%', '10rem']}
             textTransform="uppercase"
             alignItems="center"
             onClick={() => setModalOpen(!isModalOpen)}
@@ -302,10 +303,11 @@ const Request: FC = () => {
                           <Button
                             as="select"
                             name="value"
-                            width={270}
-                            height={50}
+                            mr={['NONE', 'S']}
+                            ml={['NONE', 'S']}
+                            minWidth={['100%', '10rem']}
+                            width={['16.5rem']}
                             p="L"
-                            bg="outline"
                             border="none"
                             outline="none"
                             borderRadius="M"
@@ -313,7 +315,7 @@ const Request: FC = () => {
                             borderStyle="solid"
                             borderColor="#E4E4E7"
                             color="textInverted"
-                            backgroundColor="transparent"
+                            bg="transparent"
                             focus={{
                               borderColor: '#4763E4',
                             }}
@@ -353,10 +355,11 @@ const Request: FC = () => {
                           <Button
                             as="select"
                             name="value"
-                            width={270}
-                            height={50}
+                            mr={['NONE', 'S']}
+                            ml={['NONE', 'S']}
+                            minWidth={['100%', '10rem']}
+                            width={['16.5rem']}
                             p="L"
-                            bg="outline"
                             border="none"
                             outline="none"
                             borderRadius="M"
@@ -364,7 +367,7 @@ const Request: FC = () => {
                             borderStyle="solid"
                             borderColor="#E4E4E7"
                             color="textInverted"
-                            backgroundColor="transparent"
+                            bg="transparent"
                             focus={{
                               borderColor: '#4763E4',
                             }}
@@ -443,10 +446,11 @@ const Request: FC = () => {
                           <Button
                             as="select"
                             name="value"
-                            width={270}
-                            height={50}
+                            mr={['NONE', 'S']}
+                            ml={['NONE', 'S']}
+                            minWidth={['100%', '10rem']}
+                            width={['16.5rem']}
                             p="L"
-                            bg="outline"
                             border="none"
                             outline="none"
                             borderRadius="M"
@@ -454,7 +458,7 @@ const Request: FC = () => {
                             borderStyle="solid"
                             borderColor="#E4E4E7"
                             color="textInverted"
-                            backgroundColor="transparent"
+                            bg="transparent"
                             focus={{
                               borderColor: '#4763E4',
                             }}
@@ -496,18 +500,19 @@ const Request: FC = () => {
                           <Button
                             as="select"
                             name="value"
-                            width={270}
-                            height={50}
+                            mr={['NONE', 'S']}
+                            ml={['NONE', 'S']}
+                            minWidth={['100%', '10rem']}
+                            width={['16.5rem']}
                             p="L"
                             bg="outline"
-                            border="none"
                             outline="none"
                             borderRadius="M"
                             borderSize="1px"
                             borderStyle="solid"
                             borderColor="#E4E4E7"
                             color="textInverted"
-                            backgroundColor="transparent"
+                            bg="transparent"
                             focus={{
                               borderColor: '#4763E4',
                             }}
@@ -532,7 +537,6 @@ const Request: FC = () => {
                   </Box>
                   <Box
                     as="div"
-                    width="100vw"
                     display="flex"
                     alignItems="flex-start"
                     justifyContent="flex-start"
@@ -550,7 +554,6 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        bg="outline"
                         border="none"
                         outline="none"
                         borderRadius="M"
@@ -559,8 +562,11 @@ const Request: FC = () => {
                         borderColor="#E4E4E7"
                         marginLeft="0.5rem"
                         color="textInverted"
-                        width={390}
-                        backgroundColor="transparent"
+                        mr={['NONE', 'S']}
+                        ml={['NONE', 'S']}
+                        minWidth={['100%', '10rem']}
+                        width={['25rem']}
+                        bg="transparent"
                         placeholder="Lucas Mateus"
                         focus={{
                           borderColor: '#4763E4',
@@ -581,17 +587,18 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        bg="outline"
                         border="none"
                         outline="none"
                         borderRadius="M"
                         borderSize="1px"
                         borderStyle="solid"
                         borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
                         color="textInverted"
-                        width={560}
-                        backgroundColor="transparent"
+                        mr={['NONE', 'S']}
+                        ml={['NONE', 'S']}
+                        minWidth={['100%', '10rem']}
+                        width={['34.5rem']}
+                        bg="transparent"
                         placeholder="Vidro"
                         focus={{
                           borderColor: '#4763E4',
@@ -601,7 +608,6 @@ const Request: FC = () => {
                   </Box>
                   <Box
                     as="div"
-                    width="100vw"
                     display="flex"
                     gap="1rem"
                     alignItems="flex-start"
@@ -620,7 +626,6 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        bg="outline"
                         border="none"
                         outline="none"
                         borderRadius="M"
@@ -628,9 +633,11 @@ const Request: FC = () => {
                         borderStyle="solid"
                         borderColor="#E4E4E7"
                         color="textInverted"
-                        marginLeft="0.5rem"
-                        width={390}
-                        backgroundColor="transparent"
+                        mr={['NONE', 'S']}
+                        ml={['NONE', 'S']}
+                        minWidth={['100%', '10rem']}
+                        width={['25rem']}
+                        bg="transparent"
                         placeholder="23SW34B"
                         focus={{
                           borderColor: '#4763E4',
@@ -651,17 +658,18 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="number"
-                        bg="outline"
                         border="none"
                         outline="none"
                         borderRadius="M"
                         borderSize="1px"
                         borderStyle="solid"
                         borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
                         color="textInverted"
-                        width={560}
-                        backgroundColor="transparent"
+                        mr={['NONE', 'S']}
+                        ml={['NONE', 'S']}
+                        minWidth={['100%', '10rem']}
+                        width={['34.5rem']}
+                        bg="transparent"
                         placeholder="-0.50"
                         focus={{
                           borderColor: '#4763E4',
@@ -688,13 +696,13 @@ const Request: FC = () => {
                       variant="primary"
                       fontWeight="bold"
                       color="#FFF"
-                      width={100}
                       borderRadius="M"
                       border="none"
                       bg="#4763E4"
-                      marginLeft="1rem"
-                      marginTop="1rem"
+                      ml="1rem"
+                      mt="1rem"
                       justifyContent="center"
+                      width={['10rem', 'NONE']}
                       minWidth={['100%', '10rem']}
                       textTransform="uppercase"
                       alignItems="center"
@@ -756,7 +764,8 @@ const Request: FC = () => {
                           alignItems="center"
                           padding={['S', 'XL']}
                           margin={['S', 'M']}
-                          width="95%"
+                          width={['62rem']}
+                          minWidth={['100%', '10rem']}
                           borderRadius="5px"
                           transition="0.5s"
                           boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
@@ -794,17 +803,16 @@ const Request: FC = () => {
                     type="button"
                     effect="hover"
                     display="flex"
-                    disabled=""
                     variant="primary"
                     fontWeight="bold"
                     color="#FFF"
-                    width={100}
                     borderRadius="M"
                     border="none"
                     bg="#4763E4"
-                    marginLeft="0.5rem"
-                    marginTop="1rem"
+                    ml="0.5rem"
+                    mt="1rem"
                     justifyContent="center"
+                    width={['10rem', 'NONE']}
                     minWidth={['100%', '10rem']}
                     textTransform="uppercase"
                     alignItems="center"
@@ -820,13 +828,13 @@ const Request: FC = () => {
                     disabled=""
                     variant="primary"
                     color="#4763E4"
-                    width={250}
                     borderRadius="M"
                     border="none"
                     bg="transparent"
-                    marginLeft="0.5rem"
-                    marginTop="1rem"
+                    ml="0.5rem"
+                    mt="1rem"
                     justifyContent="center"
+                    width={['15rem', 'NONE']}
                     minWidth={['100%', '10rem']}
                     textTransform="uppercase"
                     alignItems="center"
@@ -861,7 +869,7 @@ const Request: FC = () => {
                 </Box>
                 <Box
                   as="div"
-                  width="100vw"
+                  width="100%"
                   display="flex"
                   marginTop="2rem"
                   alignItems="flex-start"
@@ -881,17 +889,18 @@ const Request: FC = () => {
                       p="L"
                       type="text"
                       value={province}
-                      bg="outline"
                       border="none"
                       outline="none"
                       borderRadius="M"
                       borderSize="1px"
                       borderStyle="solid"
                       borderColor="#E4E4E7"
-                      marginLeft="0.5rem"
                       color="textInverted"
-                      width={390}
-                      backgroundColor="transparent"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
+                      minWidth={['100%', '10rem']}
+                      width={['30rem']}
+                      bg="transparent"
                       placeholder="Benguela"
                       onChange={(e) => setProvince(e.target.value)}
                       focus={{
@@ -913,17 +922,18 @@ const Request: FC = () => {
                     <Input
                       p="L"
                       type="text"
-                      bg="outline"
                       border="none"
                       outline="none"
                       borderRadius="M"
                       borderSize="1px"
                       borderStyle="solid"
                       borderColor="#E4E4E7"
-                      marginLeft="0.5rem"
                       color="textInverted"
-                      width={560}
-                      backgroundColor="transparent"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
+                      minWidth={['100%', '10rem']}
+                      width={['30rem']}
+                      bg="transparent"
                       placeholder="Lobito"
                       focus={{
                         borderColor: '#4763E4',
@@ -952,17 +962,18 @@ const Request: FC = () => {
                       p="L"
                       type="text"
                       value={city}
-                      bg="outline"
                       border="none"
                       outline="none"
                       borderRadius="M"
                       borderSize="1px"
                       borderStyle="solid"
                       borderColor="#E4E4E7"
-                      marginLeft="0.5rem"
                       color="textInverted"
-                      width={1015}
-                      backgroundColor="transparent"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
+                      minWidth={['100%', '10rem']}
+                      width={['64rem']}
+                      bg="transparent"
                       onChange={(e) => setCity(e.target.value)}
                       placeholder="Bairro da Camunda"
                       focus={{
@@ -985,17 +996,18 @@ const Request: FC = () => {
                     p="L"
                     type="text"
                     value={street}
-                    bg="outline"
                     border="none"
                     outline="none"
                     borderRadius="M"
                     borderSize="1px"
                     borderStyle="solid"
                     borderColor="#E4E4E7"
-                    marginLeft="0.5rem"
                     color="textInverted"
-                    width={1015}
-                    backgroundColor="transparent"
+                    mr={['NONE', 'S']}
+                    ml={['NONE', 'S']}
+                    minWidth={['100%', '10rem']}
+                    width={['64rem']}
+                    bg="transparent"
                     placeholder="Rua das casas amarelas"
                     onChange={(e) => setStreet(e.target.value)}
                     focus={{
@@ -1023,7 +1035,6 @@ const Request: FC = () => {
                     <Input
                       p="L"
                       type="text"
-                      bg="outline"
                       value={apt}
                       border="none"
                       outline="none"
@@ -1031,10 +1042,12 @@ const Request: FC = () => {
                       borderSize="1px"
                       borderStyle="solid"
                       borderColor="#E4E4E7"
-                      marginLeft="0.5rem"
                       color="textInverted"
-                      width={390}
-                      backgroundColor="transparent"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
+                      minWidth={['100%', '10rem']}
+                      width={['30rem']}
+                      bg="transparent"
                       onChange={(e) => setApt(e.target.value)}
                       placeholder="Casa S/N"
                       focus={{
@@ -1056,17 +1069,18 @@ const Request: FC = () => {
                     <Input
                       p="L"
                       type="text"
-                      bg="outline"
                       border="none"
                       outline="none"
                       borderRadius="M"
                       borderSize="1px"
                       borderStyle="solid"
                       borderColor="#E4E4E7"
-                      marginLeft="0.5rem"
                       color="textInverted"
-                      width={560}
-                      backgroundColor="transparent"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
+                      minWidth={['100%', '10rem']}
+                      width={['30rem']}
+                      bg="transparent"
                       placeholder="Antiga sede da ENDE"
                       focus={{
                         borderColor: '#4763E4',
@@ -1090,14 +1104,13 @@ const Request: FC = () => {
                     disabled=""
                     variant="primary"
                     color="#000"
-                    width={80}
                     borderRadius="M"
                     border="1px solid #E4E4E7"
                     bg="transparent"
-                    marginLeft="0.5rem"
-                    marginTop="1rem"
-                    justifyContent="center"
+                    mt="1rem"
+                    width={['10rem', 'NONE']}
                     minWidth={['100%', '10rem']}
+                    justifyContent="center"
                     textTransform="uppercase"
                     alignItems="center"
                     cursor="pointer"
@@ -1114,13 +1127,13 @@ const Request: FC = () => {
                     variant="primary"
                     fontWeight="bold"
                     color="#FFF"
-                    width={200}
                     borderRadius="M"
                     border="none"
                     bg="#4763E4"
-                    marginLeft="0.5rem"
-                    marginTop="1rem"
+                    ml="0.5rem"
+                    mt="1rem"
                     justifyContent="center"
+                    width={['12rem', 'NONE']}
                     minWidth={['100%', '10rem']}
                     textTransform="uppercase"
                     alignItems="center"
@@ -1172,9 +1185,11 @@ const Request: FC = () => {
                     borderSize="1px"
                     borderStyle="solid"
                     borderColor={paymentByReference ? '#4763E4' : '#E4E4E7'}
-                    width="500px"
-                    height="80px"
-                    backgroundColor="transparent"
+                    mr={['NONE', 'S']}
+                    ml={['NONE', 'S']}
+                    minWidth={['100%', '10rem']}
+                    width={['31rem']}
+                    bg="transparent"
                     name="paymentByReference"
                     onClick={handlePaymentByReference}
                   >
@@ -1198,9 +1213,11 @@ const Request: FC = () => {
                     borderSize="1px"
                     borderStyle="solid"
                     borderColor={paymentByExpress ? '#4763E4' : '#E4E4E7'}
-                    width="500px"
-                    height="80px"
-                    backgroundColor="transparent"
+                    mr={['NONE', 'S']}
+                    ml={['NONE', 'S']}
+                    minWidth={['100%', '10rem']}
+                    width={['31rem']}
+                    bg="transparent"
                     name="paymentByExpress"
                     onClick={handlePaymentByExpress}
                   >
@@ -1230,6 +1247,8 @@ const Request: FC = () => {
                       flexDirection="column"
                       justifyContent="flex-start"
                       alignItems="flex-start"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
                     >
                       <Typography textAlign="left" padding="0.5rem">
                         Entidade
@@ -1237,17 +1256,18 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        bg="outline"
                         border="none"
                         outline="none"
                         borderRadius="M"
                         borderSize="1px"
                         borderStyle="solid"
                         borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
                         color="textInverted"
-                        width={390}
-                        backgroundColor="transparent"
+                        mr={['NONE', 'S']}
+                        ml={['NONE', 'S']}
+                        minWidth={['100%', '10rem']}
+                        width={['31rem']}
+                        bg="transparent"
                         placeholder="491 Oftal Pro"
                         onChange={(e) => setProvince(e.target.value)}
                         focus={{
@@ -1261,7 +1281,8 @@ const Request: FC = () => {
                       flexDirection="column"
                       justifyContent="flex-start"
                       alignItems="flex-start"
-                      marginLeft="3.5rem"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
                     >
                       <Typography textAlign="left" padding="0.5rem">
                         Referência
@@ -1269,17 +1290,18 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        bg="outline"
                         border="none"
                         outline="none"
                         borderRadius="M"
                         borderSize="1px"
                         borderStyle="solid"
                         borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
                         color="textInverted"
-                        width={560}
-                        backgroundColor="transparent"
+                        mr={['NONE', 'S']}
+                        ml={['NONE', 'S']}
+                        minWidth={['100%', '10rem']}
+                        width={['31rem']}
+                        bg="transparent"
                         placeholder="001437785"
                         focus={{
                           borderColor: '#4763E4',
@@ -1300,6 +1322,8 @@ const Request: FC = () => {
                       flexDirection="column"
                       justifyContent="flex-start"
                       alignItems="flex-start"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
                     >
                       <Typography textAlign="left" padding="0.5rem">
                         Montante
@@ -1307,17 +1331,18 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        bg="outline"
                         border="none"
                         outline="none"
                         borderRadius="M"
                         borderSize="1px"
                         borderStyle="solid"
                         borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
                         color="textInverted"
-                        width={1015}
-                        backgroundColor="transparent"
+                        mr={['NONE', 'S']}
+                        ml={['NONE', 'S']}
+                        minWidth={['100%', '10rem']}
+                        width={['63rem']}
+                        bg="transparent"
                         onChange={(e) => setCity(e.target.value)}
                         placeholder="1.000.000,00"
                         focus={{
@@ -1344,6 +1369,8 @@ const Request: FC = () => {
                       flexDirection="column"
                       justifyContent="flex-start"
                       alignItems="flex-start"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
                     >
                       <Typography textAlign="left" padding="0.5rem">
                         Número de telefone
@@ -1351,17 +1378,18 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        bg="outline"
                         border="none"
                         outline="none"
                         borderRadius="M"
                         borderSize="1px"
                         borderStyle="solid"
                         borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
                         color="textInverted"
-                        width={390}
-                        backgroundColor="transparent"
+                        mr={['NONE', 'S']}
+                        ml={['NONE', 'S']}
+                        minWidth={['100%', '10rem']}
+                        width={['31rem']}
+                        bg="transparent"
                         placeholder="923 009 161"
                         focus={{
                           borderColor: '#4763E4',
@@ -1375,6 +1403,8 @@ const Request: FC = () => {
                       justifyContent="flex-start"
                       alignItems="flex-start"
                       marginLeft="3.5rem"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
                     >
                       <Typography textAlign="left" padding="0.5rem">
                         Montante
@@ -1382,18 +1412,19 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        bg="outline"
                         border="none"
                         outline="none"
                         borderRadius="M"
                         borderSize="1px"
                         borderStyle="solid"
                         borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
                         color="textInverted"
-                        width={560}
-                        backgroundColor="transparent"
-                        placeholder="3.000.000,00"
+                        mr={['NONE', 'S']}
+                        ml={['NONE', 'S']}
+                        minWidth={['100%', '10rem']}
+                        width={['31rem']}
+                        bg="transparent"
+                        placeholder="3.845.000,00"
                         focus={{
                           borderColor: '#4763E4',
                         }}

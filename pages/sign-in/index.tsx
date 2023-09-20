@@ -28,7 +28,6 @@ const Signin: FC = () => {
     >
       <Box
         height="700px"
-        width="700"
         padding="0.5rem"
         display="flex"
         flexDirection="column"
@@ -64,7 +63,7 @@ const Signin: FC = () => {
             <Input
               p="L"
               type="text"
-              bg="outline"
+              bg="transparent"
               border="none"
               outline="none"
               borderRadius="M"
@@ -72,9 +71,10 @@ const Signin: FC = () => {
               borderStyle="solid"
               borderColor="#E4E4E7"
               mr={['NONE', 'S']}
+              ml={['NONE', 'S']}
+              minWidth={['100%', '10rem']}
+              width={['30rem']}
               color="textInverted"
-              width={500}
-              backgroundColor="transparent"
               placeholder="John Doe"
               focus={{
                 borderColor: '#4763E4',
@@ -95,17 +95,18 @@ const Signin: FC = () => {
             <Input
               p="L"
               type="email"
-              bg="outline"
+              bg="transparent"
               border="none"
               outline="none"
               borderRadius="M"
               borderSize="1px"
               borderStyle="solid"
               borderColor="#E4E4E7"
-              mr={['NONE', 'S']}
               color="textInverted"
-              width={500}
-              backgroundColor="transparent"
+              mr={['NONE', 'S']}
+              ml={['NONE', 'S']}
+              minWidth={['100%', '10rem']}
+              width={['30rem']}
               placeholder="johndoe@oftalpro.com"
               focus={{
                 borderColor: '#4763E4',
@@ -124,17 +125,18 @@ const Signin: FC = () => {
               Senha
             </Typography>
             <Box
-              bg="outline"
               border="none"
-              outline="none"
               mr={['NONE', 'S']}
+              ml={['NONE', 'S']}
+              minWidth={['100%', '10rem']}
+              width={['30rem']}
               color="textInverted"
-              width={500}
               backgroundColor="foreground"
               borderRadius="M"
               borderSize="1px"
               borderStyle="solid"
               borderColor="#E4E4E7"
+              bg="transparent"
               display="flex"
               flexWrap="nowrap"
               overflow="hidden"
@@ -146,11 +148,13 @@ const Signin: FC = () => {
                 type={showPassword ? 'text' : 'password'}
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
+                bg="transparent"
                 border="none"
                 borderRadius="M"
                 outline="none"
                 backgroundColor="transparent"
-                width={500}
+                minWidth={['100%', '10rem']}
+                width={['50rem']}
                 placeholder="***************"
                 focus={{
                   borderColor: '#4763E4',
@@ -183,7 +187,7 @@ const Signin: FC = () => {
             variant="primary"
             fontWeight="bold"
             color="#FFF"
-            width={500}
+            width={['30rem', 'NONE']}
             borderRadius="M"
             border="none"
             bg="#4763E4"
