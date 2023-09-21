@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { FC, useState } from 'react';
+import { FC, SetStateAction, useEffect, useState } from 'react';
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -8,31 +8,23 @@ import {
   FiX,
 } from 'react-icons/fi';
 
-import { v4 as uuidv4 } from 'uuid';
-
-import { address, indiceOfRefraction, geometry } from '../../api';
+import { address, geometry, refraction, requestData } from '../../api';
 import { Layout } from '../../components';
-
-import { RoutesEnum } from '../../constants/routes';
-import colors from '../../design-system/common/primitive-colors';
-import styles from './styles.module.css';
 import {
   Box,
   Button,
   Input,
   Modal,
   ModalAddress,
+  Table,
   Typography,
-  Dropdown,
 } from '../../elements';
-
-import { Express, PaymentReference } from '../../components/image-svg';
+import { Address } from '../../interface';
 
 const Request: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('Menu');
   const [showSelectAddress, setShowSelectAddress] = useState(false);
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(null);
   const [addNewAddress, setAddNewAddress] = useState(false);
   const [newAddress, setNewAddress] = useState(address);
   const [province, setProvince] = useState('');
@@ -43,7 +35,17 @@ const Request: FC = () => {
   const [paymentByReference, setPaymentByReference] = useState(false);
   const [paymentByExpress, setPaymentByExpress] = useState(false);
   const [paymentSucceed, setPaymentSucceed] = useState(false);
-  const id = uuidv4();
+  const id = Math.random();
+
+  const columns = [
+    'Nome do paciente',
+    'Geometria',
+    'índice de refração',
+    'Tratamento',
+    'Quantidade',
+    'Data de pedido',
+    'Opções',
+  ];
 
   const espherical = [
     '-0.50',
@@ -61,7 +63,9 @@ const Request: FC = () => {
 
   const colors = ['Branco', 'Fotocromática', 'Transições', 'Polarizada'];
 
-  const handleAddressSelected = (id) => {
+  const handleAddressSelected = (
+    id: number | boolean | any | ((prevState: boolean) => boolean)
+  ) => {
     setSelected(id);
   };
 
@@ -79,7 +83,7 @@ const Request: FC = () => {
     setShowSelectAddress(true);
     setAddNewAddress(false);
 
-    const newLocation = address.push({
+    const newLocation: [] = address.push({
       id,
       province,
       city,
@@ -94,6 +98,11 @@ const Request: FC = () => {
     setApt('');
   };
 
+  const handleAddNewRequest = () => {
+    //Imcomplete function
+    newAddress, openModal;
+  };
+
   const handlePaymentModal = () => {
     setPaymentModal(false);
     setShowSelectAddress(false);
@@ -102,10 +111,6 @@ const Request: FC = () => {
   const handleCancel = () => {
     setShowSelectAddress(true);
     setAddNewAddress(false);
-  };
-
-  const handleSelect = (option) => {
-    setSelectedOption(option);
   };
 
   const openModal = () => {
@@ -141,6 +146,11 @@ const Request: FC = () => {
     setPaymentSucceed(true);
     setPaymentModal(false);
   };
+
+  //This useEffect was implemented to remove prettier and eslint error
+  useEffect(() => {
+    handleAddNewRequest();
+  }, []);
   return (
     <Layout pageTitle="Pedidos">
       <Box
@@ -218,6 +228,7 @@ const Request: FC = () => {
         </Box>
         <Box as="div" width="80%" height="100%" padding="0.5rem">
           <Typography as="h2">Listagem de pedidos</Typography>
+          <Table data={requestData} columns={columns} />
           {isModalOpen && (
             <Modal isOpen={isModalOpen} onClose={closeModal}>
               <Box
@@ -258,6 +269,7 @@ const Request: FC = () => {
                       flexDirection="column"
                       alignItems="flex-start"
                       justifyContent="flex-start"
+                      mt="0.5rem"
                     >
                       <Typography padding="0.5rem">Olho esquerdo</Typography>
                       <Box
@@ -267,12 +279,102 @@ const Request: FC = () => {
                         alignItems="flex-start"
                         justifyContent="flex-start"
                       >
-                        <Dropdown
-                          options={espherical}
-                          onSelect={handleSelect}
-                        />
-                        <Dropdown options={cylinder} onSelect={handleSelect} />
-                        <Dropdown options={axis} onSelect={handleSelect} />
+                        <Button
+                          as="select"
+                          name="value"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '8rem']}
+                          width={['8rem']}
+                          p="L"
+                          outline="none"
+                          borderRadius="M"
+                          borderSize="1px"
+                          borderStyle="solid"
+                          borderColor="#E4E4E7"
+                          color="textInverted"
+                          bg="transparent"
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                        >
+                          {espherical.map((item) => {
+                            return (
+                              <Typography
+                                as="option"
+                                padding="0.5rem"
+                                key={item}
+                                value={item}
+                              >
+                                {item}
+                              </Typography>
+                            );
+                          })}
+                        </Button>
+                        <Button
+                          as="select"
+                          name="value"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '8rem']}
+                          width={['8rem']}
+                          p="L"
+                          outline="none"
+                          borderRadius="M"
+                          borderSize="1px"
+                          borderStyle="solid"
+                          borderColor="#E4E4E7"
+                          color="textInverted"
+                          bg="transparent"
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                        >
+                          {cylinder.map((item) => {
+                            return (
+                              <Typography
+                                as="option"
+                                padding="0.5rem"
+                                key={item}
+                                value={item}
+                              >
+                                {item}
+                              </Typography>
+                            );
+                          })}
+                        </Button>
+                        <Button
+                          as="select"
+                          name="value"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '8rem']}
+                          width={['8rem']}
+                          p="L"
+                          outline="none"
+                          borderRadius="M"
+                          borderSize="1px"
+                          borderStyle="solid"
+                          borderColor="#E4E4E7"
+                          color="textInverted"
+                          bg="transparent"
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                        >
+                          {axis.map((item) => {
+                            return (
+                              <Typography
+                                as="option"
+                                padding="0.5rem"
+                                key={item}
+                                value={item}
+                              >
+                                {item}
+                              </Typography>
+                            );
+                          })}
+                        </Button>
                       </Box>
                     </Box>
                     <Box
@@ -309,9 +411,8 @@ const Request: FC = () => {
                             mr={['NONE', 'S']}
                             ml={['NONE', 'S']}
                             minWidth={['100%', '10rem']}
-                            width={['16.5rem']}
+                            width={['20rem']}
                             p="L"
-                            bg="outline"
                             outline="none"
                             borderRadius="M"
                             borderSize="1px"
@@ -365,7 +466,7 @@ const Request: FC = () => {
                             mr={['NONE', 'S']}
                             ml={['NONE', 'S']}
                             minWidth={['100%', '10rem']}
-                            width={['16.5rem']}
+                            width={['20rem']}
                             p="L"
                             border="none"
                             outline="none"
@@ -379,7 +480,7 @@ const Request: FC = () => {
                               borderColor: '#4763E4',
                             }}
                           >
-                            {indiceOfRefraction.map((item) => {
+                            {refraction.map((item) => {
                               const { id, value } = item;
                               return (
                                 <Typography as="option" key={id} value={value}>
@@ -407,6 +508,7 @@ const Request: FC = () => {
                       flexDirection="column"
                       alignItems="flex-start"
                       justifyContent="flex-start"
+                      mt="0.5rem"
                     >
                       <Typography padding="0.5rem">Olho direito</Typography>
                       <Box
@@ -416,12 +518,102 @@ const Request: FC = () => {
                         alignItems="flex-start"
                         justifyContent="flex-start"
                       >
-                        <Dropdown
-                          options={espherical}
-                          onSelect={handleSelect}
-                        />
-                        <Dropdown options={cylinder} onSelect={handleSelect} />
-                        <Dropdown options={axis} onSelect={handleSelect} />
+                        <Button
+                          as="select"
+                          name="value"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '8rem']}
+                          width={['8rem']}
+                          p="L"
+                          outline="none"
+                          borderRadius="M"
+                          borderSize="1px"
+                          borderStyle="solid"
+                          borderColor="#E4E4E7"
+                          color="textInverted"
+                          bg="transparent"
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                        >
+                          {espherical.map((item) => {
+                            return (
+                              <Typography
+                                as="option"
+                                padding="0.5rem"
+                                key={item}
+                                value={item}
+                              >
+                                {item}
+                              </Typography>
+                            );
+                          })}
+                        </Button>
+                        <Button
+                          as="select"
+                          name="value"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '8rem']}
+                          width={['8rem']}
+                          p="L"
+                          outline="none"
+                          borderRadius="M"
+                          borderSize="1px"
+                          borderStyle="solid"
+                          borderColor="#E4E4E7"
+                          color="textInverted"
+                          bg="transparent"
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                        >
+                          {cylinder.map((item) => {
+                            return (
+                              <Typography
+                                as="option"
+                                padding="0.5rem"
+                                key={item}
+                                value={item}
+                              >
+                                {item}
+                              </Typography>
+                            );
+                          })}
+                        </Button>
+                        <Button
+                          as="select"
+                          name="value"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '8rem']}
+                          width={['8rem']}
+                          p="L"
+                          outline="none"
+                          borderRadius="M"
+                          borderSize="1px"
+                          borderStyle="solid"
+                          borderColor="#E4E4E7"
+                          color="textInverted"
+                          bg="transparent"
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                        >
+                          {axis.map((item) => {
+                            return (
+                              <Typography
+                                as="option"
+                                padding="0.5rem"
+                                key={item}
+                                value={item}
+                              >
+                                {item}
+                              </Typography>
+                            );
+                          })}
+                        </Button>
                       </Box>
                     </Box>
                     <Box
@@ -456,7 +648,7 @@ const Request: FC = () => {
                             mr={['NONE', 'S']}
                             ml={['NONE', 'S']}
                             minWidth={['100%', '10rem']}
-                            width={['16.5rem']}
+                            width={['20rem']}
                             p="L"
                             border="none"
                             outline="none"
@@ -508,7 +700,7 @@ const Request: FC = () => {
                             mr={['NONE', 'S']}
                             ml={['NONE', 'S']}
                             minWidth={['100%', '10rem']}
-                            width={['16.5rem']}
+                            width={['20rem']}
                             p="L"
                             border="none"
                             outline="none"
@@ -524,7 +716,7 @@ const Request: FC = () => {
                           >
                             {threatment.map((item) => {
                               return (
-                                <Typography as="option" value={item}>
+                                <Typography key={item} as="option" value={item}>
                                   {item}
                                 </Typography>
                               );
@@ -596,7 +788,7 @@ const Request: FC = () => {
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
                         minWidth={['100%', '10rem']}
-                        width={['34.5rem']}
+                        width={['41.5rem']}
                         bg="transparent"
                         placeholder="-0.50"
                         focus={{
@@ -671,7 +863,7 @@ const Request: FC = () => {
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
                         minWidth={['100%', '10rem']}
-                        width={['34.5rem']}
+                        width={['41.5rem']}
                         bg="transparent"
                         placeholder="Deixa aqui as suas observações"
                         focus={{
@@ -685,7 +877,7 @@ const Request: FC = () => {
                   </Typography>
                   <Box
                     as="div"
-                    width="88.5%"
+                    width="98%"
                     display="flex"
                     justifyContent="flex-end"
                     alignItems="center"
@@ -756,18 +948,14 @@ const Request: FC = () => {
                           as="div"
                           key={id}
                           display="flex"
-                          justifyContent="flex-start"
+                          justifyContent="space-between"
                           alignItems="center"
-                          as="div"
                           border="none"
                           outline="none"
                           effect="hover"
-                          display="flex"
-                          justifyContent="space-between"
-                          alignItems="center"
                           padding={['S', 'XL']}
                           margin={['S', 'M']}
-                          width={['62rem']}
+                          width={['67rem']}
                           minWidth={['100%', '10rem']}
                           borderRadius="5px"
                           transition="0.5s"
@@ -786,7 +974,6 @@ const Request: FC = () => {
                             width="20px"
                             height="20px"
                             borderRadius="25px"
-                            bg="transparent"
                             bg={selected === id ? '#4763E4' : 'transparent'}
                           />
                         </Box>
@@ -902,7 +1089,7 @@ const Request: FC = () => {
                       mr={['NONE', 'S']}
                       ml={['NONE', 'S']}
                       minWidth={['100%', '10rem']}
-                      width={['30rem']}
+                      width={['32rem']}
                       bg="transparent"
                       placeholder="Benguela"
                       onChange={(e) => setProvince(e.target.value)}
@@ -935,7 +1122,7 @@ const Request: FC = () => {
                       mr={['NONE', 'S']}
                       ml={['NONE', 'S']}
                       minWidth={['100%', '10rem']}
-                      width={['30rem']}
+                      width={['32rem']}
                       bg="transparent"
                       placeholder="Lobito"
                       focus={{
@@ -975,7 +1162,7 @@ const Request: FC = () => {
                       mr={['NONE', 'S']}
                       ml={['NONE', 'S']}
                       minWidth={['100%', '10rem']}
-                      width={['64rem']}
+                      width={['68rem']}
                       bg="transparent"
                       onChange={(e) => setCity(e.target.value)}
                       placeholder="Bairro da Camunda"
@@ -1009,7 +1196,7 @@ const Request: FC = () => {
                     mr={['NONE', 'S']}
                     ml={['NONE', 'S']}
                     minWidth={['100%', '10rem']}
-                    width={['64rem']}
+                    width={['68rem']}
                     bg="transparent"
                     placeholder="Rua das casas amarelas"
                     onChange={(e) => setStreet(e.target.value)}
@@ -1049,7 +1236,7 @@ const Request: FC = () => {
                       mr={['NONE', 'S']}
                       ml={['NONE', 'S']}
                       minWidth={['100%', '10rem']}
-                      width={['30rem']}
+                      width={['32rem']}
                       bg="transparent"
                       onChange={(e) => setApt(e.target.value)}
                       placeholder="Casa S/N"
@@ -1082,7 +1269,7 @@ const Request: FC = () => {
                       mr={['NONE', 'S']}
                       ml={['NONE', 'S']}
                       minWidth={['100%', '10rem']}
-                      width={['30rem']}
+                      width={['32rem']}
                       bg="transparent"
                       placeholder="Antiga sede da ENDE"
                       focus={{
@@ -1191,7 +1378,7 @@ const Request: FC = () => {
                     mr={['NONE', 'S']}
                     ml={['NONE', 'S']}
                     minWidth={['100%', '10rem']}
-                    width={['31rem']}
+                    width={['34rem']}
                     bg="transparent"
                     name="paymentByReference"
                     onClick={handlePaymentByReference}
@@ -1219,7 +1406,7 @@ const Request: FC = () => {
                     mr={['NONE', 'S']}
                     ml={['NONE', 'S']}
                     minWidth={['100%', '10rem']}
-                    width={['31rem']}
+                    width={['34rem']}
                     bg="transparent"
                     name="paymentByExpress"
                     onClick={handlePaymentByExpress}
@@ -1269,7 +1456,7 @@ const Request: FC = () => {
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
                         minWidth={['100%', '10rem']}
-                        width={['31rem']}
+                        width={['34rem']}
                         bg="transparent"
                         placeholder="491 Oftal Pro"
                         onChange={(e) => setProvince(e.target.value)}
@@ -1303,7 +1490,7 @@ const Request: FC = () => {
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
                         minWidth={['100%', '10rem']}
-                        width={['31rem']}
+                        width={['34rem']}
                         bg="transparent"
                         placeholder="001437785"
                         focus={{
@@ -1344,7 +1531,7 @@ const Request: FC = () => {
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
                         minWidth={['100%', '10rem']}
-                        width={['63rem']}
+                        width={['69rem']}
                         bg="transparent"
                         onChange={(e) => setCity(e.target.value)}
                         placeholder="1.000.000,00"
@@ -1391,7 +1578,7 @@ const Request: FC = () => {
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
                         minWidth={['100%', '10rem']}
-                        width={['31rem']}
+                        width={['34rem']}
                         bg="transparent"
                         placeholder="923 009 161"
                         focus={{
@@ -1425,7 +1612,7 @@ const Request: FC = () => {
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
                         minWidth={['100%', '10rem']}
-                        width={['31rem']}
+                        width={['34rem']}
                         bg="transparent"
                         placeholder="3.845.000,00"
                         focus={{
@@ -1599,12 +1786,12 @@ const Request: FC = () => {
                     <FiChevronLeft size={16} color="#27272A" />
                   </Typography>
                 </Button>
-                {[1, 2, 3, 4, 5, 6, , 7, 8, 9].map((pag, index) => {
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((pag) => {
                   return (
                     <Button
                       p="0.8rem"
                       type="button"
-                      key={index}
+                      key={pag}
                       effect="hover"
                       display="flex"
                       disabled=""

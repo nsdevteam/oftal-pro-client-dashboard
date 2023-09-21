@@ -2,8 +2,8 @@ import Head from 'next/head';
 import { FC } from 'react';
 
 import { Box } from '../../elements';
-import { LayoutProps } from './layout.types';
 import Header from './header';
+import { LayoutProps } from './layout.types';
 import Sidebar from './sidebar';
 
 const Layout: FC<LayoutProps> = ({ pageTitle = '', children }) => {

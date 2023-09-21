@@ -1,8 +1,8 @@
-import { Links, Submenu, Notification, Refraction } from '../interface';
+import { FiCreditCard, FiFileText, FiSettings } from 'react-icons/fi';
 
-import { FiFileText, FiCreditCard, FiSettings } from 'react-icons/fi';
+import { Address, Links, Notification, Refraction } from '../interface';
 
-export const menuLink: Links = [
+export const menuLink: Links[] = [
   {
     id: 1,
     url: '/request',
@@ -25,7 +25,7 @@ export const menuLink: Links = [
   },
 ];
 
-export const notification: Notification = [
+export const notification: Notification[] = [
   {
     id: 1,
     title: 'Pedido',
@@ -92,7 +92,7 @@ export const notification: Notification = [
   },
 ];
 
-export const address: Address = [
+export const address: Address[] = [
   {
     id: 1,
     province: 'Luanda',
@@ -123,7 +123,8 @@ export const address: Address = [
   },
 ];
 
-export const indiceOfRefraction: Refraction = [
+// eslint-disable-next-line no-sparse-arrays
+export const refraction = [
   {
     id: 1,
     value: '1.5',
@@ -138,7 +139,7 @@ export const indiceOfRefraction: Refraction = [
   },
   {
     id: 4,
-    value: '1,56 UV420 Bluecut',
+    value: '1,56 UV420 BlueCut',
   },
   {
     id: 5,
@@ -146,7 +147,7 @@ export const indiceOfRefraction: Refraction = [
   },
   {
     id: 6,
-    value: '1,56 UV420 Bluecut',
+    value: '1,56 UV420 BlueCut',
   },
   {
     id: 7,
@@ -158,7 +159,7 @@ export const indiceOfRefraction: Refraction = [
   },
   {
     id: 10,
-    value: '1,6 UV420 Bluecut',
+    value: '1,6 UV420 BlueCut',
   },
   {
     id: 11,
@@ -166,7 +167,7 @@ export const indiceOfRefraction: Refraction = [
   },
   {
     id: 12,
-    value: '1,67 UV420 Bluecut',
+    value: '1,67 UV420 BlueCut',
   },
   ,
   {
@@ -175,11 +176,11 @@ export const indiceOfRefraction: Refraction = [
   },
   {
     id: 14,
-    value: '1,74 UV420 Bluecut',
+    value: '1,74 UV420 BlueCut',
   },
 ];
 
-export const geometry: Refraction = [
+export const geometry: Refraction[] = [
   {
     id: 1,
     value: 'Unifocal Fabrico',
@@ -204,4 +205,26 @@ export const geometry: Refraction = [
     id: 6,
     value: 'Bifocal',
   },
+];
+
+export const requestData = [
+  ['Lucas João', 'Bifocal', 'Redonda', 'HMC', '1 unidade', '10/02/2023', '--'],
+  [
+    'Artur Vidal',
+    'unifocal',
+    'Redonda',
+    'SHMC',
+    '100 unidade',
+    '15/06/2023',
+    '--',
+  ],
+  [
+    'Patrica Luísa',
+    'Bifocal',
+    'Redonda',
+    'HMC',
+    '1 unidade',
+    '22/07/2023',
+    '--',
+  ],
 ];

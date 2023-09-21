@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { SVGProps } from '../../types/svg.types';
+import { SVGProps } from '../svg/svg.types';
 
 const LogoImage: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   <svg

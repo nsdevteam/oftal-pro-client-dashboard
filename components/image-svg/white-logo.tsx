@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { SVGProps } from '../../types/svg.types';
+import { SVGProps } from '../svg/svg.types';
 
 const WhiteLogo: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   <svg

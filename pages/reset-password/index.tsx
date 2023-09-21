@@ -63,7 +63,6 @@ const ResetPassword: FC = () => {
             borderSize="1px"
             borderStyle="solid"
             borderColor="#E4E4E7"
-            mr={['NONE', 'S']}
             color="textInverted"
             mr={['NONE', 'S']}
             ml={['NONE', 'S']}

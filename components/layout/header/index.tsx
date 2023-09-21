@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
+import { FiBell, FiChevronRight, FiX } from 'react-icons/fi';
 
-import { Box, Typography, ModalNotification } from '../../../elements';
-import { FiChevronRight, FiBell, FiX } from 'react-icons/fi';
 import { notification } from '../../../api';
+import { Box, ModalNotification, Typography } from '../../../elements';
 
 const Header: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);

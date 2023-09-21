@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import { Rotate } from '../../elements';
-
 import { SVGProps } from './svg.types';
 
 const Loading: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (

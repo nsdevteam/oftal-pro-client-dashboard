@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { FC } from 'react';
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -26,7 +26,13 @@ const ModalContent = styled.div`
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 `;
 
-const Modal = ({ isOpen, onClose, children }) => {
+type Modal = {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+};
+
+const Modal: FC<Modal> = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (

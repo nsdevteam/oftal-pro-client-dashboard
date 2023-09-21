@@ -5,7 +5,7 @@ import { FC, useState } from 'react';
 import { Eye, EyeSlash } from '../../components/image-svg';
 import LogoSVG from '../../components/svg/logo';
 import { RoutePaths, RoutesEnum } from '../../constants/routes';
-import { Box, Typography, Button, Input } from '../../elements';
+import { Box, Button, Input, Typography } from '../../elements';
 
 const Signin: FC = () => {
   const [password, setPassword] = useState('');

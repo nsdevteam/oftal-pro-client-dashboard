@@ -32,6 +32,32 @@ const GlobalStyles = css`
       background-color: #4256d0;
     }
   }
+
+  .tableRequest {
+    border-collapse: collapse;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  }
+
+  .tableContent {
+    height: 25rem;
+    width: 85vw;
+    overflow-x: scroll;
+    margin-top: 1rem;
+  }
+
+  .tableRequest thead {
+    background: #f6f6f7;
+    font-weight: bold;
+  }
+
+  .tableRequest tr:nth-of-type(even) {
+    background-color: #f6f6f7;
+  }
+
+  .tableRequest tr:hover {
+    background-color: #f6f6f7;
+  }
 `;
 
 export default GlobalStyles;

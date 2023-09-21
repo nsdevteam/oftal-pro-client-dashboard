@@ -27,7 +27,6 @@ const Account: FC = () => (
           flexDirection="column"
           alignItems="flex-start"
           justifyContent="flex-start"
-          onSubmit=""
         >
           <Box
             as="div"
@@ -50,13 +49,9 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="text"
-                border="none"
                 outline="none"
                 borderRadius="M"
-                borderSize="1px"
-                borderStyle="solid"
-                borderColor="#E4E4E7"
-                marginLeft="0.5rem"
+                border="1px solid #E4E4E7"
                 color="textInverted"
                 mr={['NONE', 'S']}
                 ml={['NONE', 'S']}
@@ -83,12 +78,9 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="text"
-                border="none"
                 outline="none"
                 borderRadius="M"
-                borderSize="1px"
-                borderStyle="solid"
-                borderColor="#E4E4E7"
+                border="1px solid #E4E4E7"
                 color="textInverted"
                 bg="transparent"
                 mr={['NONE', 'S']}
@@ -105,7 +97,6 @@ const Account: FC = () => (
           <Box
             as="div"
             display="flex"
-            gap="1rem"
             alignItems="flex-start"
             justifyContent="flex-start"
           >
@@ -123,12 +114,9 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="email"
-                border="none"
                 outline="none"
                 borderRadius="M"
-                borderSize="1px"
-                borderStyle="solid"
-                borderColor="#E4E4E7"
+                border="1px solid #E4E4E7"
                 color="textInverted"
                 mr={['NONE', 'S']}
                 ml={['NONE', 'S']}
@@ -155,12 +143,9 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="number"
-                border="none"
                 outline="none"
                 borderRadius="M"
-                borderSize="1px"
-                borderStyle="solid"
-                borderColor="#E4E4E7"
+                border="1px solid #E4E4E7"
                 color="textInverted"
                 mr={['NONE', 'S']}
                 ml={['NONE', 'S']}
@@ -177,7 +162,6 @@ const Account: FC = () => (
           <Box
             as="div"
             display="flex"
-            gap="1rem"
             alignItems="flex-start"
             justifyContent="flex-start"
           >
@@ -195,12 +179,9 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="date"
-                border="none"
                 outline="none"
                 borderRadius="M"
-                borderSize="1px"
-                borderStyle="solid"
-                borderColor="#E4E4E7"
+                border="1px solid #E4E4E7"
                 color="textInverted"
                 mr={['NONE', 'S']}
                 ml={['NONE', 'S']}
@@ -227,12 +208,9 @@ const Account: FC = () => (
               <Input
                 p="L"
                 type="date"
-                border="none"
                 outline="none"
                 borderRadius="M"
-                borderSize="1px"
-                borderStyle="solid"
-                borderColor="#E4E4E7"
+                border="1px solid #E4E4E7"
                 marginLeft="0.5rem"
                 color="textInverted"
                 mr={['NONE', 'S']}
@@ -251,8 +229,6 @@ const Account: FC = () => (
             p="L"
             type="submit"
             effect="hover"
-            display="flex"
-            disabled=""
             variant="primary"
             fontWeight="bold"
             color="#FFF"
@@ -260,12 +236,12 @@ const Account: FC = () => (
             borderRadius="M"
             border="none"
             bg="#4763E4"
-            marginLeft="1rem"
-            marginTop="2rem"
+            ml="1rem"
+            mt="2rem"
+            display="flex"
             justifyContent="center"
-            minWidth={['100%', '10rem']}
-            textTransform="uppercase"
             alignItems="center"
+            minWidth={['100%', '10rem']}
           >
             Salvar
           </Button>

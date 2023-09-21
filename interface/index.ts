@@ -8,23 +8,19 @@ export interface IEmptyObject {}
 export type MaybeArray<T> = T | Array<T>;
 
 export interface Links {
-  map(arg0: (socialIcon: any) => JSX.Element): import('react').ReactNode;
-  map(arg0: (link: any) => JSX.Element): import('react').ReactNode;
   id: number;
   url: string;
   title: string;
   icon: ReactNode;
-  submenu?: unknown;
+  submenu?: string;
 }
 
 export interface Notification {
-  map(arg0: (socialIcon: any) => JSX.Element): import('react').ReactNode;
-  map(arg0: (link: any) => JSX.Element): import('react').ReactNode;
   id: number;
   title: string;
   description: string;
-  createdAt: ReactNode;
-  currentDate: unknown;
+  createdAt: string;
+  currentDate: string;
 }
 
 export interface Address {
