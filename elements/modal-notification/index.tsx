@@ -30,7 +30,7 @@ const ModalContent = styled.div`
 `;
 
 type ModalNotificationProps = {
-  isOpen: boolean;
+  isOpen: () => void;
   onClose: () => void;
   children: React.ReactNode;
 };

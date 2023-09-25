@@ -50,7 +50,7 @@ const Header: FC = () => {
         >
           <FiBell size={30} color="#000" onClick={openModal} />
           {isModalOpen ? (
-            <ModalNotification isOpen={isModalOpen} onClose={closeModal}>
+            <ModalNotification isOpen={openModal} onClose={closeModal}>
               <Box
                 as="div"
                 display="flex"

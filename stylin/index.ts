@@ -1,9 +1,8 @@
 import { SerializedStyles } from '@emotion/serialize';
 import styled from '@emotion/styled';
 
-import { Theme } from '@/design-system/landing-page-theme';
-import { IEmptyObj } from '@/interface';
-
+import { Theme } from '../design-system/light-theme';
+import { IEmptyObject } from '../interface';
 import renderStyles from './render-styles';
 import {
   GenericWithTheme,
@@ -13,7 +12,7 @@ import {
 import { isFunction } from './utils';
 
 const stylin =
-  <T extends IEmptyObj>(
+  <T extends IEmptyObject>(
     component: keyof JSX.IntrinsicElements
   ): TCreateStylinComponent<T> =>
   (...styles) =>

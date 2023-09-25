@@ -1,6 +1,12 @@
 import { FiCreditCard, FiFileText, FiSettings } from 'react-icons/fi';
 
-import { Address, Links, Notification, Refraction } from '../interface';
+import {
+  Address,
+  Indices,
+  Links,
+  Notification,
+  Refraction,
+} from '../interface';
 
 export const menuLink: Links[] = [
   {
@@ -123,63 +129,6 @@ export const address: Address[] = [
   },
 ];
 
-// eslint-disable-next-line no-sparse-arrays
-export const refraction = [
-  {
-    id: 1,
-    value: '1.5',
-  },
-  {
-    id: 2,
-    value: '1.5 lenticular +',
-  },
-  {
-    id: 3,
-    value: '1,56',
-  },
-  {
-    id: 4,
-    value: '1,56 UV420 BlueCut',
-  },
-  {
-    id: 5,
-    value: '1,56 BI-Concavo',
-  },
-  {
-    id: 6,
-    value: '1,56 UV420 BlueCut',
-  },
-  {
-    id: 7,
-    value: '1,59 Policabonato',
-  },
-  {
-    id: 8,
-    value: '1.6',
-  },
-  {
-    id: 10,
-    value: '1,6 UV420 BlueCut',
-  },
-  {
-    id: 11,
-    value: '1.67',
-  },
-  {
-    id: 12,
-    value: '1,67 UV420 BlueCut',
-  },
-  ,
-  {
-    id: 13,
-    value: '1,74',
-  },
-  {
-    id: 14,
-    value: '1,74 UV420 BlueCut',
-  },
-];
-
 export const geometry: Refraction[] = [
   {
     id: 1,
@@ -204,6 +153,61 @@ export const geometry: Refraction[] = [
   {
     id: 6,
     value: 'Bifocal',
+  },
+];
+
+export const refraction: Indices[] = [
+  {
+    id: 1,
+    size: '1.5',
+  },
+  {
+    id: 2,
+    size: '1.5 lenticular +',
+  },
+  {
+    id: 3,
+    size: '1,56',
+  },
+  {
+    id: 4,
+    size: '1,56 UV420 BlueCut',
+  },
+  {
+    id: 5,
+    size: '1,56 BI-Concavo',
+  },
+  {
+    id: 6,
+    size: '1,56 UV420 BlueCut',
+  },
+  {
+    id: 7,
+    size: '1,59 Policabonato',
+  },
+  {
+    id: 8,
+    size: '1.6',
+  },
+  {
+    id: 10,
+    size: '1,6 UV420 BlueCut',
+  },
+  {
+    id: 11,
+    size: '1.67',
+  },
+  {
+    id: 12,
+    size: '1,67 UV420 BlueCut',
+  },
+  {
+    id: 13,
+    size: '1,74',
+  },
+  {
+    id: 14,
+    size: '1,74 UV420 BlueCut',
   },
 ];
 

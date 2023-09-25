@@ -12,12 +12,7 @@ const ResetPassword: FC = () => (
     alignItems="center"
     alignContent="center"
   >
-    <Typography
-      padding="0.5rem"
-      borderLeftSize="3px"
-      borderLeftStyle="solid"
-      borderLeftColor="#16A34A"
-    >
+    <Typography padding="0.5rem" borderLeft="3px solid #16A34A">
       Correio de verificação de endereço de e-mail, contendo o link de alteração
       de senha.
     </Typography>

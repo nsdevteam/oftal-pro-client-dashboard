@@ -1748,10 +1748,10 @@
   resolved "https://registry.npmjs.org/@next/env/-/env-13.0.2.tgz"
   integrity sha512-Qb6WPuRriGIQ19qd6NBxpcrFOfj8ziN7l9eZUfwff5gl4zLXluqtuZPddYZM/oWjN53ZYcuRXzL+oowKyJeYtA==
 
-"@next/swc-darwin-arm64@13.0.2":
+"@next/swc-darwin-x64@13.0.2":
   version "13.0.2"
-  resolved "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-13.0.2.tgz"
-  integrity sha512-1zGIOkInkOLRv0QQGZ+3wffYsyKI4vIy62LYTvDWUn7TAYqnmXwougp9NSLqDeagLwgsv2URrykyAFixA/YqxA==
+  resolved "https://registry.npmjs.org/@next/swc-darwin-x64/-/swc-darwin-x64-13.0.2.tgz"
+  integrity sha512-ECDAjoMP1Y90cARaelS6X+k6BQx+MikAYJ8f/eaJrLur44NIOYc9HA/dgcTp5jenguY4yT8V+HCquLjAVle6fA==
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
@@ -2286,6 +2286,13 @@
   version "15.7.3"
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.3.tgz"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
+
+"@types/ramda@^0.29.4":
+  version "0.29.4"
+  resolved "https://registry.npmjs.org/@types/ramda/-/ramda-0.29.4.tgz"
+  integrity sha512-bd3nyfkZd5EVxuBf1kW6wvFz61SvAEfXXISIEIePJOj2XRjCHyro1ikvDXTXIlpRtuC6lwTMfYdkXCD+oiXQfw==
+  dependencies:
+    types-ramda "^0.29.4"
 
 "@types/react-dom@^18.0.1":
   version "18.0.1"
@@ -7059,6 +7066,11 @@ ts-node@^10.8.1, ts-node@>=10:
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
 
+ts-toolbelt@^9.6.0:
+  version "9.6.0"
+  resolved "https://registry.npmjs.org/ts-toolbelt/-/ts-toolbelt-9.6.0.tgz"
+  integrity sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==
+
 tsconfig-paths@^3.9.0:
   version "3.9.0"
   resolved "https://registry.npmjs.org/tsconfig-paths/-/tsconfig-paths-3.9.0.tgz"
@@ -7132,6 +7144,13 @@ type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://registry.npmjs.org/type-fest/-/type-fest-0.8.1.tgz"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
+
+types-ramda@^0.29.4:
+  version "0.29.4"
+  resolved "https://registry.npmjs.org/types-ramda/-/types-ramda-0.29.4.tgz"
+  integrity sha512-XO/820iRsCDwqLjE8XE+b57cVGPyk1h+U9lBGpDWvbEky+NQChvHVwaKM05WnW1c5z3EVQh8NhXFmh2E/1YazQ==
+  dependencies:
+    ts-toolbelt "^9.6.0"
 
 typescript@^4.6.3, "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta":
   version "4.6.3"

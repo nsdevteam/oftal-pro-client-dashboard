@@ -4,9 +4,8 @@ import { StyledComponent } from '@emotion/styled';
 import { CSSProperties } from 'react';
 import { ResponsiveValue } from 'styled-system';
 
-import { Theme } from '@/design-system/landing-page-theme';
-import { IEmptyObj } from '@/interface';
-
+import { Theme } from '../design-system/light-theme';
+import { IEmptyObject } from '../interface';
 import { CSSPseudoSelectors, StylinCustomPropertiesType } from './constants';
 
 export type TStyleValue = ResponsiveValue<string | number>;
@@ -61,7 +60,7 @@ export type TRenderPseudoSelector = (
 
 export type TGetBreakpoint = (index: number) => string;
 
-export type TCreateStylinComponent<T extends IEmptyObj> = (
+export type TCreateStylinComponent<T extends IEmptyObject> = (
   ...styles: ReadonlyArray<SerializedStyles | TStylinFn<T>>
 ) => StyledComponent<T>;
 

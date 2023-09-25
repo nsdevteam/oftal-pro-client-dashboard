@@ -35,7 +35,7 @@ const Signin: FC = () => {
         alignItems="center"
         alignContent="center"
       >
-        <LogoSVG margin="0.5rem" />
+        <LogoSVG />
         <Typography padding="0.5rem">
           Crie uma conta e desfrute do melhor que temos para si
         </Typography>
@@ -44,7 +44,6 @@ const Signin: FC = () => {
           width="100%"
           display="flex"
           alignItems="center"
-          onSubmit=""
           mt={['XL', 'XL', 'XL', 'NONE']}
           flexDirection="column"
           justifyContent="center"
@@ -64,12 +63,9 @@ const Signin: FC = () => {
               p="L"
               type="text"
               bg="transparent"
-              border="none"
               outline="none"
               borderRadius="M"
-              borderSize="1px"
-              borderStyle="solid"
-              borderColor="#E4E4E7"
+              border="1px solid #E4E4E7"
               mr={['NONE', 'S']}
               ml={['NONE', 'S']}
               minWidth={['100%', '10rem']}
@@ -96,12 +92,9 @@ const Signin: FC = () => {
               p="L"
               type="email"
               bg="transparent"
-              border="none"
               outline="none"
               borderRadius="M"
-              borderSize="1px"
-              borderStyle="solid"
-              borderColor="#E4E4E7"
+              border="1px solid #E4E4E7"
               color="textInverted"
               mr={['NONE', 'S']}
               ml={['NONE', 'S']}
@@ -125,23 +118,19 @@ const Signin: FC = () => {
               Senha
             </Typography>
             <Box
-              border="none"
               mr={['NONE', 'S']}
               ml={['NONE', 'S']}
               minWidth={['100%', '10rem']}
               width={['30rem']}
               color="textInverted"
-              backgroundColor="foreground"
               borderRadius="M"
-              borderSize="1px"
-              borderStyle="solid"
-              borderColor="#E4E4E7"
+              border="1px solid #E4E4E7"
               bg="transparent"
               display="flex"
               flexWrap="nowrap"
               overflow="hidden"
               alignItems="center"
-              justifyContent="sstretch"
+              justifyContent="stretch"
             >
               <Input
                 p="L"
@@ -152,7 +141,6 @@ const Signin: FC = () => {
                 border="none"
                 borderRadius="M"
                 outline="none"
-                backgroundColor="transparent"
                 minWidth={['100%', '10rem']}
                 width={['50rem']}
                 placeholder="***************"
@@ -180,10 +168,9 @@ const Signin: FC = () => {
           </Typography>
           <Button
             p="L"
-            type="submit"
+            type="button"
             effect="hover"
             display="flex"
-            disabled=""
             variant="primary"
             fontWeight="bold"
             color="#FFF"
@@ -193,9 +180,8 @@ const Signin: FC = () => {
             bg="#4763E4"
             justifyContent="center"
             minWidth={['100%', '10rem']}
-            textTransform="uppercase"
             alignItems="center"
-            onClick={() => router.push('/dashboard')}
+            onClick={() => router.push('/')}
           >
             Criar conta &rarr;
           </Button>
@@ -209,7 +195,10 @@ const Signin: FC = () => {
           marginTop="1rem"
         >
           <Typography padding="0.5rem">Já tem uma conta?</Typography>
-          <Link padding="0.5rem" href={RoutePaths[RoutesEnum.Home]}>
+          <Link
+            style={{ padding: '0.5rem' }}
+            href={RoutePaths[RoutesEnum.Home]}
+          >
             Entrar.{' '}
           </Link>
         </Box>

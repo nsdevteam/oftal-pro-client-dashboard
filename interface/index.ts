@@ -35,3 +35,8 @@ export interface Refraction {
   id: number;
   value: string;
 }
+
+export interface Indices {
+  id: number;
+  size: string;
+}

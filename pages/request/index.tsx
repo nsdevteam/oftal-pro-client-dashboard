@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { FC, SetStateAction, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -19,14 +19,12 @@ import {
   Table,
   Typography,
 } from '../../elements';
-import { Address } from '../../interface';
 
 const Request: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [showSelectAddress, setShowSelectAddress] = useState(false);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<number | boolean | null>(null);
   const [addNewAddress, setAddNewAddress] = useState(false);
-  const [newAddress, setNewAddress] = useState(address);
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
   const [street, setStreet] = useState('');
@@ -35,7 +33,8 @@ const Request: FC = () => {
   const [paymentByReference, setPaymentByReference] = useState(false);
   const [paymentByExpress, setPaymentByExpress] = useState(false);
   const [paymentSucceed, setPaymentSucceed] = useState(false);
-  const id = Math.random();
+  const [search, setSearch] = useState('');
+  const [files, setFiles] = useState('');
 
   const columns = [
     'Nome do paciente',
@@ -63,9 +62,7 @@ const Request: FC = () => {
 
   const colors = ['Branco', 'Fotocromática', 'Transições', 'Polarizada'];
 
-  const handleAddressSelected = (
-    id: number | boolean | any | ((prevState: boolean) => boolean)
-  ) => {
+  const handleAddressSelected = (id: number | boolean | null) => {
     setSelected(id);
   };
 
@@ -74,7 +71,7 @@ const Request: FC = () => {
     setModalOpen(false);
   };
 
-  const handleAddNewAddress = () => {
+  const handleOpenModalNewAddress = () => {
     setAddNewAddress(!addNewAddress);
     setShowSelectAddress(false);
   };
@@ -83,24 +80,27 @@ const Request: FC = () => {
     setShowSelectAddress(true);
     setAddNewAddress(false);
 
-    const newLocation: [] = address.push({
-      id,
-      province,
-      city,
-      street,
-      apt,
-    });
+    // const newLocation: [] = address.push({
+    //   id,
+    //   province,
+    //   city,
+    //   street,
+    //   apt,
+    // });
 
-    setNewAddress(newLocation);
     setProvince('');
     setCity('');
     setStreet('');
     setApt('');
   };
 
+  const handleSearch = () => {
+    setSearch(search);
+  };
+
   const handleAddNewRequest = () => {
-    //Imcomplete function
-    newAddress, openModal;
+    openModal;
+    setFiles(files);
   };
 
   const handlePaymentModal = () => {
@@ -126,6 +126,7 @@ const Request: FC = () => {
     setModalOpen(false);
     setShowSelectAddress(false);
     setPaymentByReference(true);
+    setPaymentByExpress(false);
   };
 
   const handlePaymentByReference = () => {
@@ -145,6 +146,10 @@ const Request: FC = () => {
   const handlePaymentSucceed = () => {
     setPaymentSucceed(true);
     setPaymentModal(false);
+  };
+
+  const handleOnChange = (e: { target: { value: unknown } }) => {
+    e.target.value;
   };
 
   //This useEffect was implemented to remove prettier and eslint error
@@ -167,18 +172,14 @@ const Request: FC = () => {
         padding="1rem"
       >
         <Typography padding="0.5rem">Pedidos</Typography>
-        <Box as="div" width="100vw" padding="0.5rem">
+        <Box as="form" onSubmit={handleSearch} width="100vw" padding="0.5rem">
           <Box
             bg="transparent"
-            border="none"
-            outline="none"
             mr={['NONE', 'S']}
             color="textInverted"
             width="77%"
             borderRadius="M"
-            borderSize="1px"
-            borderStyle="solid"
-            borderColor="#E4E4E7"
+            border="1px solid #E4E4E7"
             display="flex"
             flexWrap="nowrap"
             overflow="hidden"
@@ -200,6 +201,8 @@ const Request: FC = () => {
               minWidth={['100%', '10rem']}
               width={['30rem']}
               placeholder="Procurar por pedidos..."
+              value={search}
+              onChange={handleOnChange}
             />
           </Box>
           <Button
@@ -218,7 +221,6 @@ const Request: FC = () => {
             border="none"
             bg="#4763E4"
             justifyContent="center"
-            textTransform="uppercase"
             alignItems="center"
             onClick={() => setModalOpen(!isModalOpen)}
           >
@@ -230,7 +232,7 @@ const Request: FC = () => {
           <Typography as="h2">Listagem de pedidos</Typography>
           <Table data={requestData} columns={columns} />
           {isModalOpen && (
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <Modal isOpen={openModal} onClose={closeModal}>
               <Box
                 as="div"
                 display="flex"
@@ -279,102 +281,33 @@ const Request: FC = () => {
                         alignItems="flex-start"
                         justifyContent="flex-start"
                       >
-                        <Button
-                          as="select"
-                          name="value"
-                          mr={['NONE', 'S']}
-                          ml={['NONE', 'S']}
-                          minWidth={['100%', '8rem']}
-                          width={['8rem']}
-                          p="L"
-                          outline="none"
-                          borderRadius="M"
-                          borderSize="1px"
-                          borderStyle="solid"
-                          borderColor="#E4E4E7"
-                          color="textInverted"
-                          bg="transparent"
-                          focus={{
-                            borderColor: '#4763E4',
-                          }}
-                        >
+                        <select className="selectEyeForm" name="esphical">
                           {espherical.map((item) => {
                             return (
-                              <Typography
-                                as="option"
-                                padding="0.5rem"
-                                key={item}
-                                value={item}
-                              >
+                              <option key={item} value={item}>
                                 {item}
-                              </Typography>
+                              </option>
                             );
                           })}
-                        </Button>
-                        <Button
-                          as="select"
-                          name="value"
-                          mr={['NONE', 'S']}
-                          ml={['NONE', 'S']}
-                          minWidth={['100%', '8rem']}
-                          width={['8rem']}
-                          p="L"
-                          outline="none"
-                          borderRadius="M"
-                          borderSize="1px"
-                          borderStyle="solid"
-                          borderColor="#E4E4E7"
-                          color="textInverted"
-                          bg="transparent"
-                          focus={{
-                            borderColor: '#4763E4',
-                          }}
-                        >
+                        </select>
+                        <select className="selectEyeForm" name="cylinder">
                           {cylinder.map((item) => {
                             return (
-                              <Typography
-                                as="option"
-                                padding="0.5rem"
-                                key={item}
-                                value={item}
-                              >
+                              <option key={item} value={item}>
                                 {item}
-                              </Typography>
+                              </option>
                             );
                           })}
-                        </Button>
-                        <Button
-                          as="select"
-                          name="value"
-                          mr={['NONE', 'S']}
-                          ml={['NONE', 'S']}
-                          minWidth={['100%', '8rem']}
-                          width={['8rem']}
-                          p="L"
-                          outline="none"
-                          borderRadius="M"
-                          borderSize="1px"
-                          borderStyle="solid"
-                          borderColor="#E4E4E7"
-                          color="textInverted"
-                          bg="transparent"
-                          focus={{
-                            borderColor: '#4763E4',
-                          }}
-                        >
+                        </select>
+                        <select className="selectEyeForm" name="axis">
                           {axis.map((item) => {
                             return (
-                              <Typography
-                                as="option"
-                                padding="0.5rem"
-                                key={item}
-                                value={item}
-                              >
+                              <option key={item} value={item}>
                                 {item}
-                              </Typography>
+                              </option>
                             );
                           })}
-                        </Button>
+                        </select>
                       </Box>
                     </Box>
                     <Box
@@ -405,39 +338,16 @@ const Request: FC = () => {
                           alignItems="center"
                           padding="0.5rem"
                         >
-                          <Button
-                            as="select"
-                            name="value"
-                            mr={['NONE', 'S']}
-                            ml={['NONE', 'S']}
-                            minWidth={['100%', '10rem']}
-                            width={['20rem']}
-                            p="L"
-                            outline="none"
-                            borderRadius="M"
-                            borderSize="1px"
-                            borderStyle="solid"
-                            borderColor="#E4E4E7"
-                            color="textInverted"
-                            bg="transparent"
-                            focus={{
-                              borderColor: '#4763E4',
-                            }}
-                          >
+                          <select className="selectType" name="geometry">
                             {geometry.map((geo) => {
                               const { id, value } = geo;
                               return (
-                                <Typography
-                                  as="option"
-                                  padding="0.5rem"
-                                  key={id}
-                                  value={value}
-                                >
+                                <option key={id} value={value}>
                                   {value}
-                                </Typography>
+                                </option>
                               );
                             })}
-                          </Button>
+                          </select>
                         </Box>
                       </Box>
 
@@ -460,35 +370,16 @@ const Request: FC = () => {
                           alignItems="center"
                           padding="0.5rem"
                         >
-                          <Button
-                            as="select"
-                            name="value"
-                            mr={['NONE', 'S']}
-                            ml={['NONE', 'S']}
-                            minWidth={['100%', '10rem']}
-                            width={['20rem']}
-                            p="L"
-                            border="none"
-                            outline="none"
-                            borderRadius="M"
-                            borderSize="1px"
-                            borderStyle="solid"
-                            borderColor="#E4E4E7"
-                            color="textInverted"
-                            bg="transparent"
-                            focus={{
-                              borderColor: '#4763E4',
-                            }}
-                          >
+                          <select className="selectType" name="refraction">
                             {refraction.map((item) => {
-                              const { id, value } = item;
+                              const { id, size } = item;
                               return (
-                                <Typography as="option" key={id} value={value}>
-                                  {value}
-                                </Typography>
+                                <option key={id} value={size}>
+                                  {size}
+                                </option>
                               );
                             })}
-                          </Button>
+                          </select>
                         </Box>
                       </Box>
                     </Box>
@@ -518,102 +409,33 @@ const Request: FC = () => {
                         alignItems="flex-start"
                         justifyContent="flex-start"
                       >
-                        <Button
-                          as="select"
-                          name="value"
-                          mr={['NONE', 'S']}
-                          ml={['NONE', 'S']}
-                          minWidth={['100%', '8rem']}
-                          width={['8rem']}
-                          p="L"
-                          outline="none"
-                          borderRadius="M"
-                          borderSize="1px"
-                          borderStyle="solid"
-                          borderColor="#E4E4E7"
-                          color="textInverted"
-                          bg="transparent"
-                          focus={{
-                            borderColor: '#4763E4',
-                          }}
-                        >
+                        <select className="selectEyeForm" name="esphical">
                           {espherical.map((item) => {
                             return (
-                              <Typography
-                                as="option"
-                                padding="0.5rem"
-                                key={item}
-                                value={item}
-                              >
+                              <option key={item} value={item}>
                                 {item}
-                              </Typography>
+                              </option>
                             );
                           })}
-                        </Button>
-                        <Button
-                          as="select"
-                          name="value"
-                          mr={['NONE', 'S']}
-                          ml={['NONE', 'S']}
-                          minWidth={['100%', '8rem']}
-                          width={['8rem']}
-                          p="L"
-                          outline="none"
-                          borderRadius="M"
-                          borderSize="1px"
-                          borderStyle="solid"
-                          borderColor="#E4E4E7"
-                          color="textInverted"
-                          bg="transparent"
-                          focus={{
-                            borderColor: '#4763E4',
-                          }}
-                        >
+                        </select>
+                        <select className="selectEyeForm" name="cylinder">
                           {cylinder.map((item) => {
                             return (
-                              <Typography
-                                as="option"
-                                padding="0.5rem"
-                                key={item}
-                                value={item}
-                              >
+                              <option key={item} value={item}>
                                 {item}
-                              </Typography>
+                              </option>
                             );
                           })}
-                        </Button>
-                        <Button
-                          as="select"
-                          name="value"
-                          mr={['NONE', 'S']}
-                          ml={['NONE', 'S']}
-                          minWidth={['100%', '8rem']}
-                          width={['8rem']}
-                          p="L"
-                          outline="none"
-                          borderRadius="M"
-                          borderSize="1px"
-                          borderStyle="solid"
-                          borderColor="#E4E4E7"
-                          color="textInverted"
-                          bg="transparent"
-                          focus={{
-                            borderColor: '#4763E4',
-                          }}
-                        >
+                        </select>
+                        <select className="selectEyeForm" name="axis">
                           {axis.map((item) => {
                             return (
-                              <Typography
-                                as="option"
-                                padding="0.5rem"
-                                key={item}
-                                value={item}
-                              >
+                              <option key={item} value={item}>
                                 {item}
-                              </Typography>
+                              </option>
                             );
                           })}
-                        </Button>
+                        </select>
                       </Box>
                     </Box>
                     <Box
@@ -642,39 +464,15 @@ const Request: FC = () => {
                           alignItems="center"
                           padding="0.5rem"
                         >
-                          <Button
-                            as="select"
-                            name="value"
-                            mr={['NONE', 'S']}
-                            ml={['NONE', 'S']}
-                            minWidth={['100%', '10rem']}
-                            width={['20rem']}
-                            p="L"
-                            border="none"
-                            outline="none"
-                            borderRadius="M"
-                            borderSize="1px"
-                            borderStyle="solid"
-                            borderColor="#E4E4E7"
-                            color="textInverted"
-                            bg="transparent"
-                            focus={{
-                              borderColor: '#4763E4',
-                            }}
-                          >
+                          <select className="selectType" name="color">
                             {colors.map((color) => {
                               return (
-                                <Typography
-                                  as="option"
-                                  key={color}
-                                  padding="0.5rem"
-                                  value="HMC"
-                                >
+                                <option key={color} value="HMC">
                                   {color}
-                                </Typography>
+                                </option>
                               );
                             })}
-                          </Button>
+                          </select>
                         </Box>
                       </Box>
                       <Box
@@ -694,34 +492,15 @@ const Request: FC = () => {
                           alignItems="center"
                           padding="0.5rem"
                         >
-                          <Button
-                            as="select"
-                            name="value"
-                            mr={['NONE', 'S']}
-                            ml={['NONE', 'S']}
-                            minWidth={['100%', '10rem']}
-                            width={['20rem']}
-                            p="L"
-                            border="none"
-                            outline="none"
-                            borderRadius="M"
-                            borderSize="1px"
-                            borderStyle="solid"
-                            borderColor="#E4E4E7"
-                            color="textInverted"
-                            bg="transparent"
-                            focus={{
-                              borderColor: '#4763E4',
-                            }}
-                          >
+                          <select name="threatment" className="selectType">
                             {threatment.map((item) => {
                               return (
-                                <Typography key={item} as="option" value={item}>
+                                <option key={item} value={item}>
                                   {item}
-                                </Typography>
+                                </option>
                               );
                             })}
-                          </Button>
+                          </select>
                         </Box>
                       </Box>
                     </Box>
@@ -745,13 +524,9 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        border="none"
                         outline="none"
+                        border="1px solid #E4E4E7"
                         borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
-                        marginLeft="0.5rem"
                         color="textInverted"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
@@ -778,12 +553,9 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="number"
-                        border="none"
                         outline="none"
                         borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
+                        border="1px solid #E4E4E7"
                         color="textInverted"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
@@ -800,9 +572,9 @@ const Request: FC = () => {
                   <Box
                     as="div"
                     display="flex"
-                    gap="1rem"
                     alignItems="flex-start"
                     justifyContent="flex-start"
+                    mt="0.5rem"
                   >
                     <Box
                       as="div"
@@ -817,23 +589,51 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        border="none"
                         outline="none"
                         borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
+                        border="1px solid #E4E4E7"
                         color="textInverted"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
                         minWidth={['100%', '10rem']}
-                        width={['25rem']}
+                        width={['12.5rem']}
                         bg="transparent"
                         placeholder="23SW34B"
                         focus={{
                           borderColor: '#4763E4',
                         }}
                       />
+                    </Box>
+                    <Box
+                      as="div"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                      mt="2.1rem"
+                    >
+                      <Input
+                        className="inputFile"
+                        p="L"
+                        type="file"
+                        multiple
+                        accept=".doc,.pdf,.jpg,.jpeg,.png"
+                        borderRadius="M"
+                        border="none"
+                        color="#FFF"
+                        mr={['NONE', 'S']}
+                        ml={['NONE', 'S']}
+                        fontWeight="bold"
+                        width={['12rem', 'NONE']}
+                        minWidth={['100%', '10rem']}
+                        bg="#4763E4"
+                        placeholder="23SW34B"
+                        value={files}
+                        onChange={handleOnChange}
+                      />
+                      {!!files.length && (
+                        <Typography padding="0.5rem">{files.length}</Typography>
+                      )}
                     </Box>
                     <Box
                       as="div"
@@ -851,14 +651,8 @@ const Request: FC = () => {
                         p="L"
                         rows="4"
                         cols="50"
-                        resize="none"
-                        maxlength={50}
-                        border="none"
-                        outline="none"
                         borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
+                        border="1px solid #E4E4E7"
                         color="textInverted"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
@@ -866,9 +660,6 @@ const Request: FC = () => {
                         width={['41.5rem']}
                         bg="transparent"
                         placeholder="Deixa aqui as suas observações"
-                        focus={{
-                          borderColor: '#4763E4',
-                        }}
                       />
                     </Box>
                   </Box>
@@ -887,7 +678,6 @@ const Request: FC = () => {
                       type="button"
                       effect="hover"
                       display="flex"
-                      disabled=""
                       variant="primary"
                       fontWeight="bold"
                       color="#FFF"
@@ -899,7 +689,6 @@ const Request: FC = () => {
                       justifyContent="center"
                       width={['10rem', 'NONE']}
                       minWidth={['100%', '10rem']}
-                      textTransform="uppercase"
                       alignItems="center"
                       onClick={handleSelectAddress}
                     >
@@ -951,7 +740,6 @@ const Request: FC = () => {
                           justifyContent="space-between"
                           alignItems="center"
                           border="none"
-                          outline="none"
                           effect="hover"
                           padding={['S', 'XL']}
                           margin={['S', 'M']}
@@ -1004,7 +792,6 @@ const Request: FC = () => {
                     justifyContent="center"
                     width={['10rem', 'NONE']}
                     minWidth={['100%', '10rem']}
-                    textTransform="uppercase"
                     alignItems="center"
                     onClick={handleOpenPaymentModal}
                   >
@@ -1015,7 +802,6 @@ const Request: FC = () => {
                     type="button"
                     effect="hover"
                     display="flex"
-                    disabled=""
                     variant="primary"
                     color="#4763E4"
                     borderRadius="M"
@@ -1026,9 +812,8 @@ const Request: FC = () => {
                     justifyContent="center"
                     width={['15rem', 'NONE']}
                     minWidth={['100%', '10rem']}
-                    textTransform="uppercase"
                     alignItems="center"
-                    onClick={handleAddNewAddress}
+                    onClick={handleOpenModalNewAddress}
                   >
                     + Novo endereço de entrega
                   </Button>
@@ -1079,12 +864,9 @@ const Request: FC = () => {
                       p="L"
                       type="text"
                       value={province}
-                      border="none"
                       outline="none"
                       borderRadius="M"
-                      borderSize="1px"
-                      borderStyle="solid"
-                      borderColor="#E4E4E7"
+                      border="1px solid #E4E4E7"
                       color="textInverted"
                       mr={['NONE', 'S']}
                       ml={['NONE', 'S']}
@@ -1112,12 +894,9 @@ const Request: FC = () => {
                     <Input
                       p="L"
                       type="text"
-                      border="none"
                       outline="none"
                       borderRadius="M"
-                      borderSize="1px"
-                      borderStyle="solid"
-                      borderColor="#E4E4E7"
+                      border="1px solid #E4E4E7"
                       color="textInverted"
                       mr={['NONE', 'S']}
                       ml={['NONE', 'S']}
@@ -1152,12 +931,9 @@ const Request: FC = () => {
                       p="L"
                       type="text"
                       value={city}
-                      border="none"
                       outline="none"
                       borderRadius="M"
-                      borderSize="1px"
-                      borderStyle="solid"
-                      borderColor="#E4E4E7"
+                      border="1px solid #E4E4E7"
                       color="textInverted"
                       mr={['NONE', 'S']}
                       ml={['NONE', 'S']}
@@ -1186,12 +962,9 @@ const Request: FC = () => {
                     p="L"
                     type="text"
                     value={street}
-                    border="none"
                     outline="none"
                     borderRadius="M"
-                    borderSize="1px"
-                    borderStyle="solid"
-                    borderColor="#E4E4E7"
+                    border="1px solid #E4E4E7"
                     color="textInverted"
                     mr={['NONE', 'S']}
                     ml={['NONE', 'S']}
@@ -1226,12 +999,9 @@ const Request: FC = () => {
                       p="L"
                       type="text"
                       value={apt}
-                      border="none"
                       outline="none"
                       borderRadius="M"
-                      borderSize="1px"
-                      borderStyle="solid"
-                      borderColor="#E4E4E7"
+                      border="1px solid #E4E4E7"
                       color="textInverted"
                       mr={['NONE', 'S']}
                       ml={['NONE', 'S']}
@@ -1259,12 +1029,9 @@ const Request: FC = () => {
                     <Input
                       p="L"
                       type="text"
-                      border="none"
                       outline="none"
                       borderRadius="M"
-                      borderSize="1px"
-                      borderStyle="solid"
-                      borderColor="#E4E4E7"
+                      border="1px solid #E4E4E7"
                       color="textInverted"
                       mr={['NONE', 'S']}
                       ml={['NONE', 'S']}
@@ -1288,10 +1055,9 @@ const Request: FC = () => {
                 >
                   <Button
                     p="L"
-                    type="submit"
+                    type="button"
                     effect="hover"
                     display="flex"
-                    disabled=""
                     variant="primary"
                     color="#000"
                     borderRadius="M"
@@ -1301,7 +1067,6 @@ const Request: FC = () => {
                     width={['10rem', 'NONE']}
                     minWidth={['100%', '10rem']}
                     justifyContent="center"
-                    textTransform="uppercase"
                     alignItems="center"
                     cursor="pointer"
                     onClick={handleCancel}
@@ -1310,10 +1075,9 @@ const Request: FC = () => {
                   </Button>
                   <Button
                     p="L"
-                    type="submit"
+                    type="button"
                     effect="hover"
                     display="flex"
-                    disabled=""
                     variant="primary"
                     fontWeight="bold"
                     color="#FFF"
@@ -1325,8 +1089,6 @@ const Request: FC = () => {
                     justifyContent="center"
                     width={['12rem', 'NONE']}
                     minWidth={['100%', '10rem']}
-                    textTransform="uppercase"
-                    alignItems="center"
                     cursor="pointer"
                     onClick={handleUseAddress}
                   >
@@ -1369,24 +1131,22 @@ const Request: FC = () => {
                     justifyContent="flex-start"
                     alignItems="center"
                     padding="1rem"
-                    border="none"
-                    outline="none"
+                    border={`1px solid ${
+                      paymentByReference ? '#4763E4' : '#E4E4E7'
+                    }`}
                     borderRadius="M"
-                    borderSize="1px"
-                    borderStyle="solid"
-                    borderColor={paymentByReference ? '#4763E4' : '#E4E4E7'}
                     mr={['NONE', 'S']}
                     ml={['NONE', 'S']}
                     minWidth={['100%', '10rem']}
                     width={['34rem']}
                     bg="transparent"
-                    name="paymentByReference"
                     onClick={handlePaymentByReference}
                   >
                     <Image
                       src="/reference-payment.svg"
                       height={50}
                       width={50}
+                      alt="Pagamento por referência"
                     />
                     <Typography>Pagamento por referência</Typography>
                   </Box>
@@ -1397,22 +1157,20 @@ const Request: FC = () => {
                     justifyContent="flex-start"
                     alignItems="center"
                     padding="1rem"
-                    border="none"
-                    outline="none"
                     borderRadius="M"
-                    borderSize="1px"
-                    borderStyle="solid"
-                    borderColor={paymentByExpress ? '#4763E4' : '#E4E4E7'}
+                    border={`1px solid ${
+                      paymentByExpress ? '#4763E4' : '#E4E4E7'
+                    }`}
                     mr={['NONE', 'S']}
                     ml={['NONE', 'S']}
                     minWidth={['100%', '10rem']}
                     width={['34rem']}
                     bg="transparent"
-                    name="paymentByExpress"
                     onClick={handlePaymentByExpress}
                   >
                     <Image
                       src="/express.svg"
+                      alt="Multicaixa Express"
                       height={30}
                       width={30}
                       style={{ margin: '0.5rem' }}
@@ -1446,12 +1204,9 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        border="none"
                         outline="none"
                         borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
+                        border="1px solid #E4E4E7"
                         color="textInverted"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
@@ -1480,12 +1235,9 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        border="none"
                         outline="none"
                         borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
+                        border="1px solid #E4E4E7"
                         color="textInverted"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
@@ -1521,12 +1273,8 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        border="none"
-                        outline="none"
                         borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
+                        border="1px solid #E4E4E7"
                         color="textInverted"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
@@ -1568,12 +1316,9 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        border="none"
                         outline="none"
                         borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
+                        border="1px solid #E4E4E7"
                         color="textInverted"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
@@ -1602,12 +1347,8 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="text"
-                        border="none"
-                        outline="none"
                         borderRadius="M"
-                        borderSize="1px"
-                        borderStyle="solid"
-                        borderColor="#E4E4E7"
+                        border="1px solid #E4E4E7"
                         color="textInverted"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
@@ -1633,21 +1374,18 @@ const Request: FC = () => {
               >
                 <Button
                   p="L"
-                  type="submit"
+                  type="button"
                   effect="hover"
-                  display="flex"
-                  disabled=""
                   variant="primary"
                   color="#000"
-                  width={80}
                   borderRadius="M"
                   border="1px solid #E4E4E7"
                   bg="transparent"
-                  marginLeft="0.5rem"
-                  marginTop="1rem"
-                  justifyContent="center"
+                  mt="1rem"
+                  width={['10rem', 'NONE']}
                   minWidth={['100%', '10rem']}
-                  textTransform="uppercase"
+                  display="flex"
+                  justifyContent="center"
                   alignItems="center"
                   cursor="pointer"
                   onClick={handleCancelPayment}
@@ -1656,10 +1394,8 @@ const Request: FC = () => {
                 </Button>
                 <Button
                   p="L"
-                  type="submit"
+                  type="button"
                   effect="hover"
-                  display="flex"
-                  disabled=""
                   variant="primary"
                   fontWeight="bold"
                   color="#FFF"
@@ -1667,12 +1403,12 @@ const Request: FC = () => {
                   borderRadius="M"
                   border="none"
                   bg="#4763E4"
-                  marginLeft="0.5rem"
-                  marginTop="1rem"
+                  ml="0.5rem"
+                  mt="1rem"
+                  display="flex"
                   justifyContent="center"
-                  minWidth={['100%', '10rem']}
-                  textTransform="uppercase"
                   alignItems="center"
+                  minWidth={['100%', '10rem']}
                   cursor="pointer"
                   onClick={handlePaymentSucceed}
                 >
@@ -1765,17 +1501,15 @@ const Request: FC = () => {
                   type="button"
                   effect="hover"
                   display="flex"
-                  outline="none"
                   width={10}
                   height={10}
                   variant="primary"
                   color="#27272A"
                   bg="transparent"
-                  marginTop="M"
+                  mt="M"
                   border="0.5px solid #E4E4E7"
-                  marginBottom="M"
+                  mb="M"
                   justifyContent="center"
-                  textTransform="uppercase"
                   alignItems="center"
                   active={{
                     background: '#4763E4',
@@ -1792,20 +1526,16 @@ const Request: FC = () => {
                       p="0.8rem"
                       type="button"
                       key={pag}
-                      effect="hover"
                       display="flex"
-                      disabled=""
-                      outline="none"
                       width={10}
                       height={10}
                       variant="primary"
                       color="#27272A"
                       bg="transparent"
-                      marginTop="M"
+                      mt="M"
                       border="0.5px solid #E4E4E7"
-                      marginBottom="M"
+                      mb="M"
                       justifyContent="center"
-                      textTransform="uppercase"
                       alignItems="center"
                       active={{
                         background: '#4763E4',
@@ -1821,17 +1551,15 @@ const Request: FC = () => {
                   type="button"
                   effect="hover"
                   display="flex"
-                  disabled=""
                   width={10}
                   height={10}
                   variant="primary"
                   color="#27272A"
                   bg="transparent"
-                  marginTop="M"
+                  mt="M"
                   border="0.5px solid #E4E4E7"
-                  marginBottom="M"
+                  mb="M"
                   justifyContent="center"
-                  textTransform="uppercase"
                   alignItems="center"
                   active={{
                     background: '#4763E4',

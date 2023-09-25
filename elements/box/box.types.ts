@@ -32,6 +32,8 @@ export interface BoxProps
   active?: SystemStyleObject;
   as?: keyof JSX.IntrinsicElements;
   rowGap?: MaybeArray<CSSProperties['gap']>;
+  rows?: MaybeArray<CSSProperties['gap']>;
+  cols?: MaybeArray<CSSProperties['gap']>;
   cursor?: MaybeArray<CSSProperties['cursor']>;
   filter?: MaybeArray<CSSProperties['filter']>;
   columnGap?: MaybeArray<CSSProperties['gap']>;

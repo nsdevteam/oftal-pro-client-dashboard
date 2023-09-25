@@ -28,7 +28,7 @@ const ResetPassword: FC = () => {
         alignItems="center"
         alignContent="center"
       >
-        <LogoSVG margin="0.5rem" />
+        <LogoSVG />
         <Typography padding="0.5rem">
           Insira o endereço de email de recuperação
         </Typography>
@@ -37,7 +37,6 @@ const ResetPassword: FC = () => {
           width="100%"
           display="flex"
           alignItems="center"
-          onSubmit=""
           mt={['XL', 'XL', 'XL', 'NONE']}
           flexDirection="column"
           justifyContent="center"
@@ -57,12 +56,9 @@ const ResetPassword: FC = () => {
             p="L"
             type="email"
             bg="transparent"
-            border="none"
             outline="none"
             borderRadius="M"
-            borderSize="1px"
-            borderStyle="solid"
-            borderColor="#E4E4E7"
+            border="1px solid #E4E4E7"
             color="textInverted"
             mr={['NONE', 'S']}
             ml={['NONE', 'S']}
@@ -78,7 +74,6 @@ const ResetPassword: FC = () => {
             type="button"
             effect="hover"
             display="flex"
-            disabled=""
             variant="primary"
             fontWeight="bold"
             color="#FFF"
@@ -90,7 +85,6 @@ const ResetPassword: FC = () => {
             bg="#4763E4"
             justifyContent="center"
             minWidth={['100%', '10rem']}
-            textTransform="uppercase"
             alignItems="center"
             onClick={() => router.push('/reset-password-notification')}
           >
@@ -105,7 +99,7 @@ const ResetPassword: FC = () => {
           alignContent="center"
           marginTop="1rem"
         >
-          <Link padding="0.5rem" href={RoutePaths[RoutesEnum.Home]}>
+          <Link href={RoutePaths[RoutesEnum.Home]}>
             Voltar para a página de login
           </Link>
         </Box>

@@ -58,6 +58,49 @@ const GlobalStyles = css`
   .tableRequest tr:hover {
     background-color: #f6f6f7;
   }
+
+  .inputFile::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .inputFile::before {
+    content: 'Adicionar Receita';
+    display: inline-block;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+  }
+  .inputFile:hover::before {
+    border-color: #4763e4;
+  }
+  .inputFile:active::before {
+    background: transparent;
+  }
+
+  .selectEyeForm {
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+    width: 8rem;
+    max-width: 100%;
+    padding: 1rem;
+    border: 1px solid #e4e4e7;
+    border-radius: 0.5rem;
+    background: transparent;
+  }
+
+  .selectType {
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+    min-width: 100%;
+    width: 20rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e4e4e7;
+    background: transparent;
+  }
+
+  button {
+    cursor: pointer;
+  }
 `;
 
 export default GlobalStyles;

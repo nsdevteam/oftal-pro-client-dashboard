@@ -1,10 +1,9 @@
 import { filter, keys, toPairs } from 'ramda';
 
 import breakpoints from '../design-system/common/breakpoints';
-import { TStyles } from '@/stylin/stylin.types';
-
 import { CSS_STYLING_MAP } from './constants';
 import { CSSPseudoSelectors } from './constants/css-pseudo-selectors';
+import { TStyles } from './stylin.types';
 import {
   TGetBreakpoint,
   TPseudoKeys,

@@ -28,7 +28,7 @@ const ModalContent = styled.div`
 `;
 
 type ModalAddressProps = {
-  isOpen: boolean;
+  isOpen: () => void;
   onClose: () => void;
   children: React.ReactNode;
 };
