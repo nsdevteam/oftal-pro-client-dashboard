@@ -35,6 +35,8 @@ const Request: FC = () => {
   const [paymentSucceed, setPaymentSucceed] = useState(false);
   const [search, setSearch] = useState('');
   const [files, setFiles] = useState('');
+  const [selectLeftEye, setSelectLeftEye] = useState(false);
+  const [selectRightEye, setSelectRightEye] = useState(false);
 
   const columns = [
     'Nome do paciente',
@@ -150,6 +152,14 @@ const Request: FC = () => {
 
   const handleOnChange = (e: { target: { value: unknown } }) => {
     e.target.value;
+  };
+
+  const handleToggleLeftEyeOption = () => {
+    setSelectLeftEye(!selectLeftEye);
+  };
+
+  const handleToggleRightEyeOption = () => {
+    setSelectRightEye(!selectRightEye);
   };
 
   //This useEffect was implemented to remove prettier and eslint error
@@ -281,10 +291,62 @@ const Request: FC = () => {
                         alignItems="flex-start"
                         justifyContent="flex-start"
                       >
+                        <Box
+                          as="div"
+                          display="flex"
+                          justifyContent="center"
+                          alignItems="center"
+                          height="3.5rem"
+                        >
+                          {selectLeftEye ? (
+                            <Input
+                              p="L"
+                              type="checkbox"
+                              checked
+                              outline="none"
+                              border="1px solid #E4E4E7"
+                              borderRadius="L"
+                              color="textInverted"
+                              mr={['NONE', 'S']}
+                              ml={['NONE', 'S']}
+                              minWidth={['100%', '5rem']}
+                              width={['5rem']}
+                              bg="transparent"
+                              placeholder="Lucas Mateus"
+                              focus={{
+                                borderColor: '#4763E4',
+                              }}
+                              onClick={handleToggleLeftEyeOption}
+                            />
+                          ) : (
+                            <Input
+                              p="L"
+                              type="checkbox"
+                              outline="none"
+                              border="1px solid #E4E4E7"
+                              borderRadius="L"
+                              color="textInverted"
+                              mr={['NONE', 'S']}
+                              ml={['NONE', 'S']}
+                              minWidth={['100%', '5rem']}
+                              width={['5rem']}
+                              bg="transparent"
+                              placeholder="Lucas Mateus"
+                              focus={{
+                                borderColor: '#4763E4',
+                              }}
+                              onClick={handleToggleLeftEyeOption}
+                            />
+                          )}
+                        </Box>
                         <select className="selectEyeForm" name="esphical">
                           {espherical.map((item) => {
                             return (
-                              <option key={item} value={item}>
+                              <option
+                                key={item}
+                                value={item}
+                                disabled={!selectLeftEye}
+                              >
                                 {item}
                               </option>
                             );
@@ -293,7 +355,11 @@ const Request: FC = () => {
                         <select className="selectEyeForm" name="cylinder">
                           {cylinder.map((item) => {
                             return (
-                              <option key={item} value={item}>
+                              <option
+                                key={item}
+                                value={item}
+                                disabled={!selectLeftEye}
+                              >
                                 {item}
                               </option>
                             );
@@ -302,7 +368,11 @@ const Request: FC = () => {
                         <select className="selectEyeForm" name="axis">
                           {axis.map((item) => {
                             return (
-                              <option key={item} value={item}>
+                              <option
+                                key={item}
+                                value={item}
+                                disabled={!selectLeftEye}
+                              >
                                 {item}
                               </option>
                             );
@@ -350,14 +420,11 @@ const Request: FC = () => {
                           </select>
                         </Box>
                       </Box>
-
                       <Box
                         as="div"
                         width="auto"
                         display="flex"
                         flexDirection="column"
-                        alignItems="flex-start"
-                        justifyContent="flex-start"
                       >
                         <Typography padding="0.5rem">
                           Índice de refração
@@ -409,10 +476,62 @@ const Request: FC = () => {
                         alignItems="flex-start"
                         justifyContent="flex-start"
                       >
+                        <Box
+                          as="div"
+                          display="flex"
+                          justifyContent="center"
+                          alignItems="center"
+                          height="3.5rem"
+                        >
+                          {selectRightEye ? (
+                            <Input
+                              p="L"
+                              type="checkbox"
+                              checked
+                              outline="none"
+                              border="1px solid #E4E4E7"
+                              borderRadius="L"
+                              color="textInverted"
+                              mr={['NONE', 'S']}
+                              ml={['NONE', 'S']}
+                              minWidth={['100%', '5rem']}
+                              width={['5rem']}
+                              bg="transparent"
+                              placeholder="Lucas Mateus"
+                              focus={{
+                                borderColor: '#4763E4',
+                              }}
+                              onClick={handleToggleRightEyeOption}
+                            />
+                          ) : (
+                            <Input
+                              p="L"
+                              type="checkbox"
+                              outline="none"
+                              border="1px solid #E4E4E7"
+                              borderRadius="L"
+                              color="textInverted"
+                              mr={['NONE', 'S']}
+                              ml={['NONE', 'S']}
+                              minWidth={['100%', '5rem']}
+                              width={['5rem']}
+                              bg="transparent"
+                              placeholder="Lucas Mateus"
+                              focus={{
+                                borderColor: '#4763E4',
+                              }}
+                              onClick={handleToggleRightEyeOption}
+                            />
+                          )}
+                        </Box>
                         <select className="selectEyeForm" name="esphical">
                           {espherical.map((item) => {
                             return (
-                              <option key={item} value={item}>
+                              <option
+                                key={item}
+                                value={item}
+                                disabled={!selectRightEye}
+                              >
                                 {item}
                               </option>
                             );
@@ -421,7 +540,11 @@ const Request: FC = () => {
                         <select className="selectEyeForm" name="cylinder">
                           {cylinder.map((item) => {
                             return (
-                              <option key={item} value={item}>
+                              <option
+                                key={item}
+                                value={item}
+                                disabled={!selectRightEye}
+                              >
                                 {item}
                               </option>
                             );
@@ -430,7 +553,11 @@ const Request: FC = () => {
                         <select className="selectEyeForm" name="axis">
                           {axis.map((item) => {
                             return (
-                              <option key={item} value={item}>
+                              <option
+                                key={item}
+                                value={item}
+                                disabled={!selectRightEye}
+                              >
                                 {item}
                               </option>
                             );
@@ -531,7 +658,7 @@ const Request: FC = () => {
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
                         minWidth={['100%', '10rem']}
-                        width={['25rem']}
+                        width={['24.7rem']}
                         bg="transparent"
                         placeholder="Lucas Mateus"
                         focus={{
