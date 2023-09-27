@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FC } from 'react';
 
-import { Box, Input, Typography } from '../../elements';
+import { Box, Typography } from '../index';
 
 type AddAttachmentsProps = {
   label: string;
@@ -9,6 +9,7 @@ type AddAttachmentsProps = {
 };
 
 export const AddAttachments: FC<AddAttachmentsProps> = ({
+  label,
   files,
   onChange,
 }) => {
@@ -16,33 +17,41 @@ export const AddAttachments: FC<AddAttachmentsProps> = ({
     onChange(e.target.files ?? ([] as unknown as FileList));
 
   return (
-    <Box
-      as="div"
-      display="flex"
-      flexDirection="column"
-      justifyContent="flex-start"
-      alignItems="flex-start"
-      mt="2.1rem"
-    >
-      <Input
-        className="input-file"
-        p="L"
+    <div>
+      <input
         type="file"
         multiple
         accept=".doc,.pdf,.jpg,.jpeg,.png"
-        borderRadius="M"
-        border="none"
-        color="#FFF"
-        mr={['NONE', 'S']}
-        ml={['NONE', 'S']}
-        fontWeight="bold"
-        width={['12rem', 'NONE']}
-        minWidth={['100%', '10rem']}
-        bg="#4763E4"
-        placeholder="23SW34B"
+        name="attachment"
+        id="attachment"
+        style={{ display: 'none', marginBottom: '15px' }}
         onChange={handleOnChangeFile}
       />
-      {!!files.length && <Typography color="white">{files.length}</Typography>}
-    </Box>
+      <Box display="flex" columnGap="8px" alignItems="center">
+        <Box
+          as="label"
+          color="#FFF"
+          fontWeight="bold"
+          fontSize="12px"
+          height="40px"
+          width="200px"
+          padding="1rem"
+          cursor="pointer"
+          hover={{ opacity: 0.8 }}
+          aria-label="add attachment"
+          backgroundSize="contain"
+          backgroundRepeat="no-repeat"
+          backgroundImage="url(/add-an-attachment.png)"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          {label}
+        </Box>
+        {!!files.length && (
+          <Typography color="white">{files.length}</Typography>
+        )}
+      </Box>
+    </div>
   );
 };

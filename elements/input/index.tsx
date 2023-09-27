@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { forwardRef, RefAttributes } from 'react';
 
 import stylin from '../../stylin';
-
 import Box from '../box';
 import { InputProps } from './input.types';
 import { InputFieldProps } from './input.types';

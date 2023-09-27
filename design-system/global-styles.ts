@@ -75,18 +75,6 @@ const GlobalStyles = css`
   .inputFile:active::before {
     background: transparent;
   }
-
-  .selectEyeForm {
-    margin-right: 0.25rem;
-    margin-left: 0.25rem;
-    width: 6.1rem;
-    max-width: 100%;
-    padding: 1rem;
-    border: 1px solid #e4e4e7;
-    border-radius: 0.5rem;
-    background: transparent;
-  }
-
   .selectType {
     margin-right: 0.25rem;
     margin-left: 0.25rem;

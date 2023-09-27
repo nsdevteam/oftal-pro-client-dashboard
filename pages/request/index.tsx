@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -25,18 +25,28 @@ const Request: FC = () => {
   const [showSelectAddress, setShowSelectAddress] = useState(false);
   const [selected, setSelected] = useState<number | boolean | null>(null);
   const [addNewAddress, setAddNewAddress] = useState(false);
-  const [province, setProvince] = useState('');
-  const [city, setCity] = useState('');
-  const [street, setStreet] = useState('');
-  const [apt, setApt] = useState('');
   const [paymentModal, setPaymentModal] = useState(false);
   const [paymentByReference, setPaymentByReference] = useState(false);
   const [paymentByExpress, setPaymentByExpress] = useState(false);
   const [paymentSucceed, setPaymentSucceed] = useState(false);
-  const [search, setSearch] = useState('');
-  const [files, setFiles] = useState('');
   const [selectLeftEye, setSelectLeftEye] = useState(false);
   const [selectRightEye, setSelectRightEye] = useState(false);
+  const [leftEspherical, setLeftEspherical] = useState('');
+  const [leftCylinder, setLeftCylinder] = useState('');
+  const [leftAxis, setLeftAxis] = useState('');
+  const [rightEspherical, setRightEspherical] = useState('');
+  const [rightCylinder, setRightCylinder] = useState('');
+  const [rightAxis, setRightAxis] = useState('');
+  const [province, setProvince] = useState('');
+  const [city, setCity] = useState('');
+  const [street, setStreet] = useState('');
+  const [apt, setApt] = useState('');
+  const [search, setSearch] = useState('');
+  const [file, setFile] = useState<string | undefined>(undefined);
+  const [amount, setAmount] = useState('');
+  const [entity, setEntity] = useState('');
+  const [reference, setReference] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const columns = [
     'Nome do paciente',
@@ -48,18 +58,6 @@ const Request: FC = () => {
     'Opções',
   ];
 
-  const espherical = [
-    '-0.50',
-    '-0.60',
-    '-0.70',
-    '0',
-    '0.50',
-    '0.60',
-    '0.70',
-    '0.80',
-  ];
-  const cylinder = ['-0.50', '-0.60', '-0.70'];
-  const axis = ['0', '45', '90', '180', '270', '360'];
   const threatment = ['HMC', 'SHMC', 'UC', 'HC'];
 
   const colors = ['Branco', 'Fotocromática', 'Transições', 'Polarizada'];
@@ -98,11 +96,6 @@ const Request: FC = () => {
 
   const handleSearch = () => {
     setSearch(search);
-  };
-
-  const handleAddNewRequest = () => {
-    openModal;
-    setFiles(files);
   };
 
   const handlePaymentModal = () => {
@@ -150,10 +143,6 @@ const Request: FC = () => {
     setPaymentModal(false);
   };
 
-  const handleOnChange = (e: { target: { value: unknown } }) => {
-    e.target.value;
-  };
-
   const handleToggleLeftEyeOption = () => {
     setSelectLeftEye(!selectLeftEye);
   };
@@ -162,10 +151,13 @@ const Request: FC = () => {
     setSelectRightEye(!selectRightEye);
   };
 
-  //This useEffect was implemented to remove prettier and eslint error
-  useEffect(() => {
-    handleAddNewRequest();
-  }, []);
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile.name);
+    }
+  };
+
   return (
     <Layout pageTitle="Pedidos">
       <Box
@@ -211,8 +203,8 @@ const Request: FC = () => {
               minWidth={['100%', '10rem']}
               width={['30rem']}
               placeholder="Procurar por pedidos..."
-              value={search}
-              onChange={handleOnChange}
+              name={search}
+              onChange={(e) => setSearch(e.target.name)}
             />
           </Box>
           <Button
@@ -302,8 +294,8 @@ const Request: FC = () => {
                             <Input
                               p="L"
                               type="checkbox"
-                              checked
                               outline="none"
+                              checked
                               border="1px solid #E4E4E7"
                               borderRadius="L"
                               color="textInverted"
@@ -312,7 +304,6 @@ const Request: FC = () => {
                               minWidth={['100%', '5rem']}
                               width={['5rem']}
                               bg="transparent"
-                              placeholder="Lucas Mateus"
                               focus={{
                                 borderColor: '#4763E4',
                               }}
@@ -331,7 +322,6 @@ const Request: FC = () => {
                               minWidth={['100%', '5rem']}
                               width={['5rem']}
                               bg="transparent"
-                              placeholder="Lucas Mateus"
                               focus={{
                                 borderColor: '#4763E4',
                               }}
@@ -339,45 +329,68 @@ const Request: FC = () => {
                             />
                           )}
                         </Box>
-                        <select className="selectEyeForm" name="esphical">
-                          {espherical.map((item) => {
-                            return (
-                              <option
-                                key={item}
-                                value={item}
-                                disabled={!selectLeftEye}
-                              >
-                                {item}
-                              </option>
-                            );
-                          })}
-                        </select>
-                        <select className="selectEyeForm" name="cylinder">
-                          {cylinder.map((item) => {
-                            return (
-                              <option
-                                key={item}
-                                value={item}
-                                disabled={!selectLeftEye}
-                              >
-                                {item}
-                              </option>
-                            );
-                          })}
-                        </select>
-                        <select className="selectEyeForm" name="axis">
-                          {axis.map((item) => {
-                            return (
-                              <option
-                                key={item}
-                                value={item}
-                                disabled={!selectLeftEye}
-                              >
-                                {item}
-                              </option>
-                            );
-                          })}
-                        </select>
+                        <Input
+                          type="number"
+                          p="L"
+                          outline="none"
+                          border="1px solid #E4E4E7"
+                          borderRadius="M"
+                          color="textInverted"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '6.1rem']}
+                          width={['6.1rem']}
+                          bg="transparent"
+                          placeholder="Esf."
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                          name={leftEspherical}
+                          onChange={(e) => setLeftEspherical(e.target.name)}
+                          disabled={!selectLeftEye}
+                        />
+                        <Input
+                          type="number"
+                          p="L"
+                          outline="none"
+                          border="1px solid #E4E4E7"
+                          borderRadius="M"
+                          color="textInverted"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '6.1rem']}
+                          width={['6.1rem']}
+                          bg="transparent"
+                          placeholder="Cil."
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                          name={leftCylinder}
+                          onChange={(e) => setLeftCylinder(e.target.name)}
+                          disabled={!selectLeftEye}
+                        />
+                        <Input
+                          type="number"
+                          p="L"
+                          min="0"
+                          max="180"
+                          outline="none"
+                          border="1px solid #E4E4E7"
+                          borderRadius="M"
+                          color="textInverted"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '6.1rem']}
+                          width={['6.1rem']}
+                          bg="transparent"
+                          placeholder="Eix."
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                          name={leftAxis}
+                          onChange={(e) => setLeftAxis(e.target.name)}
+                          disabled={!selectLeftEye}
+                        />
                       </Box>
                     </Box>
                     <Box
@@ -497,7 +510,6 @@ const Request: FC = () => {
                               minWidth={['100%', '5rem']}
                               width={['5rem']}
                               bg="transparent"
-                              placeholder="Lucas Mateus"
                               focus={{
                                 borderColor: '#4763E4',
                               }}
@@ -516,7 +528,6 @@ const Request: FC = () => {
                               minWidth={['100%', '5rem']}
                               width={['5rem']}
                               bg="transparent"
-                              placeholder="Lucas Mateus"
                               focus={{
                                 borderColor: '#4763E4',
                               }}
@@ -524,45 +535,68 @@ const Request: FC = () => {
                             />
                           )}
                         </Box>
-                        <select className="selectEyeForm" name="esphical">
-                          {espherical.map((item) => {
-                            return (
-                              <option
-                                key={item}
-                                value={item}
-                                disabled={!selectRightEye}
-                              >
-                                {item}
-                              </option>
-                            );
-                          })}
-                        </select>
-                        <select className="selectEyeForm" name="cylinder">
-                          {cylinder.map((item) => {
-                            return (
-                              <option
-                                key={item}
-                                value={item}
-                                disabled={!selectRightEye}
-                              >
-                                {item}
-                              </option>
-                            );
-                          })}
-                        </select>
-                        <select className="selectEyeForm" name="axis">
-                          {axis.map((item) => {
-                            return (
-                              <option
-                                key={item}
-                                value={item}
-                                disabled={!selectRightEye}
-                              >
-                                {item}
-                              </option>
-                            );
-                          })}
-                        </select>
+                        <Input
+                          type="number"
+                          p="L"
+                          outline="none"
+                          border="1px solid #E4E4E7"
+                          borderRadius="M"
+                          color="textInverted"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '6.1rem']}
+                          width={['6.1rem']}
+                          bg="transparent"
+                          placeholder="Esf."
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                          name={rightEspherical}
+                          onChange={(e) => setRightEspherical(e.target.name)}
+                          disabled={!selectRightEye}
+                        />
+                        <Input
+                          type="number"
+                          p="L"
+                          outline="none"
+                          border="1px solid #E4E4E7"
+                          borderRadius="M"
+                          color="textInverted"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '6.1rem']}
+                          width={['6.1rem']}
+                          bg="transparent"
+                          placeholder="Cil."
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                          name={rightCylinder}
+                          onChange={(e) => setRightCylinder(e.target.name)}
+                          disabled={!selectRightEye}
+                        />
+                        <Input
+                          type="number"
+                          p="L"
+                          min="0"
+                          max="180"
+                          outline="none"
+                          border="1px solid #E4E4E7"
+                          borderRadius="M"
+                          color="textInverted"
+                          mr={['NONE', 'S']}
+                          ml={['NONE', 'S']}
+                          minWidth={['100%', '6.1rem']}
+                          width={['6.1rem']}
+                          bg="transparent"
+                          placeholder="Eix."
+                          focus={{
+                            borderColor: '#4763E4',
+                          }}
+                          name={rightAxis}
+                          onChange={(e) => setRightAxis(e.target.name)}
+                          disabled={!selectRightEye}
+                        />
                       </Box>
                     </Box>
                     <Box
@@ -740,7 +774,6 @@ const Request: FC = () => {
                       mt="2.1rem"
                     >
                       <Input
-                        className="inputFile"
                         p="L"
                         type="file"
                         multiple
@@ -748,18 +781,20 @@ const Request: FC = () => {
                         borderRadius="M"
                         border="none"
                         color="#FFF"
+                        className="inputFile"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
                         fontWeight="bold"
                         width={['12rem', 'NONE']}
                         minWidth={['100%', '10rem']}
                         bg="#4763E4"
-                        placeholder="23SW34B"
-                        value={files}
-                        onChange={handleOnChange}
+                        name={file}
+                        onChange={handleFileInputChange}
                       />
-                      {!!files.length && (
-                        <Typography padding="0.5rem">{files.length}</Typography>
+                      {file && (
+                        <Typography padding="0.5rem">
+                          Ficheiro: {file}
+                        </Typography>
                       )}
                     </Box>
                     <Box
@@ -990,7 +1025,6 @@ const Request: FC = () => {
                     <Input
                       p="L"
                       type="text"
-                      value={province}
                       outline="none"
                       borderRadius="M"
                       border="1px solid #E4E4E7"
@@ -1001,7 +1035,8 @@ const Request: FC = () => {
                       width={['32rem']}
                       bg="transparent"
                       placeholder="Benguela"
-                      onChange={(e) => setProvince(e.target.value)}
+                      name={province}
+                      onChange={(e) => setProvince(e.target.name)}
                       focus={{
                         borderColor: '#4763E4',
                       }}
@@ -1057,7 +1092,6 @@ const Request: FC = () => {
                     <Input
                       p="L"
                       type="text"
-                      value={city}
                       outline="none"
                       borderRadius="M"
                       border="1px solid #E4E4E7"
@@ -1067,7 +1101,8 @@ const Request: FC = () => {
                       minWidth={['100%', '10rem']}
                       width={['68rem']}
                       bg="transparent"
-                      onChange={(e) => setCity(e.target.value)}
+                      name={city}
+                      onChange={(e) => setCity(e.target.name)}
                       placeholder="Bairro da Camunda"
                       focus={{
                         borderColor: '#4763E4',
@@ -1088,7 +1123,6 @@ const Request: FC = () => {
                   <Input
                     p="L"
                     type="text"
-                    value={street}
                     outline="none"
                     borderRadius="M"
                     border="1px solid #E4E4E7"
@@ -1099,7 +1133,8 @@ const Request: FC = () => {
                     width={['68rem']}
                     bg="transparent"
                     placeholder="Rua das casas amarelas"
-                    onChange={(e) => setStreet(e.target.value)}
+                    name={street}
+                    onChange={(e) => setStreet(e.target.name)}
                     focus={{
                       borderColor: '#4763E4',
                     }}
@@ -1125,7 +1160,6 @@ const Request: FC = () => {
                     <Input
                       p="L"
                       type="text"
-                      value={apt}
                       outline="none"
                       borderRadius="M"
                       border="1px solid #E4E4E7"
@@ -1135,7 +1169,8 @@ const Request: FC = () => {
                       minWidth={['100%', '10rem']}
                       width={['32rem']}
                       bg="transparent"
-                      onChange={(e) => setApt(e.target.value)}
+                      name={apt}
+                      onChange={(e) => setApt(e.target.name)}
                       placeholder="Casa S/N"
                       focus={{
                         borderColor: '#4763E4',
@@ -1341,7 +1376,8 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="491 Oftal Pro"
-                        onChange={(e) => setProvince(e.target.value)}
+                        name={entity}
+                        onChange={(e) => setEntity(e.target.name)}
                         focus={{
                           borderColor: '#4763E4',
                         }}
@@ -1372,6 +1408,8 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="001437785"
+                        name={reference}
+                        onChange={(e) => setReference(e.target.name)}
                         focus={{
                           borderColor: '#4763E4',
                         }}
@@ -1408,7 +1446,8 @@ const Request: FC = () => {
                         minWidth={['100%', '10rem']}
                         width={['69rem']}
                         bg="transparent"
-                        onChange={(e) => setCity(e.target.value)}
+                        name={amount}
+                        onChange={(e) => setAmount(e.target.name)}
                         placeholder="1.000.000,00"
                         focus={{
                           borderColor: '#4763E4',
@@ -1453,6 +1492,8 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="923 009 161"
+                        name={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.name)}
                         focus={{
                           borderColor: '#4763E4',
                         }}
@@ -1483,6 +1524,8 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="3.845.000,00"
+                        name={amount}
+                        onChange={(e) => setAmount(e.target.name)}
                         focus={{
                           borderColor: '#4763E4',
                         }}
