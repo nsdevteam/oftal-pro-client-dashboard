@@ -47,6 +47,7 @@ const Request: FC = () => {
   const [entity, setEntity] = useState('');
   const [reference, setReference] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [totalAmount, setTotalAmount] = useState<number | unknown>(0);
 
   const columns = [
     'Nome do paciente',
@@ -155,6 +156,7 @@ const Request: FC = () => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       setFile(selectedFile.name);
+      setTotalAmount(amount + 5000);
     }
   };
 
@@ -825,8 +827,8 @@ const Request: FC = () => {
                       />
                     </Box>
                   </Box>
-                  <Typography padding="0.5rem">
-                    Subtotal: 3.000.000,00 AOA
+                  <Typography as="h3" padding="0.5rem">
+                    {`Subtotal: ${totalAmount},00 AOA`}
                   </Typography>
                   <Box
                     as="div"
