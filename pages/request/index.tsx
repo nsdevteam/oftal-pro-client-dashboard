@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -26,18 +26,37 @@ import {
   Table,
   Typography,
 } from '../../elements';
+import { useFormInput } from '../../hooks';
 const Request: FC = () => {
-  const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const [showSelectAddress, setShowSelectAddress] = useState<boolean>(false);
-  const [selected, setSelected] = useState<number | boolean | null>(null);
-  const [addNewAddress, setAddNewAddress] = useState<boolean>(false);
-  const [paymentModal, setPaymentModal] = useState<boolean>(false);
-  const [paymentByReference, setPaymentByReference] = useState<boolean>(false);
-  const [paymentByExpress, setPaymentByExpress] = useState<boolean>(false);
-  const [paymentSucceed, setPaymentSucceed] = useState<boolean>(false);
-  const [selectLeftEye, setSelectLeftEye] = useState<boolean>(false);
-  const [selectRightEye, setSelectRightEye] = useState<boolean>(false);
-  const [file, setFile] = useState<string | undefined>(undefined);
+  const {
+    register,
+    handleSubmit,
+    errors,
+
+    isModalOpen,
+    showSelectAddress,
+    selected,
+    addNewAddress,
+    paymentModal,
+    paymentByReference,
+    paymentByExpress,
+    paymentSucceed,
+    selectLeftEye,
+    selectRightEye,
+    file,
+    setModalOpen,
+    setShowSelectAddress,
+    setSelected,
+    setAddNewAddress,
+    setPaymentModal,
+    setPaymentByReference,
+    setPaymentSucceed,
+    setPaymentByExpress,
+    setSelectLeftEye,
+    setSelectRightEye,
+    setFile,
+    onSubmit,
+  } = useFormInput();
 
   const columns = [
     'Nome do paciente',
@@ -51,15 +70,6 @@ const Request: FC = () => {
 
   const handleAddressSelected = (id: number | boolean | null) => {
     setSelected(id);
-  };
-
-  const handleOpenModalSelectAddress = () => {
-    try {
-      setShowSelectAddress(!showSelectAddress);
-      setModalOpen(false);
-    } catch (err) {
-      console.log(err, 'Something went wrong');
-    }
   };
 
   const handleOpenModalNewAddress = () => {
@@ -219,7 +229,12 @@ const Request: FC = () => {
                 </Typography>
                 <FiX size={20} color="#A1A1AA" onClick={closeModal} />
               </Box>
-              <Box as="form" width="100%" padding="1rem">
+              <Box
+                as="form"
+                onSubmit={handleSubmit(onSubmit)}
+                width="100%"
+                padding="1rem"
+              >
                 <Typography as="p" padding="0.5rem">
                   Refração
                 </Typography>
@@ -320,9 +335,18 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name="leftEspherical"
+                          {...register('leftSpherical', {
+                            required: 'Campo obrigatório',
+                            min: -6,
+                            max: 7,
+                          })}
                           disabled={!selectLeftEye}
                         />
+                        {errors.leftSpherical && (
+                          <Typography className="alertDanger">
+                            {errors.leftSpherical.message}
+                          </Typography>
+                        )}
                         <Input
                           type="number"
                           p="L"
@@ -341,9 +365,18 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name="leftCylinder"
+                          {...register('leftCylinder', {
+                            required: 'Campo obrigatório',
+                            min: -6,
+                            max: 7,
+                          })}
                           disabled={!selectLeftEye}
                         />
+                        {errors.leftCylinder && (
+                          <Typography className="alertDanger">
+                            {errors.leftCylinder.message}
+                          </Typography>
+                        )}
                         <Input
                           type="number"
                           p="L"
@@ -362,9 +395,18 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name="leftAxis"
+                          {...register('leftAxis', {
+                            required: 'Campo obrigatório',
+                            min: 0,
+                            max: 180,
+                          })}
                           disabled={!selectLeftEye}
                         />
+                        {errors.leftAxis && (
+                          <Typography className="alertDanger">
+                            {errors.leftAxis.message}
+                          </Typography>
+                        )}
                       </Box>
                     </Box>
                     <Box
@@ -887,7 +929,7 @@ const Request: FC = () => {
                   >
                     <Button
                       p="L"
-                      type="button"
+                      type="submit"
                       effect="hover"
                       display="flex"
                       variant="primary"
@@ -902,7 +944,7 @@ const Request: FC = () => {
                       width={['10rem', 'NONE']}
                       minWidth={['100%', '10rem']}
                       alignItems="center"
-                      onClick={handleOpenModalSelectAddress}
+                      // onClick={handleOpenModalSelectAddress}
                     >
                       Prosseguir
                     </Button>
