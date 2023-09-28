@@ -8,7 +8,14 @@ import {
   FiX,
 } from 'react-icons/fi';
 
-import { address, geometry, refraction, requestData } from '../../api';
+import {
+  address,
+  colorData,
+  geometryData,
+  refractionData,
+  requestData,
+  treatmentData,
+} from '../../api';
 import { Layout } from '../../components';
 import {
   Box,
@@ -19,35 +26,18 @@ import {
   Table,
   Typography,
 } from '../../elements';
-
 const Request: FC = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [showSelectAddress, setShowSelectAddress] = useState(false);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [showSelectAddress, setShowSelectAddress] = useState<boolean>(false);
   const [selected, setSelected] = useState<number | boolean | null>(null);
-  const [addNewAddress, setAddNewAddress] = useState(false);
-  const [paymentModal, setPaymentModal] = useState(false);
-  const [paymentByReference, setPaymentByReference] = useState(false);
-  const [paymentByExpress, setPaymentByExpress] = useState(false);
-  const [paymentSucceed, setPaymentSucceed] = useState(false);
-  const [selectLeftEye, setSelectLeftEye] = useState(false);
-  const [selectRightEye, setSelectRightEye] = useState(false);
-  const [leftEspherical, setLeftEspherical] = useState('');
-  const [leftCylinder, setLeftCylinder] = useState('');
-  const [leftAxis, setLeftAxis] = useState('');
-  const [rightEspherical, setRightEspherical] = useState('');
-  const [rightCylinder, setRightCylinder] = useState('');
-  const [rightAxis, setRightAxis] = useState('');
-  const [province, setProvince] = useState('');
-  const [city, setCity] = useState('');
-  const [street, setStreet] = useState('');
-  const [apt, setApt] = useState('');
-  const [search, setSearch] = useState('');
+  const [addNewAddress, setAddNewAddress] = useState<boolean>(false);
+  const [paymentModal, setPaymentModal] = useState<boolean>(false);
+  const [paymentByReference, setPaymentByReference] = useState<boolean>(false);
+  const [paymentByExpress, setPaymentByExpress] = useState<boolean>(false);
+  const [paymentSucceed, setPaymentSucceed] = useState<boolean>(false);
+  const [selectLeftEye, setSelectLeftEye] = useState<boolean>(false);
+  const [selectRightEye, setSelectRightEye] = useState<boolean>(false);
   const [file, setFile] = useState<string | undefined>(undefined);
-  const [amount, setAmount] = useState('');
-  const [entity, setEntity] = useState('');
-  const [reference, setReference] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [totalAmount, setTotalAmount] = useState<number | unknown>(0);
 
   const columns = [
     'Nome do paciente',
@@ -59,17 +49,17 @@ const Request: FC = () => {
     'Opções',
   ];
 
-  const threatment = ['HMC', 'SHMC', 'UC', 'HC'];
-
-  const colors = ['Branco', 'Fotocromática', 'Transições', 'Polarizada'];
-
   const handleAddressSelected = (id: number | boolean | null) => {
     setSelected(id);
   };
 
-  const handleSelectAddress = () => {
-    setShowSelectAddress(!showSelectAddress);
-    setModalOpen(false);
+  const handleOpenModalSelectAddress = () => {
+    try {
+      setShowSelectAddress(!showSelectAddress);
+      setModalOpen(false);
+    } catch (err) {
+      console.log(err, 'Something went wrong');
+    }
   };
 
   const handleOpenModalNewAddress = () => {
@@ -80,23 +70,6 @@ const Request: FC = () => {
   const handleUseAddress = () => {
     setShowSelectAddress(true);
     setAddNewAddress(false);
-
-    // const newLocation: [] = address.push({
-    //   id,
-    //   province,
-    //   city,
-    //   street,
-    //   apt,
-    // });
-
-    setProvince('');
-    setCity('');
-    setStreet('');
-    setApt('');
-  };
-
-  const handleSearch = () => {
-    setSearch(search);
   };
 
   const handlePaymentModal = () => {
@@ -156,7 +129,6 @@ const Request: FC = () => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       setFile(selectedFile.name);
-      setTotalAmount(amount + 5000);
     }
   };
 
@@ -176,7 +148,7 @@ const Request: FC = () => {
         padding="1rem"
       >
         <Typography padding="0.5rem">Pedidos</Typography>
-        <Box as="form" onSubmit={handleSearch} width="100vw" padding="0.5rem">
+        <Box as="form" width="100vw" padding="0.5rem">
           <Box
             bg="transparent"
             mr={['NONE', 'S']}
@@ -205,8 +177,7 @@ const Request: FC = () => {
               minWidth={['100%', '10rem']}
               width={['30rem']}
               placeholder="Procurar por pedidos..."
-              name={search}
-              onChange={(e) => setSearch(e.target.name)}
+              name="search"
             />
           </Box>
           <Button
@@ -248,7 +219,7 @@ const Request: FC = () => {
                 </Typography>
                 <FiX size={20} color="#A1A1AA" onClick={closeModal} />
               </Box>
-              <Box as="div" width="100%" padding="1rem">
+              <Box as="form" width="100%" padding="1rem">
                 <Typography as="p" padding="0.5rem">
                   Refração
                 </Typography>
@@ -334,6 +305,8 @@ const Request: FC = () => {
                         <Input
                           type="number"
                           p="L"
+                          min="-35"
+                          max="20"
                           outline="none"
                           border="1px solid #E4E4E7"
                           borderRadius="M"
@@ -347,13 +320,14 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name={leftEspherical}
-                          onChange={(e) => setLeftEspherical(e.target.name)}
+                          name="leftEspherical"
                           disabled={!selectLeftEye}
                         />
                         <Input
                           type="number"
                           p="L"
+                          min="-6"
+                          max="7"
                           outline="none"
                           border="1px solid #E4E4E7"
                           borderRadius="M"
@@ -367,8 +341,7 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name={leftCylinder}
-                          onChange={(e) => setLeftCylinder(e.target.name)}
+                          name="leftCylinder"
                           disabled={!selectLeftEye}
                         />
                         <Input
@@ -389,8 +362,7 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name={leftAxis}
-                          onChange={(e) => setLeftAxis(e.target.name)}
+                          name="leftAxis"
                           disabled={!selectLeftEye}
                         />
                       </Box>
@@ -424,7 +396,7 @@ const Request: FC = () => {
                           padding="0.5rem"
                         >
                           <select className="selectType" name="geometry">
-                            {geometry.map((geo) => {
+                            {geometryData.map((geo) => {
                               const { id, value } = geo;
                               return (
                                 <option key={id} value={value}>
@@ -453,7 +425,7 @@ const Request: FC = () => {
                           padding="0.5rem"
                         >
                           <select className="selectType" name="refraction">
-                            {refraction.map((item) => {
+                            {refractionData.map((item) => {
                               const { id, size } = item;
                               return (
                                 <option key={id} value={size}>
@@ -540,6 +512,8 @@ const Request: FC = () => {
                         <Input
                           type="number"
                           p="L"
+                          min="-35"
+                          max="20"
                           outline="none"
                           border="1px solid #E4E4E7"
                           borderRadius="M"
@@ -553,13 +527,14 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name={rightEspherical}
-                          onChange={(e) => setRightEspherical(e.target.name)}
+                          name="rightEspherical"
                           disabled={!selectRightEye}
                         />
                         <Input
                           type="number"
                           p="L"
+                          min="-6"
+                          max="7"
                           outline="none"
                           border="1px solid #E4E4E7"
                           borderRadius="M"
@@ -573,8 +548,7 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name={rightCylinder}
-                          onChange={(e) => setRightCylinder(e.target.name)}
+                          name="rightCylinder"
                           disabled={!selectRightEye}
                         />
                         <Input
@@ -595,8 +569,7 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name={rightAxis}
-                          onChange={(e) => setRightAxis(e.target.name)}
+                          name="rightAxis"
                           disabled={!selectRightEye}
                         />
                       </Box>
@@ -628,10 +601,11 @@ const Request: FC = () => {
                           padding="0.5rem"
                         >
                           <select className="selectType" name="color">
-                            {colors.map((color) => {
+                            {colorData.map((item) => {
+                              const { id, value } = item;
                               return (
-                                <option key={color} value="HMC">
-                                  {color}
+                                <option key={id} value={value}>
+                                  {value}
                                 </option>
                               );
                             })}
@@ -655,11 +629,12 @@ const Request: FC = () => {
                           alignItems="center"
                           padding="0.5rem"
                         >
-                          <select name="threatment" className="selectType">
-                            {threatment.map((item) => {
+                          <select className="selectType" name="treatment">
+                            {treatmentData.map((item) => {
+                              const { id, value } = item;
                               return (
-                                <option key={item} value={item}>
-                                  {item}
+                                <option key={id} value={value}>
+                                  {value}
                                 </option>
                               );
                             })}
@@ -697,6 +672,7 @@ const Request: FC = () => {
                         width={['24.7rem']}
                         bg="transparent"
                         placeholder="Lucas Mateus"
+                        name="patientName"
                         focus={{
                           borderColor: '#4763E4',
                         }}
@@ -711,25 +687,95 @@ const Request: FC = () => {
                       alignItems="flex-start"
                     >
                       <Typography textAlign="left" padding="0.5rem">
-                        Diâmetro da lente
+                        Diâmetro
                       </Typography>
                       <Input
                         p="L"
                         type="number"
+                        min="50"
+                        max="80"
                         outline="none"
                         borderRadius="M"
                         border="1px solid #E4E4E7"
                         color="textInverted"
                         mr={['NONE', 'S']}
                         ml={['NONE', 'S']}
-                        minWidth={['100%', '10rem']}
-                        width={['41.5rem']}
+                        minWidth={['100%', '5rem']}
+                        width={['7.5rem']}
                         bg="transparent"
-                        placeholder="-0.50"
+                        placeholder="70mm"
+                        name="diameter"
                         focus={{
                           borderColor: '#4763E4',
                         }}
                       />
+                    </Box>
+                    <Box
+                      as="div"
+                      marginLeft="0.5rem"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                    >
+                      <Typography textAlign="left" padding="0.5rem">
+                        Corredor
+                      </Typography>
+                      <select className="selectAdition" name="alway">
+                        <option value="9">9</option>
+                        <option value="11">11</option>
+                        <option value="13">13</option>
+                        <option value="15">15</option>
+                        <option value="17">17</option>
+                      </select>
+                    </Box>
+                    <Box
+                      as="div"
+                      marginLeft="0.5rem"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                    >
+                      <Typography textAlign="left" padding="0.5rem">
+                        Coloração
+                      </Typography>
+                      <select className="selectAdition" name="coloring">
+                        <option value="yes">Sim</option>
+                        <option value="no">Não</option>
+                      </select>
+                    </Box>
+                    <Box
+                      as="div"
+                      marginLeft="0.5rem"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                    >
+                      <Typography textAlign="left" padding="0.5rem">
+                        Prisma
+                      </Typography>
+                      <select className="selectAdition" name="prism">
+                        <option value="yes">Sim</option>
+                        <option value="no">Não</option>
+                      </select>
+                    </Box>
+                    <Box
+                      as="div"
+                      marginLeft="0.5rem"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                    >
+                      <Typography textAlign="left" padding="0.5rem">
+                        Precal
+                      </Typography>
+                      <select className="selectAdition" name="precal">
+                        <option value="yes">Sim</option>
+                        <option value="no">Não</option>
+                      </select>
                     </Box>
                   </Box>
                   <Box
@@ -762,6 +808,7 @@ const Request: FC = () => {
                         width={['12.5rem']}
                         bg="transparent"
                         placeholder="23SW34B"
+                        name="jobReference"
                         focus={{
                           borderColor: '#4763E4',
                         }}
@@ -815,6 +862,7 @@ const Request: FC = () => {
                         p="L"
                         rows="4"
                         cols="50"
+                        maxlength="50"
                         borderRadius="M"
                         border="1px solid #E4E4E7"
                         color="textInverted"
@@ -827,8 +875,8 @@ const Request: FC = () => {
                       />
                     </Box>
                   </Box>
-                  <Typography as="h3" padding="0.5rem">
-                    {`Subtotal: ${totalAmount},00 AOA`}
+                  <Typography as="h4" padding="0.5rem">
+                    {`Subtotal: 0,00 AOA`}
                   </Typography>
                   <Box
                     as="div"
@@ -854,7 +902,7 @@ const Request: FC = () => {
                       width={['10rem', 'NONE']}
                       minWidth={['100%', '10rem']}
                       alignItems="center"
-                      onClick={handleSelectAddress}
+                      onClick={handleOpenModalSelectAddress}
                     >
                       Prosseguir
                     </Button>
@@ -1037,8 +1085,7 @@ const Request: FC = () => {
                       width={['32rem']}
                       bg="transparent"
                       placeholder="Benguela"
-                      name={province}
-                      onChange={(e) => setProvince(e.target.name)}
+                      name="province"
                       focus={{
                         borderColor: '#4763E4',
                       }}
@@ -1103,8 +1150,7 @@ const Request: FC = () => {
                       minWidth={['100%', '10rem']}
                       width={['68rem']}
                       bg="transparent"
-                      name={city}
-                      onChange={(e) => setCity(e.target.name)}
+                      name="city"
                       placeholder="Bairro da Camunda"
                       focus={{
                         borderColor: '#4763E4',
@@ -1135,8 +1181,7 @@ const Request: FC = () => {
                     width={['68rem']}
                     bg="transparent"
                     placeholder="Rua das casas amarelas"
-                    name={street}
-                    onChange={(e) => setStreet(e.target.name)}
+                    name="street"
                     focus={{
                       borderColor: '#4763E4',
                     }}
@@ -1171,8 +1216,7 @@ const Request: FC = () => {
                       minWidth={['100%', '10rem']}
                       width={['32rem']}
                       bg="transparent"
-                      name={apt}
-                      onChange={(e) => setApt(e.target.name)}
+                      name="apt"
                       placeholder="Casa S/N"
                       focus={{
                         borderColor: '#4763E4',
@@ -1378,8 +1422,7 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="491 Oftal Pro"
-                        name={entity}
-                        onChange={(e) => setEntity(e.target.name)}
+                        name="entity"
                         focus={{
                           borderColor: '#4763E4',
                         }}
@@ -1410,8 +1453,7 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="001437785"
-                        name={reference}
-                        onChange={(e) => setReference(e.target.name)}
+                        name="reference"
                         focus={{
                           borderColor: '#4763E4',
                         }}
@@ -1448,8 +1490,7 @@ const Request: FC = () => {
                         minWidth={['100%', '10rem']}
                         width={['69rem']}
                         bg="transparent"
-                        name={amount}
-                        onChange={(e) => setAmount(e.target.name)}
+                        name="amount"
                         placeholder="1.000.000,00"
                         focus={{
                           borderColor: '#4763E4',
@@ -1494,8 +1535,7 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="923 009 161"
-                        name={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.name)}
+                        name="phoneNumber"
                         focus={{
                           borderColor: '#4763E4',
                         }}
@@ -1526,8 +1566,7 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="3.845.000,00"
-                        name={amount}
-                        onChange={(e) => setAmount(e.target.name)}
+                        name="amount"
                         focus={{
                           borderColor: '#4763E4',
                         }}

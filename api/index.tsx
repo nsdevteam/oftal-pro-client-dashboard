@@ -129,7 +129,26 @@ export const address: Address[] = [
   },
 ];
 
-export const geometry: Refraction[] = [
+export const treatmentData: Refraction[] = [
+  {
+    id: 1,
+    value: 'HMC',
+  },
+  {
+    id: 1,
+    value: 'SHMC',
+  },
+  {
+    id: 1,
+    value: 'UC',
+  },
+  {
+    id: 1,
+    value: 'HC',
+  },
+];
+
+export const geometryData: Refraction[] = [
   {
     id: 1,
     value: 'Unifocal Fabrico',
@@ -156,7 +175,26 @@ export const geometry: Refraction[] = [
   },
 ];
 
-export const refraction: Indices[] = [
+export const colorData: Refraction[] = [
+  {
+    id: 1,
+    value: 'Branca',
+  },
+  {
+    id: 2,
+    value: 'Fotocromática',
+  },
+  {
+    id: 3,
+    value: 'Transições',
+  },
+  {
+    id: 4,
+    value: 'Polarização',
+  },
+];
+
+export const refractionData: Indices[] = [
   {
     id: 1,
     size: '1.5',

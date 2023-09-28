@@ -85,9 +85,30 @@ const GlobalStyles = css`
     border: 1px solid #e4e4e7;
     background: transparent;
   }
+  .selectAdition {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    min-width: 100%;
+    width: 7.5rem;
+    background: transparent;
+    border: 1px solid #e4e4e7;
+  }
 
   button {
     cursor: pointer;
+  }
+
+  .alertDanger {
+    padding: 0.5rem;
+    color: #721c24;
+    background: #f8d7da;
+  }
+  .alertSuccess {
+    padding: 0.5rem;
+    color: #155724;
+    background: #d4edda;
   }
 `;
 
