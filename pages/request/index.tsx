@@ -349,7 +349,7 @@ const Request: FC = () => {
                             display="flex"
                             flexDirection="column"
                             justifyContent="flex-end"
-                            alignCenter="center"
+                            alignItems="center"
                             mt={['29rem', 'NONE']}
                             ml={['22rem', 'NONE']}
                           >
@@ -398,7 +398,7 @@ const Request: FC = () => {
                             display="flex"
                             flexDirection="column"
                             justifyContent="flex-end"
-                            alignCenter="center"
+                            alignItems="center"
                             mt={['29rem', 'NONE']}
                             ml={['22rem', 'NONE']}
                           >
@@ -447,7 +447,7 @@ const Request: FC = () => {
                             display="flex"
                             flexDirection="column"
                             justifyContent="center"
-                            alignCenter="center"
+                            alignItems="center"
                             mt={['29rem', 'NONE']}
                             ml={['22rem', 'NONE']}
                           >
@@ -509,12 +509,12 @@ const Request: FC = () => {
                               display="flex"
                               flexDirection="column"
                               justifyContent="center"
-                              alignCenter="center"
+                              alignItems="center"
                               mt={['29rem', 'NONE']}
                               ml={['22rem', 'NONE']}
                             >
                               <Typography className="alertDanger">
-                                {errors.leftgeometry.message}
+                                {errors.geometry.message}
                               </Typography>
                             </Box>
                           )}
@@ -560,7 +560,7 @@ const Request: FC = () => {
                               display="flex"
                               flexDirection="column"
                               justifyContent="center"
-                              alignCenter="center"
+                              alignItems="center"
                               mt={['29rem', 'NONE']}
                               ml={['22rem', 'NONE']}
                             >
@@ -677,7 +677,7 @@ const Request: FC = () => {
                             display="flex"
                             flexDirection="column"
                             justifyContent="center"
-                            alignCenter="center"
+                            alignItems="center"
                             mt={['29rem', 'NONE']}
                             ml={['22rem', 'NONE']}
                           >
@@ -719,7 +719,7 @@ const Request: FC = () => {
                             display="flex"
                             flexDirection="column"
                             justifyContent="center"
-                            alignCenter="center"
+                            alignItems="center"
                             mt={['29rem', 'NONE']}
                             ml={['22rem', 'NONE']}
                           >
@@ -761,7 +761,7 @@ const Request: FC = () => {
                             display="flex"
                             flexDirection="column"
                             justifyContent="center"
-                            alignCenter="center"
+                            alignItems="center"
                             mt={['29rem', 'NONE']}
                             ml={['22rem', 'NONE']}
                           >
@@ -821,7 +821,7 @@ const Request: FC = () => {
                               display="flex"
                               flexDirection="column"
                               justifyContent="center"
-                              alignCenter="center"
+                              alignItems="center"
                               mt={['29rem', 'NONE']}
                               ml={['22rem', 'NONE']}
                             >
@@ -872,7 +872,7 @@ const Request: FC = () => {
                               display="flex"
                               flexDirection="column"
                               justifyContent="center"
-                              alignCenter="center"
+                              alignItems="center"
                               mt={['29rem', 'NONE']}
                               ml={['22rem', 'NONE']}
                             >
@@ -930,7 +930,7 @@ const Request: FC = () => {
                           display="flex"
                           flexDirection="column"
                           justifyContent="center"
-                          alignCenter="center"
+                          alignItems="center"
                           mt={['29rem', 'NONE']}
                           ml={['22rem', 'NONE']}
                         >
@@ -983,7 +983,7 @@ const Request: FC = () => {
                           display="flex"
                           flexDirection="column"
                           justifyContent="center"
-                          alignCenter="center"
+                          alignItems="center"
                           mt={['29rem', 'NONE']}
                           ml={['22rem', 'NONE']}
                         >
@@ -1024,7 +1024,7 @@ const Request: FC = () => {
                           display="flex"
                           flexDirection="column"
                           justifyContent="center"
-                          alignCenter="center"
+                          alignItems="center"
                           mt={['29rem', 'NONE']}
                           ml={['22rem', 'NONE']}
                         >
@@ -1060,7 +1060,7 @@ const Request: FC = () => {
                           display="flex"
                           flexDirection="column"
                           justifyContent="center"
-                          alignCenter="center"
+                          alignItems="center"
                           mt={['2rem', 'NONE']}
                           ml={['1rem', 'NONE']}
                         >
@@ -1093,7 +1093,7 @@ const Request: FC = () => {
                           display="flex"
                           flexDirection="column"
                           justifyContent="center"
-                          alignCenter="center"
+                          alignItems="center"
                           mt={['29rem', 'NONE']}
                           ml={['22rem', 'NONE']}
                         >
@@ -1126,7 +1126,7 @@ const Request: FC = () => {
                           display="flex"
                           flexDirection="column"
                           justifyContent="center"
-                          alignCenter="center"
+                          alignItems="center"
                           mt={['29rem', 'NONE']}
                           ml={['22rem', 'NONE']}
                         >
@@ -1183,7 +1183,7 @@ const Request: FC = () => {
                           display="flex"
                           flexDirection="column"
                           justifyContent="center"
-                          alignCenter="center"
+                          alignItems="center"
                           mt={['29rem', 'NONE']}
                           ml={['22rem', 'NONE']}
                         >
@@ -1263,7 +1263,7 @@ const Request: FC = () => {
                           display="flex"
                           flexDirection="column"
                           justifyContent="center"
-                          alignCenter="center"
+                          alignItems="center"
                           mt={['29rem', 'NONE']}
                           ml={['22rem', 'NONE']}
                         >
