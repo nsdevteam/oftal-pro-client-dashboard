@@ -32,7 +32,6 @@ const Request: FC = () => {
     register,
     handleSubmit,
     errors,
-
     isModalOpen,
     showSelectAddress,
     selected,
@@ -229,12 +228,7 @@ const Request: FC = () => {
                 </Typography>
                 <FiX size={20} color="#A1A1AA" onClick={closeModal} />
               </Box>
-              <Box
-                as="form"
-                onSubmit={handleSubmit(onSubmit)}
-                width="100%"
-                padding="1rem"
-              >
+              <Box as="div" width="100%" padding="1rem">
                 <Typography as="p" padding="0.5rem">
                   Refração
                 </Typography>
@@ -320,8 +314,6 @@ const Request: FC = () => {
                         <Input
                           type="number"
                           p="L"
-                          min="-35"
-                          max="20"
                           outline="none"
                           border="1px solid #E4E4E7"
                           borderRadius="M"
@@ -336,16 +328,35 @@ const Request: FC = () => {
                             borderColor: '#4763E4',
                           }}
                           {...register('leftSpherical', {
-                            required: 'Campo obrigatório',
-                            min: -6,
-                            max: 7,
+                            min: {
+                              value: -35,
+                              message:
+                                'O valor mínimo deve ser maior ou igual a -35',
+                            },
+                            max: {
+                              value: 20,
+                              message:
+                                'O valor máximo deve ser menor ou igual a 20',
+                            },
                           })}
                           disabled={!selectLeftEye}
                         />
                         {errors.leftSpherical && (
-                          <Typography className="alertDanger">
-                            {errors.leftSpherical.message}
-                          </Typography>
+                          <Box
+                            as="div"
+                            position="absolute"
+                            width="auto"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="flex-end"
+                            alignCenter="center"
+                            mt={['29rem', 'NONE']}
+                            ml={['22rem', 'NONE']}
+                          >
+                            <Typography className="alertDanger">
+                              {errors.leftSpherical.message}
+                            </Typography>
+                          </Box>
                         )}
                         <Input
                           type="number"
@@ -366,16 +377,35 @@ const Request: FC = () => {
                             borderColor: '#4763E4',
                           }}
                           {...register('leftCylinder', {
-                            required: 'Campo obrigatório',
-                            min: -6,
-                            max: 7,
+                            min: {
+                              value: -6,
+                              message:
+                                'O valor mínimo deve ser maior ou igual a -6',
+                            },
+                            max: {
+                              value: 7,
+                              message:
+                                'O valor máximo deve ser menor ou igual a 7',
+                            },
                           })}
                           disabled={!selectLeftEye}
                         />
                         {errors.leftCylinder && (
-                          <Typography className="alertDanger">
-                            {errors.leftCylinder.message}
-                          </Typography>
+                          <Box
+                            as="div"
+                            position="absolute"
+                            width="auto"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="flex-end"
+                            alignCenter="center"
+                            mt={['29rem', 'NONE']}
+                            ml={['22rem', 'NONE']}
+                          >
+                            <Typography className="alertDanger">
+                              {errors.leftCylinder.message}
+                            </Typography>
+                          </Box>
                         )}
                         <Input
                           type="number"
@@ -396,16 +426,35 @@ const Request: FC = () => {
                             borderColor: '#4763E4',
                           }}
                           {...register('leftAxis', {
-                            required: 'Campo obrigatório',
-                            min: 0,
-                            max: 180,
+                            min: {
+                              value: 0,
+                              message:
+                                'O valor mínimo deve ser maior ou igual a 0',
+                            },
+                            max: {
+                              value: 180,
+                              message:
+                                'O valor máximo deve ser menor ou igual a 180',
+                            },
                           })}
                           disabled={!selectLeftEye}
                         />
                         {errors.leftAxis && (
-                          <Typography className="alertDanger">
-                            {errors.leftAxis.message}
-                          </Typography>
+                          <Box
+                            as="div"
+                            position="absolute"
+                            width="auto"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="center"
+                            alignCenter="center"
+                            mt={['29rem', 'NONE']}
+                            ml={['22rem', 'NONE']}
+                          >
+                            <Typography className="alertDanger">
+                              {errors.leftAxis.message}
+                            </Typography>
+                          </Box>
                         )}
                       </Box>
                     </Box>
@@ -437,7 +486,12 @@ const Request: FC = () => {
                           alignItems="center"
                           padding="0.5rem"
                         >
-                          <select className="selectType" name="geometry">
+                          <select
+                            className="selectType"
+                            {...register('geometry', {
+                              required: 'O campo de geometria deve preenchido',
+                            })}
+                          >
                             {geometryData.map((geo) => {
                               const { id, value } = geo;
                               return (
@@ -447,6 +501,23 @@ const Request: FC = () => {
                               );
                             })}
                           </select>
+                          {errors.geometry && (
+                            <Box
+                              as="div"
+                              position="absolute"
+                              width="auto"
+                              display="flex"
+                              flexDirection="column"
+                              justifyContent="center"
+                              alignCenter="center"
+                              mt={['29rem', 'NONE']}
+                              ml={['22rem', 'NONE']}
+                            >
+                              <Typography className="alertDanger">
+                                {errors.leftgeometry.message}
+                              </Typography>
+                            </Box>
+                          )}
                         </Box>
                       </Box>
                       <Box
@@ -466,7 +537,12 @@ const Request: FC = () => {
                           alignItems="center"
                           padding="0.5rem"
                         >
-                          <select className="selectType" name="refraction">
+                          <select
+                            className="selectType"
+                            {...register('refraction', {
+                              required: 'Campo obrigatório',
+                            })}
+                          >
                             {refractionData.map((item) => {
                               const { id, size } = item;
                               return (
@@ -476,6 +552,23 @@ const Request: FC = () => {
                               );
                             })}
                           </select>
+                          {errors.refraction && (
+                            <Box
+                              as="div"
+                              position="absolute"
+                              width="auto"
+                              display="flex"
+                              flexDirection="column"
+                              justifyContent="center"
+                              alignCenter="center"
+                              mt={['29rem', 'NONE']}
+                              ml={['22rem', 'NONE']}
+                            >
+                              <Typography className="alertDanger">
+                                {errors.refraction.message}
+                              </Typography>
+                            </Box>
+                          )}
                         </Box>
                       </Box>
                     </Box>
@@ -569,9 +662,30 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name="rightEspherical"
+                          {...register('rightSpherical', {
+                            required: 'Campo obrigatório',
+                            min: -35,
+                            max: 20,
+                          })}
                           disabled={!selectRightEye}
                         />
+                        {errors.rightSpherical && (
+                          <Box
+                            as="div"
+                            position="absolute"
+                            width="auto"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="center"
+                            alignCenter="center"
+                            mt={['29rem', 'NONE']}
+                            ml={['22rem', 'NONE']}
+                          >
+                            <Typography className="alertDanger">
+                              {errors.rightSpherical.message}
+                            </Typography>
+                          </Box>
+                        )}
                         <Input
                           type="number"
                           p="L"
@@ -590,9 +704,30 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name="rightCylinder"
+                          {...register('rightCylinder', {
+                            required: 'Campo obrigatório',
+                            min: -6,
+                            max: 7,
+                          })}
                           disabled={!selectRightEye}
                         />
+                        {errors.rightCylinder && (
+                          <Box
+                            as="div"
+                            position="absolute"
+                            width="auto"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="center"
+                            alignCenter="center"
+                            mt={['29rem', 'NONE']}
+                            ml={['22rem', 'NONE']}
+                          >
+                            <Typography className="alertDanger">
+                              {errors.rightCylinder.message}
+                            </Typography>
+                          </Box>
+                        )}
                         <Input
                           type="number"
                           p="L"
@@ -611,9 +746,30 @@ const Request: FC = () => {
                           focus={{
                             borderColor: '#4763E4',
                           }}
-                          name="rightAxis"
+                          {...register('rightAxis', {
+                            required: 'Campo obrigatório',
+                            min: 0,
+                            max: 180,
+                          })}
                           disabled={!selectRightEye}
                         />
+                        {errors.rightAxis && (
+                          <Box
+                            as="div"
+                            position="absolute"
+                            width="auto"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="center"
+                            alignCenter="center"
+                            mt={['29rem', 'NONE']}
+                            ml={['22rem', 'NONE']}
+                          >
+                            <Typography className="alertDanger">
+                              {errors.rightAxis.message}
+                            </Typography>
+                          </Box>
+                        )}
                       </Box>
                     </Box>
                     <Box
@@ -642,7 +798,12 @@ const Request: FC = () => {
                           alignItems="center"
                           padding="0.5rem"
                         >
-                          <select className="selectType" name="color">
+                          <select
+                            className="selectType"
+                            {...register('color', {
+                              required: 'Campo obrigatório',
+                            })}
+                          >
                             {colorData.map((item) => {
                               const { id, value } = item;
                               return (
@@ -652,6 +813,23 @@ const Request: FC = () => {
                               );
                             })}
                           </select>
+                          {errors.color && (
+                            <Box
+                              as="div"
+                              position="absolute"
+                              width="auto"
+                              display="flex"
+                              flexDirection="column"
+                              justifyContent="center"
+                              alignCenter="center"
+                              mt={['29rem', 'NONE']}
+                              ml={['22rem', 'NONE']}
+                            >
+                              <Typography className="alertDanger">
+                                {errors.color.message}
+                              </Typography>
+                            </Box>
+                          )}
                         </Box>
                       </Box>
                       <Box
@@ -671,7 +849,12 @@ const Request: FC = () => {
                           alignItems="center"
                           padding="0.5rem"
                         >
-                          <select className="selectType" name="treatment">
+                          <select
+                            className="selectType"
+                            {...register('treatment', {
+                              required: 'Campo obrigatório',
+                            })}
+                          >
                             {treatmentData.map((item) => {
                               const { id, value } = item;
                               return (
@@ -681,6 +864,23 @@ const Request: FC = () => {
                               );
                             })}
                           </select>
+                          {errors.treatment && (
+                            <Box
+                              as="div"
+                              position="absolute"
+                              width="auto"
+                              display="flex"
+                              flexDirection="column"
+                              justifyContent="center"
+                              alignCenter="center"
+                              mt={['29rem', 'NONE']}
+                              ml={['22rem', 'NONE']}
+                            >
+                              <Typography className="alertDanger">
+                                {errors.treatment.message}
+                              </Typography>
+                            </Box>
+                          )}
                         </Box>
                       </Box>
                     </Box>
@@ -714,11 +914,31 @@ const Request: FC = () => {
                         width={['24.7rem']}
                         bg="transparent"
                         placeholder="Lucas Mateus"
-                        name="patientName"
+                        {...register('patientName', {
+                          required: 'Campo obrigatório',
+                          max: 15,
+                        })}
                         focus={{
                           borderColor: '#4763E4',
                         }}
                       />
+                      {errors.patientName && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignCenter="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.patientName.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                     <Box
                       as="div"
@@ -746,11 +966,32 @@ const Request: FC = () => {
                         width={['7.5rem']}
                         bg="transparent"
                         placeholder="70mm"
-                        name="diameter"
+                        {...register('diameter', {
+                          required: 'Campo obrigatório',
+                          min: 50,
+                          max: 80,
+                        })}
                         focus={{
                           borderColor: '#4763E4',
                         }}
                       />
+                      {errors.diameter && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignCenter="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.diameter.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                     <Box
                       as="div"
@@ -763,13 +1004,35 @@ const Request: FC = () => {
                       <Typography textAlign="left" padding="0.5rem">
                         Corredor
                       </Typography>
-                      <select className="selectAdition" name="alway">
+                      <select
+                        className="selectAdition"
+                        {...register('alway', {
+                          required: 'Campo obrigatório',
+                        })}
+                      >
                         <option value="9">9</option>
                         <option value="11">11</option>
                         <option value="13">13</option>
                         <option value="15">15</option>
                         <option value="17">17</option>
                       </select>
+                      {errors.alway && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignCenter="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.alway.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                     <Box
                       as="div"
@@ -782,10 +1045,30 @@ const Request: FC = () => {
                       <Typography textAlign="left" padding="0.5rem">
                         Coloração
                       </Typography>
-                      <select className="selectAdition" name="coloring">
+                      <select
+                        className="selectAdition"
+                        {...register('coloring')}
+                      >
                         <option value="yes">Sim</option>
                         <option value="no">Não</option>
                       </select>
+                      {errors.coloring && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignCenter="center"
+                          mt={['2rem', 'NONE']}
+                          ml={['1rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.coloring.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                     <Box
                       as="div"
@@ -798,10 +1081,27 @@ const Request: FC = () => {
                       <Typography textAlign="left" padding="0.5rem">
                         Prisma
                       </Typography>
-                      <select className="selectAdition" name="prism">
+                      <select className="selectAdition" {...register('prism')}>
                         <option value="yes">Sim</option>
                         <option value="no">Não</option>
                       </select>
+                      {errors.prism && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignCenter="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.prism.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                     <Box
                       as="div"
@@ -814,10 +1114,27 @@ const Request: FC = () => {
                       <Typography textAlign="left" padding="0.5rem">
                         Precal
                       </Typography>
-                      <select className="selectAdition" name="precal">
+                      <select className="selectAdition" {...register('precal')}>
                         <option value="yes">Sim</option>
                         <option value="no">Não</option>
                       </select>
+                      {errors.precal && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignCenter="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.precal.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                   </Box>
                   <Box
@@ -850,11 +1167,31 @@ const Request: FC = () => {
                         width={['12.5rem']}
                         bg="transparent"
                         placeholder="23SW34B"
-                        name="jobReference"
+                        {...register('jobReference', {
+                          required: 'Campo obrigatório',
+                          max: 12,
+                        })}
                         focus={{
                           borderColor: '#4763E4',
                         }}
                       />
+                      {errors.jobReference && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignCenter="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.jobReference.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                     <Box
                       as="div"
@@ -913,8 +1250,28 @@ const Request: FC = () => {
                         minWidth={['100%', '10rem']}
                         width={['41.5rem']}
                         bg="transparent"
+                        {...register('observation', {
+                          max: 50,
+                        })}
                         placeholder="Deixa aqui as suas observações"
                       />
+                      {errors.observation && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignCenter="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.observation.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                   </Box>
                   <Typography as="h4" padding="0.5rem">
@@ -929,7 +1286,7 @@ const Request: FC = () => {
                   >
                     <Button
                       p="L"
-                      type="submit"
+                      type="button"
                       effect="hover"
                       display="flex"
                       variant="primary"
@@ -945,6 +1302,7 @@ const Request: FC = () => {
                       minWidth={['100%', '10rem']}
                       alignItems="center"
                       // onClick={handleOpenModalSelectAddress}
+                      onClick={handleSubmit(onSubmit)}
                     >
                       Prosseguir
                     </Button>

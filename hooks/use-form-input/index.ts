@@ -5,9 +5,10 @@ interface FormData {
   leftSpherical?: number;
   leftCylinder?: number;
   leftAxis?: number;
-  RightSpherical?: number;
-  RightCylinder?: number;
-  RightAxis?: number;
+  rightSpherical?: number;
+  rightCylinder?: number;
+  rightAxis?: number;
+  refraction?: string;
   geometry?: string;
   indiceOfRefraction?: number;
   color?: string;

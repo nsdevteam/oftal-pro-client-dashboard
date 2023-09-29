@@ -101,7 +101,11 @@ const GlobalStyles = css`
   }
 
   .alertDanger {
+    height: auto;
+    width: auto;
+    margin: 0.5rem;
     padding: 0.5rem;
+    border-radius: 0.5rem;
     color: #721c24;
     background: #f8d7da;
   }

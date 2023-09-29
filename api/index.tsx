@@ -135,15 +135,15 @@ export const treatmentData: Refraction[] = [
     value: 'HMC',
   },
   {
-    id: 1,
+    id: 2,
     value: 'SHMC',
   },
   {
-    id: 1,
+    id: 3,
     value: 'UC',
   },
   {
-    id: 1,
+    id: 4,
     value: 'HC',
   },
 ];
