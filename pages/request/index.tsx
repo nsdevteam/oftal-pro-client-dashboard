@@ -13,8 +13,8 @@ import {
   colorData,
   geometryData,
   refractionData,
-  requestData,
   treatmentData,
+  requestData,
 } from '../../api';
 import { Layout } from '../../components';
 import {
@@ -45,19 +45,36 @@ const Request: FC = () => {
     file,
     setModalOpen,
     setShowSelectAddress,
-    setSelected,
     setAddNewAddress,
     setPaymentModal,
-    setPaymentByReference,
     setPaymentSucceed,
-    setPaymentByExpress,
-    setSelectLeftEye,
-    setSelectRightEye,
-    setFile,
     onSubmit,
+    handleAddressSelected,
+    handleOpenModalNewAddress,
+    handleUseAddress,
+    handlePaymentModal,
+    handleCancel,
+    openModal,
+    closeModal,
+    handleOpenPaymentModal,
+    handlePaymentByReference,
+    handlePaymentByExpress,
+    handleCancelPayment,
+    handlePaymentSucceed,
+    handleToggleLeftEyeOption,
+    handleToggleRightEyeOption,
+    handleFileInputChange,
+    request,
   } = useFormInput();
 
   const columns = [
+    'patientName',
+    'geometry',
+    'índiceOfRefraction',
+    'Tratamento',
+    'Quantidade',
+    'Data de pedido',
+    'Opções',
     'Nome do paciente',
     'Geometria',
     'índice de refração',
@@ -65,81 +82,19 @@ const Request: FC = () => {
     'Quantidade',
     'Data de pedido',
     'Opções',
+    'Nome do paciente',
+    'Geometria',
+    'índice de refração',
+    'Tratamento',
   ];
 
-  const handleAddressSelected = (id: number | boolean | null) => {
-    setSelected(id);
-  };
+  //   const data = [
+  //   { id: 1, name: 'Alice', age: 25 },
+  //   { id: 2, name: 'Bob', age: 30 },
+  //   { id: 3, name: 'Charlie', age: 22 },
+  // ];
 
-  const handleOpenModalNewAddress = () => {
-    setAddNewAddress(!addNewAddress);
-    setShowSelectAddress(false);
-  };
-
-  const handleUseAddress = () => {
-    setShowSelectAddress(true);
-    setAddNewAddress(false);
-  };
-
-  const handlePaymentModal = () => {
-    setPaymentModal(false);
-    setShowSelectAddress(false);
-  };
-
-  const handleCancel = () => {
-    setShowSelectAddress(true);
-    setAddNewAddress(false);
-  };
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
-  const handleOpenPaymentModal = () => {
-    setPaymentModal(true);
-    setModalOpen(false);
-    setShowSelectAddress(false);
-    setPaymentByReference(true);
-    setPaymentByExpress(false);
-  };
-
-  const handlePaymentByReference = () => {
-    setPaymentByReference(true);
-    setPaymentByExpress(false);
-  };
-
-  const handlePaymentByExpress = () => {
-    setPaymentByExpress(true);
-    setPaymentByReference(false);
-  };
-
-  const handleCancelPayment = () => {
-    setPaymentModal(false);
-  };
-
-  const handlePaymentSucceed = () => {
-    setPaymentSucceed(true);
-    setPaymentModal(false);
-  };
-
-  const handleToggleLeftEyeOption = () => {
-    setSelectLeftEye(!selectLeftEye);
-  };
-
-  const handleToggleRightEyeOption = () => {
-    setSelectRightEye(!selectRightEye);
-  };
-
-  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      setFile(selectedFile.name);
-    }
-  };
+  // const columns = ['id', 'name', 'age'];
 
   return (
     <Layout pageTitle="Pedidos">
@@ -361,8 +316,6 @@ const Request: FC = () => {
                         <Input
                           type="number"
                           p="L"
-                          min="-6"
-                          max="7"
                           outline="none"
                           border="1px solid #E4E4E7"
                           borderRadius="M"
@@ -410,8 +363,6 @@ const Request: FC = () => {
                         <Input
                           type="number"
                           p="L"
-                          min="0"
-                          max="180"
                           outline="none"
                           border="1px solid #E4E4E7"
                           borderRadius="M"
@@ -489,7 +440,8 @@ const Request: FC = () => {
                           <select
                             className="selectType"
                             {...register('geometry', {
-                              required: 'O campo de geometria deve preenchido',
+                              required:
+                                'O campo de geometria deve ser preenchido',
                             })}
                           >
                             {geometryData.map((geo) => {
@@ -540,7 +492,11 @@ const Request: FC = () => {
                           <select
                             className="selectType"
                             {...register('refraction', {
-                              required: 'Campo obrigatório',
+                              min: {
+                                value: '',
+                                message:
+                                  'O campo de índice de refração deve ser preenchido',
+                              },
                             })}
                           >
                             {refractionData.map((item) => {
@@ -647,8 +603,6 @@ const Request: FC = () => {
                         <Input
                           type="number"
                           p="L"
-                          min="-35"
-                          max="20"
                           outline="none"
                           border="1px solid #E4E4E7"
                           borderRadius="M"
@@ -663,9 +617,16 @@ const Request: FC = () => {
                             borderColor: '#4763E4',
                           }}
                           {...register('rightSpherical', {
-                            required: 'Campo obrigatório',
-                            min: -35,
-                            max: 20,
+                            min: {
+                              value: -35,
+                              message:
+                                'O valor mínimo deve ser maior ou igual a -35',
+                            },
+                            max: {
+                              value: 20,
+                              message:
+                                'O valor máximo deve ser menor ou igual a 20',
+                            },
                           })}
                           disabled={!selectRightEye}
                         />
@@ -678,7 +639,7 @@ const Request: FC = () => {
                             flexDirection="column"
                             justifyContent="center"
                             alignItems="center"
-                            mt={['29rem', 'NONE']}
+                            mt={['22rem', 'NONE']}
                             ml={['22rem', 'NONE']}
                           >
                             <Typography className="alertDanger">
@@ -689,8 +650,6 @@ const Request: FC = () => {
                         <Input
                           type="number"
                           p="L"
-                          min="-6"
-                          max="7"
                           outline="none"
                           border="1px solid #E4E4E7"
                           borderRadius="M"
@@ -705,9 +664,16 @@ const Request: FC = () => {
                             borderColor: '#4763E4',
                           }}
                           {...register('rightCylinder', {
-                            required: 'Campo obrigatório',
-                            min: -6,
-                            max: 7,
+                            min: {
+                              value: -6,
+                              message:
+                                'O valor mínimo deve ser maior ou igual a -6',
+                            },
+                            max: {
+                              value: 7,
+                              message:
+                                'O valor máximo deve ser menor ou igual a 7',
+                            },
                           })}
                           disabled={!selectRightEye}
                         />
@@ -720,7 +686,7 @@ const Request: FC = () => {
                             flexDirection="column"
                             justifyContent="center"
                             alignItems="center"
-                            mt={['29rem', 'NONE']}
+                            mt={['22rem', 'NONE']}
                             ml={['22rem', 'NONE']}
                           >
                             <Typography className="alertDanger">
@@ -747,9 +713,16 @@ const Request: FC = () => {
                             borderColor: '#4763E4',
                           }}
                           {...register('rightAxis', {
-                            required: 'Campo obrigatório',
-                            min: 0,
-                            max: 180,
+                            min: {
+                              value: 0,
+                              message:
+                                'O valor mínimo deve ser maior ou igual a 0',
+                            },
+                            max: {
+                              value: 180,
+                              message:
+                                'O valor máximo deve ser menor ou igual a 180',
+                            },
                           })}
                           disabled={!selectRightEye}
                         />
@@ -762,7 +735,7 @@ const Request: FC = () => {
                             flexDirection="column"
                             justifyContent="center"
                             alignItems="center"
-                            mt={['29rem', 'NONE']}
+                            mt={['22rem', 'NONE']}
                             ml={['22rem', 'NONE']}
                           >
                             <Typography className="alertDanger">
@@ -801,7 +774,7 @@ const Request: FC = () => {
                           <select
                             className="selectType"
                             {...register('color', {
-                              required: 'Campo obrigatório',
+                              required: 'Campo  de cor é obrigatório',
                             })}
                           >
                             {colorData.map((item) => {
@@ -822,7 +795,7 @@ const Request: FC = () => {
                               flexDirection="column"
                               justifyContent="center"
                               alignItems="center"
-                              mt={['29rem', 'NONE']}
+                              mt={['22rem', 'NONE']}
                               ml={['22rem', 'NONE']}
                             >
                               <Typography className="alertDanger">
@@ -852,7 +825,7 @@ const Request: FC = () => {
                           <select
                             className="selectType"
                             {...register('treatment', {
-                              required: 'Campo obrigatório',
+                              required: 'Campo de tratamento é obrigatório',
                             })}
                           >
                             {treatmentData.map((item) => {
@@ -873,7 +846,7 @@ const Request: FC = () => {
                               flexDirection="column"
                               justifyContent="center"
                               alignItems="center"
-                              mt={['29rem', 'NONE']}
+                              mt={['22rem', 'NONE']}
                               ml={['22rem', 'NONE']}
                             >
                               <Typography className="alertDanger">
@@ -915,8 +888,9 @@ const Request: FC = () => {
                         bg="transparent"
                         placeholder="Lucas Mateus"
                         {...register('patientName', {
-                          required: 'Campo obrigatório',
-                          max: 15,
+                          required:
+                            'Campo nome do paciente deve ter no máximo 16 caracteres',
+                          maxLength: 16,
                         })}
                         focus={{
                           borderColor: '#4763E4',
@@ -931,8 +905,8 @@ const Request: FC = () => {
                           flexDirection="column"
                           justifyContent="center"
                           alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
+                          mt={['18rem', 'NONE']}
+                          ml={['18rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.patientName.message}
@@ -954,8 +928,6 @@ const Request: FC = () => {
                       <Input
                         p="L"
                         type="number"
-                        min="50"
-                        max="80"
                         outline="none"
                         borderRadius="M"
                         border="1px solid #E4E4E7"
@@ -967,9 +939,16 @@ const Request: FC = () => {
                         bg="transparent"
                         placeholder="70mm"
                         {...register('diameter', {
-                          required: 'Campo obrigatório',
-                          min: 50,
-                          max: 80,
+                          min: {
+                            value: 50,
+                            message:
+                              'O valor mínimo deve ser maior ou igual a 50',
+                          },
+                          max: {
+                            value: 80,
+                            message:
+                              'O valor máximo deve ser menor ou igual a 80',
+                          },
                         })}
                         focus={{
                           borderColor: '#4763E4',
@@ -984,8 +963,8 @@ const Request: FC = () => {
                           flexDirection="column"
                           justifyContent="center"
                           alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
+                          mt={['18rem', 'NONE']}
+                          ml={['18rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.diameter.message}
@@ -1007,12 +986,12 @@ const Request: FC = () => {
                       <select
                         className="selectAdition"
                         {...register('alway', {
-                          required: 'Campo obrigatório',
+                          required: 'Campo de corredor obrigatório',
                         })}
                       >
-                        <option value="9">9</option>
+                        <option value="9">13</option>
+                        <option value="13">9</option>
                         <option value="11">11</option>
-                        <option value="13">13</option>
                         <option value="15">15</option>
                         <option value="17">17</option>
                       </select>
@@ -1025,8 +1004,8 @@ const Request: FC = () => {
                           flexDirection="column"
                           justifyContent="center"
                           alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
+                          mt={['18rem', 'NONE']}
+                          ml={['18rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.alway.message}
@@ -1047,7 +1026,9 @@ const Request: FC = () => {
                       </Typography>
                       <select
                         className="selectAdition"
-                        {...register('coloring')}
+                        {...register('coloring', {
+                          required: 'Campo de coloração obrigatório',
+                        })}
                       >
                         <option value="yes">Sim</option>
                         <option value="no">Não</option>
@@ -1061,8 +1042,8 @@ const Request: FC = () => {
                           flexDirection="column"
                           justifyContent="center"
                           alignItems="center"
-                          mt={['2rem', 'NONE']}
-                          ml={['1rem', 'NONE']}
+                          mt={['18rem', 'NONE']}
+                          ml={['18rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.coloring.message}
@@ -1081,7 +1062,12 @@ const Request: FC = () => {
                       <Typography textAlign="left" padding="0.5rem">
                         Prisma
                       </Typography>
-                      <select className="selectAdition" {...register('prism')}>
+                      <select
+                        className="selectAdition"
+                        {...register('prism', {
+                          required: 'Campo de prisma é obrigatório',
+                        })}
+                      >
                         <option value="yes">Sim</option>
                         <option value="no">Não</option>
                       </select>
@@ -1094,8 +1080,8 @@ const Request: FC = () => {
                           flexDirection="column"
                           justifyContent="center"
                           alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
+                          mt={['18rem', 'NONE']}
+                          ml={['18rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.prism.message}
@@ -1114,7 +1100,12 @@ const Request: FC = () => {
                       <Typography textAlign="left" padding="0.5rem">
                         Precal
                       </Typography>
-                      <select className="selectAdition" {...register('precal')}>
+                      <select
+                        className="selectAdition"
+                        {...register('precal', {
+                          required: 'Campo de precal é obrigatório',
+                        })}
+                      >
                         <option value="yes">Sim</option>
                         <option value="no">Não</option>
                       </select>
@@ -1127,8 +1118,8 @@ const Request: FC = () => {
                           flexDirection="column"
                           justifyContent="center"
                           alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
+                          mt={['18rem', 'NONE']}
+                          ml={['18rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.precal.message}
@@ -1168,8 +1159,13 @@ const Request: FC = () => {
                         bg="transparent"
                         placeholder="23SW34B"
                         {...register('jobReference', {
-                          required: 'Campo obrigatório',
-                          max: 12,
+                          required:
+                            'Campo de referência de trabalho é obrigatório',
+                          maxLength: {
+                            value: 8,
+                            message:
+                              'O campo deve conter no mínimo de 8 caracteres',
+                          },
                         })}
                         focus={{
                           borderColor: '#4763E4',
@@ -1184,8 +1180,8 @@ const Request: FC = () => {
                           flexDirection="column"
                           justifyContent="center"
                           alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
+                          mt={['9rem', 'NONE']}
+                          ml={['18rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.jobReference.message}
@@ -1251,7 +1247,10 @@ const Request: FC = () => {
                         width={['41.5rem']}
                         bg="transparent"
                         {...register('observation', {
-                          max: 50,
+                          maxLength: {
+                            value: 50,
+                            message: 'Deve conter no máximo 50 caracteres',
+                          },
                         })}
                         placeholder="Deixa aqui as suas observações"
                       />
@@ -1264,8 +1263,8 @@ const Request: FC = () => {
                           flexDirection="column"
                           justifyContent="center"
                           alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
+                          mt={['10rem', 'NONE']}
+                          ml={['16rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.observation.message}

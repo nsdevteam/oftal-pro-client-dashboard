@@ -250,23 +250,24 @@ export const refractionData: Indices[] = [
 ];
 
 export const requestData = [
-  ['Lucas João', 'Bifocal', 'Redonda', 'HMC', '1 unidade', '10/02/2023', '--'],
-  [
-    'Artur Vidal',
-    'unifocal',
-    'Redonda',
-    'SHMC',
-    '100 unidade',
-    '15/06/2023',
-    '--',
-  ],
-  [
-    'Patrica Luísa',
-    'Bifocal',
-    'Redonda',
-    'HMC',
-    '1 unidade',
-    '22/07/2023',
-    '--',
-  ],
+  {
+    id: 1,
+    leftSpherical: 12,
+    leftCylinder: 2,
+    leftAxis: 0,
+    geometry: 'Unifocal',
+    indiceOfRefraction: 1.5,
+    rightSpherical: 4,
+    rightCylinder: 6,
+    rightAxis: 8,
+    color: 'Branca',
+    treatment: 'HMC',
+    patientName: 'Mario Silva',
+    diamenter: 12,
+    alway: 99,
+    prism: 10,
+    precal: 67,
+    jobReference: '12BD678',
+    observation: 'Preciso de dois pares de lente com as mesmas especificações',
+  },
 ];
