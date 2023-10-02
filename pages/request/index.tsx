@@ -14,7 +14,6 @@ import {
   geometryData,
   refractionData,
   treatmentData,
-  requestData,
 } from '../../api';
 import { Layout } from '../../components';
 import {
@@ -27,8 +26,11 @@ import {
   Typography,
 } from '../../elements';
 import { useFormInput } from '../../hooks';
+import { TTableHeadings } from '../../interface';
+import FileName from './file-name';
 const Request: FC = () => {
   const {
+    control,
     register,
     handleSubmit,
     errors,
@@ -42,7 +44,6 @@ const Request: FC = () => {
     paymentSucceed,
     selectLeftEye,
     selectRightEye,
-    file,
     setModalOpen,
     setShowSelectAddress,
     setAddNewAddress,
@@ -63,38 +64,17 @@ const Request: FC = () => {
     handlePaymentSucceed,
     handleToggleLeftEyeOption,
     handleToggleRightEyeOption,
-    handleFileInputChange,
-    request,
+    shortRequestInfo,
   } = useFormInput();
 
-  const columns = [
+  const columns: Array<keyof TTableHeadings> = [
     'patientName',
     'geometry',
-    'índiceOfRefraction',
-    'Tratamento',
-    'Quantidade',
-    'Data de pedido',
-    'Opções',
-    'Nome do paciente',
-    'Geometria',
-    'índice de refração',
-    'Tratamento',
-    'Quantidade',
-    'Data de pedido',
-    'Opções',
-    'Nome do paciente',
-    'Geometria',
-    'índice de refração',
-    'Tratamento',
+    'refraction',
+    'color',
+    'treatment',
+    'diameter',
   ];
-
-  //   const data = [
-  //   { id: 1, name: 'Alice', age: 25 },
-  //   { id: 2, name: 'Bob', age: 30 },
-  //   { id: 3, name: 'Charlie', age: 22 },
-  // ];
-
-  // const columns = ['id', 'name', 'age'];
 
   return (
     <Layout pageTitle="Pedidos">
@@ -169,7 +149,7 @@ const Request: FC = () => {
         </Box>
         <Box as="div" width="80%" height="100%" padding="0.5rem">
           <Typography as="h2">Listagem de pedidos</Typography>
-          <Table data={requestData} columns={columns} />
+          <Table data={shortRequestInfo} columns={columns} />
           {isModalOpen && (
             <Modal isOpen={openModal} onClose={closeModal}>
               <Box
@@ -964,7 +944,7 @@ const Request: FC = () => {
                           justifyContent="center"
                           alignItems="center"
                           mt={['18rem', 'NONE']}
-                          ml={['18rem', 'NONE']}
+                          ml={['1rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.diameter.message}
@@ -1005,7 +985,7 @@ const Request: FC = () => {
                           justifyContent="center"
                           alignItems="center"
                           mt={['18rem', 'NONE']}
-                          ml={['18rem', 'NONE']}
+                          ml={['1rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.alway.message}
@@ -1043,7 +1023,7 @@ const Request: FC = () => {
                           justifyContent="center"
                           alignItems="center"
                           mt={['18rem', 'NONE']}
-                          ml={['18rem', 'NONE']}
+                          ml={['1rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.coloring.message}
@@ -1081,7 +1061,7 @@ const Request: FC = () => {
                           justifyContent="center"
                           alignItems="center"
                           mt={['18rem', 'NONE']}
-                          ml={['18rem', 'NONE']}
+                          ml={['1rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.prism.message}
@@ -1119,7 +1099,7 @@ const Request: FC = () => {
                           justifyContent="center"
                           alignItems="center"
                           mt={['18rem', 'NONE']}
-                          ml={['18rem', 'NONE']}
+                          ml={['1rem', 'NONE']}
                         >
                           <Typography className="alertDanger">
                             {errors.precal.message}
@@ -1212,14 +1192,9 @@ const Request: FC = () => {
                         width={['12rem', 'NONE']}
                         minWidth={['100%', '10rem']}
                         bg="#4763E4"
-                        name={file}
-                        onChange={handleFileInputChange}
+                        {...register('file')}
                       />
-                      {file && (
-                        <Typography padding="0.5rem">
-                          Ficheiro: {file}
-                        </Typography>
-                      )}
+                      <FileName control={control} />
                     </Box>
                     <Box
                       as="div"
@@ -1889,7 +1864,9 @@ const Request: FC = () => {
                         minWidth={['100%', '10rem']}
                         width={['69rem']}
                         bg="transparent"
-                        name="amount"
+                        {...register('amount', {
+                          required: 'Campo de montante é obrigatório',
+                        })}
                         placeholder="1.000.000,00"
                         focus={{
                           borderColor: '#4763E4',

@@ -2,6 +2,8 @@
 
 import { ReactNode } from 'react';
 
+import { FormData } from '../hooks/use-form-input';
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IEmptyObject {}
 
@@ -40,3 +42,13 @@ export interface Indices {
   id: number;
   size: string;
 }
+
+export type TTableHeadings = Pick<
+  FormData,
+  'patientName' | 'geometry' | 'refraction' | 'color' | 'treatment' | 'diameter'
+>;
+
+export type TRowData = Record<
+  keyof TTableHeadings,
+  string | number | undefined
+>;

@@ -9,6 +9,8 @@ import {
   typography,
 } from 'styled-system';
 
+import { TRowData, TTableHeadings } from '../../interface';
+
 const StyledTable = styled.table(
   compose(color, space, border, layout, typography)
 );
@@ -22,8 +24,17 @@ const StyledTableCell = styled.td(
 );
 
 type TableProps = {
-  data: Array<Record<string, any>>;
-  columns: Array<string>;
+  data: Array<TRowData & { file: string }>;
+  columns: Array<keyof TTableHeadings>;
+};
+
+const HEADINGS: Record<keyof TTableHeadings, string> = {
+  patientName: 'Nome de pacitente',
+  geometry: 'Geomatria',
+  refraction: 'Refração',
+  color: 'cor',
+  treatment: 'Tratamento',
+  diameter: 'Diametro',
 };
 
 const Table: FC<TableProps> = ({ data, columns }) => {
@@ -32,22 +43,22 @@ const Table: FC<TableProps> = ({ data, columns }) => {
       <StyledTable className="tableRequest" width="75vw">
         <thead>
           <tr>
-            {columns.map((column: string, index: number) => (
+            {columns.map((column, index) => (
               <StyledTableCell
                 padding="1rem"
                 borderBottom="1px solid #E4E4E7"
                 color="#A1A1AA"
                 key={index}
               >
-                {column}
+                {HEADINGS[column]}
               </StyledTableCell>
             ))}
           </tr>
         </thead>
         <tbody>
-          {data.map((row: Record<string, any>, rowIndex: number) => (
+          {data.map((row, rowIndex) => (
             <StyledTableRow key={rowIndex}>
-              {columns.map((column: string, cellIndex: number) => (
+              {columns.map((column, cellIndex) => (
                 <StyledTableCell
                   padding="1rem"
                   borderBottom="1px solid #E4E4E7"

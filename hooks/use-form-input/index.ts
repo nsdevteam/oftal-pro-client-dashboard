@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-interface FormData {
+import { TRowData } from '../../interface';
+
+export interface FormData {
   leftSpherical?: number;
   leftCylinder?: number;
   leftAxis?: number;
@@ -21,32 +23,10 @@ interface FormData {
   patientName: string;
   jobReference: string;
   observation: string;
+  file?: FileList | unknown;
+  amount?: string;
 }
 
-const requestData = [
-  {
-    id: 1,
-    leftSpherical: 12,
-    leftCylinder: 2,
-    leftAxis: 0,
-    geometry: 'Unifocal',
-    indiceOfRefraction: 1.5,
-    rightSpherical: 4,
-    rightCylinder: 6,
-    rightAxis: 8,
-    color: 'Branca',
-    treatment: 'HMC',
-    patientName: 'Mario Silva',
-    diamenter: 12,
-    alway: 99,
-    prism: 10,
-    precal: 67,
-    jobReference: '12BD678',
-    observation: 'Preciso de dois pares de lente com as mesmas especificações',
-  },
-];
-
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const useFormInput = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [showSelectAddress, setShowSelectAddress] = useState<boolean>(false);
@@ -58,21 +38,53 @@ const useFormInput = () => {
   const [paymentSucceed, setPaymentSucceed] = useState<boolean>(false);
   const [selectLeftEye, setSelectLeftEye] = useState<boolean>(false);
   const [selectRightEye, setSelectRightEye] = useState<boolean>(false);
-  const [file, setFile] = useState<string | undefined>(undefined);
-  const [request, setRequest] = useState<Array<string>>([]);
+  const [request, setRequest] = useState<Array<FormData>>([]);
+  const [shortRequestInfo, setShortRequestInfo] = useState<
+    Array<TRowData & { file: string }>
+  >([]);
 
   const {
     register,
     handleSubmit,
+    reset,
+    control,
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<FormData> = (data: unknown) => {
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     try {
-      const newRequest = requestData.push(data);
-      setRequest(newRequest);
+      const newRequest = [...request, data];
+
+      const mappedRequest: Array<TRowData & { file: string }> = newRequest.map(
+        ({
+          patientName,
+          geometry,
+          refraction,
+          color,
+          treatment,
+          diameter,
+          amount,
+          file,
+        }) => ({
+          patientName,
+          geometry,
+          refraction,
+          color,
+          treatment,
+          diameter,
+          amount,
+          file: file
+            ? [...(file as unknown as Array<File>)][0]?.name ?? ''
+            : '',
+        })
+      );
+
+      setShortRequestInfo(mappedRequest);
+
       setShowSelectAddress(!showSelectAddress);
       setModalOpen(false);
+      setRequest(newRequest);
+      reset();
     } catch (err) {
       console.log(err, 'Something went wrong adding new request');
     }
@@ -145,12 +157,12 @@ const useFormInput = () => {
     setSelectRightEye(!selectRightEye);
   };
 
-  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      setFile(selectedFile.name);
-    }
-  };
+  // const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const selectedFile = e.target.files?.[0];
+  //   if (selectedFile) {
+  //     setFile(selectedFile.name);
+  //   }
+  // };
 
   return {
     register,
@@ -166,7 +178,7 @@ const useFormInput = () => {
     paymentSucceed,
     selectLeftEye,
     selectRightEye,
-    file,
+    control,
     request,
     setRequest,
     setModalOpen,
@@ -179,7 +191,6 @@ const useFormInput = () => {
     setPaymentByExpress,
     setSelectLeftEye,
     setSelectRightEye,
-    setFile,
     onSubmit,
     handleAddressSelected,
     handleOpenModalNewAddress,
@@ -195,8 +206,7 @@ const useFormInput = () => {
     handlePaymentSucceed,
     handleToggleLeftEyeOption,
     handleToggleRightEyeOption,
-    handleFileInputChange,
-    requestData,
+    shortRequestInfo,
   };
 };
 
