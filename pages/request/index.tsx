@@ -27,6 +27,7 @@ import {
 } from '../../elements';
 import { useFormInput } from '../../hooks';
 import { TTableHeadings } from '../../interface';
+import FileName from './file-name';
 const Request: FC = () => {
   const {
     //control,
@@ -1177,23 +1178,7 @@ const Request: FC = () => {
                       alignItems="flex-start"
                       mt="2.1rem"
                     >
-                      <Input
-                        p="L"
-                        type="file"
-                        multiple
-                        accept=".doc,.pdf,.jpg,.jpeg,.png"
-                        borderRadius="M"
-                        border="none"
-                        color="#FFF"
-                        className="inputFile"
-                        mr={['NONE', 'S']}
-                        ml={['NONE', 'S']}
-                        fontWeight="bold"
-                        width={['12rem', 'NONE']}
-                        minWidth={['100%', '10rem']}
-                        bg="#4763E4"
-                        {...register('file')}
-                      />
+                      <FileName />
                     </Box>
                     <Box
                       as="div"
