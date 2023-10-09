@@ -27,10 +27,9 @@ import {
 } from '../../elements';
 import { useFormInput } from '../../hooks';
 import { TTableHeadings } from '../../interface';
-import FileName from './file-name';
 const Request: FC = () => {
   const {
-    control,
+    //control,
     register,
     handleSubmit,
     errors,
@@ -65,6 +64,7 @@ const Request: FC = () => {
     handleToggleLeftEyeOption,
     handleToggleRightEyeOption,
     shortRequestInfo,
+    totalAmount,
   } = useFormInput();
 
   const columns: Array<keyof TTableHeadings> = [
@@ -1194,7 +1194,6 @@ const Request: FC = () => {
                         bg="#4763E4"
                         {...register('file')}
                       />
-                      <FileName control={control} />
                     </Box>
                     <Box
                       as="div"
@@ -1249,7 +1248,7 @@ const Request: FC = () => {
                     </Box>
                   </Box>
                   <Typography as="h4" padding="0.5rem">
-                    {`Subtotal: 0,00 AOA`}
+                    {`Subtotal: ${totalAmount},00 AOA`}
                   </Typography>
                   <Box
                     as="div"

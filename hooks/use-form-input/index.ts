@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { TRowData } from '../../interface';
+import { Address, TRowData } from '../../interface';
 
 export interface FormData {
   leftSpherical?: number;
@@ -24,7 +24,8 @@ export interface FormData {
   jobReference: string;
   observation: string;
   file?: FileList | unknown;
-  amount?: string;
+  amount?: number;
+  address?: Address | undefined;
 }
 
 const useFormInput = () => {
@@ -42,6 +43,8 @@ const useFormInput = () => {
   const [shortRequestInfo, setShortRequestInfo] = useState<
     Array<TRowData & { file: string }>
   >([]);
+  const amount = 0;
+  let totalAmount = 0;
 
   const {
     register,
@@ -53,6 +56,22 @@ const useFormInput = () => {
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     try {
+      if (data.treatment === 'UC') {
+        totalAmount = amount + 2000;
+        if (data.file) {
+          totalAmount += 5000;
+        }
+
+        console.log('====================================');
+        console.log('>> Treatment igual ::', data.treatment);
+        console.log('====================================');
+
+        console.log('====================================');
+        console.log('>> Total ::', totalAmount);
+        console.log('====================================');
+      }
+      // if (data.indiceOfRefraction === 1.5) {
+      // }
       const newRequest = [...request, data];
 
       const mappedRequest: Array<TRowData & { file: string }> = newRequest.map(
@@ -157,13 +176,6 @@ const useFormInput = () => {
     setSelectRightEye(!selectRightEye);
   };
 
-  // const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const selectedFile = e.target.files?.[0];
-  //   if (selectedFile) {
-  //     setFile(selectedFile.name);
-  //   }
-  // };
-
   return {
     register,
     handleSubmit,
@@ -207,6 +219,7 @@ const useFormInput = () => {
     handleToggleLeftEyeOption,
     handleToggleRightEyeOption,
     shortRequestInfo,
+    totalAmount,
   };
 };
 
