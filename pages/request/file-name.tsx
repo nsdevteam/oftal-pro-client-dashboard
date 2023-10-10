@@ -1,20 +1,43 @@
-import { FC } from 'react';
-import { Control, useWatch } from 'react-hook-form';
+import React, { ChangeEvent, FC, useState } from 'react';
 
-import { Typography } from '../../elements';
-import { FormData } from '../../hooks/use-form-input';
+import { Input, Typography } from '../../elements';
 
-const FileName: FC<{ control: Control<FormData> }> = ({ control }) => {
-  const files = useWatch({ control, name: 'file' });
-  const filename = files
-    ? [...(files as unknown as Array<File>)][0]?.name ?? ''
-    : '';
+const FileName: FC = () => {
+  const [fileName, setFileName] = useState<string>('');
 
-  console.log('>> files :: ', files);
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFileName(selectedFile.name);
+    } else {
+      setFileName('');
+    }
+  };
 
-  if (!filename) return null;
-
-  return <Typography padding="0.5rem">Ficheiro: {filename}</Typography>;
+  return (
+    <>
+      <Input
+        p="L"
+        type="file"
+        multiple
+        accept=".doc,.pdf,.jpg,.jpeg,.png"
+        borderRadius="M"
+        border="none"
+        color="#FFF"
+        className="inputFile"
+        mr={['NONE', 'S']}
+        ml={['NONE', 'S']}
+        fontWeight="bold"
+        width={['12rem', 'NONE']}
+        minWidth={['100%', '10rem']}
+        bg="#4763E4"
+        onChange={handleFileChange}
+      />
+      {fileName && (
+        <Typography padding="0.5rem">Ficheiro: {fileName}</Typography>
+      )}
+    </>
+  );
 };
 
 export default FileName;
