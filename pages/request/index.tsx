@@ -9,7 +9,6 @@ import {
 } from 'react-icons/fi';
 
 import {
-  address,
   colorData,
   geometryData,
   refractionData,
@@ -30,13 +29,12 @@ import { TTableHeadings } from '../../interface';
 import FileName from './file-name';
 const Request: FC = () => {
   const {
-    //control,
     register,
     handleSubmit,
     errors,
     isModalOpen,
     showSelectAddress,
-    selected,
+    selectAddress,
     addNewAddress,
     paymentModal,
     paymentByReference,
@@ -66,6 +64,7 @@ const Request: FC = () => {
     handleToggleRightEyeOption,
     shortRequestInfo,
     totalAmount,
+    addresses,
   } = useFormInput();
 
   const columns: Array<keyof TTableHeadings> = [
@@ -869,9 +868,17 @@ const Request: FC = () => {
                         bg="transparent"
                         placeholder="Lucas Mateus"
                         {...register('patientName', {
-                          required:
-                            'Campo nome do paciente deve ter no máximo 16 caracteres',
-                          maxLength: 16,
+                          required: 'Campo nome do paciente é obrigatório',
+                          maxLength: {
+                            value: 16,
+                            message:
+                              'Campo nome do paciente deve ter no máximo 16 caracteres',
+                          },
+                          minLength: {
+                            value: 6,
+                            message:
+                              'Campo nome do paciente deve ter no mínimo 6 caracteres',
+                          },
                         })}
                         focus={{
                           borderColor: '#4763E4',
@@ -879,6 +886,7 @@ const Request: FC = () => {
                       />
                       {errors.patientName && (
                         <Box
+                          role="alert"
                           as="div"
                           position="absolute"
                           width="auto"
@@ -1141,12 +1149,19 @@ const Request: FC = () => {
                         placeholder="23SW34B"
                         {...register('jobReference', {
                           required:
-                            'Campo de referência de trabalho é obrigatório',
+                            'Referência de trabalho  é obrigatório e deve conter letras maísculas e números',
                           maxLength: {
                             value: 8,
                             message:
-                              'O campo deve conter no mínimo de 8 caracteres',
+                              'O campo deve conter no máximo de 8 caracteres',
                           },
+                          minLength: {
+                            value: 4,
+                            message:
+                              'O campo deve conter no mínimo de 4 caracteres',
+                          },
+
+                          pattern: /^[A-Z0-9]+$/,
                         })}
                         focus={{
                           borderColor: '#4763E4',
@@ -1291,7 +1306,7 @@ const Request: FC = () => {
                   />
                 </Box>
                 <Box as="div" marginTop={['S', 'XXL']}>
-                  {address.map((addressItem) => {
+                  {addresses.map((addressItem) => {
                     const { id, province, city, street, apt } = addressItem;
                     return (
                       <Box
@@ -1301,10 +1316,9 @@ const Request: FC = () => {
                         justifyContent="space-between"
                         alignItems="center"
                         className="address-list"
-                        onClick={() => handleAddressSelected(id)}
+                        onClick={() => handleAddressSelected(addressItem)}
                       >
-                        <Box
-                          as="div"
+                        <Button
                           key={id}
                           display="flex"
                           justifyContent="space-between"
@@ -1316,9 +1330,13 @@ const Request: FC = () => {
                           width={['67rem']}
                           minWidth={['100%', '10rem']}
                           borderRadius="5px"
-                          transition="0.5s"
                           boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                          bg={selected === id ? '#F2F2F2' : 'transparent'}
+                          bg={
+                            selectAddress === addressItem
+                              ? '#F2F2F2'
+                              : 'transparent'
+                          }
+                          variant="primary"
                         >
                           <Box>
                             {province}, {city},{' '}
@@ -1332,9 +1350,13 @@ const Request: FC = () => {
                             width="20px"
                             height="20px"
                             borderRadius="25px"
-                            bg={selected === id ? '#4763E4' : 'transparent'}
+                            bg={
+                              selectAddress === addressItem
+                                ? '#4763E4'
+                                : 'transparent'
+                            }
                           />
-                        </Box>
+                        </Button>
                       </Box>
                     );
                   })}
@@ -1443,11 +1465,40 @@ const Request: FC = () => {
                       width={['32rem']}
                       bg="transparent"
                       placeholder="Benguela"
-                      name="province"
+                      {...register('address.province', {
+                        required: 'Campo província é obrigatório',
+                        maxLength: {
+                          value: 16,
+                          message:
+                            'Campo província deve ter no máximo 16 caracteres',
+                        },
+                        minLength: {
+                          value: 6,
+                          message:
+                            'Campo província deve ter no mínimo 4 caracteres',
+                        },
+                      })}
                       focus={{
                         borderColor: '#4763E4',
                       }}
                     />
+                    {errors.address?.province && (
+                      <Box
+                        as="div"
+                        position="absolute"
+                        width="auto"
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                        mt={['29rem', 'NONE']}
+                        ml={['22rem', 'NONE']}
+                      >
+                        <Typography className="alertDanger">
+                          {errors.address?.province.message}
+                        </Typography>
+                      </Box>
+                    )}
                   </Box>
                   <Box
                     as="div"
@@ -1473,10 +1524,40 @@ const Request: FC = () => {
                       width={['32rem']}
                       bg="transparent"
                       placeholder="Lobito"
+                      {...register('address.state', {
+                        required: 'Campo município é obrigatório',
+                        maxLength: {
+                          value: 16,
+                          message:
+                            'Campo município deve ter no máximo 16 caracteres',
+                        },
+                        minLength: {
+                          value: 6,
+                          message:
+                            'Campo município deve ter no mínimo 4 caracteres',
+                        },
+                      })}
                       focus={{
                         borderColor: '#4763E4',
                       }}
                     />
+                    {errors.address?.state && (
+                      <Box
+                        as="div"
+                        position="absolute"
+                        width="auto"
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                        mt={['29rem', 'NONE']}
+                        ml={['22rem', 'NONE']}
+                      >
+                        <Typography className="alertDanger">
+                          {errors.address?.state.message}
+                        </Typography>
+                      </Box>
+                    )}
                   </Box>
                 </Box>
                 <Box
@@ -1508,12 +1589,36 @@ const Request: FC = () => {
                       minWidth={['100%', '10rem']}
                       width={['68rem']}
                       bg="transparent"
-                      name="city"
                       placeholder="Bairro da Camunda"
+                      {...register('address.city', {
+                        required: 'Campo bairro é obrigatório',
+                        maxLength: {
+                          value: 16,
+                          message:
+                            'Campo bairro deve ter no máximo 10 caracteres',
+                        },
+                      })}
                       focus={{
                         borderColor: '#4763E4',
                       }}
                     />
+                    {errors.address?.city && (
+                      <Box
+                        as="div"
+                        position="absolute"
+                        width="auto"
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                        mt={['26rem', 'NONE']}
+                        ml={['19rem', 'NONE']}
+                      >
+                        <Typography className="alertDanger">
+                          {errors.address?.city.message}
+                        </Typography>
+                      </Box>
+                    )}
                   </Box>
                 </Box>
                 <Box
@@ -1539,11 +1644,30 @@ const Request: FC = () => {
                     width={['68rem']}
                     bg="transparent"
                     placeholder="Rua das casas amarelas"
-                    name="street"
+                    {...register('address.street', {
+                      required: 'Campo bairro é obrigatório',
+                    })}
                     focus={{
                       borderColor: '#4763E4',
                     }}
                   />
+                  {errors.address?.street && (
+                    <Box
+                      as="div"
+                      position="absolute"
+                      width="auto"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-end"
+                      alignItems="center"
+                      mt={['29rem', 'NONE']}
+                      ml={['22rem', 'NONE']}
+                    >
+                      <Typography className="alertDanger">
+                        {errors.address?.street.message}
+                      </Typography>
+                    </Box>
+                  )}
                 </Box>
                 <Box
                   as="div"
@@ -1574,12 +1698,31 @@ const Request: FC = () => {
                       minWidth={['100%', '10rem']}
                       width={['32rem']}
                       bg="transparent"
-                      name="apt"
                       placeholder="Casa S/N"
+                      {...register('address.apt', {
+                        required: 'Campo número da casa é obrigatório',
+                      })}
                       focus={{
                         borderColor: '#4763E4',
                       }}
                     />
+                    {errors.address?.apt && (
+                      <Box
+                        as="div"
+                        position="absolute"
+                        width="auto"
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                        mt={['29rem', 'NONE']}
+                        ml={['22rem', 'NONE']}
+                      >
+                        <Typography className="alertDanger">
+                          {errors.address?.apt.message}
+                        </Typography>
+                      </Box>
+                    )}
                   </Box>
                   <Box
                     as="div"
@@ -1605,10 +1748,30 @@ const Request: FC = () => {
                       width={['32rem']}
                       bg="transparent"
                       placeholder="Antiga sede da ENDE"
+                      {...register('address.house', {
+                        required: 'Campo edíficio é obrigatório',
+                      })}
                       focus={{
                         borderColor: '#4763E4',
                       }}
                     />
+                    {errors.address?.house && (
+                      <Box
+                        as="div"
+                        position="absolute"
+                        width="auto"
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                        mt={['29rem', 'NONE']}
+                        ml={['22rem', 'NONE']}
+                      >
+                        <Typography className="alertDanger">
+                          {errors.address?.house.message}
+                        </Typography>
+                      </Box>
+                    )}
                   </Box>
                 </Box>
                 <Box
@@ -1780,7 +1943,6 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="491 Oftal Pro"
-                        name="entity"
                         focus={{
                           borderColor: '#4763E4',
                         }}
