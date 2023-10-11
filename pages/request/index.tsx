@@ -1943,10 +1943,30 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="491 Oftal Pro"
+                        {...register('payment.entity', {
+                          required: 'Campo entidade é obrigatório',
+                        })}
                         focus={{
                           borderColor: '#4763E4',
                         }}
                       />
+                      {errors.payment?.entity && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="flex-end"
+                          alignItems="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.payment?.entity.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                     <Box
                       as="div"
@@ -1973,11 +1993,30 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="001437785"
-                        name="reference"
+                        {...register('payment.reference', {
+                          required: 'Campo referência é obrigatório',
+                        })}
                         focus={{
                           borderColor: '#4763E4',
                         }}
                       />
+                      {errors.payment?.reference && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="flex-end"
+                          alignItems="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.payment?.reference.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                   </Box>
                   <Box
@@ -2010,14 +2049,31 @@ const Request: FC = () => {
                         minWidth={['100%', '10rem']}
                         width={['69rem']}
                         bg="transparent"
-                        {...register('amount', {
-                          required: 'Campo de montante é obrigatório',
-                        })}
                         placeholder="1.000.000,00"
+                        {...register('payment.amount', {
+                          required: 'Campo montante é obrigatório',
+                        })}
                         focus={{
                           borderColor: '#4763E4',
                         }}
                       />
+                      {errors.payment?.amount && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="flex-end"
+                          alignItems="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.payment?.amount.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                   </Box>
                 </Box>
@@ -2057,11 +2113,30 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="923 009 161"
-                        name="phoneNumber"
+                        {...register('payment.phoneNumber', {
+                          required: 'Campo número de telefone é obrigatório',
+                        })}
                         focus={{
                           borderColor: '#4763E4',
                         }}
                       />
+                      {errors.payment?.phoneNumber && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="flex-end"
+                          alignItems="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.payment?.phoneNumber.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                     <Box
                       as="div"
@@ -2088,11 +2163,30 @@ const Request: FC = () => {
                         width={['34rem']}
                         bg="transparent"
                         placeholder="3.845.000,00"
-                        name="amount"
+                        {...register('payment.amount', {
+                          required: 'Campo montante é obrigatório',
+                        })}
                         focus={{
                           borderColor: '#4763E4',
                         }}
                       />
+                      {errors.payment?.amount && (
+                        <Box
+                          as="div"
+                          position="absolute"
+                          width="auto"
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="flex-end"
+                          alignItems="center"
+                          mt={['29rem', 'NONE']}
+                          ml={['22rem', 'NONE']}
+                        >
+                          <Typography className="alertDanger">
+                            {errors.payment?.amount.message}
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                   </Box>
                 </Box>

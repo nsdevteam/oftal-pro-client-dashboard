@@ -30,6 +30,7 @@ export interface FormData {
   file?: FileList | unknown;
   amount?: number;
   address?: Address | undefined;
+  payment?: Payment | undefined;
 }
 
 const useFormInput = () => {
@@ -104,8 +105,10 @@ const useFormInput = () => {
       setModalOpen(false);
       setRequest(newRequest);
       reset();
-    } catch (err) {
-      console.log(err, 'Something went wrong adding new request');
+    } catch (error) {
+      console.log('====================================');
+      console.log('>>>Something went wrong adding new request ::', error);
+      console.log('====================================');
     }
   };
 
@@ -153,7 +156,7 @@ const useFormInput = () => {
       setValue('address.house', '');
     } catch (error) {
       console.log('====================================');
-      console.log('>>> Erro ao adicionar novo endereço');
+      console.log('>>> Error adding new address', error);
       console.log('====================================');
     }
   };
