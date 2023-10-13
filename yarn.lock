@@ -2243,6 +2243,11 @@
   dependencies:
     csstype "^3.0.2"
 
+"@types/uuid@^9.0.5":
+  version "9.0.5"
+  resolved "https://registry.npmjs.org/@types/uuid/-/uuid-9.0.5.tgz"
+  integrity sha512-xfHdwa1FMJ082prjSJpoEI57GZITiQz10r3vEJCHa2khEFQjKy91aWKz6+zybzssCvXUwE1LQWgWVwZ4nYUvHQ==
+
 "@types/yargs-parser@*":
   version "21.0.1"
   resolved "https://registry.npmjs.org/@types/yargs-parser/-/yargs-parser-21.0.1.tgz"

@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
 
-import { Address, TRowData } from '../../interface';
+import { address } from '../../api';
+import { Address, Payment, TRowData } from '../../interface';
+
+const id = uuidv4();
 
 export interface FormData {
   leftSpherical?: number;
@@ -26,12 +30,13 @@ export interface FormData {
   file?: FileList | unknown;
   amount?: number;
   address?: Address | undefined;
+  payment?: Payment | undefined;
 }
 
 const useFormInput = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [showSelectAddress, setShowSelectAddress] = useState<boolean>(false);
-  const [selected, setSelected] = useState<number | boolean | null>(null);
+  const [selectAddress, setSelectAddress] = useState<Address | null>(null);
   const [addNewAddress, setAddNewAddress] = useState<boolean>(false);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
   const [paymentByReference, setPaymentByReference] = useState<boolean>(false);
@@ -40,6 +45,8 @@ const useFormInput = () => {
   const [selectLeftEye, setSelectLeftEye] = useState<boolean>(false);
   const [selectRightEye, setSelectRightEye] = useState<boolean>(false);
   const [request, setRequest] = useState<Array<FormData>>([]);
+  const [addresses, setAddresses] = useState<Address[]>(address);
+  const [payment, setPayment] = useState<Payment[] | null>(null);
   const [shortRequestInfo, setShortRequestInfo] = useState<
     Array<TRowData & { file: string }>
   >([]);
@@ -51,6 +58,8 @@ const useFormInput = () => {
     handleSubmit,
     reset,
     control,
+    getValues,
+    setValue,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -61,14 +70,6 @@ const useFormInput = () => {
         if (data.file) {
           totalAmount += 5000;
         }
-
-        console.log('====================================');
-        console.log('>> Treatment igual ::', data.treatment);
-        console.log('====================================');
-
-        console.log('====================================');
-        console.log('>> Total ::', totalAmount);
-        console.log('====================================');
       }
       // if (data.indiceOfRefraction === 1.5) {
       // }
@@ -104,13 +105,15 @@ const useFormInput = () => {
       setModalOpen(false);
       setRequest(newRequest);
       reset();
-    } catch (err) {
-      console.log(err, 'Something went wrong adding new request');
+    } catch (error) {
+      console.log('====================================');
+      console.log('>>>Something went wrong adding new request ::', error);
+      console.log('====================================');
     }
   };
 
-  const handleAddressSelected = (id: number | boolean | null) => {
-    setSelected(id);
+  const handleAddressSelected = (addressItem: Address) => {
+    setSelectAddress(addressItem);
   };
 
   const handleOpenModalNewAddress = () => {
@@ -119,13 +122,50 @@ const useFormInput = () => {
   };
 
   const handleUseAddress = () => {
-    setShowSelectAddress(true);
-    setAddNewAddress(false);
+    try {
+      const province = getValues('address.province');
+      const state = getValues('address.state');
+      const city = getValues('address.city');
+      const street = getValues('address.street');
+      const apt = getValues('address.apt');
+      const house = getValues('address.house');
+
+      const newAddress: Address = {
+        id,
+        province,
+        state,
+        city,
+        street,
+        apt,
+        house,
+      };
+
+      const updateAddress: Address[] = [...addresses, newAddress];
+
+      setAddresses(updateAddress);
+      setSelectAddress(newAddress);
+
+      setShowSelectAddress(true);
+      setAddNewAddress(false);
+
+      setValue('address.province', '');
+      setValue('address.state', '');
+      setValue('address.city', '');
+      setValue('address.street', '');
+      setValue('address.apt', '');
+      setValue('address.house', '');
+    } catch (error) {
+      console.log('====================================');
+      console.log('>>> Error adding new address', error);
+      console.log('====================================');
+    }
   };
 
   const handlePaymentModal = () => {
     setPaymentModal(false);
     setShowSelectAddress(false);
+
+    setPayment([]);
   };
 
   const handleCancel = () => {
@@ -182,7 +222,7 @@ const useFormInput = () => {
     errors,
     isModalOpen,
     showSelectAddress,
-    selected,
+    selectAddress,
     addNewAddress,
     paymentModal,
     paymentByReference,
@@ -192,10 +232,12 @@ const useFormInput = () => {
     selectRightEye,
     control,
     request,
+    addresses,
+    payment,
     setRequest,
     setModalOpen,
     setShowSelectAddress,
-    setSelected,
+    setSelectAddress,
     setAddNewAddress,
     setPaymentModal,
     setPaymentByReference,

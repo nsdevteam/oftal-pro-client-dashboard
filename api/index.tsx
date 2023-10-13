@@ -1,4 +1,5 @@
 import { FiCreditCard, FiFileText, FiSettings } from 'react-icons/fi';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   Address,
@@ -7,6 +8,7 @@ import {
   Notification,
   Refraction,
 } from '../interface';
+const id = uuidv4();
 
 export const menuLink: Links[] = [
   {
@@ -100,32 +102,40 @@ export const notification: Notification[] = [
 
 export const address: Address[] = [
   {
-    id: 1,
+    id,
     province: 'Luanda',
+    state: '',
     city: 'Futungo de Belas',
     street: 'Rua do Pantanal',
     apt: 'Casa S/N',
+    house: '',
   },
   {
-    id: 2,
+    id,
     province: 'Huambo',
+    state: '',
     city: 'Centralidade do Lossambo',
     street: 'Rua do 24',
     apt: 'Edificio PD3, apart 135',
+    house: '',
   },
   {
-    id: 3,
+    id,
     province: 'Luanda',
+    state: '',
     city: 'Vila Alice',
     street: 'Rua do Queirós Galvão',
     apt: 'Casa 12',
+    house: '',
   },
   {
-    id: 4,
+    id,
     province: 'Cabinda',
+    state: '',
     city: 'Mbanza Congo',
     street: 'Rua 4 de Abril ',
     apt: 'Casa 345',
+    house: '',
   },
 ];
 

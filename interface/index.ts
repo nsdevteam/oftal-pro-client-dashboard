@@ -26,11 +26,21 @@ export interface Notification {
 }
 
 export interface Address {
-  id: number;
+  id: string;
   province: string;
+  state: string;
   city?: string;
   street?: string;
   apt?: string;
+  house?: string;
+  building?: string;
+}
+
+export interface Payment {
+  entity?: string;
+  amount?: number;
+  reference?: string;
+  phoneNumber?: number;
 }
 
 export interface Refraction {
