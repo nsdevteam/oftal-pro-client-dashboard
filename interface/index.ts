@@ -55,7 +55,12 @@ export interface Indices {
 
 export type TTableHeadings = Pick<
   FormData,
-  'patientName' | 'geometry' | 'refraction' | 'color' | 'treatment' | 'diameter'
+  | 'patientName'
+  | 'geometry'
+  | 'indiceOfRefraction'
+  | 'color'
+  | 'treatment'
+  | 'diameter'
 >;
 
 export type TRowData = Record<

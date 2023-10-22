@@ -40,7 +40,7 @@ const GlobalStyles = css`
   }
 
   .tableContent {
-    height: 25rem;
+    height: 23rem;
     width: 85vw;
     overflow-x: scroll;
     margin-top: 1rem;

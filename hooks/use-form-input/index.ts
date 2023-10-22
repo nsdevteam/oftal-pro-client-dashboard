@@ -32,6 +32,7 @@ export interface FormData {
   address?: Address | undefined;
   payment?: Payment | undefined;
 }
+export let totalAmount = 0;
 
 const useFormInput = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
@@ -50,12 +51,11 @@ const useFormInput = () => {
   const [shortRequestInfo, setShortRequestInfo] = useState<
     Array<TRowData & { file: string }>
   >([]);
-  const amount = 0;
-  let totalAmount = 0;
 
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     control,
     getValues,
@@ -66,20 +66,27 @@ const useFormInput = () => {
   const onSubmit: SubmitHandler<FormData> = (data) => {
     try {
       if (data.treatment === 'UC') {
-        totalAmount = amount + 2000;
-        if (data.file) {
-          totalAmount += 5000;
-        }
+        totalAmount += 2000;
       }
-      // if (data.indiceOfRefraction === 1.5) {
-      // }
+
+      if (data.file) {
+        totalAmount += 5000;
+      }
+
+      if (data.treatment === 'SHMC') {
+        totalAmount -= 1000;
+      }
+      if (data.indiceOfRefraction === 1.5) {
+        alert('índice of refraction igual 1.5');
+      }
+
       const newRequest = [...request, data];
 
       const mappedRequest: Array<TRowData & { file: string }> = newRequest.map(
         ({
           patientName,
           geometry,
-          refraction,
+          indiceOfRefraction,
           color,
           treatment,
           diameter,
@@ -88,7 +95,7 @@ const useFormInput = () => {
         }) => ({
           patientName,
           geometry,
-          refraction,
+          indiceOfRefraction,
           color,
           treatment,
           diameter,
@@ -218,6 +225,7 @@ const useFormInput = () => {
 
   return {
     register,
+    watch,
     handleSubmit,
     errors,
     isModalOpen,

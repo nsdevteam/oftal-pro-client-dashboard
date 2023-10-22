@@ -25,6 +25,7 @@ import {
   Typography,
 } from '../../elements';
 import { useFormInput } from '../../hooks';
+import { totalAmount } from '../../hooks/use-form-input';
 import { TTableHeadings } from '../../interface';
 import FileName from './file-name';
 const Request: FC = () => {
@@ -63,14 +64,13 @@ const Request: FC = () => {
     handleToggleLeftEyeOption,
     handleToggleRightEyeOption,
     shortRequestInfo,
-    totalAmount,
     addresses,
   } = useFormInput();
 
   const columns: Array<keyof TTableHeadings> = [
     'patientName',
     'geometry',
-    'refraction',
+    'indiceOfRefraction',
     'color',
     'treatment',
     'diameter',
@@ -150,6 +150,9 @@ const Request: FC = () => {
         <Box as="div" width="80%" height="100%" padding="0.5rem">
           <Typography as="h2">Listagem de pedidos</Typography>
           <Table data={shortRequestInfo} columns={columns} />
+          <Typography as="h4">
+            Total da compra: {totalAmount}, 00 AOA
+          </Typography>
           {isModalOpen && (
             <Modal isOpen={openModal} onClose={closeModal}>
               <Box
@@ -471,7 +474,7 @@ const Request: FC = () => {
                         >
                           <select
                             className="selectType"
-                            {...register('refraction', {
+                            {...register('indiceOfRefraction', {
                               min: {
                                 value: '',
                                 message:
@@ -488,7 +491,7 @@ const Request: FC = () => {
                               );
                             })}
                           </select>
-                          {errors.refraction && (
+                          {errors.indiceOfRefraction && (
                             <Box
                               as="div"
                               position="absolute"
@@ -501,7 +504,7 @@ const Request: FC = () => {
                               ml={['22rem', 'NONE']}
                             >
                               <Typography className="alertDanger">
-                                {errors.refraction.message}
+                                {errors.indiceOfRefraction.message}
                               </Typography>
                             </Box>
                           )}
@@ -1248,7 +1251,7 @@ const Request: FC = () => {
                     </Box>
                   </Box>
                   <Typography as="h4" padding="0.5rem">
-                    {`Subtotal: ${totalAmount},00 AOA`}
+                    Subtotal: {totalAmount}, 00 AOA
                   </Typography>
                   <Box
                     as="div"

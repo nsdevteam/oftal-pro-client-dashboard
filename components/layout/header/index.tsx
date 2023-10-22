@@ -37,8 +37,8 @@ const Header: FC = () => {
         </Typography>
       </Box>
       <Box as="div">
-        <Typography
-          as="span"
+        <Box
+          as="div"
           padding="0.5rem"
           borderRadius={25}
           display="flex"
@@ -48,6 +48,23 @@ const Header: FC = () => {
           }}
           justifyContent="center"
         >
+          <Box
+            as="span"
+            position="absolute"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            height={20}
+            width={20}
+            fontSize={12}
+            ml={15}
+            mt={-7}
+            borderRadius="100%"
+            bg="#f00"
+            color="#fff"
+          >
+            3
+          </Box>
           <FiBell size={30} color="#000" onClick={openModal} />
           {isModalOpen ? (
             <ModalNotification isOpen={openModal} onClose={closeModal}>
@@ -106,7 +123,7 @@ const Header: FC = () => {
           ) : (
             ''
           )}
-        </Typography>
+        </Box>
       </Box>
     </Box>
   );
