@@ -973,19 +973,20 @@ const Request: FC = () => {
                       alignItems="flex-start"
                     >
                       <Typography textAlign="left" padding="0.5rem">
-                        Corredor
+                        Altura mínima
                       </Typography>
                       <select
+                        defaultValue="17"
                         className="selectAdition"
                         {...register('alway', {
-                          required: 'Campo de corredor obrigatório',
+                          required: 'Campo de altura mínima obrigatório',
                         })}
                       >
-                        <option value="9">13</option>
-                        <option value="13">9</option>
-                        <option value="11">11</option>
+                        <option value="13">13</option>
                         <option value="15">15</option>
                         <option value="17">17</option>
+                        <option value="19">19</option>
+                        <option value="21">21</option>
                       </select>
                       {errors.alway && (
                         <Box
@@ -1017,13 +1018,14 @@ const Request: FC = () => {
                         Coloração
                       </Typography>
                       <select
+                        defaultValue="Não"
                         className="selectAdition"
                         {...register('coloring', {
                           required: 'Campo de coloração obrigatório',
                         })}
                       >
-                        <option value="yes">Sim</option>
-                        <option value="no">Não</option>
+                        <option value="Sim<">Sim</option>
+                        <option value="Não">Não</option>
                       </select>
                       {errors.coloring && (
                         <Box
@@ -1055,13 +1057,14 @@ const Request: FC = () => {
                         Prisma
                       </Typography>
                       <select
+                        defaultValue="Não"
                         className="selectAdition"
                         {...register('prism', {
                           required: 'Campo de prisma é obrigatório',
                         })}
                       >
-                        <option value="yes">Sim</option>
-                        <option value="no">Não</option>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
                       </select>
                       {errors.prism && (
                         <Box
@@ -1093,13 +1096,14 @@ const Request: FC = () => {
                         Precal
                       </Typography>
                       <select
+                        defaultValue="Não"
                         className="selectAdition"
                         {...register('precal', {
                           required: 'Campo de precal é obrigatório',
                         })}
                       >
-                        <option value="yes">Sim</option>
-                        <option value="no">Não</option>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
                       </select>
                       {errors.precal && (
                         <Box
