@@ -183,6 +183,10 @@ export const geometryData: Refraction[] = [
     id: 6,
     value: 'Bifocal',
   },
+  {
+    id: 6,
+    value: 'Regressiva OFFICE',
+  },
 ];
 
 export const colorData: Refraction[] = [
@@ -196,11 +200,11 @@ export const colorData: Refraction[] = [
   },
   {
     id: 3,
-    value: 'Transições',
+    value: 'Transitions',
   },
   {
     id: 4,
-    value: 'Polarização',
+    value: 'Polarizado',
   },
 ];
 
