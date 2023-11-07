@@ -25,14 +25,21 @@ import {
   Typography,
 } from '../../elements';
 import { useFormInput } from '../../hooks';
+import useFirebase from '../../hooks/use-firebase';
 import { totalAmount } from '../../hooks/use-form-input';
 import { TTableHeadings } from '../../interface';
 import FileName from './file-name';
 const Request: FC = () => {
+  const { requestDBInfo } = useFirebase();
+
+  console.log('====================================');
+  console.log('>> request db info', requestDBInfo);
+  console.log('====================================');
+
   const {
     register,
-    handleSubmit,
     errors,
+    handleSubmit,
     isModalOpen,
     showSelectAddress,
     selectAddress,
@@ -1281,7 +1288,7 @@ const Request: FC = () => {
                       width={['10rem', 'NONE']}
                       minWidth={['100%', '10rem']}
                       alignItems="center"
-                      // onClick={handleOpenModalSelectAddress}
+                      //onClick={handleAddNewRequest}
                       onClick={handleSubmit(onSubmit)}
                     >
                       Prosseguir

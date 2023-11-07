@@ -2,8 +2,6 @@
 
 import { ReactNode } from 'react';
 
-import { FormData } from '../hooks/use-form-input';
-
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IEmptyObject {}
 
@@ -53,8 +51,34 @@ export interface Indices {
   size: string;
 }
 
+export interface IRequest {
+  leftSpherical?: number;
+  leftCylinder?: number;
+  leftAxis?: number;
+  rightSpherical?: number;
+  rightCylinder?: number;
+  rightAxis?: number;
+  refraction?: string;
+  geometry?: string;
+  indiceOfRefraction?: number;
+  color?: string;
+  treatment?: string;
+  diameter?: number;
+  alway?: number;
+  coloring?: number;
+  prism?: number;
+  precal?: number;
+  patientName: string;
+  jobReference: string;
+  observation: string;
+  file?: FileList | unknown;
+  amount?: number;
+  address?: Address | undefined;
+  payment?: Payment | undefined;
+}
+
 export type TTableHeadings = Pick<
-  FormData,
+  IRequest,
   | 'patientName'
   | 'geometry'
   | 'indiceOfRefraction'
@@ -67,3 +91,16 @@ export type TRowData = Record<
   keyof TTableHeadings,
   string | number | undefined
 >;
+
+export interface IClient {
+  id?: string;
+  fullname?: string;
+  email?: string;
+  password?: string;
+}
+
+export interface AlertProps {
+  type: string;
+  msg: string;
+  removeAlert: () => void;
+}

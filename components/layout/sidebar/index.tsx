@@ -1,25 +1,26 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { FC } from 'react';
+import { useForm } from 'react-hook-form';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 import { menuLink } from '../../../api';
 import colors from '../../../design-system/light-theme/colors';
 import { Box, Button, Typography } from '../../../elements';
+import { useFirebase } from '../../../hooks';
 import LogoSVG from '../../svg/logo';
 
 type MenuId = number;
 const Sidebar: FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<MenuId | null>(null); // Use the MenuId type and allow null
   const [isDropDown, setIsDropDown] = useState<boolean>(false);
+  const { handleSubmit } = useForm();
+  const { handleLogOut } = useFirebase();
 
   const handleShowDropDownMenu = (id: MenuId) => {
     setSelectedMenu(id);
     setIsDropDown(!isDropDown);
   };
-
-  const router = useRouter();
 
   return (
     <Box
@@ -138,7 +139,7 @@ const Sidebar: FC = () => {
             margin="0.5rem"
             minWidth="90%"
             bg="#DC2626"
-            onClick={() => router.push('/')}
+            onClick={handleSubmit(handleLogOut)}
           >
             Terminar a sessão
           </Button>

@@ -1,17 +1,45 @@
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Eye, EyeSlash } from '../components/image-svg';
 import LogoSVG from '../components/svg/logo';
 import { RoutePaths, RoutesEnum } from '../constants/routes';
 import { Box, Button, Input, Typography } from '../elements';
+import { useFirebase } from '../hooks';
 
 const Home: FC = () => {
-  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const { handleFirebaseConfig } = useFirebase();
 
   const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
+
+  const onLoginSubmit = async (data: { email: string; password: string }) => {
+    try {
+      const { email, password } = data;
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, email, password);
+      setValue('email', '');
+      setValue('password', '');
+      console.log('User logged in successfully!');
+      router.push('/request');
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  };
+
+  useEffect(() => {
+    handleFirebaseConfig();
+  }, []);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -66,22 +94,44 @@ const Home: FC = () => {
             <Input
               p="L"
               type="email"
-              mr={['NONE', 'S']}
-              ml={['NONE', 'S']}
-              minWidth={['100%', '10rem']}
-              width={['30rem']}
+              bg="transparent"
               outline="none"
               borderRadius="M"
               border="1px solid #E4E4E7"
               color="textInverted"
-              bg="transparent"
+              mr={['NONE', 'S']}
+              ml={['NONE', 'S']}
+              minWidth={['100%', '10rem']}
+              width={['30rem']}
               placeholder="johndoe@oftalpro.com"
               focus={{
-                borderColor: '#4763E4',
-                borderSize: '1px',
-                borderStyle: 'solid',
+                border: '1px solid #4763E4',
               }}
+              {...register('email', {
+                required: 'Campo email é obrigatório',
+                max: {
+                  value: 6,
+                  message: 'O email deve ter no máximo 6 caracteres',
+                },
+              })}
             />
+            {errors.email && (
+              <Box
+                as="div"
+                position="absolute"
+                width="auto"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                mt={['23rem', 'NONE']}
+                ml={['7.5rem', 'NONE']}
+              >
+                <Typography className="alertDanger">
+                  {errors.email.message}
+                </Typography>
+              </Box>
+            )}
           </Box>
           <Box
             as="div"
@@ -112,8 +162,6 @@ const Home: FC = () => {
               <Input
                 p="L"
                 type={showPassword ? 'text' : 'password'}
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
                 bg="transparent"
                 border="none"
                 borderRadius="M"
@@ -126,7 +174,31 @@ const Home: FC = () => {
                   borderSize: '1px',
                   borderStyle: 'solid',
                 }}
+                {...register('password', {
+                  required: 'Campo palavra-passe é obrigatório',
+                  maxLength: {
+                    value: 12,
+                    message: 'O email deve ter no máximo 12 caracteres',
+                  },
+                })}
               />
+              {errors.password && (
+                <Box
+                  as="div"
+                  position="absolute"
+                  width="auto"
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  mt={['26rem', 'NONE']}
+                  ml={['5rem', 'NONE']}
+                >
+                  <Typography className="alertDanger">
+                    {errors.password.message}
+                  </Typography>
+                </Box>
+              )}
               <Box
                 onClick={togglePasswordVisibility}
                 cursor="pointer"
@@ -175,7 +247,7 @@ const Home: FC = () => {
             bg="#4763E4"
             justifyContent="center"
             alignItems="center"
-            onClick={() => router.push('/request')}
+            onClick={handleSubmit(onLoginSubmit)}
           >
             Entrar &rarr;
           </Button>

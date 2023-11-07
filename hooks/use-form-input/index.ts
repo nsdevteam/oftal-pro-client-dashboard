@@ -3,35 +3,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
 import { address } from '../../api';
-import { Address, Payment, TRowData } from '../../interface';
+import { Address, IRequest, Payment, TRowData } from '../../interface';
 
 const id = uuidv4();
 
-export interface FormData {
-  leftSpherical?: number;
-  leftCylinder?: number;
-  leftAxis?: number;
-  rightSpherical?: number;
-  rightCylinder?: number;
-  rightAxis?: number;
-  refraction?: string;
-  geometry?: string;
-  indiceOfRefraction?: number;
-  color?: string;
-  treatment?: string;
-  diameter?: number;
-  alway?: number;
-  coloring?: number;
-  prism?: number;
-  precal?: number;
-  patientName: string;
-  jobReference: string;
-  observation: string;
-  file?: FileList | unknown;
-  amount?: number;
-  address?: Address | undefined;
-  payment?: Payment | undefined;
-}
 export let totalAmount = 0;
 
 const useFormInput = () => {
@@ -45,7 +20,7 @@ const useFormInput = () => {
   const [paymentSucceed, setPaymentSucceed] = useState<boolean>(false);
   const [selectLeftEye, setSelectLeftEye] = useState<boolean>(false);
   const [selectRightEye, setSelectRightEye] = useState<boolean>(false);
-  const [request, setRequest] = useState<Array<FormData>>([]);
+  const [request, setRequest] = useState<Array<IRequest>>([]);
   const [addresses, setAddresses] = useState<Address[]>(address);
   const [payment, setPayment] = useState<Payment[] | null>(null);
   const [shortRequestInfo, setShortRequestInfo] = useState<
@@ -61,12 +36,13 @@ const useFormInput = () => {
     getValues,
     setValue,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<IRequest>();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<IRequest> = (data) => {
     try {
       if (data.treatment === 'UC') {
         totalAmount += 2000;
+        setValue('indiceOfRefraction', 1.5);
       }
 
       if (data.file) {
@@ -114,7 +90,7 @@ const useFormInput = () => {
       reset();
     } catch (error) {
       console.log('====================================');
-      console.log('>>>Something went wrong adding new request ::', error);
+      console.log('>>> Something went wrong adding new request ::', error);
       console.log('====================================');
     }
   };

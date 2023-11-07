@@ -184,7 +184,7 @@ export const geometryData: Refraction[] = [
     value: 'Bifocal',
   },
   {
-    id: 6,
+    id: 7,
     value: 'Regressiva OFFICE',
   },
 ];

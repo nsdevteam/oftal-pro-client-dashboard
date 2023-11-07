@@ -63,7 +63,7 @@ const Header: FC = () => {
             bg="#f00"
             color="#fff"
           >
-            3
+            9
           </Box>
           <FiBell size={30} color="#000" onClick={openModal} />
           {isModalOpen ? (

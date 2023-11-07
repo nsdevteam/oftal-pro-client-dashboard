@@ -1,17 +1,50 @@
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Eye, EyeSlash } from '../../components/image-svg';
+import Alert from '../../components/layout/alert';
 import LogoSVG from '../../components/svg/logo';
 import { RoutePaths, RoutesEnum } from '../../constants/routes';
 import { Box, Button, Input, Typography } from '../../elements';
+import { useFirebase } from '../../hooks';
 
 const Signin: FC = () => {
-  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+  const { handleFirebaseConfig } = useFirebase();
 
-  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
+
+  const showAlert = (show = false, type = '', msg = '') => {
+    setAlert({ show, type, msg });
+  };
+
+  useEffect(() => {
+    handleFirebaseConfig();
+  }, []);
+  const onSubmit = async (data: { email: string; password: string }) => {
+    try {
+      const auth = getAuth();
+      const { email, password } = data;
+      createUserWithEmailAndPassword(auth, email, password).then(() => {
+        setValue('fullName', '');
+        setValue('email', '');
+        setValue('password', '');
+        showAlert(true, 'Success', 'A sua conta foi criada com sucesso.');
+        console.log('User signed up successfully!');
+      });
+    } catch (error) {
+      console.error('Error signing up:', error);
+      showAlert(true, 'Danger', 'Erro ao criar conta');
+    }
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -39,6 +72,7 @@ const Signin: FC = () => {
         <Typography padding="0.5rem">
           Crie uma conta e desfrute do melhor que temos para si
         </Typography>
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <Box
           as="form"
           width="100%"
@@ -75,6 +109,9 @@ const Signin: FC = () => {
               focus={{
                 borderColor: '#4763E4',
               }}
+              {...register('fullName', {
+                required: 'O campo nome é obrigatório',
+              })}
             />
           </Box>
           <Box
@@ -104,7 +141,31 @@ const Signin: FC = () => {
               focus={{
                 borderColor: '#4763E4',
               }}
+              {...register('email', {
+                required: 'Campo email é obrigatório',
+                max: {
+                  value: 6,
+                  message: 'O email deve ter no máximo 6 caracteres',
+                },
+              })}
             />
+            {errors.email && (
+              <Box
+                as="div"
+                position="absolute"
+                width="auto"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                mt={['23rem', 'NONE']}
+                ml={['7.5rem', 'NONE']}
+              >
+                <Typography className="alertDanger">
+                  {errors.email.message}
+                </Typography>
+              </Box>
+            )}
           </Box>
           <Box
             as="div"
@@ -135,8 +196,6 @@ const Signin: FC = () => {
               <Input
                 p="L"
                 type={showPassword ? 'text' : 'password'}
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
                 bg="transparent"
                 border="none"
                 borderRadius="M"
@@ -149,7 +208,31 @@ const Signin: FC = () => {
                   borderSize: '1px',
                   borderStyle: 'solid',
                 }}
+                {...register('password', {
+                  required: 'Campo palavra-passe é obrigatório',
+                  maxLength: {
+                    value: 12,
+                    message: 'O email deve ter no máximo 12 caracteres',
+                  },
+                })}
               />
+              {errors.password && (
+                <Box
+                  as="div"
+                  position="absolute"
+                  width="auto"
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  mt={['26rem', 'NONE']}
+                  ml={['5rem', 'NONE']}
+                >
+                  <Typography className="alertDanger">
+                    {errors.password.message}
+                  </Typography>
+                </Box>
+              )}
               <Box
                 onClick={togglePasswordVisibility}
                 cursor="pointer"
@@ -181,7 +264,7 @@ const Signin: FC = () => {
             justifyContent="center"
             minWidth={['100%', '10rem']}
             alignItems="center"
-            onClick={() => router.push('/')}
+            onClick={handleSubmit(onSubmit)}
           >
             Criar conta &rarr;
           </Button>

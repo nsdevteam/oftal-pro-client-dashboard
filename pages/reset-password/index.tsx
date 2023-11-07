@@ -1,13 +1,14 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 import LogoSVG from '../../components/svg/logo';
 import { RoutePaths, RoutesEnum } from '../../constants/routes';
 import { Box, Button, Input, Typography } from '../../elements';
+import { useFirebase, useFormInput } from '../../hooks';
 
 const ResetPassword: FC = () => {
-  const router = useRouter();
+  const { handleSubmit, register, errors } = useFormInput();
+  const { handleUpdatePassword } = useFirebase();
   return (
     <Box
       as="div"
@@ -68,7 +69,31 @@ const ResetPassword: FC = () => {
             focus={{
               borderColor: '#4763E4',
             }}
+            {...register('email', {
+              required: 'Campo email é obrigatório',
+              max: {
+                value: 6,
+                message: 'O email deve ter no máximo 6 caracteres',
+              },
+            })}
           />
+          {errors.email && (
+            <Box
+              as="div"
+              position="absolute"
+              width="auto"
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              mt={['23rem', 'NONE']}
+              ml={['7.5rem', 'NONE']}
+            >
+              <Typography className="alertDanger">
+                {errors.email.message}
+              </Typography>
+            </Box>
+          )}
           <Button
             p="L"
             type="button"
@@ -86,7 +111,7 @@ const ResetPassword: FC = () => {
             justifyContent="center"
             minWidth={['100%', '10rem']}
             alignItems="center"
-            onClick={() => router.push('/reset-password-notification')}
+            onClick={handleSubmit(handleUpdatePassword)}
           >
             Prosseguir &rarr;
           </Button>

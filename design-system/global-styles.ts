@@ -110,7 +110,11 @@ const GlobalStyles = css`
     background: #f8d7da;
   }
   .alertSuccess {
+    height: auto;
+    width: auto;
+    margin: 0.5rem;
     padding: 0.5rem;
+    border-radius: 0.5rem;
     color: #155724;
     background: #d4edda;
   }
