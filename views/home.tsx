@@ -5,6 +5,7 @@ import { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Eye, EyeSlash } from '../components/image-svg';
+import Alert from '../components/layout/alert';
 import LogoSVG from '../components/svg/logo';
 import { RoutePaths, RoutesEnum } from '../constants/routes';
 import { Box, Button, Input, Typography } from '../elements';
@@ -12,6 +13,8 @@ import { useFirebase } from '../hooks';
 
 const Home: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+
   const { handleFirebaseConfig } = useFirebase();
 
   const router = useRouter();
@@ -23,6 +26,10 @@ const Home: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const showAlert = (show = false, type = '', msg = '') => {
+    setAlert({ show, type, msg });
+  };
 
   const onLoginSubmit = async () => {
     try {
@@ -40,6 +47,7 @@ const Home: FC = () => {
       console.log('====================================');
       console.log('>> Error signing :: ', err);
       console.log('====================================');
+      showAlert(true, 'Danger', 'Erro ao entrar, verifique as credências');
     }
   };
 
@@ -77,6 +85,7 @@ const Home: FC = () => {
         <Typography padding="0.5rem">
           Insira os seus dados e clique em entrar
         </Typography>
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <Box
           as="form"
           width="100%"
