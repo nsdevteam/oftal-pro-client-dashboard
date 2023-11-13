@@ -1,8 +1,4 @@
-import {
-  fetchSignInMethodsForEmail,
-  getAuth,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
@@ -29,23 +25,20 @@ const Home: FC = () => {
   } = useForm();
 
   const onLoginSubmit = async () => {
-    const { email, password } = getValues();
-
     try {
+      const email = getValues('email');
+      const password = getValues('password');
       const auth = getAuth();
-      signInWithEmailAndPassword(auth, email, password);
-      setValue('email', '');
-      setValue('password', '');
-      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
-      if (signInMethods) {
-        console.log('====================================');
-        console.log('>> Login successful');
-        console.log('====================================');
+
+      const checkUser = await signInWithEmailAndPassword(auth, email, password);
+      if (checkUser) {
         router.push('/request');
       }
+      setValue('email', '');
+      setValue('password', '');
     } catch (err) {
       console.log('====================================');
-      console.log('>> Something went wrong :: ', err);
+      console.log('>> Error signing :: ', err);
       console.log('====================================');
     }
   };
