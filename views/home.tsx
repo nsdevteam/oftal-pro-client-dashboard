@@ -37,15 +37,11 @@ const Home: FC = () => {
       setValue('email', '');
       setValue('password', '');
       const signInMethods = await fetchSignInMethodsForEmail(auth, email);
-      if (signInMethods.length > 0) {
+      if (signInMethods) {
         console.log('====================================');
         console.log('>> Login successful');
         console.log('====================================');
         router.push('/request');
-      } else {
-        console.log('====================================');
-        console.log('>> User authentication failed');
-        console.log('====================================');
       }
     } catch (err) {
       console.log('====================================');
