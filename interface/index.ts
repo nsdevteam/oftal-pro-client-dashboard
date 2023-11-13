@@ -51,7 +51,7 @@ export interface Indices {
   size: string;
 }
 
-export interface IRequest {
+export interface IRequest extends IClient {
   leftSpherical?: number;
   leftCylinder?: number;
   leftAxis?: number;

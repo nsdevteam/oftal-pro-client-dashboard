@@ -18,14 +18,15 @@ const Home: FC = () => {
 
   const {
     register,
-    handleSubmit,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm();
 
-  const onLoginSubmit = async (data: { email: string; password: string }) => {
+  const onLoginSubmit = async () => {
+    const { email, password } = getValues();
+
     try {
-      const { email, password } = data;
       const auth = getAuth();
       signInWithEmailAndPassword(auth, email, password);
       setValue('email', '');
@@ -128,7 +129,7 @@ const Home: FC = () => {
                 ml={['7.5rem', 'NONE']}
               >
                 <Typography className="alertDanger">
-                  {errors.email.message}
+                  {errors.email.message as string}
                 </Typography>
               </Box>
             )}
@@ -195,7 +196,7 @@ const Home: FC = () => {
                   ml={['5rem', 'NONE']}
                 >
                   <Typography className="alertDanger">
-                    {errors.password.message}
+                    {errors.password.message as string}
                   </Typography>
                 </Box>
               )}
@@ -247,7 +248,7 @@ const Home: FC = () => {
             bg="#4763E4"
             justifyContent="center"
             alignItems="center"
-            onClick={handleSubmit(onLoginSubmit)}
+            onClick={onLoginSubmit}
           >
             Entrar &rarr;
           </Button>

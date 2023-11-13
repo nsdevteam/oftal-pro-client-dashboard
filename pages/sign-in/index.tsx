@@ -17,7 +17,7 @@ const Signin: FC = () => {
 
   const {
     register,
-    handleSubmit,
+    getValues,
     setValue,
     formState: { errors },
   } = useForm();
@@ -29,10 +29,12 @@ const Signin: FC = () => {
   useEffect(() => {
     handleFirebaseConfig();
   }, []);
-  const onSubmit = async (data: { email: string; password: string }) => {
+
+  const onSubmit = async () => {
+    const { email, password } = getValues();
+
     try {
       const auth = getAuth();
-      const { email, password } = data;
       createUserWithEmailAndPassword(auth, email, password).then(() => {
         setValue('fullName', '');
         setValue('email', '');
@@ -162,7 +164,7 @@ const Signin: FC = () => {
                 ml={['7.5rem', 'NONE']}
               >
                 <Typography className="alertDanger">
-                  {errors.email.message}
+                  {errors.email.message as string}
                 </Typography>
               </Box>
             )}
@@ -229,7 +231,7 @@ const Signin: FC = () => {
                   ml={['5rem', 'NONE']}
                 >
                   <Typography className="alertDanger">
-                    {errors.password.message}
+                    {errors.password.message as string}
                   </Typography>
                 </Box>
               )}
@@ -264,7 +266,7 @@ const Signin: FC = () => {
             justifyContent="center"
             minWidth={['100%', '10rem']}
             alignItems="center"
-            onClick={handleSubmit(onSubmit)}
+            onClick={onSubmit}
           >
             Criar conta &rarr;
           </Button>

@@ -7,8 +7,15 @@ import { Box, Button, Input, Typography } from '../../elements';
 import { useFirebase, useFormInput } from '../../hooks';
 
 const ResetPassword: FC = () => {
-  const { handleSubmit, register, errors } = useFormInput();
+  const { handleSubmit, register, errors, getValues } = useFormInput();
   const { handleUpdatePassword } = useFirebase();
+
+  const onChangePassword = () => {
+    const { email } = getValues();
+
+    handleUpdatePassword(email!);
+  };
+
   return (
     <Box
       as="div"
@@ -111,7 +118,7 @@ const ResetPassword: FC = () => {
             justifyContent="center"
             minWidth={['100%', '10rem']}
             alignItems="center"
-            onClick={handleSubmit(handleUpdatePassword)}
+            onClick={handleSubmit(onChangePassword)}
           >
             Prosseguir &rarr;
           </Button>

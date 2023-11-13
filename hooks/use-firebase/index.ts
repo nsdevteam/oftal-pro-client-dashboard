@@ -69,11 +69,12 @@ const useFirebase = () => {
     }
   };
 
-  const handleUpdatePassword = (data: { email: string }) => {
-    const { email } = data;
+  const handleUpdatePassword = (email: string) => {
     const auth = getAuth();
     const user = auth.currentUser;
-    const newPassword = Math.random();
+    const newPassword = String(Math.random());
+
+    if (!user) return;
 
     updatePassword(user, newPassword)
       .then(() => {

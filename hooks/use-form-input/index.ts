@@ -219,6 +219,7 @@ const useFormInput = () => {
     addresses,
     payment,
     setRequest,
+    getValues,
     setModalOpen,
     setShowSelectAddress,
     setSelectAddress,
