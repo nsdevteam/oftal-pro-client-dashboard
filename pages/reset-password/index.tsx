@@ -93,8 +93,8 @@ const ResetPassword: FC = () => {
               flexDirection="column"
               justifyContent="center"
               alignItems="center"
-              mt={['23rem', 'NONE']}
-              ml={['7.5rem', 'NONE']}
+              mt={['19rem', 'NONE']}
+              ml={['0', 'NONE']}
             >
               <Typography className="alertDanger">
                 {errors.email.message}

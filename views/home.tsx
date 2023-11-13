@@ -1,4 +1,8 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  fetchSignInMethodsForEmail,
+  getAuth,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
@@ -20,6 +24,7 @@ const Home: FC = () => {
     register,
     setValue,
     getValues,
+    handleSubmit,
     formState: { errors },
   } = useForm();
 
@@ -31,10 +36,21 @@ const Home: FC = () => {
       signInWithEmailAndPassword(auth, email, password);
       setValue('email', '');
       setValue('password', '');
-      console.log('User logged in successfully!');
-      router.push('/request');
-    } catch (error) {
-      console.error('Error logging in:', error);
+      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+      if (signInMethods.length > 0) {
+        console.log('====================================');
+        console.log('>> Login successful');
+        console.log('====================================');
+        router.push('/request');
+      } else {
+        console.log('====================================');
+        console.log('>> User authentication failed');
+        console.log('====================================');
+      }
+    } catch (err) {
+      console.log('====================================');
+      console.log('>> Something went wrong :: ', err);
+      console.log('====================================');
     }
   };
 
@@ -248,7 +264,7 @@ const Home: FC = () => {
             bg="#4763E4"
             justifyContent="center"
             alignItems="center"
-            onClick={onLoginSubmit}
+            onClick={handleSubmit(onLoginSubmit)}
           >
             Entrar &rarr;
           </Button>
