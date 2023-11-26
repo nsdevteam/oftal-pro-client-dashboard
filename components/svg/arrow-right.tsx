@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { SVGProps } from '../svg/svg.types';
 
-const ArrowRight: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
+const ArrowRightSVG: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   <svg
     style={{ maxWidth, maxHeight }}
     {...props}
@@ -17,4 +17,4 @@ const ArrowRight: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   </svg>
 );
 
-export default ArrowRight;
+export default ArrowRightSVG;

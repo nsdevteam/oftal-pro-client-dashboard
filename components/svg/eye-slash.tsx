@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { SVGProps } from '../svg/svg.types';
 
-const EyeSlash: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
+const EyeSlashSVG: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   <svg
     style={{ maxWidth, maxHeight }}
     {...props}
@@ -17,4 +17,4 @@ const EyeSlash: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   </svg>
 );
 
-export default EyeSlash;
+export default EyeSlashSVG;

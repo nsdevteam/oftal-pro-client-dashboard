@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Eye, EyeSlash } from '../components/image-svg';
 import Alert from '../components/layout/alert';
+import { EyeSlashSVG, EyeSVG } from '../components/svg';
 import LogoSVG from '../components/svg/logo';
 import { RoutePaths, RoutesEnum } from '../constants/routes';
 import { Box, Button, Input, Typography } from '../elements';
@@ -220,9 +220,9 @@ const Home: FC = () => {
                 margin="0.5rem"
               >
                 {showPassword ? (
-                  <Eye width={16} height={16} />
+                  <EyeSVG width={16} height={16} />
                 ) : (
-                  <EyeSlash width={16} height={16} />
+                  <EyeSlashSVG width={16} height={16} />
                 )}
               </Box>
             </Box>

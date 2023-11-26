@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { SVGProps } from '../svg/svg.types';
 
-const WhiteLogo: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
+const WhiteLogoSVG: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   <svg
     style={{ maxWidth, maxHeight }}
     {...props}
@@ -58,4 +58,4 @@ const WhiteLogo: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   </svg>
 );
 
-export default WhiteLogo;
+export default WhiteLogoSVG;

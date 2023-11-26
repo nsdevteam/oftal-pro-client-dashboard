@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { SVGProps } from '../svg/svg.types';
 
-const LogoImage: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
+const LogoImageSVG: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   <svg
     style={{ maxWidth, maxHeight }}
     {...props}
@@ -65,4 +65,4 @@ const LogoImage: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   </svg>
 );
 
-export default LogoImage;
+export default LogoImageSVG;

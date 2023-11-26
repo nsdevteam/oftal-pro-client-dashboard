@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Rotate } from '../../elements';
 import { SVGProps } from './svg.types';
 
-const Loading: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
+const LoadingSVG: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   <Rotate display="flex">
     <svg
       style={{ maxWidth, maxHeight }}
@@ -22,4 +22,4 @@ const Loading: FC<SVGProps> = ({ maxHeight, maxWidth, ...props }) => (
   </Rotate>
 );
 
-export default Loading;
+export default LoadingSVG;
