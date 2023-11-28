@@ -287,21 +287,9 @@ const Request: FC = () => {
                           disabled={!selectLeftEye}
                         />
                         {errors.leftSpherical && (
-                          <Box
-                            as="div"
-                            position="absolute"
-                            width="auto"
-                            display="flex"
-                            flexDirection="column"
-                            justifyContent="flex-end"
-                            alignItems="center"
-                            mt={['29rem', 'NONE']}
-                            ml={['22rem', 'NONE']}
-                          >
-                            <Typography className="alertDanger">
-                              {errors.leftSpherical.message}
-                            </Typography>
-                          </Box>
+                          <Typography className="alertDanger">
+                            {errors.leftSpherical.message}
+                          </Typography>
                         )}
                         <Input
                           type="number"
@@ -334,21 +322,9 @@ const Request: FC = () => {
                           disabled={!selectLeftEye}
                         />
                         {errors.leftCylinder && (
-                          <Box
-                            as="div"
-                            position="absolute"
-                            width="auto"
-                            display="flex"
-                            flexDirection="column"
-                            justifyContent="flex-end"
-                            alignItems="center"
-                            mt={['29rem', 'NONE']}
-                            ml={['22rem', 'NONE']}
-                          >
-                            <Typography className="alertDanger">
-                              {errors.leftCylinder.message}
-                            </Typography>
-                          </Box>
+                          <Typography className="alertDanger">
+                            {errors.leftCylinder.message}
+                          </Typography>
                         )}
                         <Input
                           type="number"
@@ -381,21 +357,9 @@ const Request: FC = () => {
                           disabled={!selectLeftEye}
                         />
                         {errors.leftAxis && (
-                          <Box
-                            as="div"
-                            position="absolute"
-                            width="auto"
-                            display="flex"
-                            flexDirection="column"
-                            justifyContent="center"
-                            alignItems="center"
-                            mt={['29rem', 'NONE']}
-                            ml={['22rem', 'NONE']}
-                          >
-                            <Typography className="alertDanger">
-                              {errors.leftAxis.message}
-                            </Typography>
-                          </Box>
+                          <Typography className="alertDanger">
+                            {errors.leftAxis.message}
+                          </Typography>
                         )}
                       </Box>
                     </Box>
@@ -444,21 +408,9 @@ const Request: FC = () => {
                             })}
                           </select>
                           {errors.geometry && (
-                            <Box
-                              as="div"
-                              position="absolute"
-                              width="auto"
-                              display="flex"
-                              flexDirection="column"
-                              justifyContent="center"
-                              alignItems="center"
-                              mt={['29rem', 'NONE']}
-                              ml={['22rem', 'NONE']}
-                            >
-                              <Typography className="alertDanger">
-                                {errors.geometry.message}
-                              </Typography>
-                            </Box>
+                            <Typography className="alertDanger">
+                              {errors.geometry.message}
+                            </Typography>
                           )}
                         </Box>
                       </Box>
@@ -499,21 +451,9 @@ const Request: FC = () => {
                             })}
                           </select>
                           {errors.indiceOfRefraction && (
-                            <Box
-                              as="div"
-                              position="absolute"
-                              width="auto"
-                              display="flex"
-                              flexDirection="column"
-                              justifyContent="center"
-                              alignItems="center"
-                              mt={['29rem', 'NONE']}
-                              ml={['22rem', 'NONE']}
-                            >
-                              <Typography className="alertDanger">
-                                {errors.indiceOfRefraction.message}
-                              </Typography>
-                            </Box>
+                            <Typography className="alertDanger">
+                              {errors.indiceOfRefraction.message}
+                            </Typography>
                           )}
                         </Box>
                       </Box>
@@ -621,21 +561,9 @@ const Request: FC = () => {
                           disabled={!selectRightEye}
                         />
                         {errors.rightSpherical && (
-                          <Box
-                            as="div"
-                            position="absolute"
-                            width="auto"
-                            display="flex"
-                            flexDirection="column"
-                            justifyContent="center"
-                            alignItems="center"
-                            mt={['22rem', 'NONE']}
-                            ml={['22rem', 'NONE']}
-                          >
-                            <Typography className="alertDanger">
-                              {errors.rightSpherical.message}
-                            </Typography>
-                          </Box>
+                          <Typography className="alertDanger">
+                            {errors.rightSpherical.message}
+                          </Typography>
                         )}
                         <Input
                           type="number"
@@ -668,21 +596,9 @@ const Request: FC = () => {
                           disabled={!selectRightEye}
                         />
                         {errors.rightCylinder && (
-                          <Box
-                            as="div"
-                            position="absolute"
-                            width="auto"
-                            display="flex"
-                            flexDirection="column"
-                            justifyContent="center"
-                            alignItems="center"
-                            mt={['22rem', 'NONE']}
-                            ml={['22rem', 'NONE']}
-                          >
-                            <Typography className="alertDanger">
-                              {errors.rightCylinder.message}
-                            </Typography>
-                          </Box>
+                          <Typography className="alertDanger">
+                            {errors.rightCylinder.message}
+                          </Typography>
                         )}
                         <Input
                           type="number"
@@ -717,21 +633,9 @@ const Request: FC = () => {
                           disabled={!selectRightEye}
                         />
                         {errors.rightAxis && (
-                          <Box
-                            as="div"
-                            position="absolute"
-                            width="auto"
-                            display="flex"
-                            flexDirection="column"
-                            justifyContent="center"
-                            alignItems="center"
-                            mt={['22rem', 'NONE']}
-                            ml={['22rem', 'NONE']}
-                          >
-                            <Typography className="alertDanger">
-                              {errors.rightAxis.message}
-                            </Typography>
-                          </Box>
+                          <Typography className="alertDanger">
+                            {errors.rightAxis.message}
+                          </Typography>
                         )}
                       </Box>
                     </Box>
@@ -777,21 +681,9 @@ const Request: FC = () => {
                             })}
                           </select>
                           {errors.color && (
-                            <Box
-                              as="div"
-                              position="absolute"
-                              width="auto"
-                              display="flex"
-                              flexDirection="column"
-                              justifyContent="center"
-                              alignItems="center"
-                              mt={['22rem', 'NONE']}
-                              ml={['22rem', 'NONE']}
-                            >
-                              <Typography className="alertDanger">
-                                {errors.color.message}
-                              </Typography>
-                            </Box>
+                            <Typography className="alertDanger">
+                              {errors.color.message}
+                            </Typography>
                           )}
                         </Box>
                       </Box>
@@ -828,21 +720,9 @@ const Request: FC = () => {
                             })}
                           </select>
                           {errors.treatment && (
-                            <Box
-                              as="div"
-                              position="absolute"
-                              width="auto"
-                              display="flex"
-                              flexDirection="column"
-                              justifyContent="center"
-                              alignItems="center"
-                              mt={['22rem', 'NONE']}
-                              ml={['22rem', 'NONE']}
-                            >
-                              <Typography className="alertDanger">
-                                {errors.treatment.message}
-                              </Typography>
-                            </Box>
+                            <Typography className="alertDanger">
+                              {errors.treatment.message}
+                            </Typography>
                           )}
                         </Box>
                       </Box>
@@ -895,22 +775,9 @@ const Request: FC = () => {
                         }}
                       />
                       {errors.patientName && (
-                        <Box
-                          role="alert"
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                          mt={['18rem', 'NONE']}
-                          ml={['18rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.patientName.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.patientName.message}
+                        </Typography>
                       )}
                     </Box>
                     <Box
@@ -954,21 +821,9 @@ const Request: FC = () => {
                         }}
                       />
                       {errors.diameter && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                          mt={['18rem', 'NONE']}
-                          ml={['1rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.diameter.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.diameter.message}
+                        </Typography>
                       )}
                     </Box>
                     <Box
@@ -996,21 +851,9 @@ const Request: FC = () => {
                         <option value="21">21</option>
                       </select>
                       {errors.alway && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                          mt={['18rem', 'NONE']}
-                          ml={['1rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.alway.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.alway.message}
+                        </Typography>
                       )}
                     </Box>
                     <Box
@@ -1035,21 +878,9 @@ const Request: FC = () => {
                         <option value="Não">Não</option>
                       </select>
                       {errors.coloring && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                          mt={['18rem', 'NONE']}
-                          ml={['1rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.coloring.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.coloring.message}
+                        </Typography>
                       )}
                     </Box>
                     <Box
@@ -1074,21 +905,9 @@ const Request: FC = () => {
                         <option value="Não">Não</option>
                       </select>
                       {errors.prism && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                          mt={['18rem', 'NONE']}
-                          ml={['1rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.prism.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.prism.message}
+                        </Typography>
                       )}
                     </Box>
                     <Box
@@ -1113,21 +932,9 @@ const Request: FC = () => {
                         <option value="Não">Não</option>
                       </select>
                       {errors.precal && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                          mt={['18rem', 'NONE']}
-                          ml={['1rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.precal.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.precal.message}
+                        </Typography>
                       )}
                     </Box>
                   </Box>
@@ -1182,21 +989,9 @@ const Request: FC = () => {
                         }}
                       />
                       {errors.jobReference && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                          mt={['9rem', 'NONE']}
-                          ml={['18rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.jobReference.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.jobReference.message}
+                        </Typography>
                       )}
                     </Box>
                     <Box
@@ -1243,21 +1038,9 @@ const Request: FC = () => {
                         placeholder="Deixa aqui as suas observações"
                       />
                       {errors.observation && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
-                          mt={['10rem', 'NONE']}
-                          ml={['16rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.observation.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.observation.message}
+                        </Typography>
                       )}
                     </Box>
                   </Box>
@@ -1288,7 +1071,6 @@ const Request: FC = () => {
                       width={['10rem', 'NONE']}
                       minWidth={['100%', '10rem']}
                       alignItems="center"
-                      //onClick={handleAddNewRequest}
                       onClick={handleSubmit(onSubmit)}
                     >
                       Prosseguir
@@ -1497,21 +1279,9 @@ const Request: FC = () => {
                       }}
                     />
                     {errors.address?.province && (
-                      <Box
-                        as="div"
-                        position="absolute"
-                        width="auto"
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="flex-end"
-                        alignItems="center"
-                        mt={['29rem', 'NONE']}
-                        ml={['22rem', 'NONE']}
-                      >
-                        <Typography className="alertDanger">
-                          {errors.address?.province.message}
-                        </Typography>
-                      </Box>
+                      <Typography className="alertDanger">
+                        {errors.address?.province.message}
+                      </Typography>
                     )}
                   </Box>
                   <Box
@@ -1556,21 +1326,9 @@ const Request: FC = () => {
                       }}
                     />
                     {errors.address?.state && (
-                      <Box
-                        as="div"
-                        position="absolute"
-                        width="auto"
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="flex-end"
-                        alignItems="center"
-                        mt={['29rem', 'NONE']}
-                        ml={['22rem', 'NONE']}
-                      >
-                        <Typography className="alertDanger">
-                          {errors.address?.state.message}
-                        </Typography>
-                      </Box>
+                      <Typography className="alertDanger">
+                        {errors.address?.state.message}
+                      </Typography>
                     )}
                   </Box>
                 </Box>
@@ -1617,21 +1375,9 @@ const Request: FC = () => {
                       }}
                     />
                     {errors.address?.city && (
-                      <Box
-                        as="div"
-                        position="absolute"
-                        width="auto"
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="flex-end"
-                        alignItems="center"
-                        mt={['26rem', 'NONE']}
-                        ml={['19rem', 'NONE']}
-                      >
-                        <Typography className="alertDanger">
-                          {errors.address?.city.message}
-                        </Typography>
-                      </Box>
+                      <Typography className="alertDanger">
+                        {errors.address?.city.message}
+                      </Typography>
                     )}
                   </Box>
                 </Box>
@@ -1666,21 +1412,9 @@ const Request: FC = () => {
                     }}
                   />
                   {errors.address?.street && (
-                    <Box
-                      as="div"
-                      position="absolute"
-                      width="auto"
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-end"
-                      alignItems="center"
-                      mt={['29rem', 'NONE']}
-                      ml={['22rem', 'NONE']}
-                    >
-                      <Typography className="alertDanger">
-                        {errors.address?.street.message}
-                      </Typography>
-                    </Box>
+                    <Typography className="alertDanger">
+                      {errors.address?.street.message}
+                    </Typography>
                   )}
                 </Box>
                 <Box
@@ -1721,21 +1455,9 @@ const Request: FC = () => {
                       }}
                     />
                     {errors.address?.apt && (
-                      <Box
-                        as="div"
-                        position="absolute"
-                        width="auto"
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="flex-end"
-                        alignItems="center"
-                        mt={['29rem', 'NONE']}
-                        ml={['22rem', 'NONE']}
-                      >
-                        <Typography className="alertDanger">
-                          {errors.address?.apt.message}
-                        </Typography>
-                      </Box>
+                      <Typography className="alertDanger">
+                        {errors.address?.apt.message}
+                      </Typography>
                     )}
                   </Box>
                   <Box
@@ -1770,21 +1492,9 @@ const Request: FC = () => {
                       }}
                     />
                     {errors.address?.house && (
-                      <Box
-                        as="div"
-                        position="absolute"
-                        width="auto"
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="flex-end"
-                        alignItems="center"
-                        mt={['29rem', 'NONE']}
-                        ml={['22rem', 'NONE']}
-                      >
-                        <Typography className="alertDanger">
-                          {errors.address?.house.message}
-                        </Typography>
-                      </Box>
+                      <Typography className="alertDanger">
+                        {errors.address?.house.message}
+                      </Typography>
                     )}
                   </Box>
                 </Box>
@@ -1965,21 +1675,9 @@ const Request: FC = () => {
                         }}
                       />
                       {errors.payment?.entity && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="flex-end"
-                          alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.payment?.entity.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.payment?.entity.message}
+                        </Typography>
                       )}
                     </Box>
                     <Box
@@ -2015,21 +1713,9 @@ const Request: FC = () => {
                         }}
                       />
                       {errors.payment?.reference && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="flex-end"
-                          alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.payment?.reference.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.payment?.reference.message}
+                        </Typography>
                       )}
                     </Box>
                   </Box>
@@ -2072,21 +1758,9 @@ const Request: FC = () => {
                         }}
                       />
                       {errors.payment?.amount && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="flex-end"
-                          alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.payment?.amount.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.payment?.amount.message}
+                        </Typography>
                       )}
                     </Box>
                   </Box>
@@ -2135,21 +1809,9 @@ const Request: FC = () => {
                         }}
                       />
                       {errors.payment?.phoneNumber && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="flex-end"
-                          alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.payment?.phoneNumber.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.payment?.phoneNumber.message}
+                        </Typography>
                       )}
                     </Box>
                     <Box
@@ -2185,21 +1847,9 @@ const Request: FC = () => {
                         }}
                       />
                       {errors.payment?.amount && (
-                        <Box
-                          as="div"
-                          position="absolute"
-                          width="auto"
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="flex-end"
-                          alignItems="center"
-                          mt={['29rem', 'NONE']}
-                          ml={['22rem', 'NONE']}
-                        >
-                          <Typography className="alertDanger">
-                            {errors.payment?.amount.message}
-                          </Typography>
-                        </Box>
+                        <Typography className="alertDanger">
+                          {errors.payment?.amount.message}
+                        </Typography>
                       )}
                     </Box>
                   </Box>
