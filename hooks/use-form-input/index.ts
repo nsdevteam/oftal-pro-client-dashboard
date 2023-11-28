@@ -36,7 +36,9 @@ const useFormInput = () => {
     getValues,
     setValue,
     formState: { errors },
-  } = useForm<IRequest>();
+  } = useForm<IRequest>({
+    reValidateMode: 'onBlur',
+  });
 
   const onSubmit: SubmitHandler<IRequest> = (data) => {
     try {

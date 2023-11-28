@@ -73,7 +73,7 @@ const ResetPasswordPage: FC = () => {
             minWidth={['100%', '10rem']}
             width={['30rem']}
             placeholder="johndoe@oftalpro.com"
-            focus={{
+            nFocus={{
               borderColor: '#4763E4',
             }}
             {...register('email', {

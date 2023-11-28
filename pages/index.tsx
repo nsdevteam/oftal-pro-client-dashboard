@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 
-import Home from '../views/home';
+import SignIn from '../views/sign-in';
 
-const HomePage: NextPage = () => <Home />;
+const HomePage: NextPage = () => <SignIn />;
 
 export default HomePage;
