@@ -10,7 +10,7 @@ export enum RoutesEnum {
   Dashboard = 'dashboard',
   Request = 'request',
   Account = 'account',
-  Setting = 'setting',
+  Settings = 'setting',
   Test = 'Test',
 }
 
@@ -26,7 +26,7 @@ export const RoutePaths: Record<RoutesEnum, string> = {
   [RoutesEnum.Dashboard]: '/dashboard',
   [RoutesEnum.Request]: '/request',
   [RoutesEnum.Account]: '/account',
-  [RoutesEnum.Setting]: '/setting',
+  [RoutesEnum.Settings]: '/setting',
   [RoutesEnum.Test]: '/Test',
 };
 
