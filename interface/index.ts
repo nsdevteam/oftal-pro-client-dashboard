@@ -98,9 +98,3 @@ export interface IClient {
   email?: string;
   password?: string;
 }
-
-export interface AlertProps {
-  type: string;
-  msg: string;
-  removeAlert: () => void;
-}

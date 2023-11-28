@@ -1,63 +1,48 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
-import Alert from '../components/layout/alert';
-import { EyeSlashSVG, EyeSVG } from '../components/svg';
-import LogoSVG from '../components/svg/logo';
-import { RoutePaths, RoutesEnum } from '../constants/routes';
-import { Box, Button, Input, Typography } from '../elements';
-import { useFirebase } from '../hooks';
+import { EyeSlashSVG, EyeSVG, LogoSVG } from '../../components/svg';
+import { RoutePaths, RoutesEnum } from '../../constants/routes';
+import { Box, Button, Input, Typography } from '../../elements';
+import { useFirebase } from '../../hooks';
 
-const Home: FC = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
-
+const SignUp: FC = () => {
   const { handleFirebaseConfig } = useFirebase();
-
-  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
-    setValue,
     getValues,
-    handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm();
-
-  const showAlert = (show = false, type = '', msg = '') => {
-    setAlert({ show, type, msg });
-  };
-
-  const onLoginSubmit = async () => {
-    try {
-      const email = getValues('email');
-      const password = getValues('password');
-      const auth = getAuth();
-
-      const checkUser = await signInWithEmailAndPassword(auth, email, password);
-      if (checkUser) {
-        router.push('/request');
-      }
-      setValue('email', '');
-      setValue('password', '');
-    } catch (err) {
-      console.log('====================================');
-      console.log('>> Error signing :: ', err);
-      console.log('====================================');
-      showAlert(true, 'Danger', 'Erro ao entrar, verifique as credências');
-    }
-  };
+  } = useForm({
+    reValidateMode: 'onBlur',
+  });
 
   useEffect(() => {
     handleFirebaseConfig();
   }, []);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const onSubmit = async () => {
+    const { email, password } = getValues();
+
+    try {
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, email, password).then(() => {
+        reset();
+        toast.success('Sign up efectuado com sucesso.');
+        console.log('User signed up successfully!');
+      });
+    } catch (error) {
+      console.error('Error signing up:', error);
+      toast.error('Erro ao efectuar sign up');
+    }
   };
+
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   return (
     <Box
@@ -71,19 +56,16 @@ const Home: FC = () => {
     >
       <Box
         height="700px"
-        width="700"
         padding="0.5rem"
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
         alignContent="center"
-        ml={['NONE', 'S']}
-        mr={['NONE', 'S']}
       >
         <LogoSVG />
         <Typography padding="0.5rem">
-          Insira os seus dados e clique em entrar
+          Crie uma conta e desfrute do melhor que temos para si
         </Typography>
         <Box
           as="form"
@@ -94,6 +76,38 @@ const Home: FC = () => {
           flexDirection="column"
           justifyContent="center"
         >
+          <Box
+            as="div"
+            width="100%"
+            display="flex"
+            flexDirection="column"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+          >
+            <Typography textAlign="left" padding="0.5rem">
+              Nome completo
+            </Typography>
+            <Input
+              p="L"
+              type="text"
+              bg="transparent"
+              outline="none"
+              borderRadius="M"
+              border="1px solid #E4E4E7"
+              mr={['NONE', 'S']}
+              ml={['NONE', 'S']}
+              minWidth={['100%', '10rem']}
+              width={['30rem']}
+              color="textInverted"
+              placeholder="John Doe"
+              nFocus={{
+                borderColor: '#4763E4',
+              }}
+              {...register('fullName', {
+                required: 'O campo nome é obrigatório',
+              })}
+            />
+          </Box>
           <Box
             as="div"
             width="100%"
@@ -119,7 +133,7 @@ const Home: FC = () => {
               width={['30rem']}
               placeholder="johndoe@oftalpro.com"
               nFocus={{
-                border: '1px solid #4763E4',
+                borderColor: '#4763E4',
               }}
               {...register('email', {
                 required: 'Campo email é obrigatório',
@@ -138,8 +152,8 @@ const Home: FC = () => {
                 flexDirection="column"
                 justifyContent="center"
                 alignItems="center"
-                mt={['22rem', 'NONE']}
-                ml={['9rem', 'NONE']}
+                mt={['23rem', 'NONE']}
+                ml={['7.5rem', 'NONE']}
               >
                 <Typography className="alertDanger">
                   {errors.email.message as string}
@@ -154,7 +168,6 @@ const Home: FC = () => {
             flexDirection="column"
             justifyContent="flex-start"
             alignItems="flex-start"
-            mb="1.5rem"
           >
             <Typography textAlign="left" padding="0.5rem">
               Senha
@@ -206,8 +219,8 @@ const Home: FC = () => {
                   flexDirection="column"
                   justifyContent="center"
                   alignItems="center"
-                  mt={['23rem', 'NONE']}
-                  ml={['6.5rem', 'NONE']}
+                  mt={['26rem', 'NONE']}
+                  ml={['5rem', 'NONE']}
                 >
                   <Typography className="alertDanger">
                     {errors.password.message as string}
@@ -227,6 +240,9 @@ const Home: FC = () => {
               </Box>
             </Box>
           </Box>
+          <Typography padding="1rem" marginTop="1rem">
+            Próximo passo
+          </Typography>
           <Button
             p="L"
             type="button"
@@ -235,18 +251,16 @@ const Home: FC = () => {
             variant="primary"
             fontWeight="bold"
             color="#FFF"
-            mr={['NONE', 'S']}
-            ml={['NONE', 'S']}
-            minWidth={['100%', '10rem']}
             width={['30rem', 'NONE']}
             borderRadius="M"
             border="none"
             bg="#4763E4"
             justifyContent="center"
+            minWidth={['100%', '10rem']}
             alignItems="center"
-            onClick={handleSubmit(onLoginSubmit)}
+            onClick={onSubmit}
           >
-            Entrar &rarr;
+            Criar conta &rarr;
           </Button>
         </Box>
         <Box
@@ -257,15 +271,17 @@ const Home: FC = () => {
           alignContent="center"
           marginTop="1rem"
         >
-          <Typography padding="0.5rem">Esqueceu a sua senha?</Typography>
-          <Link href={RoutePaths[RoutesEnum.ResetPassword]}>
-            Solicitar uma nova senha.{' '}
+          <Typography padding="0.5rem">Já tem uma conta?</Typography>
+          <Link
+            style={{ padding: '0.5rem' }}
+            href={RoutePaths[RoutesEnum.Home]}
+          >
+            Entrar.{' '}
           </Link>
         </Box>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
       </Box>
     </Box>
   );
 };
 
-export default Home;
+export default SignUp;
