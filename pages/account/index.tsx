@@ -59,7 +59,7 @@ const Account: FC = () => (
                 width={['30rem', 'NONE']}
                 bg="transparent"
                 placeholder="john"
-                focus={{
+                nFocus={{
                   borderColor: '#4763E4',
                 }}
               />
@@ -88,7 +88,7 @@ const Account: FC = () => (
                 minWidth={['100%', '10rem']}
                 width={['30rem']}
                 placeholder="Doe"
-                focus={{
+                nFocus={{
                   borderColor: '#4763E4',
                 }}
               />
@@ -124,7 +124,7 @@ const Account: FC = () => (
                 width={['30rem']}
                 bg="transparent"
                 placeholder="johndoe@oftalpro.com"
-                focus={{
+                nFocus={{
                   borderColor: '#4763E4',
                 }}
               />
@@ -153,7 +153,7 @@ const Account: FC = () => (
                 width={['30rem']}
                 bg="transparent"
                 placeholder="(+244) 945 000 000"
-                focus={{
+                nFocus={{
                   borderColor: '#4763E4',
                 }}
               />
@@ -189,7 +189,7 @@ const Account: FC = () => (
                 width={['30rem']}
                 bg="transparent"
                 placeholder="10-02-2019"
-                focus={{
+                nFocus={{
                   borderColor: '#4763E4',
                 }}
               />
@@ -219,7 +219,7 @@ const Account: FC = () => (
                 width={['30rem']}
                 bg="transparent"
                 placeholder="20-03-2020"
-                focus={{
+                nFocus={{
                   borderColor: '#4763E4',
                 }}
               />

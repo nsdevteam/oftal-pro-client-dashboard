@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
@@ -15,12 +15,17 @@ const Sidebar: FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<MenuId | null>(null); // Use the MenuId type and allow null
   const [isDropDown, setIsDropDown] = useState<boolean>(false);
   const { handleSubmit } = useForm();
-  const { handleLogOut } = useFirebase();
+  const [userData, setUserData] = useState<any>();
+  const { handleLogOut, getCurrentUserData } = useFirebase();
 
   const handleShowDropDownMenu = (id: MenuId) => {
     setSelectedMenu(id);
     setIsDropDown(!isDropDown);
   };
+
+  useEffect(() => {
+    getCurrentUserData().then(setUserData);
+  }, []);
 
   return (
     <Box
@@ -122,8 +127,8 @@ const Sidebar: FC = () => {
           padding="0.5rem"
           alignItems="flex-start"
         >
-          <Typography padding="0.5rem">Mario Batalha</Typography>
-          <Typography padding="0.5rem">mariobatalha@gmail.com</Typography>
+          <Typography padding="0.5rem">{userData?.fullName}</Typography>
+          <Typography padding="0.5rem">{userData?.email}</Typography>
           <Button
             type="button"
             effect="hover"
