@@ -2,29 +2,25 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import Link from 'next/link';
 import { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
-import Alert from '../../components/layout/alert';
-import { EyeSlashSVG, EyeSVG } from '../../components/svg';
-import LogoSVG from '../../components/svg/logo';
+import { EyeSlashSVG, EyeSVG, LogoSVG } from '../../components/svg';
 import { RoutePaths, RoutesEnum } from '../../constants/routes';
 import { Box, Button, Input, Typography } from '../../elements';
 import { useFirebase } from '../../hooks';
 
-const Signin: FC = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+const SignUp: FC = () => {
   const { handleFirebaseConfig } = useFirebase();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
     getValues,
-    setValue,
+    reset,
     formState: { errors },
-  } = useForm();
-
-  const showAlert = (show = false, type = '', msg = '') => {
-    setAlert({ show, type, msg });
-  };
+  } = useForm({
+    reValidateMode: 'onBlur',
+  });
 
   useEffect(() => {
     handleFirebaseConfig();
@@ -36,21 +32,18 @@ const Signin: FC = () => {
     try {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, email, password).then(() => {
-        setValue('fullName', '');
-        setValue('email', '');
-        setValue('password', '');
-        showAlert(true, 'Success', 'A sua conta foi criada com sucesso.');
+        reset();
+        toast.success('Sign up efectuado com sucesso.');
         console.log('User signed up successfully!');
       });
     } catch (error) {
       console.error('Error signing up:', error);
-      showAlert(true, 'Danger', 'Erro ao criar conta');
+      toast.error('Erro ao efectuar sign up');
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
   return (
     <Box
       as="div"
@@ -74,7 +67,6 @@ const Signin: FC = () => {
         <Typography padding="0.5rem">
           Crie uma conta e desfrute do melhor que temos para si
         </Typography>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <Box
           as="form"
           width="100%"
@@ -108,7 +100,7 @@ const Signin: FC = () => {
               width={['30rem']}
               color="textInverted"
               placeholder="John Doe"
-              focus={{
+              nFocus={{
                 borderColor: '#4763E4',
               }}
               {...register('fullName', {
@@ -140,7 +132,7 @@ const Signin: FC = () => {
               minWidth={['100%', '10rem']}
               width={['30rem']}
               placeholder="johndoe@oftalpro.com"
-              focus={{
+              nFocus={{
                 borderColor: '#4763E4',
               }}
               {...register('email', {
@@ -205,7 +197,7 @@ const Signin: FC = () => {
                 minWidth={['100%', '10rem']}
                 width={['50rem']}
                 placeholder="***************"
-                focus={{
+                nFocus={{
                   borderColor: '#4763E4',
                   borderSize: '1px',
                   borderStyle: 'solid',
@@ -292,4 +284,4 @@ const Signin: FC = () => {
   );
 };
 
-export default Signin;
+export default SignUp;

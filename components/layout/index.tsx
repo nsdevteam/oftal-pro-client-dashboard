@@ -1,13 +1,21 @@
 import Head from 'next/head';
-import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { FC, useEffect } from 'react';
 
+import { useUser } from '../../context/user';
 import { Box } from '../../elements';
 import Header from './header';
 import { LayoutProps } from './layout.types';
 import Sidebar from './sidebar';
 
 const Layout: FC<LayoutProps> = ({ pageTitle = '', children }) => {
+  const { push } = useRouter();
+  const { userAuth, loading } = useUser();
   const title = `${pageTitle} | Dashboard do cliente`;
+
+  useEffect(() => {
+    if (!userAuth && !loading) push('/');
+  }, [userAuth, loading]);
 
   return (
     <>

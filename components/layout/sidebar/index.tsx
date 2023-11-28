@@ -1,26 +1,38 @@
 import Link from 'next/link';
-import { useState } from 'react';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
-import { menuLink } from '../../../api';
+import { logout } from '../../../api/auth';
+import { menuLink } from '../../../constants';
+import { useUser } from '../../../context/user';
 import colors from '../../../design-system/light-theme/colors';
 import { Box, Button, Typography } from '../../../elements';
-import { useFirebase } from '../../../hooks';
 import LogoSVG from '../../svg/logo';
 
-type MenuId = number;
 const Sidebar: FC = () => {
-  const [selectedMenu, setSelectedMenu] = useState<MenuId | null>(null); // Use the MenuId type and allow null
+  const [selectedMenu, setSelectedMenu] = useState<number | null>(null); // Use the MenuId type and allow null
   const [isDropDown, setIsDropDown] = useState<boolean>(false);
   const { handleSubmit } = useForm();
-  const { handleLogOut } = useFirebase();
+  const { userData, forceVerifyLogin } = useUser();
 
-  const handleShowDropDownMenu = (id: MenuId) => {
+  const handleShowDropDownMenu = (id: number) => {
     setSelectedMenu(id);
     setIsDropDown(!isDropDown);
   };
+
+  const signOut = async () => {
+    await logout();
+    forceVerifyLogin();
+  };
+
+  const handleLogout = () =>
+    toast.promise(signOut(), {
+      loading: 'Terminando a sessão...',
+      success: 'Sessão terminada com sucesso',
+      error: 'Error ao terminar sessão',
+    });
 
   return (
     <Box
@@ -57,61 +69,58 @@ const Sidebar: FC = () => {
         alignItems="center"
       >
         <Box as="ul" width="100%">
-          {menuLink.map((link) => {
-            const { id, url, title, icon, submenu } = link;
-            return (
-              <Box as="div" display="flex" flexDirection="column" key={id}>
-                <Box as="ul">
-                  <Typography
-                    as="li"
-                    width="100%"
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
+          {menuLink.map(({ id, url, title, icon, submenu }) => (
+            <Box as="div" display="flex" flexDirection="column" key={id}>
+              <Box as="ul">
+                <Typography
+                  as="li"
+                  width="100%"
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Link
+                    href={url}
+                    style={{
+                      color: '#FFF',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
                   >
-                    <Link
-                      href={url}
-                      style={{
-                        color: '#FFF',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      {icon}
-                      {title}
-                    </Link>
-                    <Button
-                      variant="primary"
-                      type="button"
-                      borderRadius="M"
-                      border="none"
-                      bg="transparent"
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      onClick={() => handleShowDropDownMenu(id)}
-                    >
-                      {selectedMenu === id && isDropDown ? (
-                        <FiChevronDown size={18} color="#FFF" />
-                      ) : (
-                        <FiChevronUp size={18} color="#FFF" />
-                      )}
-                    </Button>
-                  </Typography>
-                </Box>
-                <Typography as="ul">
-                  <Typography as="li">
-                    {selectedMenu === id && isDropDown && (
-                      <Link href="#" className="dropDownLink">
-                        {submenu}
-                      </Link>
+                    {icon}
+                    {title}
+                  </Link>
+                  <Button
+                    variant="primary"
+                    type="button"
+                    borderRadius="M"
+                    border="none"
+                    bg="transparent"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    onClick={() => handleShowDropDownMenu(id)}
+                  >
+                    {selectedMenu === id && isDropDown ? (
+                      <FiChevronDown size={18} color="#FFF" />
+                    ) : (
+                      <FiChevronUp size={18} color="#FFF" />
                     )}
-                  </Typography>
+                  </Button>
                 </Typography>
               </Box>
-            );
-          })}
+              <Typography as="ul">
+                <Typography as="li">
+                  {selectedMenu === id && isDropDown && (
+                    <Link href="#" className="dropDownLink">
+                      {submenu}
+                    </Link>
+                  )}
+                </Typography>
+              </Typography>
+            </Box>
+          ))}
         </Box>
         <Box
           as="ul"
@@ -122,8 +131,8 @@ const Sidebar: FC = () => {
           padding="0.5rem"
           alignItems="flex-start"
         >
-          <Typography padding="0.5rem">Mario Batalha</Typography>
-          <Typography padding="0.5rem">mariobatalha@gmail.com</Typography>
+          <Typography padding="0.5rem">{userData?.fullName}</Typography>
+          <Typography padding="0.5rem">{userData?.email}</Typography>
           <Button
             type="button"
             effect="hover"
@@ -139,7 +148,7 @@ const Sidebar: FC = () => {
             margin="0.5rem"
             minWidth="90%"
             bg="#DC2626"
-            onClick={handleSubmit(handleLogOut)}
+            onClick={handleSubmit(handleLogout)}
           >
             Terminar a sessão
           </Button>

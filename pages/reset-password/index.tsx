@@ -6,7 +6,7 @@ import { RoutePaths, RoutesEnum } from '../../constants/routes';
 import { Box, Button, Input, Typography } from '../../elements';
 import { useFirebase, useFormInput } from '../../hooks';
 
-const ResetPassword: FC = () => {
+const ResetPasswordPage: FC = () => {
   const { handleSubmit, register, errors, getValues } = useFormInput();
   const { handleUpdatePassword } = useFirebase();
 
@@ -73,7 +73,7 @@ const ResetPassword: FC = () => {
             minWidth={['100%', '10rem']}
             width={['30rem']}
             placeholder="johndoe@oftalpro.com"
-            focus={{
+            nFocus={{
               borderColor: '#4763E4',
             }}
             {...register('email', {
@@ -140,4 +140,4 @@ const ResetPassword: FC = () => {
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordPage;
