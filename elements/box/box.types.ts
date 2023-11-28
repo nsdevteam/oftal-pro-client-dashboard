@@ -1,46 +1,9 @@
-import { SystemStyleObject } from '@styled-system/css';
-import { CSSProperties, HTMLAttributes } from 'react';
-import {
-  BackgroundProps,
-  BorderProps,
-  BoxShadowProps,
-  ColorProps,
-  FlexboxProps,
-  GridProps,
-  LayoutProps,
-  PositionProps,
-  SpaceProps,
-  TypographyProps,
-} from 'styled-system';
+import { StylinComponentProps } from '@stylin.js/react';
+import { HTMLAttributes } from 'react';
 
-import { MaybeArray } from '../../interface';
+export type BoxElementProps = Omit<HTMLAttributes<HTMLDivElement>, 'color'> &
+  StylinComponentProps;
 
-export interface BoxProps
-  extends FlexboxProps,
-    GridProps,
-    LayoutProps,
-    PositionProps,
-    TypographyProps,
-    ColorProps,
-    BackgroundProps,
-    BoxShadowProps,
-    BorderProps,
-    SpaceProps,
-    Omit<HTMLAttributes<HTMLDivElement>, 'color'> {
-  effect?: 'hover';
-  hover?: SystemStyleObject;
-  active?: SystemStyleObject;
+export interface BoxProps extends BoxElementProps {
   as?: keyof JSX.IntrinsicElements;
-  rowGap?: MaybeArray<CSSProperties['gap']>;
-  rows?: MaybeArray<CSSProperties['gap']>;
-  maxlength?: MaybeArray<CSSProperties['gap']>;
-  cols?: MaybeArray<CSSProperties['gap']>;
-  cursor?: MaybeArray<CSSProperties['cursor']>;
-  filter?: MaybeArray<CSSProperties['filter']>;
-  columnGap?: MaybeArray<CSSProperties['gap']>;
-  transform?: MaybeArray<CSSProperties['transform']>;
-  transition?: MaybeArray<CSSProperties['transition']>;
-  backdropFilter?: MaybeArray<CSSProperties['filter']>;
-  borderSpacing?: MaybeArray<CSSProperties['borderSpacing']>;
-  borderCollapse?: MaybeArray<CSSProperties['borderCollapse']>;
 }

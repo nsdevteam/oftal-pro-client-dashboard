@@ -1,5 +1,6 @@
 export { default as ArrowLeftSVG } from './arrow-right';
 export { default as ArrowRightSVG } from './arrow-right';
+export { default as ChevronRightSVG } from './chevron-right';
 export { default as EyeSVG } from './eye';
 export { default as EyeSlashSVG } from './eye-slash';
 export { default as LoadingSVG } from './loading';
