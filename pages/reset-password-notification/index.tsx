@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Box, Typography } from '../../elements';
 
-const ResetPassword: FC = () => (
+const ResetPasswordPage: FC = () => (
   <Box
     as="div"
     height="100vh"
@@ -19,4 +19,4 @@ const ResetPassword: FC = () => (
   </Box>
 );
 
-export default ResetPassword;
+export default ResetPasswordPage;

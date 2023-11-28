@@ -6,7 +6,7 @@ import { RoutePaths, RoutesEnum } from '../../constants/routes';
 import { Box, Button, Input, Typography } from '../../elements';
 import { useFirebase, useFormInput } from '../../hooks';
 
-const ResetPassword: FC = () => {
+const ResetPasswordPage: FC = () => {
   const { handleSubmit, register, errors, getValues } = useFormInput();
   const { handleUpdatePassword } = useFirebase();
 
@@ -140,4 +140,4 @@ const ResetPassword: FC = () => {
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordPage;

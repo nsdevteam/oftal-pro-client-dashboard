@@ -11,7 +11,7 @@ import { RoutePaths, RoutesEnum } from '../constants/routes';
 import { Box, Button, Input, Typography } from '../elements';
 import { useFirebase } from '../hooks';
 
-const Home: FC = () => {
+const SignInPage: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
 
@@ -268,4 +268,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default SignInPage;

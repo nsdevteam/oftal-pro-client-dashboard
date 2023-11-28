@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Layout } from '../../components';
 import { Box, Typography } from '../../elements';
 
-const Setting: FC = () => (
+const SettingPage: FC = () => (
   <Layout pageTitle="Configurações">
     <Box
       as="div"
@@ -31,4 +31,4 @@ const Setting: FC = () => (
   </Layout>
 );
 
-export default Setting;
+export default SettingPage;
