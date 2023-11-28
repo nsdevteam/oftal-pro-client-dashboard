@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { FiBell, FiChevronRight, FiX } from 'react-icons/fi';
 
-import { notification } from '../../../api';
+import { notification } from '../../../constants';
 import { Box, ModalNotification, Typography } from '../../../elements';
 
 const Header: FC = () => {

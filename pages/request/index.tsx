@@ -8,13 +8,13 @@ import {
   FiX,
 } from 'react-icons/fi';
 
+import { Layout } from '../../components';
 import {
   colorData,
   geometryData,
   refractionData,
   treatmentData,
-} from '../../api';
-import { Layout } from '../../components';
+} from '../../constants';
 import {
   Box,
   Button,
@@ -25,9 +25,9 @@ import {
   Typography,
 } from '../../elements';
 import { useFormInput } from '../../hooks';
-import { totalAmount } from '../../hooks/use-form-input';
 import { TTableHeadings } from '../../interface';
 import FileName from './file-name';
+
 const RequestPage: FC = () => {
   const {
     register,
@@ -65,6 +65,7 @@ const RequestPage: FC = () => {
     handleToggleRightEyeOption,
     shortRequestInfo,
     addresses,
+    subtotal,
   } = useFormInput();
 
   const columns: Array<keyof TTableHeadings> = [
@@ -150,9 +151,7 @@ const RequestPage: FC = () => {
         <Box as="div" width="80%" height="100%" padding="0.5rem">
           <Typography as="h2">Listagem de pedidos</Typography>
           <Table data={shortRequestInfo} columns={columns} />
-          <Typography as="h4">
-            Total da compra: {totalAmount}, 00 AOA
-          </Typography>
+          <Typography as="h4">Total da compra: {subtotal},00 AOA</Typography>
           {isModalOpen && (
             <Modal isOpen={openModal} onClose={closeModal}>
               <Box
@@ -1038,7 +1037,7 @@ const RequestPage: FC = () => {
                     </Box>
                   </Box>
                   <Typography as="h4" padding="0.5rem">
-                    Subtotal: {totalAmount}, 00 AOA
+                    Subtotal: {subtotal},00 AOA
                   </Typography>
                   <Box
                     as="div"
