@@ -85,7 +85,6 @@ const Home: FC = () => {
         <Typography padding="0.5rem">
           Insira os seus dados e clique em entrar
         </Typography>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <Box
           as="form"
           width="100%"
@@ -139,8 +138,8 @@ const Home: FC = () => {
                 flexDirection="column"
                 justifyContent="center"
                 alignItems="center"
-                mt={['23rem', 'NONE']}
-                ml={['7.5rem', 'NONE']}
+                mt={['22rem', 'NONE']}
+                ml={['9rem', 'NONE']}
               >
                 <Typography className="alertDanger">
                   {errors.email.message as string}
@@ -155,6 +154,7 @@ const Home: FC = () => {
             flexDirection="column"
             justifyContent="flex-start"
             alignItems="flex-start"
+            mb="1.5rem"
           >
             <Typography textAlign="left" padding="0.5rem">
               Senha
@@ -206,8 +206,8 @@ const Home: FC = () => {
                   flexDirection="column"
                   justifyContent="center"
                   alignItems="center"
-                  mt={['26rem', 'NONE']}
-                  ml={['5rem', 'NONE']}
+                  mt={['23rem', 'NONE']}
+                  ml={['6.5rem', 'NONE']}
                 >
                   <Typography className="alertDanger">
                     {errors.password.message as string}
@@ -226,24 +226,6 @@ const Home: FC = () => {
                 )}
               </Box>
             </Box>
-          </Box>
-          <Box
-            as="div"
-            display="flex"
-            width="100%"
-            justifyContent="center"
-            alignItems="center"
-            alignContent="center"
-            marginTop="1rem"
-            marginBottom="1rem"
-          >
-            <Typography padding="0.5rem">Não tem uma conta?</Typography>
-            <Link
-              style={{ padding: '0.5rem' }}
-              href={RoutePaths[RoutesEnum.SignIn]}
-            >
-              Crie uma.{' '}
-            </Link>
           </Box>
           <Button
             p="L"
@@ -280,6 +262,7 @@ const Home: FC = () => {
             Solicitar uma nova senha.{' '}
           </Link>
         </Box>
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
       </Box>
     </Box>
   );
