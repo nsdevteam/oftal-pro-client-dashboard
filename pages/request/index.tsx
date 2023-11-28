@@ -231,7 +231,7 @@ const Request: FC = () => {
                               minWidth={['100%', '5rem']}
                               width={['5rem']}
                               bg="transparent"
-                              focus={{
+                              nFocus={{
                                 borderColor: '#4763E4',
                               }}
                               onClick={handleToggleLeftEyeOption}
@@ -249,7 +249,7 @@ const Request: FC = () => {
                               minWidth={['100%', '5rem']}
                               width={['5rem']}
                               bg="transparent"
-                              focus={{
+                              nFocus={{
                                 borderColor: '#4763E4',
                               }}
                               onClick={handleToggleLeftEyeOption}
@@ -269,7 +269,7 @@ const Request: FC = () => {
                           width={['6.1rem']}
                           bg="transparent"
                           placeholder="Esf."
-                          focus={{
+                          nFocus={{
                             borderColor: '#4763E4',
                           }}
                           {...register('leftSpherical', {
@@ -316,7 +316,7 @@ const Request: FC = () => {
                           width={['6.1rem']}
                           bg="transparent"
                           placeholder="Cil."
-                          focus={{
+                          nFocus={{
                             borderColor: '#4763E4',
                           }}
                           {...register('leftCylinder', {
@@ -363,7 +363,7 @@ const Request: FC = () => {
                           width={['6.1rem']}
                           bg="transparent"
                           placeholder="Eix."
-                          focus={{
+                          nFocus={{
                             borderColor: '#4763E4',
                           }}
                           {...register('leftAxis', {
@@ -565,7 +565,7 @@ const Request: FC = () => {
                               minWidth={['100%', '5rem']}
                               width={['5rem']}
                               bg="transparent"
-                              focus={{
+                              nFocus={{
                                 borderColor: '#4763E4',
                               }}
                               onClick={handleToggleRightEyeOption}
@@ -583,7 +583,7 @@ const Request: FC = () => {
                               minWidth={['100%', '5rem']}
                               width={['5rem']}
                               bg="transparent"
-                              focus={{
+                              nFocus={{
                                 borderColor: '#4763E4',
                               }}
                               onClick={handleToggleRightEyeOption}
@@ -603,7 +603,7 @@ const Request: FC = () => {
                           width={['6.1rem']}
                           bg="transparent"
                           placeholder="Esf."
-                          focus={{
+                          nFocus={{
                             borderColor: '#4763E4',
                           }}
                           {...register('rightSpherical', {
@@ -650,7 +650,7 @@ const Request: FC = () => {
                           width={['6.1rem']}
                           bg="transparent"
                           placeholder="Cil."
-                          focus={{
+                          nFocus={{
                             borderColor: '#4763E4',
                           }}
                           {...register('rightCylinder', {
@@ -699,7 +699,7 @@ const Request: FC = () => {
                           width={['6.1rem']}
                           bg="transparent"
                           placeholder="Eix."
-                          focus={{
+                          nFocus={{
                             borderColor: '#4763E4',
                           }}
                           {...register('rightAxis', {
@@ -890,7 +890,7 @@ const Request: FC = () => {
                               'Campo nome do paciente deve ter no mínimo 6 caracteres',
                           },
                         })}
-                        focus={{
+                        nFocus={{
                           borderColor: '#4763E4',
                         }}
                       />
@@ -949,7 +949,7 @@ const Request: FC = () => {
                               'O valor máximo deve ser menor ou igual a 80',
                           },
                         })}
-                        focus={{
+                        nFocus={{
                           borderColor: '#4763E4',
                         }}
                       />
@@ -1177,7 +1177,7 @@ const Request: FC = () => {
 
                           pattern: /^[A-Z0-9]+$/,
                         })}
-                        focus={{
+                        nFocus={{
                           borderColor: '#4763E4',
                         }}
                       />
@@ -1492,7 +1492,7 @@ const Request: FC = () => {
                             'Campo província deve ter no mínimo 4 caracteres',
                         },
                       })}
-                      focus={{
+                      nFocus={{
                         borderColor: '#4763E4',
                       }}
                     />
@@ -1551,7 +1551,7 @@ const Request: FC = () => {
                             'Campo município deve ter no mínimo 4 caracteres',
                         },
                       })}
-                      focus={{
+                      nFocus={{
                         borderColor: '#4763E4',
                       }}
                     />
@@ -1612,7 +1612,7 @@ const Request: FC = () => {
                             'Campo bairro deve ter no máximo 10 caracteres',
                         },
                       })}
-                      focus={{
+                      nFocus={{
                         borderColor: '#4763E4',
                       }}
                     />
@@ -1661,7 +1661,7 @@ const Request: FC = () => {
                     {...register('address.street', {
                       required: 'Campo bairro é obrigatório',
                     })}
-                    focus={{
+                    nFocus={{
                       borderColor: '#4763E4',
                     }}
                   />
@@ -1716,7 +1716,7 @@ const Request: FC = () => {
                       {...register('address.apt', {
                         required: 'Campo número da casa é obrigatório',
                       })}
-                      focus={{
+                      nFocus={{
                         borderColor: '#4763E4',
                       }}
                     />
@@ -1765,7 +1765,7 @@ const Request: FC = () => {
                       {...register('address.house', {
                         required: 'Campo edíficio é obrigatório',
                       })}
-                      focus={{
+                      nFocus={{
                         borderColor: '#4763E4',
                       }}
                     />
@@ -1960,7 +1960,7 @@ const Request: FC = () => {
                         {...register('payment.entity', {
                           required: 'Campo entidade é obrigatório',
                         })}
-                        focus={{
+                        nFocus={{
                           borderColor: '#4763E4',
                         }}
                       />
@@ -2010,7 +2010,7 @@ const Request: FC = () => {
                         {...register('payment.reference', {
                           required: 'Campo referência é obrigatório',
                         })}
-                        focus={{
+                        nFocus={{
                           borderColor: '#4763E4',
                         }}
                       />
@@ -2067,7 +2067,7 @@ const Request: FC = () => {
                         {...register('payment.amount', {
                           required: 'Campo montante é obrigatório',
                         })}
-                        focus={{
+                        nFocus={{
                           borderColor: '#4763E4',
                         }}
                       />
@@ -2130,7 +2130,7 @@ const Request: FC = () => {
                         {...register('payment.phoneNumber', {
                           required: 'Campo número de telefone é obrigatório',
                         })}
-                        focus={{
+                        nFocus={{
                           borderColor: '#4763E4',
                         }}
                       />
@@ -2180,7 +2180,7 @@ const Request: FC = () => {
                         {...register('payment.amount', {
                           required: 'Campo montante é obrigatório',
                         })}
-                        focus={{
+                        nFocus={{
                           borderColor: '#4763E4',
                         }}
                       />

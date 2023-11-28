@@ -1134,6 +1134,20 @@
     "@styled-system/core" "^5.1.2"
     "@styled-system/css" "^5.1.5"
 
+"@stylin.js/core@latest":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@stylin.js/core/-/core-1.0.1.tgz#b9c6a1f0cd3d601f793ed3753745afec07b411c0"
+  integrity sha512-863ADeuvAbzLFrish0gJX2qEwDyx6NV4Raf2/EHerd5/2FYX4LUxX4AAKaM2UIVmlsi5gbsdimf0ad3oxhCcCQ==
+
+"@stylin.js/react@^1.0.5-alpha.0":
+  version "1.0.5-alpha.0"
+  resolved "https://registry.yarnpkg.com/@stylin.js/react/-/react-1.0.5-alpha.0.tgz#d7635d97956f5e14a84625354481a4a4731a4f89"
+  integrity sha512-m46JSEkSYPTgAKerN+vlCecs7z/D9kwabWVrg77jxM2l6ng4bfh4H7zpw9cxtVT7K36ZEj5CAwSWDffa+2Y7Qg==
+  dependencies:
+    "@emotion/react" "^11.10.5"
+    "@emotion/styled" "^11.10.5"
+    "@stylin.js/core" latest
+
 "@swc/helpers@0.5.2":
   version "0.5.2"
   resolved "https://registry.npmjs.org/@swc/helpers/-/helpers-0.5.2.tgz"

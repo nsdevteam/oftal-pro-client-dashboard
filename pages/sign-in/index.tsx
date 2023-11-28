@@ -108,7 +108,7 @@ const Signin: FC = () => {
               width={['30rem']}
               color="textInverted"
               placeholder="John Doe"
-              focus={{
+              nFocus={{
                 borderColor: '#4763E4',
               }}
               {...register('fullName', {
@@ -140,7 +140,7 @@ const Signin: FC = () => {
               minWidth={['100%', '10rem']}
               width={['30rem']}
               placeholder="johndoe@oftalpro.com"
-              focus={{
+              nFocus={{
                 borderColor: '#4763E4',
               }}
               {...register('email', {
@@ -205,7 +205,7 @@ const Signin: FC = () => {
                 minWidth={['100%', '10rem']}
                 width={['50rem']}
                 placeholder="***************"
-                focus={{
+                nFocus={{
                   borderColor: '#4763E4',
                   borderSize: '1px',
                   borderStyle: 'solid',

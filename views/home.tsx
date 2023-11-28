@@ -118,7 +118,7 @@ const Home: FC = () => {
               minWidth={['100%', '10rem']}
               width={['30rem']}
               placeholder="johndoe@oftalpro.com"
-              focus={{
+              nFocus={{
                 border: '1px solid #4763E4',
               }}
               {...register('email', {
@@ -184,7 +184,7 @@ const Home: FC = () => {
                 minWidth={['100%', '10rem']}
                 width={['50rem']}
                 placeholder="***************"
-                focus={{
+                nFocus={{
                   borderColor: '#4763E4',
                   borderSize: '1px',
                   borderStyle: 'solid',
