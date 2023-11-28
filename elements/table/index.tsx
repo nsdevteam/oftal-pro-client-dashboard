@@ -30,11 +30,11 @@ type TableProps = {
 
 const HEADINGS: Record<keyof TTableHeadings, string> = {
   patientName: 'Nome de pacitente',
-  geometry: 'Geomatria',
+  geometry: 'Geometria',
   indiceOfRefraction: 'Índice de refração',
-  color: 'cor',
+  color: 'Cor',
   treatment: 'Tratamento',
-  diameter: 'Diametro',
+  diameter: 'Diâmetro',
 };
 
 const Table: FC<TableProps> = ({ data, columns }) => {

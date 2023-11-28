@@ -25,17 +25,10 @@ import {
   Typography,
 } from '../../elements';
 import { useFormInput } from '../../hooks';
-import useFirebase from '../../hooks/use-firebase';
 import { totalAmount } from '../../hooks/use-form-input';
 import { TTableHeadings } from '../../interface';
 import FileName from './file-name';
-const Request: FC = () => {
-  const { requestDBInfo } = useFirebase();
-
-  console.log('====================================');
-  console.log('>> request db info', requestDBInfo);
-  console.log('====================================');
-
+const RequestPage: FC = () => {
   const {
     register,
     errors,
@@ -2070,4 +2063,4 @@ const Request: FC = () => {
   );
 };
 
-export default Request;
+export default RequestPage;

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Layout } from '../../components';
 import { Box, Button, Input, Typography } from '../../elements';
 
-const Account: FC = () => (
+const AccountPage: FC = () => (
   <Layout pageTitle="Oftal Pro">
     <Box
       as="div"
@@ -251,4 +251,4 @@ const Account: FC = () => (
   </Layout>
 );
 
-export default Account;
+export default AccountPage;
