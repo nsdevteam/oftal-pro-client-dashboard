@@ -53,8 +53,6 @@ const useFirebase = () => {
     addDoc(colRef, {
       jobRefence: '67SJDMN',
       patientName: 'Patricia Silva',
-    }).then(() => {
-      //reset function
     });
   };
 
