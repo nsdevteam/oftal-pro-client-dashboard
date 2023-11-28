@@ -1010,6 +1010,8 @@ const RequestPage: FC = () => {
                       <Box
                         as="textarea"
                         p="L"
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-ignore
                         rows="4"
                         cols="50"
                         maxlength="50"
