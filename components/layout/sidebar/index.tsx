@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 import { menuLink } from '../../../api';
 import colors from '../../../design-system/light-theme/colors';
@@ -10,18 +9,10 @@ import { Box, Button, Typography } from '../../../elements';
 import { useFirebase } from '../../../hooks';
 import LogoSVG from '../../svg/logo';
 
-type MenuId = number;
 const Sidebar: FC = () => {
-  const [selectedMenu, setSelectedMenu] = useState<MenuId | null>(null); // Use the MenuId type and allow null
-  const [isDropDown, setIsDropDown] = useState<boolean>(false);
   const { handleSubmit } = useForm();
   const [userData, setUserData] = useState<any>();
   const { handleLogOut, getCurrentUserData } = useFirebase();
-
-  const handleShowDropDownMenu = (id: MenuId) => {
-    setSelectedMenu(id);
-    setIsDropDown(!isDropDown);
-  };
 
   useEffect(() => {
     getCurrentUserData().then(setUserData);
@@ -63,9 +54,15 @@ const Sidebar: FC = () => {
       >
         <Box as="ul" width="100%">
           {menuLink.map((link) => {
-            const { id, url, title, icon, submenu } = link;
+            const { id, url, title, icon } = link;
             return (
-              <Box as="div" display="flex" flexDirection="column" key={id}>
+              <Box
+                as="div"
+                display="flex"
+                flexDirection="column"
+                key={id}
+                p="0.5rem"
+              >
                 <Box as="ul">
                   <Typography
                     as="li"
@@ -86,34 +83,8 @@ const Sidebar: FC = () => {
                       {icon}
                       {title}
                     </Link>
-                    <Button
-                      variant="primary"
-                      type="button"
-                      borderRadius="M"
-                      border="none"
-                      bg="transparent"
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      onClick={() => handleShowDropDownMenu(id)}
-                    >
-                      {selectedMenu === id && isDropDown ? (
-                        <FiChevronDown size={18} color="#FFF" />
-                      ) : (
-                        <FiChevronUp size={18} color="#FFF" />
-                      )}
-                    </Button>
                   </Typography>
                 </Box>
-                <Typography as="ul">
-                  <Typography as="li">
-                    {selectedMenu === id && isDropDown && (
-                      <Link href="#" className="dropDownLink">
-                        {submenu}
-                      </Link>
-                    )}
-                  </Typography>
-                </Typography>
               </Box>
             );
           })}
