@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 import { FiBell, FiX } from 'react-icons/fi';
 
-import { notification } from '../../../api';
+import { notification } from '../../../constants';
 import { Box, ModalNotification, Typography } from '../../../elements';
 import { ChevronRightSVG } from '../../svg';
 import { BREADCRUMB_DATA } from './header.data';

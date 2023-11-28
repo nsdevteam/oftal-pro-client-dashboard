@@ -3,16 +3,19 @@ import { AppProps } from 'next/app';
 import { ReactElement, StrictMode } from 'react';
 import { Toaster } from 'react-hot-toast';
 
+import { UserProvider } from '../context/user';
 import { LightTheme } from '../design-system';
 import GlobalStyles from '../design-system/global-styles';
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
   <StrictMode>
-    <ThemeProvider theme={LightTheme}>
-      <Global styles={GlobalStyles} />
-      <Component {...pageProps} />
-      <Toaster />
-    </ThemeProvider>
+    <UserProvider>
+      <ThemeProvider theme={LightTheme}>
+        <Global styles={GlobalStyles} />
+        <Component {...pageProps} />
+        <Toaster />
+      </ThemeProvider>
+    </UserProvider>
   </StrictMode>
 );
 

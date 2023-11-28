@@ -94,7 +94,10 @@ export type TRowData = Record<
 
 export interface IClient {
   id?: string;
-  fullname?: string;
+  fullName?: string;
   email?: string;
   password?: string;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface IEmptyObject {}
