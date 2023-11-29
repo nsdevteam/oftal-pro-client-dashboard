@@ -23,7 +23,9 @@ const Home: FC = () => {
     getValues,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    reValidateMode: 'onBlur',
+  });
 
   const onLoginSubmit = async () => {
     try {
@@ -123,21 +125,9 @@ const Home: FC = () => {
                 })}
               />
               {errors.email && (
-                <Box
-                  as="div"
-                  position="absolute"
-                  width="auto"
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  mt={['22rem', 'NONE']}
-                  ml={['9rem', 'NONE']}
-                >
-                  <Typography className="alertDanger">
-                    {errors.email.message as string}
-                  </Typography>
-                </Box>
+                <Typography className="alertDanger">
+                  {errors.email.message as string}
+                </Typography>
               )}
             </Box>
             <Box
@@ -191,21 +181,9 @@ const Home: FC = () => {
                   })}
                 />
                 {errors.password && (
-                  <Box
-                    as="div"
-                    position="absolute"
-                    width="auto"
-                    display="flex"
-                    flexDirection="column"
-                    justifyContent="center"
-                    alignItems="center"
-                    mt={['23rem', 'NONE']}
-                    ml={['6.5rem', 'NONE']}
-                  >
-                    <Typography className="alertDanger">
-                      {errors.password.message as string}
-                    </Typography>
-                  </Box>
+                  <Typography className="alertDanger">
+                    {errors.password.message as string}
+                  </Typography>
                 )}
                 <Box
                   onClick={togglePasswordVisibility}
