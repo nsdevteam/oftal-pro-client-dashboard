@@ -2,28 +2,27 @@ import { FiCreditCard, FiFileText, FiSettings } from 'react-icons/fi';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
-  Address,
-  Indices,
-  Links,
-  Notification,
-  Refraction,
+  AddressProps,
+  IndicesProps,
+  MenuProps,
+  NotificationProps,
+  RefractionProps,
 } from '../interface';
+
 const id = uuidv4();
 
-export const menuLink: Links[] = [
+export const menuLink: MenuProps[] = [
   {
     id: 1,
     url: '/request',
     title: 'Pedido',
     icon: <FiFileText size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
-    submenu: 'Novo Pedido',
   },
   {
     id: 2,
     url: '/account',
     title: 'Contas',
     icon: <FiCreditCard size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
-    submenu: 'Dados do usuário',
   },
   {
     id: 3,
@@ -33,7 +32,7 @@ export const menuLink: Links[] = [
   },
 ];
 
-export const notification: Notification[] = [
+export const notification: NotificationProps[] = [
   {
     id: 1,
     title: 'Pedido',
@@ -100,7 +99,7 @@ export const notification: Notification[] = [
   },
 ];
 
-export const address: Address[] = [
+export const address: AddressProps[] = [
   {
     id,
     province: 'Luanda',
@@ -139,7 +138,7 @@ export const address: Address[] = [
   },
 ];
 
-export const treatmentData: Refraction[] = [
+export const treatmentData: RefractionProps[] = [
   {
     id: 1,
     value: 'HMC',
@@ -158,7 +157,7 @@ export const treatmentData: Refraction[] = [
   },
 ];
 
-export const geometryData: Refraction[] = [
+export const geometryData: RefractionProps[] = [
   {
     id: 1,
     value: 'Unifocal Fabrico',
@@ -189,7 +188,7 @@ export const geometryData: Refraction[] = [
   },
 ];
 
-export const colorData: Refraction[] = [
+export const colorData: RefractionProps[] = [
   {
     id: 1,
     value: 'Branca',
@@ -208,7 +207,7 @@ export const colorData: Refraction[] = [
   },
 ];
 
-export const refractionData: Indices[] = [
+export const refractionData: IndicesProps[] = [
   {
     id: 1,
     size: '1.5',
@@ -260,28 +259,5 @@ export const refractionData: Indices[] = [
   {
     id: 14,
     size: '1,74 UV420 BlueCut',
-  },
-];
-
-export const requestData = [
-  {
-    id: 1,
-    leftSpherical: 12,
-    leftCylinder: 2,
-    leftAxis: 0,
-    geometry: 'Unifocal',
-    indiceOfRefraction: 1.5,
-    rightSpherical: 4,
-    rightCylinder: 6,
-    rightAxis: 8,
-    color: 'Branca',
-    treatment: 'HMC',
-    patientName: 'Mario Silva',
-    diamenter: 12,
-    alway: 99,
-    prism: 10,
-    precal: 67,
-    jobReference: '12BD678',
-    observation: 'Preciso de dois pares de lente com as mesmas especificações',
   },
 ];

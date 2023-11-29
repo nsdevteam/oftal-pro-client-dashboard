@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 import { logout } from '../../../api/auth';
 import { menuLink } from '../../../constants';
@@ -12,15 +11,8 @@ import { Box, Button, Typography } from '../../../elements';
 import LogoSVG from '../../svg/logo';
 
 const Sidebar: FC = () => {
-  const [selectedMenu, setSelectedMenu] = useState<number | null>(null); // Use the MenuId type and allow null
-  const [isDropDown, setIsDropDown] = useState<boolean>(false);
   const { handleSubmit } = useForm();
   const { userData, forceVerifyLogin } = useUser();
-
-  const handleShowDropDownMenu = (id: number) => {
-    setSelectedMenu(id);
-    setIsDropDown(!isDropDown);
-  };
 
   const signOut = async () => {
     await logout();
@@ -69,8 +61,14 @@ const Sidebar: FC = () => {
         alignItems="center"
       >
         <Box as="ul" width="100%">
-          {menuLink.map(({ id, url, title, icon, submenu }) => (
-            <Box as="div" display="flex" flexDirection="column" key={id}>
+          {menuLink.map(({ id, url, title, icon }) => (
+            <Box
+              as="div"
+              display="flex"
+              flexDirection="column"
+              key={id}
+              p="0.5rem"
+            >
               <Box as="ul">
                 <Typography
                   as="li"
@@ -91,34 +89,8 @@ const Sidebar: FC = () => {
                     {icon}
                     {title}
                   </Link>
-                  <Button
-                    variant="primary"
-                    type="button"
-                    borderRadius="M"
-                    border="none"
-                    bg="transparent"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    onClick={() => handleShowDropDownMenu(id)}
-                  >
-                    {selectedMenu === id && isDropDown ? (
-                      <FiChevronDown size={18} color="#FFF" />
-                    ) : (
-                      <FiChevronUp size={18} color="#FFF" />
-                    )}
-                  </Button>
                 </Typography>
               </Box>
-              <Typography as="ul">
-                <Typography as="li">
-                  {selectedMenu === id && isDropDown && (
-                    <Link href="#" className="dropDownLink">
-                      {submenu}
-                    </Link>
-                  )}
-                </Typography>
-              </Typography>
             </Box>
           ))}
         </Box>

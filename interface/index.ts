@@ -7,15 +7,14 @@ export interface IEmptyObject {}
 
 export type MaybeArray<T> = T | Array<T>;
 
-export interface Links {
+export interface MenuProps {
   id: number;
   url: string;
   title: string;
   icon: ReactNode;
-  submenu?: string;
 }
 
-export interface Notification {
+export interface NotificationProps {
   id: number;
   title: string;
   description: string;
@@ -23,7 +22,7 @@ export interface Notification {
   currentDate: string;
 }
 
-export interface Address {
+export interface AddressProps {
   id: string;
   province: string;
   state: string;
@@ -34,19 +33,19 @@ export interface Address {
   building?: string;
 }
 
-export interface Payment {
+export interface PaymentProps {
   entity?: string;
   amount?: number;
   reference?: string;
   phoneNumber?: number;
 }
 
-export interface Refraction {
+export interface RefractionProps {
   id: number;
   value: string;
 }
 
-export interface Indices {
+export interface IndicesProps {
   id: number;
   size: string;
 }
@@ -73,8 +72,8 @@ export interface IRequest extends IClient {
   observation: string;
   file?: FileList | unknown;
   amount?: number;
-  address?: Address | undefined;
-  payment?: Payment | undefined;
+  address?: AddressProps | undefined;
+  payment?: PaymentProps | undefined;
 }
 
 export type TTableHeadings = Pick<
