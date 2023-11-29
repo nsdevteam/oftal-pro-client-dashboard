@@ -1,19 +1,19 @@
+import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
-import { FiBell, FiChevronRight, FiX } from 'react-icons/fi';
+import { FiBell, FiX } from 'react-icons/fi';
 
-import { notification } from '../../../api';
+import { notification } from '../../../constants';
 import { Box, ModalNotification, Typography } from '../../../elements';
+import { ChevronRightSVG } from '../../svg';
+import { BREADCRUMB_DATA } from './header.data';
 
 const Header: FC = () => {
+  const { pathname } = useRouter();
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
+  const openModal = () => setModalOpen(true);
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+  const closeModal = () => setModalOpen(false);
 
   return (
     <Box
@@ -24,25 +24,33 @@ const Header: FC = () => {
       alignItems="center"
       padding="1rem"
     >
-      <Box as="div">
-        <Typography
-          as="span"
-          padding="0.5rem"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          color="#4658AC"
-        >
-          Inicio <FiChevronRight size={18} color="#A1A1AA" /> Pedido
-        </Typography>
+      <Box display="flex" alignItems="center" gap="1rem">
+        {BREADCRUMB_DATA[pathname]?.map((item, index) => (
+          <>
+            {!!index && (
+              <ChevronRightSVG
+                maxWidth="0.6rem"
+                maxHeight="0.6rem"
+                width="100%"
+              />
+            )}
+            <Typography
+              as="span"
+              p="0.5rem"
+              key={index}
+              color={index ? '#4658AC' : 'inherit'}
+            >
+              {item}
+            </Typography>
+          </>
+        ))}
       </Box>
-      <Box as="div">
+      <Box>
         <Box
-          as="div"
           padding="0.5rem"
           borderRadius={25}
           display="flex"
-          hover={{
+          nHover={{
             background: '#E5E5E5',
             transition: 'all 1s ease-out',
           }}
@@ -77,9 +85,8 @@ const Header: FC = () => {
                 <Typography as="h3">Notificações</Typography>
                 <FiX size={20} color="#A1A1AA" onClick={closeModal} />
               </Box>
-              {notification.map((item) => {
-                const { id, title, description, createdAt, currentDate } = item;
-                return (
+              {notification.map(
+                ({ id, title, description, createdAt, currentDate }) => (
                   <Box
                     as="div"
                     key={id}
@@ -87,7 +94,7 @@ const Header: FC = () => {
                     borderRadius="0.5rem"
                     padding="0.3rem"
                     marginTop="0.5rem"
-                    active={{
+                    nActive={{
                       background: '#F2F2F2',
                       border: 'none',
                     }}
@@ -117,8 +124,8 @@ const Header: FC = () => {
                       </Typography>
                     </Box>
                   </Box>
-                );
-              })}
+                )
+              )}
             </ModalNotification>
           ) : (
             ''

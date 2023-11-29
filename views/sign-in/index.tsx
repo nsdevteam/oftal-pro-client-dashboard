@@ -1,22 +1,21 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
+import { login } from '../../api/auth';
 import { EyeSlashSVG, EyeSVG } from '../../components/svg';
 import LogoSVG from '../../components/svg/logo';
 import { RoutePaths, RoutesEnum } from '../../constants/routes';
+import { useUser } from '../../context/user';
 import { Box, Button, Input, Typography } from '../../elements';
-import { useFirebase } from '../../hooks';
 
 const Home: FC = () => {
+  const { userAuth, forceVerifyLogin, loading } = useUser();
   const [showPassword, setShowPassword] = useState(false);
 
-  const { handleFirebaseConfig } = useFirebase();
-
-  const router = useRouter();
+  const { push } = useRouter();
 
   const {
     register,
@@ -28,29 +27,31 @@ const Home: FC = () => {
 
   const onLoginSubmit = async () => {
     try {
-      const auth = getAuth();
       const { email, password } = getValues();
 
-      const checkUser = await signInWithEmailAndPassword(auth, email, password);
+      await login(email, password);
 
-      if (checkUser) router.push('/request');
-
+      forceVerifyLogin();
       reset();
-    } catch (err) {
-      console.log('====================================');
-      console.log('>> Error signing :: ', err);
-      console.log('====================================');
-      toast.error('Erro ao entrar, verifique as credenciais');
+    } catch {
+      throw Error();
     }
   };
 
   useEffect(() => {
-    handleFirebaseConfig();
-  }, []);
+    if (userAuth && !loading) push('/request');
+  }, [userAuth, loading]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  const handleLogin = () =>
+    toast.promise(onLoginSubmit(), {
+      loading: 'Iniciando a sessão',
+      success: 'Sessão iniciada com sucesso',
+      error: 'Erro ao iniciar a sessão',
+    });
 
   return (
     <Box
@@ -86,7 +87,7 @@ const Home: FC = () => {
           flexDirection="column"
           justifyContent="center"
         >
-          <form onSubmit={handleSubmit(onLoginSubmit)}>
+          <form onSubmit={handleSubmit(handleLogin)}>
             <Box
               width="100%"
               display="flex"

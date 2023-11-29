@@ -2,17 +2,16 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
-import { address } from '../../api';
+import { address } from '../../constants';
 import {
   AddressProps,
   IRequest,
   PaymentProps,
   TRowData,
 } from '../../interface';
+import { useSubtotal } from '../use-subtotal';
 
 const id = uuidv4();
-
-export let totalAmount = 0;
 
 const useFormInput = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
@@ -45,20 +44,14 @@ const useFormInput = () => {
     reValidateMode: 'onBlur',
   });
 
+  const subtotal = useSubtotal(control);
+
   const onSubmit: SubmitHandler<IRequest> = (data) => {
     try {
       if (data.treatment === 'UC') {
-        totalAmount += 2000;
         setValue('indiceOfRefraction', 1.5);
       }
 
-      if (data.file) {
-        totalAmount += 5000;
-      }
-
-      if (data.treatment === 'SHMC') {
-        totalAmount -= 1000;
-      }
       if (data.indiceOfRefraction === 1.5) {
         alert('índice of refraction igual 1.5');
       }
@@ -253,7 +246,7 @@ const useFormInput = () => {
     handleToggleLeftEyeOption,
     handleToggleRightEyeOption,
     shortRequestInfo,
-    totalAmount,
+    subtotal,
   };
 };
 

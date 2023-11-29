@@ -10,7 +10,7 @@ export enum RoutesEnum {
   Dashboard = 'dashboard',
   Request = 'request',
   Account = 'account',
-  Setting = 'setting',
+  Settings = 'setting',
 }
 
 /**
@@ -25,7 +25,7 @@ export const RoutePaths: Record<RoutesEnum, string> = {
   [RoutesEnum.Dashboard]: '/dashboard',
   [RoutesEnum.Request]: '/request',
   [RoutesEnum.Account]: '/account',
-  [RoutesEnum.Setting]: '/setting',
+  [RoutesEnum.Settings]: '/setting',
 };
 
 export const routesList = Object.keys(RoutePaths) as ReadonlyArray<RoutesEnum>;

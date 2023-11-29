@@ -5,33 +5,13 @@ import {
   signOut,
   updatePassword,
 } from 'firebase/auth';
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-} from 'firebase/firestore';
+import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const useFirebase = () => {
   const [requestDBInfo, setRequestDBInfo] = useState();
   const router = useRouter();
-
-  const getCurrentUserData = async () => {
-    const auth = getAuth();
-
-    const db = getFirestore();
-    const clientCollection = collection(db, 'client');
-
-    const docRef = doc(clientCollection, auth.currentUser!.uid);
-
-    const userSnapshot = await getDoc(docRef);
-
-    return userSnapshot.data();
-  };
 
   const handleFirebaseConfig = () => {
     const firebaseConfig = {
@@ -73,8 +53,6 @@ const useFirebase = () => {
     addDoc(colRef, {
       jobRefence: '67SJDMN',
       patientName: 'Patricia Silva',
-    }).then(() => {
-      //reset function
     });
   };
 
@@ -117,7 +95,6 @@ const useFirebase = () => {
 
   return {
     requestDBInfo,
-    getCurrentUserData,
     handleFirebaseConfig,
     handleFetchRequestData,
     handleAddNewRequest,

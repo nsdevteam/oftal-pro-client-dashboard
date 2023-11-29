@@ -19,7 +19,6 @@ import {
   Typography,
 } from '../../elements';
 import { useFormInput } from '../../hooks';
-import { totalAmount } from '../../hooks/use-form-input';
 import { TTableHeadings } from '../../interface';
 import RequestModal from './request-modal';
 
@@ -138,9 +137,7 @@ const RequestPage: FC = () => {
         <Box as="div" width="80%" height="100%" padding="0.5rem">
           <Typography as="h2">Listagem de pedidos</Typography>
           <Table data={shortRequestInfo} columns={columns} />
-          <Typography as="h4">
-            Total da compra: {totalAmount}, 00 AOA
-          </Typography>
+          <Typography as="h4">Total da compra: 0,00 AOA</Typography>
           <RequestModal isModalOpen={isModalOpen} closeModal={closeModal} />
           {showSelectAddress && (
             <ModalAddress

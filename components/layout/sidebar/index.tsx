@@ -1,22 +1,30 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
-import { menuLink } from '../../../api';
+import { logout } from '../../../api/auth';
+import { menuLink } from '../../../constants';
+import { useUser } from '../../../context/user';
 import colors from '../../../design-system/light-theme/colors';
 import { Box, Button, Typography } from '../../../elements';
-import { useFirebase } from '../../../hooks';
 import LogoSVG from '../../svg/logo';
 
 const Sidebar: FC = () => {
   const { handleSubmit } = useForm();
-  const [userData, setUserData] = useState<any>();
-  const { handleLogOut, getCurrentUserData } = useFirebase();
+  const { userData, forceVerifyLogin } = useUser();
 
-  useEffect(() => {
-    getCurrentUserData().then(setUserData);
-  }, []);
+  const signOut = async () => {
+    await logout();
+    forceVerifyLogin();
+  };
+
+  const handleLogout = () =>
+    toast.promise(signOut(), {
+      loading: 'Terminando a sessão...',
+      success: 'Sessão terminada com sucesso',
+      error: 'Error ao terminar sessão',
+    });
 
   return (
     <Box
@@ -53,41 +61,38 @@ const Sidebar: FC = () => {
         alignItems="center"
       >
         <Box as="ul" width="100%">
-          {menuLink.map((link) => {
-            const { id, url, title, icon } = link;
-            return (
-              <Box
-                as="div"
-                display="flex"
-                flexDirection="column"
-                key={id}
-                p="0.5rem"
-              >
-                <Box as="ul">
-                  <Typography
-                    as="li"
-                    width="100%"
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
+          {menuLink.map(({ id, url, title, icon }) => (
+            <Box
+              as="div"
+              display="flex"
+              flexDirection="column"
+              key={id}
+              p="0.5rem"
+            >
+              <Box as="ul">
+                <Typography
+                  as="li"
+                  width="100%"
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Link
+                    href={url}
+                    style={{
+                      color: '#FFF',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
                   >
-                    <Link
-                      href={url}
-                      style={{
-                        color: '#FFF',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      {icon}
-                      {title}
-                    </Link>
-                  </Typography>
-                </Box>
+                    {icon}
+                    {title}
+                  </Link>
+                </Typography>
               </Box>
-            );
-          })}
+            </Box>
+          ))}
         </Box>
         <Box
           as="ul"
@@ -115,7 +120,7 @@ const Sidebar: FC = () => {
             margin="0.5rem"
             minWidth="90%"
             bg="#DC2626"
-            onClick={handleSubmit(handleLogOut)}
+            onClick={handleSubmit(handleLogout)}
           >
             Terminar a sessão
           </Button>
