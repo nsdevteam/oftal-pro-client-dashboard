@@ -6,9 +6,8 @@ import {
   geometryData,
   refractionData,
   treatmentData,
-} from '../../api';
+} from '../../constants';
 import { Box, Button, Input, Modal, Typography } from '../../elements';
-import { totalAmount } from '../../hooks/use-form-input';
 import useFormInput from '../../hooks/use-form-input';
 import FileName from './file-name';
 
@@ -291,14 +290,11 @@ const RequestModal: FC<{ isModalOpen: boolean; closeModal: () => void }> = ({
                       },
                     })}
                   >
-                    {refractionData.map((item) => {
-                      const { id, size } = item;
-                      return (
-                        <option key={id} value={size}>
-                          {size}
-                        </option>
-                      );
-                    })}
+                    {refractionData.map(({ id, size }) => (
+                      <option key={id} value={size}>
+                        {size}
+                      </option>
+                    ))}
                   </select>
                   {errors.indiceOfRefraction && (
                     <Typography className="alertDanger">
@@ -858,6 +854,8 @@ const RequestModal: FC<{ isModalOpen: boolean; closeModal: () => void }> = ({
               <Box
                 as="textarea"
                 p="L"
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 rows="4"
                 cols="50"
                 maxlength="50"
@@ -885,7 +883,7 @@ const RequestModal: FC<{ isModalOpen: boolean; closeModal: () => void }> = ({
             </Box>
           </Box>
           <Typography as="h4" padding="0.5rem">
-            Subtotal: {totalAmount}, 00 AOA
+            Subtotal: {0},00 AOA
           </Typography>
           <Box
             as="div"
