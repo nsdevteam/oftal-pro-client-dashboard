@@ -3,7 +3,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
 import { address } from '../../constants';
-import { Address, IRequest, Payment, TRowData } from '../../interface';
+import {
+  AddressProps,
+  IRequest,
+  PaymentProps,
+  TRowData,
+} from '../../interface';
 import { useSubtotal } from '../use-subtotal';
 
 const id = uuidv4();
@@ -11,7 +16,7 @@ const id = uuidv4();
 const useFormInput = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [showSelectAddress, setShowSelectAddress] = useState<boolean>(false);
-  const [selectAddress, setSelectAddress] = useState<Address | null>(null);
+  const [selectAddress, setSelectAddress] = useState<AddressProps | null>(null);
   const [addNewAddress, setAddNewAddress] = useState<boolean>(false);
   const [paymentModal, setPaymentModal] = useState<boolean>(false);
   const [paymentByReference, setPaymentByReference] = useState<boolean>(false);
@@ -20,8 +25,8 @@ const useFormInput = () => {
   const [selectLeftEye, setSelectLeftEye] = useState<boolean>(false);
   const [selectRightEye, setSelectRightEye] = useState<boolean>(false);
   const [request, setRequest] = useState<Array<IRequest>>([]);
-  const [addresses, setAddresses] = useState<Address[]>(address);
-  const [payment, setPayment] = useState<Payment[] | null>(null);
+  const [addresses, setAddresses] = useState<AddressProps[]>(address);
+  const [payment, setPayment] = useState<PaymentProps[] | null>(null);
   const [shortRequestInfo, setShortRequestInfo] = useState<
     Array<TRowData & { file: string }>
   >([]);
@@ -90,7 +95,7 @@ const useFormInput = () => {
     }
   };
 
-  const handleAddressSelected = (addressItem: Address) => {
+  const handleAddressSelected = (addressItem: AddressProps) => {
     setSelectAddress(addressItem);
   };
 
@@ -108,7 +113,7 @@ const useFormInput = () => {
       const apt = getValues('address.apt');
       const house = getValues('address.house');
 
-      const newAddress: Address = {
+      const newAddress: AddressProps = {
         id,
         province,
         state,
@@ -118,7 +123,7 @@ const useFormInput = () => {
         house,
       };
 
-      const updateAddress: Address[] = [...addresses, newAddress];
+      const updateAddress: AddressProps[] = [...addresses, newAddress];
 
       setAddresses(updateAddress);
       setSelectAddress(newAddress);

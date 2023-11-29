@@ -29,7 +29,7 @@ const ModalContent = styled.div`
 `;
 
 type Modal = {
-  isOpen: () => void;
+  isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
 };

@@ -11,7 +11,6 @@ export enum RoutesEnum {
   Request = 'request',
   Account = 'account',
   Settings = 'setting',
-  Test = 'Test',
 }
 
 /**
@@ -27,7 +26,6 @@ export const RoutePaths: Record<RoutesEnum, string> = {
   [RoutesEnum.Request]: '/request',
   [RoutesEnum.Account]: '/account',
   [RoutesEnum.Settings]: '/setting',
-  [RoutesEnum.Test]: '/Test',
 };
 
 export const routesList = Object.keys(RoutePaths) as ReadonlyArray<RoutesEnum>;
