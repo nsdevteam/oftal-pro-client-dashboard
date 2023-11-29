@@ -36,7 +36,6 @@ const RequestPage: FC = () => {
     paymentSucceed,
     setShowSelectAddress,
     setAddNewAddress,
-    setPaymentModal,
     setPaymentSucceed,
     handleAddressSelected,
     handleOpenModalNewAddress,
@@ -269,10 +268,7 @@ const RequestPage: FC = () => {
             </ModalAddress>
           )}
           {addNewAddress && (
-            <Modal
-              isOpen={() => setAddNewAddress(true)}
-              onClose={() => setAddNewAddress(false)}
-            >
+            <Modal isOpen={isModalOpen} onClose={() => setAddNewAddress(false)}>
               <Box paddingLeft="1rem">
                 <Box
                   as="div"
@@ -612,10 +608,7 @@ const RequestPage: FC = () => {
           )}
         </Box>
         {paymentModal && (
-          <Modal
-            isOpen={() => setPaymentModal(true)}
-            onClose={handlePaymentModal}
-          >
+          <Modal isOpen={isModalOpen} onClose={handlePaymentModal}>
             <Box paddingLeft="1rem">
               <Box
                 as="div"
@@ -969,10 +962,7 @@ const RequestPage: FC = () => {
           </Modal>
         )}
         {paymentSucceed && (
-          <Modal
-            isOpen={() => setAddNewAddress(true)}
-            onClose={() => setAddNewAddress(false)}
-          >
+          <Modal isOpen={isModalOpen} onClose={() => setAddNewAddress(false)}>
             <Box
               as="div"
               display="flex"
