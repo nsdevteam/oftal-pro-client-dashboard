@@ -29,7 +29,7 @@ type TableProps = {
 };
 
 const HEADINGS: Record<keyof TTableHeadings, string> = {
-  patientName: 'Nome de pacitente',
+  patientName: 'Nome de paciente',
   geometry: 'Geometria',
   indiceOfRefraction: 'Índice de refração',
   color: 'Cor',
