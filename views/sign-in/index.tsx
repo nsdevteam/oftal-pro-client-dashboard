@@ -180,11 +180,6 @@ const Home: FC = () => {
                     },
                   })}
                 />
-                {errors.password && (
-                  <Typography className="alertDanger">
-                    {errors.password.message as string}
-                  </Typography>
-                )}
                 <Box
                   onClick={togglePasswordVisibility}
                   cursor="pointer"
@@ -197,6 +192,11 @@ const Home: FC = () => {
                   )}
                 </Box>
               </Box>
+              {errors.password && (
+                <Typography className="alertDanger">
+                  {errors.password.message as string}
+                </Typography>
+              )}
             </Box>
             <Button
               p="L"
