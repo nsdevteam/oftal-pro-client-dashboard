@@ -18,8 +18,8 @@ const ResetPasswordPage: FC = () => {
 
   return (
     <Box
-      as="div"
       height="100vh"
+      width={['auto', 'auto', 'auto', '100%']}
       display="flex"
       flexDirection="column"
       justifyContent="center"
@@ -27,54 +27,38 @@ const ResetPasswordPage: FC = () => {
       alignContent="center"
     >
       <Box
-        height="700px"
-        width="700"
-        padding="0.5rem"
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        alignContent="center"
       >
         <LogoSVG />
-        <Typography padding="0.5rem">
-          Insira o endereço de email de recuperação
+        <Typography m="L" fontSize={['0.5rem', '1rem']}>
+          Insira o email endereço de recuperação
         </Typography>
-        <Box
-          as="form"
-          width="100%"
-          display="flex"
-          alignItems="center"
-          mt={['XL', 'XL', 'XL', 'NONE']}
-          flexDirection="column"
-          justifyContent="center"
-        >
-          <Box
-            as="div"
-            width="100%"
-            display="flex"
-            justifyContent="flex-start"
-            alignItems="flex-start"
+      </Box>
+      <form onSubmit={handleSubmit(onChangePassword)}>
+        <Box pt="1rem">
+          <Typography
+            fontSize={['0.5rem', '1rem']}
+            textAlign="left"
+            py="0.5rem"
           >
-            <Typography textAlign="left" padding="0.5rem">
-              Endereço de Email
-            </Typography>
-          </Box>
+            Endereço de email
+          </Typography>
           <Input
-            p="L"
+            width={['18rem', '30rem']}
+            p={['0.5rem', 'L']}
+            fontSize={['0.5rem', '1rem']}
             type="email"
             bg="transparent"
             outline="none"
             borderRadius="M"
             border="1px solid #E4E4E7"
             color="textInverted"
-            mr={['NONE', 'S']}
-            ml={['NONE', 'S']}
-            minWidth={['100%', '10rem']}
-            width={['30rem']}
             placeholder="johndoe@oftalpro.com"
             nFocus={{
-              borderColor: '#4763E4',
+              border: '1px solid #4763E4',
             }}
             {...register('email', {
               required: 'Campo email é obrigatório',
@@ -85,56 +69,41 @@ const ResetPasswordPage: FC = () => {
             })}
           />
           {errors.email && (
-            <Box
-              as="div"
-              position="absolute"
-              width="auto"
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
-              alignItems="center"
-              mt={['19rem', 'NONE']}
-              ml={['0', 'NONE']}
-            >
-              <Typography className="alertDanger">
-                {errors.email.message}
-              </Typography>
-            </Box>
+            <Typography className="alertDanger">
+              {errors.email.message as string}
+            </Typography>
           )}
-          <Button
-            p="L"
-            type="button"
-            effect="hover"
-            display="flex"
-            variant="primary"
-            fontWeight="bold"
-            color="#FFF"
-            width={['30rem', 'NONE']}
-            borderRadius="M"
-            border="none"
-            mt={['L', 'NONE']}
-            mb={['L', 'NONE']}
-            bg="#4763E4"
-            justifyContent="center"
-            minWidth={['100%', '10rem']}
-            alignItems="center"
-            onClick={handleSubmit(onChangePassword)}
-          >
-            Prosseguir &rarr;
-          </Button>
         </Box>
-        <Box
-          as="div"
+        <Button
+          p={['0.5rem', 'L']}
+          fontSize={['0.5rem', '1rem']}
+          type="submit"
+          effect="hover"
           display="flex"
+          variant="primary"
+          fontWeight="bold"
+          color="#FFF"
+          my={['0.5rem', 'L']}
+          width={['18rem', '30rem']}
+          borderRadius="M"
+          border="none"
+          bg="#4763E4"
           justifyContent="center"
           alignItems="center"
-          alignContent="center"
-          marginTop="1rem"
         >
-          <Link href={RoutePaths[RoutesEnum.Home]}>
-            Voltar para a página de login
-          </Link>
-        </Box>
+          Prosseguir &rarr;
+        </Button>
+      </form>
+      <Box
+        as="div"
+        display="flex"
+        fontSize={['0.5rem', '1rem']}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Link href={RoutePaths[RoutesEnum.Home]}>
+          Voltar para a página de login.
+        </Link>
       </Box>
     </Box>
   );
