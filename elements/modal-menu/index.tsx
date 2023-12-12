@@ -2,23 +2,24 @@ import styled from '@emotion/styled';
 import React, { FC } from 'react';
 
 const ModalBackdrop = styled.div`
+  top: 4rem;
+  right: 2.5rem;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: auto;
+  height: auto;
+  background-color: transparent;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 999;
 `;
 
 const ModalContent = styled.div`
-  max-width: 100vw;
-  max-height: 100vh;
-  width: 85vhw;
-  height: 85vh;
+  top: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+  position: relative;
   background-color: #fff;
   border-radius: 0.5rem;
   overflow-x: auto;
@@ -28,17 +29,13 @@ const ModalContent = styled.div`
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 `;
 
-type Modal = {
-  isOpen: boolean;
-  onClose: () => void;
+type ModalMenu = {
   children: React.ReactNode;
 };
 
-const Modal: FC<Modal> = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
-
+const ModalModal: FC<ModalMenu> = ({ children }) => {
   return (
-    <ModalBackdrop onClick={onClose}>
+    <ModalBackdrop>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         {children}
       </ModalContent>
@@ -46,4 +43,4 @@ const Modal: FC<Modal> = ({ isOpen, onClose, children }) => {
   );
 };
 
-export default Modal;
+export default ModalModal;

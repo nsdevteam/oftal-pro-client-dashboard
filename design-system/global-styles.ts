@@ -44,6 +44,7 @@ const GlobalStyles = css`
     width: 85vw;
     overflow-x: scroll;
     margin-top: 1rem;
+    overflow-y: scroll;
   }
 
   .tableRequest thead {
@@ -104,6 +105,13 @@ const GlobalStyles = css`
     font-size: 0.75rem;
     margin: 0.5rem;
     color: #dc2626;
+  }
+
+  @media only screen and (max-width: 430px) {
+    .tableContent {
+      height: 23rem;
+      width: 60vw;
+    }
   }
 `;
 

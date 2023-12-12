@@ -18,6 +18,7 @@ const Header: FC = () => {
   return (
     <Box
       as="header"
+      visibility={['hidden', 'visible']}
       width="100%"
       display="flex"
       justifyContent="space-between"
@@ -26,7 +27,13 @@ const Header: FC = () => {
     >
       <Box display="flex" alignItems="center" gap="1rem">
         {BREADCRUMB_DATA[pathname]?.map((item, index) => (
-          <>
+          <Box
+            key={index}
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+          >
             {!!index && (
               <ChevronRightSVG
                 maxWidth="0.6rem"
@@ -37,12 +44,11 @@ const Header: FC = () => {
             <Typography
               as="span"
               p="0.5rem"
-              key={index}
               color={index ? '#4658AC' : 'inherit'}
             >
               {item}
             </Typography>
-          </>
+          </Box>
         ))}
       </Box>
       <Box>

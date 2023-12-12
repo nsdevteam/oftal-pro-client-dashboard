@@ -3,6 +3,7 @@ export { default as Button } from './button';
 export { default as Input } from './input';
 export { default as Modal } from './modal';
 export { default as ModalAddress } from './modal-address';
+export { default as ModalMenu } from './modal-menu';
 export { default as ModalNotification } from './modal-notification';
 export { default as Rotate } from './rotate';
 export { default as Table } from './table';

@@ -16,19 +16,19 @@ export const menuLink: MenuProps[] = [
     id: 1,
     url: '/request',
     title: 'Pedido',
-    icon: <FiFileText size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
+    icon: <FiFileText size={18} style={{ margin: '0.5rem' }} />,
   },
   {
     id: 2,
     url: '/account',
     title: 'Contas',
-    icon: <FiCreditCard size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
+    icon: <FiCreditCard size={18} style={{ margin: '0.5rem' }} />,
   },
   {
     id: 3,
     url: '/setting',
     title: 'Configurações',
-    icon: <FiSettings size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
+    icon: <FiSettings size={18} style={{ margin: '0.5rem' }} />,
   },
 ];
 

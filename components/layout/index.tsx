@@ -23,24 +23,24 @@ const Layout: FC<LayoutProps> = ({ pageTitle = '', children }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{title}</title>
       </Head>
-      <Box minHeight="100vh" display="flex" flexDirection="column">
+      <Box
+        height={['100%', '100%', '100%', '100%']}
+        width={['100vw', '100vw', '100vw', '100vw']}
+        display="flex"
+        flexDirection="column"
+      >
         <Box
-          as="div"
-          height="100vh"
+          height={['100%', '100%', '100%', '100%']}
+          width={['100vw', '100vw', '100vw', '100vw']}
           display="flex"
-          justifyContent="flex-start"
-          alignItems="flex-start"
+          justifyContent="center"
+          alignItems="center"
           alignContent="center"
         >
           <Sidebar />
           <Box
-            as="div"
-            height="100vh"
-            width="100vw"
-            display="flex"
-            flexDirection="column"
-            justifyContent="flex-start"
-            alignItems="center"
+            height={['100vh', '100vh', '100vh', '100vh']}
+            width={['100vw', '100vw', '100vw', '100vw']}
           >
             <Header />
             <Box as="main">{children}</Box>

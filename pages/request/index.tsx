@@ -66,16 +66,16 @@ const RequestPage: FC = () => {
     <Layout pageTitle="Pedidos">
       <Box
         as="div"
-        minWidth="100%"
-        minHeight="100%"
-        height="90vh"
-        width="80vw"
+        height="80vh"
+        width={['100vw', '100vw', '100vw', '80vw', '80vw']}
         display="flex"
         flexDirection="column"
         justifyContent="flex-start"
         alignItems="flex-start"
         alignContent="flex-start"
         padding="1rem"
+        ml={['-14rem', 'auto', 'auto', 'auto', 'auto']}
+        fontSize={['0.5rem', '1rem']}
       >
         <Typography padding="0.5rem">Pedidos</Typography>
         <Box as="form" width="100vw" padding="0.5rem">
@@ -83,7 +83,8 @@ const RequestPage: FC = () => {
             bg="transparent"
             mr={['NONE', 'S']}
             color="textInverted"
-            width="77%"
+            width={['15rem', '76%']}
+            height={['2rem', '3.5rem']}
             borderRadius="M"
             border="1px solid #E4E4E7"
             display="flex"
@@ -92,20 +93,26 @@ const RequestPage: FC = () => {
             alignItems="center"
             justifyContent="flex-start"
           >
-            <Box cursor="pointer" padding="0.5rem" paddingRight="0">
-              <FiSearch size={24} />
+            <Box
+              cursor="pointer"
+              p="0.5rem"
+              pr="0"
+              height={['2rem', '3.5rem']}
+              width={['2rem', '3.5rem']}
+            >
+              <FiSearch size={'100%'} />
             </Box>
             <Input
               p="L"
               type="text"
+              fontSize={['0.5rem', '1rem']}
               border="none"
               borderRadius="M"
               outline="none"
               backgroundColor="transparent"
               mr={['NONE', 'S']}
-              ml={['NONE', 'S']}
               minWidth={['100%', '10rem']}
-              width={['30rem']}
+              width={['18rem', '30rem']}
               placeholder="Procurar por pedidos..."
               name="search"
             />
@@ -118,8 +125,9 @@ const RequestPage: FC = () => {
             variant="primary"
             fontWeight="bold"
             color="#FFF"
-            width={['10rem', 'NONE']}
-            minWidth={['100%', '10rem']}
+            height={['2rem', '3.5rem']}
+            width={['7rem', '10rem']}
+            fontSize={['0.5rem', '1rem']}
             borderRadius="M"
             marginTop="M"
             marginBottom="M"
@@ -133,7 +141,7 @@ const RequestPage: FC = () => {
             <FiPlus size={18} color="#FFF" />
           </Button>
         </Box>
-        <Box as="div" width="80%" height="100%" padding="0.5rem">
+        <Box as="div" width={['15rem', '76%']} height="100%" p="0.5rem">
           <Typography as="h2">Listagem de pedidos</Typography>
           <Table data={shortRequestInfo} columns={columns} />
           <Typography as="h4">Total da compra: 0,00 AOA</Typography>
@@ -181,6 +189,7 @@ const RequestPage: FC = () => {
                           effect="hover"
                           padding={['S', 'XL']}
                           margin={['S', 'M']}
+                          fontSize={['0.5rem', '1rem']}
                           width={['67rem']}
                           minWidth={['100%', '10rem']}
                           borderRadius="5px"
@@ -228,6 +237,7 @@ const RequestPage: FC = () => {
                     effect="hover"
                     display="flex"
                     variant="primary"
+                    fontSize={['0.5rem', '1rem']}
                     fontWeight="bold"
                     color="#FFF"
                     borderRadius="M"
@@ -258,6 +268,7 @@ const RequestPage: FC = () => {
                     justifyContent="center"
                     width={['15rem', 'NONE']}
                     minWidth={['100%', '10rem']}
+                    fontSize={['0.5rem', '1rem']}
                     alignItems="center"
                     onClick={handleOpenModalNewAddress}
                   >
@@ -314,6 +325,7 @@ const RequestPage: FC = () => {
                       ml={['NONE', 'S']}
                       minWidth={['100%', '10rem']}
                       width={['32rem']}
+                      fontSize={['0.5rem', '1rem']}
                       bg="transparent"
                       placeholder="Benguela"
                       {...register('address.province', {
@@ -354,6 +366,7 @@ const RequestPage: FC = () => {
                       p="L"
                       type="text"
                       outline="none"
+                      fontSize={['0.5rem', '1rem']}
                       borderRadius="M"
                       border="1px solid #E4E4E7"
                       color="textInverted"
@@ -408,6 +421,7 @@ const RequestPage: FC = () => {
                       p="L"
                       type="text"
                       outline="none"
+                      fontSize={['0.5rem', '1rem']}
                       borderRadius="M"
                       border="1px solid #E4E4E7"
                       color="textInverted"
@@ -450,6 +464,7 @@ const RequestPage: FC = () => {
                     p="L"
                     type="text"
                     outline="none"
+                    fontSize={['0.5rem', '1rem']}
                     borderRadius="M"
                     border="1px solid #E4E4E7"
                     color="textInverted"
@@ -493,6 +508,7 @@ const RequestPage: FC = () => {
                       p="L"
                       type="text"
                       outline="none"
+                      fontSize={['0.5rem', '1rem']}
                       borderRadius="M"
                       border="1px solid #E4E4E7"
                       color="textInverted"
@@ -530,6 +546,7 @@ const RequestPage: FC = () => {
                       p="L"
                       type="text"
                       outline="none"
+                      fontSize={['0.5rem', '1rem']}
                       borderRadius="M"
                       border="1px solid #E4E4E7"
                       color="textInverted"
@@ -567,6 +584,7 @@ const RequestPage: FC = () => {
                     effect="hover"
                     display="flex"
                     variant="primary"
+                    fontSize={['0.5rem', '1rem']}
                     color="#000"
                     borderRadius="M"
                     border="1px solid #E4E4E7"
@@ -594,6 +612,7 @@ const RequestPage: FC = () => {
                     bg="#4763E4"
                     ml="0.5rem"
                     mt="1rem"
+                    fontSize={['0.5rem', '1rem']}
                     justifyContent="center"
                     width={['12rem', 'NONE']}
                     minWidth={['100%', '10rem']}
@@ -710,6 +729,7 @@ const RequestPage: FC = () => {
                         p="L"
                         type="text"
                         outline="none"
+                        fontSize={['0.5rem', '1rem']}
                         borderRadius="M"
                         border="1px solid #E4E4E7"
                         color="textInverted"
@@ -748,6 +768,7 @@ const RequestPage: FC = () => {
                         p="L"
                         type="text"
                         outline="none"
+                        fontSize={['0.5rem', '1rem']}
                         borderRadius="M"
                         border="1px solid #E4E4E7"
                         color="textInverted"
@@ -793,6 +814,7 @@ const RequestPage: FC = () => {
                       <Input
                         p="L"
                         type="text"
+                        fontSize={['0.5rem', '1rem']}
                         borderRadius="M"
                         border="1px solid #E4E4E7"
                         color="textInverted"
@@ -844,6 +866,7 @@ const RequestPage: FC = () => {
                         p="L"
                         type="text"
                         outline="none"
+                        fontSize={['0.5rem', '1rem']}
                         borderRadius="M"
                         border="1px solid #E4E4E7"
                         color="textInverted"
@@ -882,6 +905,7 @@ const RequestPage: FC = () => {
                       <Input
                         p="L"
                         type="text"
+                        fontSize={['0.5rem', '1rem']}
                         borderRadius="M"
                         border="1px solid #E4E4E7"
                         color="textInverted"
@@ -925,6 +949,7 @@ const RequestPage: FC = () => {
                   border="1px solid #E4E4E7"
                   bg="transparent"
                   mt="1rem"
+                  fontSize={['0.5rem', '1rem']}
                   width={['10rem', 'NONE']}
                   minWidth={['100%', '10rem']}
                   display="flex"
@@ -940,6 +965,7 @@ const RequestPage: FC = () => {
                   type="button"
                   effect="hover"
                   variant="primary"
+                  fontSize={['0.5rem', '1rem']}
                   fontWeight="bold"
                   color="#FFF"
                   width={200}
@@ -1010,7 +1036,6 @@ const RequestPage: FC = () => {
         )}
         <Box
           as="div"
-          padding="0.5rem"
           width="100%"
           display="flex"
           justifyContent="space-between"
@@ -1018,7 +1043,7 @@ const RequestPage: FC = () => {
         >
           <Box
             as="div"
-            width="100%"
+            width="100vw"
             display="flex"
             justifyContent="space-between"
             alignItems="center"
@@ -1034,15 +1059,15 @@ const RequestPage: FC = () => {
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
-                height={30}
               >
                 <Button
-                  p="0.8rem"
+                  p={['0.4rem', '0.8rem']}
                   type="button"
+                  fontSize={['0.5rem', '1rem']}
                   effect="hover"
                   display="flex"
-                  width={10}
-                  height={10}
+                  width={['0.3rem', '0.9rem']}
+                  height={['0.3rem', '0.9rem']}
                   variant="primary"
                   color="#27272A"
                   bg="transparent"
@@ -1063,12 +1088,13 @@ const RequestPage: FC = () => {
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((pag) => {
                   return (
                     <Button
-                      p="0.8rem"
+                      p={['0.4rem', '0.8rem']}
                       type="button"
+                      fontSize={['0.5rem', '1rem']}
                       key={pag}
                       display="flex"
-                      width={10}
-                      height={10}
+                      width={['0.3rem', '0.9rem']}
+                      height={['0.3rem', '0.9rem']}
                       variant="primary"
                       color="#27272A"
                       bg="transparent"
@@ -1087,18 +1113,19 @@ const RequestPage: FC = () => {
                   );
                 })}
                 <Button
-                  p="0.8rem"
+                  p={['0.4rem', '0.8rem']}
                   type="button"
                   effect="hover"
                   display="flex"
-                  width={10}
-                  height={10}
+                  width={['0.3rem', '0.9rem']}
+                  height={['0.3rem', '0.9rem']}
                   variant="primary"
                   color="#27272A"
                   bg="transparent"
                   mt="M"
                   border="0.5px solid #E4E4E7"
                   mb="M"
+                  fontSize={['0.5rem', '1rem']}
                   justifyContent="center"
                   alignItems="center"
                   active={{
