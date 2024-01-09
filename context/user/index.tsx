@@ -1,4 +1,5 @@
-import { User } from 'firebase/auth';
+import { getLoggedInUser } from 'burnbase/auth';
+import type { User } from 'firebase/auth';
 import React, {
   createContext,
   FC,
@@ -10,7 +11,6 @@ import React, {
 } from 'react';
 import toast from 'react-hot-toast';
 
-import { isLoggedIn } from '../../api/auth';
 import { getUser } from '../../api/user';
 import useRerender from '../../hooks/use-rerender';
 import { IClient } from '../../interface';
@@ -33,7 +33,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     setLoading(true);
-    isLoggedIn().then(handleSetUserAuth).catch(toast.error);
+    getLoggedInUser().then(handleSetUserAuth).catch(toast.error);
   }, [userAuth, renderer]);
 
   const defaultData: IUserContext = {

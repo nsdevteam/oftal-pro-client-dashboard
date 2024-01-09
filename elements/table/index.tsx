@@ -1,77 +1,60 @@
-import styled from '@emotion/styled';
 import React, { FC } from 'react';
-import {
-  border,
-  color,
-  compose,
-  layout,
-  space,
-  typography,
-} from 'styled-system';
 
-import { TRowData, TTableHeadings } from '../../interface';
-
-const StyledTable = styled.table(
-  compose(color, space, border, layout, typography)
-);
-
-const StyledTableRow = styled.tr(
-  compose(color, space, border, layout, typography)
-);
-
-const StyledTableCell = styled.td(
-  compose(color, space, border, layout, typography)
-);
-
-type TableProps = {
-  data: Array<TRowData & { file: string }>;
-  columns: Array<keyof TTableHeadings>;
-};
-
-const HEADINGS: Record<keyof TTableHeadings, string> = {
-  patientName: 'Nome de pacitente',
-  geometry: 'Geometria',
-  indiceOfRefraction: 'Índice de refração',
-  color: 'Cor',
-  treatment: 'Tratamento',
-  diameter: 'Diâmetro',
-};
+import { TableProps } from '../../interface';
+import Box from '../box';
+import Typography from '../typography';
 
 const Table: FC<TableProps> = ({ data, columns }) => {
+  const columnKeys = Object.keys(columns);
+  const columnValues = Object.values(columns);
+
   return (
-    <div className="tableContent">
-      <StyledTable className="tableRequest" width="75vw">
-        <thead>
-          <tr>
-            {columns.map((column, index) => (
-              <StyledTableCell
+    <Box mt="1rem" width="100%">
+      <Box as="table" className="tableRequest" width="100%">
+        <Box as="thead">
+          <Box as="tr">
+            {columnValues.map((column, index) => (
+              <Box
+                as="th"
                 padding="1rem"
                 borderBottom="1px solid #E4E4E7"
                 color="#A1A1AA"
                 key={index}
               >
-                {HEADINGS[column]}
-              </StyledTableCell>
+                {column}
+              </Box>
             ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, rowIndex) => (
-            <StyledTableRow key={rowIndex}>
-              {columns.map((column, cellIndex) => (
-                <StyledTableCell
-                  padding="1rem"
-                  borderBottom="1px solid #E4E4E7"
-                  key={cellIndex}
-                >
-                  {row[column]}
-                </StyledTableCell>
-              ))}
-            </StyledTableRow>
-          ))}
-        </tbody>
-      </StyledTable>
-    </div>
+          </Box>
+        </Box>
+        <Box as="tbody">
+          {!data.length ? (
+            <Box as="tr" textAlign="center" py="2rem">
+              <td colSpan={columnKeys.length}>
+                <Box width="100%">
+                  <img src="/images/not-found.png" alt="Not found" />
+                </Box>
+                <Typography>Não foram encontrados resultados</Typography>
+              </td>
+            </Box>
+          ) : (
+            data.map((item, rowIndex) => (
+              <Box as="tr" key={rowIndex}>
+                {columnKeys.map((columnKey, cellIndex) => (
+                  <Box
+                    as="td"
+                    padding="1rem"
+                    borderBottom="1px solid #E4E4E7"
+                    key={cellIndex}
+                  >
+                    {item[columnKey]}
+                  </Box>
+                ))}
+              </Box>
+            ))
+          )}
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

@@ -1,8 +1,8 @@
+import { IQueryParams, IResponse, TOnSnapshot } from 'burnbase/firestore';
 import { UpdateData } from 'firebase/firestore';
 import { Dispatch, SetStateAction } from 'react';
 
 import { IClient } from '../../interface';
-import { IQueryParams, IResponse, TOnSnapshot } from '../utils/utils.protocol';
 
 export type TGetUser = (docId: string) => Promise<IClient>;
 

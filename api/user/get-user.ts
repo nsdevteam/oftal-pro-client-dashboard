@@ -1,4 +1,5 @@
-import { getDocument } from './../utils/index';
+import { getDocument } from 'burnbase/firestore';
+
 import { TGetUser } from './user.protocol';
 
 const collectionName = 'client';

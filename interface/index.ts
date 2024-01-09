@@ -50,7 +50,7 @@ export interface IndicesProps {
   size: string;
 }
 
-export interface IRequest extends IClient {
+export interface IOrder {
   leftSpherical?: number;
   leftCylinder?: number;
   leftAxis?: number;
@@ -76,19 +76,8 @@ export interface IRequest extends IClient {
   payment?: PaymentProps | undefined;
 }
 
-export type TTableHeadings = Pick<
-  IRequest,
-  | 'patientName'
-  | 'geometry'
-  | 'indiceOfRefraction'
-  | 'color'
-  | 'treatment'
-  | 'diameter'
->;
-
-export type TRowData = Record<
-  keyof TTableHeadings,
-  string | number | undefined
+export type TRowData = ReadonlyArray<
+  Record<string, string | number | undefined>
 >;
 
 export interface IClient {
@@ -98,5 +87,17 @@ export interface IClient {
   password?: string;
 }
 
+export interface IOrder {
+  id?: string;
+  fullName?: string;
+  email?: string;
+  password?: string;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IEmptyObject {}
+
+export interface TableProps {
+  data: TRowData;
+  columns: Record<string, string>;
+}

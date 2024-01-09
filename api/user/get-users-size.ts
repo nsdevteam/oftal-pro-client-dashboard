@@ -1,4 +1,5 @@
-import { getCollectionSize } from '../utils';
+import { getCollectionSize } from 'burnbase/firestore';
+
 import { TGetUsersSize } from './user.protocol';
 
 const userCollectionName = 'client';

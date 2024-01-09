@@ -1,3 +1,5 @@
+import '../api/init';
+
 import { Global, ThemeProvider } from '@emotion/react';
 import { AppProps } from 'next/app';
 import { ReactElement, StrictMode } from 'react';

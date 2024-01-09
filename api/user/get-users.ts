@@ -1,10 +1,11 @@
+import { getPagination } from 'burnbase/firestore';
+
 import { IClient } from '../../interface';
-import { pageGetter } from '../utils';
 import { TGetUsers } from './user.protocol';
 
 const userCollectionName = 'client';
 
-const getUsers: TGetUsers = pageGetter<IClient>(
+const getUsers: TGetUsers = getPagination<IClient>(
   userCollectionName
 ) as TGetUsers;
 

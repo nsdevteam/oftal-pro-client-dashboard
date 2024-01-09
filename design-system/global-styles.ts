@@ -39,13 +39,6 @@ const GlobalStyles = css`
       rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   }
 
-  .tableContent {
-    height: 23rem;
-    width: 85vw;
-    overflow-x: scroll;
-    margin-top: 1rem;
-  }
-
   .tableRequest thead {
     background: #f6f6f7;
     font-weight: bold;

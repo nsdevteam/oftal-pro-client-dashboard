@@ -1,9 +1,9 @@
+import { logout } from 'burnbase/auth';
 import Link from 'next/link';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import { logout } from '../../../api/auth';
 import { menuLink } from '../../../constants';
 import { useUser } from '../../../context/user';
 import colors from '../../../design-system/light-theme/colors';

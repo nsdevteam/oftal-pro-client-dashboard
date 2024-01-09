@@ -1,5 +1,6 @@
+import { updateDocument } from 'burnbase/firestore';
+
 import { IClient } from '../../interface';
-import { updateDocument } from '../utils';
 import { TUpdateUser } from './user.protocol';
 
 export const userCollectionName = 'accessData';
