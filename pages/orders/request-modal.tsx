@@ -67,261 +67,6 @@ const RequestModal: FC<{ isModalOpen: boolean; closeModal: () => void }> = ({
               justifyContent="flex-start"
               mt="0.5rem"
             >
-              <Typography padding="0.5rem">Olho esquerdo</Typography>
-              <Box
-                as="div"
-                display="flex"
-                flexDirection="row"
-                alignItems="flex-start"
-                justifyContent="flex-start"
-              >
-                <Box
-                  as="div"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  height="3.5rem"
-                >
-                  {selectLeftEye ? (
-                    <Input
-                      p="L"
-                      type="checkbox"
-                      outline="none"
-                      checked
-                      border="1px solid #E4E4E7"
-                      borderRadius="L"
-                      color="textInverted"
-                      mr={['NONE', 'S']}
-                      ml={['NONE', 'S']}
-                      minWidth={['100%', '5rem']}
-                      width={['5rem']}
-                      bg="transparent"
-                      nFocus={{
-                        borderColor: '#4763E4',
-                      }}
-                      onClick={handleToggleLeftEyeOption}
-                    />
-                  ) : (
-                    <Input
-                      p="L"
-                      type="checkbox"
-                      outline="none"
-                      border="1px solid #E4E4E7"
-                      borderRadius="L"
-                      color="textInverted"
-                      mr={['NONE', 'S']}
-                      ml={['NONE', 'S']}
-                      minWidth={['100%', '5rem']}
-                      width={['5rem']}
-                      bg="transparent"
-                      nFocus={{
-                        borderColor: '#4763E4',
-                      }}
-                      onClick={handleToggleLeftEyeOption}
-                    />
-                  )}
-                </Box>
-                <Input
-                  type="number"
-                  p="L"
-                  outline="none"
-                  border="1px solid #E4E4E7"
-                  borderRadius="M"
-                  color="textInverted"
-                  mr={['NONE', 'S']}
-                  ml={['NONE', 'S']}
-                  minWidth={['100%', '6.1rem']}
-                  width={['6.1rem']}
-                  bg="transparent"
-                  placeholder="Esf."
-                  nFocus={{
-                    borderColor: '#4763E4',
-                  }}
-                  {...register('leftSpherical', {
-                    min: {
-                      value: -35,
-                      message: 'O valor mínimo deve ser maior ou igual a -35',
-                    },
-                    max: {
-                      value: 20,
-                      message: 'O valor máximo deve ser menor ou igual a 20',
-                    },
-                  })}
-                  disabled={!selectLeftEye}
-                />
-                {errors.leftSpherical && (
-                  <Typography className="alertDanger">
-                    {errors.leftSpherical.message}
-                  </Typography>
-                )}
-                <Input
-                  type="number"
-                  p="L"
-                  outline="none"
-                  border="1px solid #E4E4E7"
-                  borderRadius="M"
-                  color="textInverted"
-                  mr={['NONE', 'S']}
-                  ml={['NONE', 'S']}
-                  minWidth={['100%', '6.1rem']}
-                  width={['6.1rem']}
-                  bg="transparent"
-                  placeholder="Cil."
-                  nFocus={{
-                    borderColor: '#4763E4',
-                  }}
-                  {...register('leftCylinder', {
-                    min: {
-                      value: -6,
-                      message: 'O valor mínimo deve ser maior ou igual a -6',
-                    },
-                    max: {
-                      value: 7,
-                      message: 'O valor máximo deve ser menor ou igual a 7',
-                    },
-                  })}
-                  disabled={!selectLeftEye}
-                />
-                {errors.leftCylinder && (
-                  <Typography className="alertDanger">
-                    {errors.leftCylinder.message}
-                  </Typography>
-                )}
-                <Input
-                  type="number"
-                  p="L"
-                  outline="none"
-                  border="1px solid #E4E4E7"
-                  borderRadius="M"
-                  color="textInverted"
-                  mr={['NONE', 'S']}
-                  ml={['NONE', 'S']}
-                  minWidth={['100%', '6.1rem']}
-                  width={['6.1rem']}
-                  bg="transparent"
-                  placeholder="Eix."
-                  nFocus={{
-                    borderColor: '#4763E4',
-                  }}
-                  {...register('leftAxis', {
-                    min: {
-                      value: 0,
-                      message: 'O valor mínimo deve ser maior ou igual a 0',
-                    },
-                    max: {
-                      value: 180,
-                      message: 'O valor máximo deve ser menor ou igual a 180',
-                    },
-                  })}
-                  disabled={!selectLeftEye}
-                />
-                {errors.leftAxis && (
-                  <Typography className="alertDanger">
-                    {errors.leftAxis.message}
-                  </Typography>
-                )}
-              </Box>
-            </Box>
-            <Box
-              as="div"
-              width="auto"
-              display="flex"
-              flexDirection="row"
-              alignItems="flex-start"
-              justifyContent="flex-start"
-            >
-              <Box
-                as="div"
-                width="auto"
-                display="flex"
-                flexDirection="column"
-                alignItems="flex-start"
-                justifyContent="flex-start"
-                marginLeft="3rem"
-              >
-                <Typography padding="0.5rem">Geometria/Superfície</Typography>
-                <Box
-                  as="div"
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="flex-start"
-                  alignItems="center"
-                  padding="0.5rem"
-                >
-                  <select
-                    className="selectType"
-                    {...register('geometry', {
-                      required: 'O campo de geometria deve ser preenchido',
-                    })}
-                  >
-                    {geometryData.map((geo) => {
-                      const { id, value } = geo;
-                      return (
-                        <option key={id} value={value}>
-                          {value}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  {errors.geometry && (
-                    <Typography className="alertDanger">
-                      {errors.geometry.message}
-                    </Typography>
-                  )}
-                </Box>
-              </Box>
-              <Box as="div" width="auto" display="flex" flexDirection="column">
-                <Typography padding="0.5rem">Índice de refração</Typography>
-                <Box
-                  as="div"
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="flex-start"
-                  alignItems="center"
-                  padding="0.5rem"
-                >
-                  <select
-                    className="selectType"
-                    {...register('indiceOfRefraction', {
-                      min: {
-                        value: '',
-                        message:
-                          'O campo de índice de refração deve ser preenchido',
-                      },
-                    })}
-                  >
-                    {refractionData.map(({ id, size }) => (
-                      <option key={id} value={size}>
-                        {size}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.indiceOfRefraction && (
-                    <Typography className="alertDanger">
-                      {errors.indiceOfRefraction.message}
-                    </Typography>
-                  )}
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-          <Box
-            as="div"
-            width="auto"
-            display="flex"
-            flexDirection="row"
-            alignItems="flex-start"
-            justifyContent="flex-start"
-          >
-            <Box
-              as="div"
-              width="auto"
-              display="flex"
-              flexDirection="column"
-              alignItems="flex-start"
-              justifyContent="flex-start"
-              mt="0.5rem"
-            >
               <Typography padding="0.5rem">Olho direito</Typography>
               <Box
                 as="div"
@@ -341,8 +86,8 @@ const RequestModal: FC<{ isModalOpen: boolean; closeModal: () => void }> = ({
                     <Input
                       p="L"
                       type="checkbox"
-                      checked
                       outline="none"
+                      checked
                       border="1px solid #E4E4E7"
                       borderRadius="L"
                       color="textInverted"
@@ -445,8 +190,6 @@ const RequestModal: FC<{ isModalOpen: boolean; closeModal: () => void }> = ({
                 <Input
                   type="number"
                   p="L"
-                  min="0"
-                  max="180"
                   outline="none"
                   border="1px solid #E4E4E7"
                   borderRadius="M"
@@ -475,6 +218,263 @@ const RequestModal: FC<{ isModalOpen: boolean; closeModal: () => void }> = ({
                 {errors.rightAxis && (
                   <Typography className="alertDanger">
                     {errors.rightAxis.message}
+                  </Typography>
+                )}
+              </Box>
+            </Box>
+            <Box
+              as="div"
+              width="auto"
+              display="flex"
+              flexDirection="row"
+              alignItems="flex-start"
+              justifyContent="flex-start"
+            >
+              <Box
+                as="div"
+                width="auto"
+                display="flex"
+                flexDirection="column"
+                alignItems="flex-start"
+                justifyContent="flex-start"
+                marginLeft="3rem"
+              >
+                <Typography padding="0.5rem">Geometria</Typography>
+                <Box
+                  as="div"
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="flex-start"
+                  alignItems="center"
+                  padding="0.5rem"
+                >
+                  <select
+                    className="selectType"
+                    {...register('geometry', {
+                      required: 'O campo de geometria deve ser preenchido',
+                    })}
+                  >
+                    {geometryData.map((geo) => {
+                      const { id, value } = geo;
+                      return (
+                        <option key={id} value={value}>
+                          {value}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  {errors.geometry && (
+                    <Typography className="alertDanger">
+                      {errors.geometry.message}
+                    </Typography>
+                  )}
+                </Box>
+              </Box>
+              <Box as="div" width="auto" display="flex" flexDirection="column">
+                <Typography padding="0.5rem">Índice de refração</Typography>
+                <Box
+                  as="div"
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="flex-start"
+                  alignItems="center"
+                  padding="0.5rem"
+                >
+                  <select
+                    className="selectType"
+                    {...register('indiceOfRefraction', {
+                      min: {
+                        value: '',
+                        message:
+                          'O campo de índice de refração deve ser preenchido',
+                      },
+                    })}
+                  >
+                    {refractionData.map(({ id, size }) => (
+                      <option key={id} value={size}>
+                        {size}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.indiceOfRefraction && (
+                    <Typography className="alertDanger">
+                      {errors.indiceOfRefraction.message}
+                    </Typography>
+                  )}
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+          <Box
+            as="div"
+            width="auto"
+            display="flex"
+            flexDirection="row"
+            alignItems="flex-start"
+            justifyContent="flex-start"
+          >
+            <Box
+              as="div"
+              width="auto"
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+              justifyContent="flex-start"
+              mt="0.5rem"
+            >
+              <Typography padding="0.5rem">Olho esquerdo</Typography>
+              <Box
+                as="div"
+                display="flex"
+                flexDirection="row"
+                alignItems="flex-start"
+                justifyContent="flex-start"
+              >
+                <Box
+                  as="div"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  height="3.5rem"
+                >
+                  {selectLeftEye ? (
+                    <Input
+                      p="L"
+                      type="checkbox"
+                      checked
+                      outline="none"
+                      border="1px solid #E4E4E7"
+                      borderRadius="L"
+                      color="textInverted"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
+                      minWidth={['100%', '5rem']}
+                      width={['5rem']}
+                      bg="transparent"
+                      nFocus={{
+                        borderColor: '#4763E4',
+                      }}
+                      onClick={handleToggleLeftEyeOption}
+                    />
+                  ) : (
+                    <Input
+                      p="L"
+                      type="checkbox"
+                      outline="none"
+                      border="1px solid #E4E4E7"
+                      borderRadius="L"
+                      color="textInverted"
+                      mr={['NONE', 'S']}
+                      ml={['NONE', 'S']}
+                      minWidth={['100%', '5rem']}
+                      width={['5rem']}
+                      bg="transparent"
+                      nFocus={{
+                        borderColor: '#4763E4',
+                      }}
+                      onClick={handleToggleLeftEyeOption}
+                    />
+                  )}
+                </Box>
+                <Input
+                  type="number"
+                  p="L"
+                  outline="none"
+                  border="1px solid #E4E4E7"
+                  borderRadius="M"
+                  color="textInverted"
+                  mr={['NONE', 'S']}
+                  ml={['NONE', 'S']}
+                  minWidth={['100%', '6.1rem']}
+                  width={['6.1rem']}
+                  bg="transparent"
+                  placeholder="Esf."
+                  nFocus={{
+                    borderColor: '#4763E4',
+                  }}
+                  {...register('leftSpherical', {
+                    min: {
+                      value: -35,
+                      message: 'O valor mínimo deve ser maior ou igual a -35',
+                    },
+                    max: {
+                      value: 20,
+                      message: 'O valor máximo deve ser menor ou igual a 20',
+                    },
+                  })}
+                  disabled={!selectLeftEye}
+                />
+                {errors.leftSpherical && (
+                  <Typography className="alertDanger">
+                    {errors.leftSpherical.message}
+                  </Typography>
+                )}
+                <Input
+                  type="number"
+                  p="L"
+                  outline="none"
+                  border="1px solid #E4E4E7"
+                  borderRadius="M"
+                  color="textInverted"
+                  mr={['NONE', 'S']}
+                  ml={['NONE', 'S']}
+                  minWidth={['100%', '6.1rem']}
+                  width={['6.1rem']}
+                  bg="transparent"
+                  placeholder="Cil."
+                  nFocus={{
+                    borderColor: '#4763E4',
+                  }}
+                  {...register('leftCylinder', {
+                    min: {
+                      value: -6,
+                      message: 'O valor mínimo deve ser maior ou igual a -6',
+                    },
+                    max: {
+                      value: 7,
+                      message: 'O valor máximo deve ser menor ou igual a 7',
+                    },
+                  })}
+                  disabled={!selectLeftEye}
+                />
+                {errors.leftCylinder && (
+                  <Typography className="alertDanger">
+                    {errors.leftCylinder.message}
+                  </Typography>
+                )}
+                <Input
+                  type="number"
+                  p="L"
+                  min="0"
+                  max="180"
+                  outline="none"
+                  border="1px solid #E4E4E7"
+                  borderRadius="M"
+                  color="textInverted"
+                  mr={['NONE', 'S']}
+                  ml={['NONE', 'S']}
+                  minWidth={['100%', '6.1rem']}
+                  width={['6.1rem']}
+                  bg="transparent"
+                  placeholder="Eix."
+                  nFocus={{
+                    borderColor: '#4763E4',
+                  }}
+                  {...register('leftAxis', {
+                    min: {
+                      value: 0,
+                      message: 'O valor mínimo deve ser maior ou igual a 0',
+                    },
+                    max: {
+                      value: 180,
+                      message: 'O valor máximo deve ser menor ou igual a 180',
+                    },
+                  })}
+                  disabled={!selectLeftEye}
+                />
+                {errors.leftAxis && (
+                  <Typography className="alertDanger">
+                    {errors.leftAxis.message}
                   </Typography>
                 )}
               </Box>
@@ -582,7 +582,7 @@ const RequestModal: FC<{ isModalOpen: boolean; closeModal: () => void }> = ({
               alignItems="flex-start"
             >
               <Typography textAlign="left" padding="0.5rem">
-                Nome do paciente
+                Nome do paciente / Referência
               </Typography>
               <Input
                 p="L"
@@ -789,54 +789,8 @@ const RequestModal: FC<{ isModalOpen: boolean; closeModal: () => void }> = ({
               flexDirection="column"
               justifyContent="flex-start"
               alignItems="flex-start"
-            >
-              <Typography textAlign="left" padding="0.5rem">
-                Referência de trabalho
-              </Typography>
-              <Input
-                p="L"
-                type="text"
-                outline="none"
-                borderRadius="M"
-                border="1px solid #E4E4E7"
-                color="textInverted"
-                mr={['NONE', 'S']}
-                ml={['NONE', 'S']}
-                minWidth={['100%', '10rem']}
-                width={['12.5rem']}
-                bg="transparent"
-                placeholder="23SW34B"
-                {...register('jobReference', {
-                  required:
-                    'Referência de trabalho  é obrigatório e deve conter letras maísculas e números',
-                  maxLength: {
-                    value: 8,
-                    message: 'O campo deve conter no máximo de 8 caracteres',
-                  },
-                  minLength: {
-                    value: 4,
-                    message: 'O campo deve conter no mínimo de 4 caracteres',
-                  },
-
-                  pattern: /^[A-Z0-9]+$/,
-                })}
-                nFocus={{
-                  borderColor: '#4763E4',
-                }}
-              />
-              {errors.jobReference && (
-                <Typography className="alertDanger">
-                  {errors.jobReference.message}
-                </Typography>
-              )}
-            </Box>
-            <Box
-              as="div"
-              display="flex"
-              flexDirection="column"
-              justifyContent="flex-start"
-              alignItems="flex-start"
               mt="2.1rem"
+              mr="12.5rem"
             >
               <FileName />
             </Box>
