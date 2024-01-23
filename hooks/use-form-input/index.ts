@@ -3,12 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
 import { address } from '../../constants';
-import {
-  AddressProps,
-  IRequest,
-  PaymentProps,
-  TRowData,
-} from '../../interface';
+import { AddressProps, IOrder, PaymentProps, TRowData } from '../../interface';
 import { useSubtotal } from '../use-subtotal';
 
 const id = uuidv4();
@@ -24,7 +19,7 @@ const useFormInput = () => {
   const [paymentSucceed, setPaymentSucceed] = useState<boolean>(false);
   const [selectLeftEye, setSelectLeftEye] = useState<boolean>(false);
   const [selectRightEye, setSelectRightEye] = useState<boolean>(false);
-  const [request, setRequest] = useState<Array<IRequest>>([]);
+  const [request, setRequest] = useState<Array<IOrder>>([]);
   const [addresses, setAddresses] = useState<AddressProps[]>(address);
   const [payment, setPayment] = useState<PaymentProps[] | null>(null);
   const [shortRequestInfo, setShortRequestInfo] = useState<
@@ -40,13 +35,13 @@ const useFormInput = () => {
     getValues,
     setValue,
     formState: { errors },
-  } = useForm<IRequest>({
+  } = useForm<IOrder>({
     reValidateMode: 'onBlur',
   });
 
   const subtotal = useSubtotal(control);
 
-  const onSubmit: SubmitHandler<IRequest> = (data) => {
+  const onSubmit: SubmitHandler<IOrder> = (data) => {
     try {
       if (data.treatment === 'UC') {
         setValue('indiceOfRefraction', 1.5);
@@ -58,7 +53,7 @@ const useFormInput = () => {
 
       const newRequest = [...request, data];
 
-      const mappedRequest: Array<TRowData & { file: string }> = newRequest.map(
+      const mappedRequest: Array<any> = newRequest.map(
         ({
           patientName,
           geometry,
