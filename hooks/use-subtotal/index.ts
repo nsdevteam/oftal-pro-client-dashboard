@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Control, useWatch } from 'react-hook-form';
 
-import { IRequest } from '../../interface';
+import { IOrder } from '../../interface';
 
-export const useSubtotal = (control: Control<IRequest, any>): number => {
+export const useSubtotal = (control: Control<IOrder, any>): number => {
   const { treatment, file } = useWatch({ control });
   const [treatmentAmount, setTreatmentAmount] = useState(0);
   const [recipeAmount, setRecipeAmount] = useState(0);
