@@ -50,7 +50,7 @@ const Input = forwardRef(
           </Box>
         )}
         <Box flex="1">
-          <InputField px="L" color="text" ref={ref} {...props} />
+          <InputField p="L" color="text" ref={ref} {...props} />
         </Box>
         {Suffix && (
           <Box

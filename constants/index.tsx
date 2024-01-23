@@ -14,7 +14,7 @@ const id = uuidv4();
 export const menuLink: MenuProps[] = [
   {
     id: 1,
-    url: '/request',
+    url: '/orders',
     title: 'Pedido',
     icon: <FiFileText size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
   },

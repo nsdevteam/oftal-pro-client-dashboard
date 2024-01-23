@@ -1,17 +1,24 @@
 import { FC, useEffect, useState } from 'react';
-import { FiPlus, FiSearch } from 'react-icons/fi';
+import {
+  FiChevronLeft,
+  FiChevronRight,
+  FiPlus,
+  FiSearch,
+} from 'react-icons/fi';
 
 import getAllOrders from '../../api/orders/get-all-orders';
 import { Box, Button, Input, Typography } from '../../elements';
 import { IOrder } from '../../interface';
+import OrderForm from './order-form';
 import OrderTable from './orders-table';
 
 const Orders: FC = () => {
+  const [isOpen, setOpen] = useState(false);
   const [orders, setOrders] = useState<ReadonlyArray<IOrder>>([]);
 
   useEffect(() => {
     getAllOrders().then(setOrders);
-  });
+  }, []);
 
   return (
     <Box
@@ -22,20 +29,19 @@ const Orders: FC = () => {
     >
       <Box display="flex" gap="2rem" flexDirection="column">
         <Box
-          as="div"
-          padding="0.5rem"
           width="100%"
           display="flex"
+          padding="0.5rem"
+          flexDirection="column"
+          alignItems="flex-start"
           justifyContent="space-between"
-          alignItems="flex-end"
         >
           <Box
-            width="77%"
+            width="100%"
             display="flex"
+            mr={['0', 'S']}
             borderRadius="M"
-            flexWrap="nowrap"
             overflow="hidden"
-            mr={['NONE', 'S']}
             alignItems="center"
             color="textInverted"
             border="1px solid #E4E4E7"
@@ -44,90 +50,89 @@ const Orders: FC = () => {
             <Box cursor="pointer" padding="0.5rem" paddingRight="0">
               <FiSearch size={24} />
             </Box>
-            <Input
-              p="L"
-              type="text"
-              border="none"
-              borderRadius="M"
-              outline="none"
-              backgroundColor="transparent"
-              mr={['NONE', 'S']}
-              ml={['NONE', 'S']}
-              minWidth={['100%', '10rem']}
-              width={['30rem']}
-              placeholder="Procurar por pedidos..."
-              name="search"
-            />
+            <Box display="flex" flexDirection="column" flex="1">
+              <Input
+                p="L"
+                type="search"
+                name="search"
+                mr={['0', 'S']}
+                ml={['0', 'S']}
+                borderRadius="M"
+                backgroundColor="transparent"
+                placeholder="Procurar por pedidos..."
+              />
+            </Box>
           </Box>
           <Button
             p="L"
-            type="button"
-            effect="hover"
+            my="M"
+            color="#FFF"
+            bg="#4763E4"
+            border="none"
             display="flex"
+            borderRadius="M"
             variant="primary"
             fontWeight="bold"
-            color="#FFF"
-            width={['10rem', 'NONE']}
-            minWidth={['100%', '10rem']}
-            borderRadius="M"
-            marginTop="M"
-            marginBottom="M"
-            border="none"
-            bg="#4763E4"
-            justifyContent="center"
             alignItems="center"
+            justifyContent="center"
+            onClick={() => setOpen(true)}
           >
-            Novo pedido
-            <FiPlus size={18} color="#FFF" />
+            <Typography as="span">Novo pedido</Typography>
+            <Typography as="span" ml="M">
+              <FiPlus size={18} color="#FFF" />
+            </Typography>
           </Button>
         </Box>
         <OrderTable data={orders} />
       </Box>
       <Box p="0.5rem" display="flex" justifyContent="space-between">
         <Typography as="h4">Total de resultados: {orders.length}</Typography>
-        {/* <Box display="flex" justifyContent="center" alignItems="center">
-          <Button
-            my="M"
-            p="0.3rem"
-            type="button"
-            effect="hover"
-            display="flex"
-            variant="primary"
-            color="#27272A"
-            bg="transparent"
-            alignItems="center"
-            border="0.5px solid #E4E4E7"
-            justifyContent="center"
-            active={{
-              background: '#4763E4',
-              color: '#FFF',
-            }}
-          >
-            <FiChevronLeft size={16} color="#27272A" />
-            <Typography>Anterior</Typography>
-          </Button>
-          <Button
-            my="M"
-            p="0.3rem"
-            type="button"
-            effect="hover"
-            display="flex"
-            variant="primary"
-            color="#27272A"
-            bg="transparent"
-            border="0.5px solid #E4E4E7"
-            justifyContent="center"
-            alignItems="center"
-            active={{
-              background: '#4763E4',
-              color: '#FFF',
-            }}
-          >
-            <Typography>Seguinte</Typography>
-            <FiChevronRight size={16} color="#27272A" />
-          </Button>
-        </Box> */}
+        {!!orders.length && (
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Button
+              my="M"
+              p="0.3rem"
+              type="button"
+              effect="hover"
+              display="flex"
+              variant="primary"
+              color="#27272A"
+              bg="transparent"
+              alignItems="center"
+              border="0.5px solid #E4E4E7"
+              justifyContent="center"
+              active={{
+                background: '#4763E4',
+                color: '#FFF',
+              }}
+            >
+              <FiChevronLeft size={16} color="#27272A" />
+              <Typography>Anterior</Typography>
+            </Button>
+            <Button
+              my="M"
+              p="0.3rem"
+              type="button"
+              effect="hover"
+              display="flex"
+              variant="primary"
+              color="#27272A"
+              bg="transparent"
+              border="0.5px solid #E4E4E7"
+              justifyContent="center"
+              alignItems="center"
+              active={{
+                background: '#4763E4',
+                color: '#FFF',
+              }}
+            >
+              <Typography>Seguinte</Typography>
+              <FiChevronRight size={16} color="#27272A" />
+            </Button>
+          </Box>
+        )}
       </Box>
+      {isOpen && <OrderForm closeForm={() => setOpen(false)} />}
     </Box>
   );
 };
