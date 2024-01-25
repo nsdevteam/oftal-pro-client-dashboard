@@ -15,6 +15,7 @@ interface IEye {
 export interface IOrderForm {
   leftEye: IEye;
   rightEye: IEye;
+  diameter: number;
   minimumHeight: string;
   prisma: 'true' | 'false';
   precal: 'true' | 'false';

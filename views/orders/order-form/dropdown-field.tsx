@@ -14,7 +14,6 @@ const DropdownField: FC<DropdownFieldProps> = ({ label, name, ...props }) => {
       <Typography>{label}</Typography>
       <Dropdown
         {...props}
-        label={label}
         defaultValue={fieldValue}
         onSelect={(value: string) => {
           setValue(name, value);

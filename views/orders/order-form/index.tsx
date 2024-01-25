@@ -4,7 +4,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 import {
   Attachment,
   Box,
-  Dropdown,
   Input,
   Textarea,
   Typography,
@@ -123,49 +122,35 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               </Box>
               <Box display="flex" flexDirection="column" gap="1rem">
                 <Typography>Diâmetro</Typography>
-                <Input borderRadius="0.8rem" border="1px solid #CDCDCD" />
-              </Box>
-              <Box display="flex" flexDirection="column" gap="1rem">
-                <Typography>Altura mínima</Typography>
-                <Dropdown
-                  values={['13', '15', '19', '21']}
-                  label="Altura mínima"
-                  onSelect={(value) => form.setValue('minimumHeight', value)}
+                <Input
+                  borderRadius="0.8rem"
+                  border="1px solid #CDCDCD"
+                  {...form.register('diameter')}
                 />
               </Box>
-              <Box display="flex" flexDirection="column" gap="1rem">
-                <Typography>Coloração</Typography>
-                <Dropdown
-                  label="Coloração"
-                  values={['true', 'false']}
-                  legend={{ true: 'Sim', false: 'Não' }}
-                  onSelect={(value) =>
-                    form.setValue('coloring', value as 'true' | 'false')
-                  }
-                />
-              </Box>
-              <Box display="flex" flexDirection="column" gap="1rem">
-                <Typography>Prisma</Typography>
-                <Dropdown
-                  label="Prisma"
-                  values={['true', 'false']}
-                  legend={{ true: 'Sim', false: 'Não' }}
-                  onSelect={(value) =>
-                    form.setValue('prisma', value as 'true' | 'false')
-                  }
-                />
-              </Box>
-              <Box display="flex" flexDirection="column" gap="1rem">
-                <Typography>Precal</Typography>
-                <Dropdown
-                  label="Precal"
-                  values={['true', 'false']}
-                  legend={{ true: 'Sim', false: 'Não' }}
-                  onSelect={(value) =>
-                    form.setValue('precal', value as 'true' | 'false')
-                  }
-                />
-              </Box>
+              <DropdownField
+                name="minimumHeight"
+                label="Altura mínima"
+                values={['13', '15', '19', '21']}
+              />
+              <DropdownField
+                name="coloring"
+                label="Coloração"
+                values={['true', 'false']}
+                legend={{ true: 'Sim', false: 'Não' }}
+              />
+              <DropdownField
+                name="prisma"
+                label="Prisma"
+                values={['true', 'false']}
+                legend={{ true: 'Sim', false: 'Não' }}
+              />
+              <DropdownField
+                name="precal"
+                label="Precal"
+                values={['true', 'false']}
+                legend={{ true: 'Sim', false: 'Não' }}
+              />
             </Box>
           </Box>
         </Box>

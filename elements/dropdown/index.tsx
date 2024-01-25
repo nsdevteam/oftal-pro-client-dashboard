@@ -44,7 +44,7 @@ const Dropdown: FC<DropdownProps> = ({
         cursor={disabled ? 'not-allowed' : 'pointer'}
       >
         <Typography as="span">
-          {defaultValue ? legend?.[defaultValue] ?? defaultValue : label}
+          {defaultValue ? legend?.[defaultValue] ?? defaultValue : label ?? ''}
         </Typography>
         <Typography as="span">
           <FiChevronDown size={24} color="#000" />
