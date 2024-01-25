@@ -1,4 +1,4 @@
-export const ADDITIONAL_VALUES = Array.from(
+export const ADDITION_VALUES = Array.from(
   { length: 13 },
   (_, index) => 0.5 + 0.25 * index
 );
@@ -15,7 +15,7 @@ export const SPHERICAL_VALUES = Array.from(
 
 export const AXIS_VALUES = Array.from({ length: 181 }, (_, index) => 0 + index);
 
-export const ADDITIONAL_VALUES_LEGEND = ADDITIONAL_VALUES.reduce(
+export const ADDITION_VALUES_LEGEND = ADDITION_VALUES.reduce(
   (acc, value) => ({
     ...acc,
     [value]: value.toFixed(2).replace('+', '').replace('.', ','),

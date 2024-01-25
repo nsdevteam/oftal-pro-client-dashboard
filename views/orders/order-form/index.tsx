@@ -75,7 +75,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                 />
               </Box>
               <Box display="flex" flexDirection="column" gap="1rem">
-                <Typography>Anexar Receita (Opcional)</Typography>
+                <Typography>Anexar Receita (Opcional com acréscimo)</Typography>
                 <Attachment
                   label="Adicionar ficheiro"
                   files={[] as unknown as FileList}

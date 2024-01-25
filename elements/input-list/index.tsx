@@ -7,6 +7,8 @@ import Typography from '../typography';
 import { InputListProps } from './input-list.types';
 
 const InputList: FC<InputListProps> = ({
+  min,
+  max,
   label,
   values,
   legend,
@@ -26,15 +28,17 @@ const InputList: FC<InputListProps> = ({
         minWidth="6rem"
         disabled={disabled}
         borderRadius="0.8rem"
-        max={Number(values[0])}
         border="1px solid #CDCDCD"
-        min={Number(values[values.length - 1])}
+        max={max ?? Number(values[0])}
+        {...(defaultValue && {
+          defaultValue: Number(defaultValue.replace('+', '').replace(',', '.')),
+        })}
         cursor={disabled ? 'not-allowed' : 'pointer'}
+        min={min ?? Number(values[values.length - 1])}
         onBlur={(e) => {
           const value = Number(e.target.value);
           onSelect(value > 0 ? `+${value.toFixed(2)}` : value.toFixed(2));
         }}
-        defaultValue={Number(defaultValue ?? '0')}
       />
       <Box id={listId} as="datalist">
         {values.map((value) => (

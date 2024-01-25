@@ -8,8 +8,8 @@ interface IEye {
   axis?: string;
   active: boolean;
   cylinder?: string;
+  addition?: string;
   spherical?: string;
-  additional?: string;
 }
 
 export interface IOrderForm {

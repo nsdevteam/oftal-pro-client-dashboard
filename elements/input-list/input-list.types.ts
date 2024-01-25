@@ -1,4 +1,6 @@
 export interface InputListProps {
+  max?: number;
+  min?: number;
   label: string;
   disabled?: boolean;
   defaultValue?: string;
