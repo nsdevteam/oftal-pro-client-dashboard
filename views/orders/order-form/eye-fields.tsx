@@ -1,18 +1,21 @@
 import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import { Box, Dropdown, Typography } from '../../../elements';
+import { Box, InputList, Typography } from '../../../elements';
 import {
   ADDITIONAL_VALUES,
   AXIS_VALUES,
   CYLINDER_VALUES,
+  CYLINDER_VALUES_LEGEND,
   SPHERICAL_VALUES,
+  SPHERICAL_VALUES_LEGEND,
 } from './order-form.data';
 import { EyeFieldsProps, IOrderForm } from './order-form.types';
 
 const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
   const { control, setValue } = useFormContext<IOrderForm>();
   const eye = useWatch({ control, name: name });
+  const type = useWatch({ control, name: 'type' });
 
   return (
     <Box display="flex" flexDirection="column" gap="1rem">
@@ -28,27 +31,29 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
           checked={eye.active}
           onClick={() => setValue(name, { active: !eye.active })}
         />
-        <Dropdown
-          label="Esf."
+        <InputList
+          label="Esférico"
           disabled={!eye.active}
           values={SPHERICAL_VALUES}
           defaultValue={eye.spherical}
+          legend={SPHERICAL_VALUES_LEGEND}
           onSelect={(value: string) => {
             setValue(`${name}.spherical`, Number(value) ? value : undefined);
           }}
         />
-        <Dropdown
-          label="Cil."
+        <InputList
+          label="Cilindro"
           disabled={!eye.active}
           values={CYLINDER_VALUES}
           defaultValue={eye.cylinder}
+          legend={CYLINDER_VALUES_LEGEND}
           onSelect={(value: string) => {
             setValue(`${name}.cylinder`, Number(value) ? value : undefined);
           }}
         />
         {eye.cylinder && (
-          <Dropdown
-            label="Eix."
+          <InputList
+            label="Eixo"
             values={AXIS_VALUES}
             disabled={!eye.active}
             defaultValue={eye.axis}
@@ -60,15 +65,18 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
             }}
           />
         )}
-        <Dropdown
-          label="Ad."
-          disabled={!eye.active}
-          values={ADDITIONAL_VALUES}
-          defaultValue={eye.additional}
-          onSelect={(value: string) => {
-            setValue(`${name}.additional`, value);
-          }}
-        />
+        {type !== 'single-focal' && (
+          <InputList
+            label="Adicional"
+            disabled={!eye.active}
+            values={ADDITIONAL_VALUES}
+            defaultValue={eye.additional}
+            legend={CYLINDER_VALUES_LEGEND}
+            onSelect={(value: string) => {
+              setValue(`${name}.additional`, value);
+            }}
+          />
+        )}
       </Box>
     </Box>
   );

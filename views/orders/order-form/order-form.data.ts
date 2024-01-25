@@ -1,22 +1,51 @@
-export const ADDITIONAL_VALUES = Array.from({ length: 13 }, (_, index) => {
-  const value = 0.5 + 0.25 * index;
-  return `${value > 0 ? '+' : ''}${value.toFixed(2)}`;
-});
+export const ADDITIONAL_VALUES = Array.from(
+  { length: 13 },
+  (_, index) => 0.5 + 0.25 * index
+);
 
-export const AXIS_VALUES = Array.from({ length: 181 }, (_, index) => {
-  const value = 0 + index;
-  return `${value}°`;
-});
+export const CYLINDER_VALUES = Array.from(
+  { length: 49 },
+  (_, index) => 6 - 0.25 * index
+);
 
-export const CYLINDER_VALUES = Array.from({ length: 49 }, (_, index) => {
-  const value = 6 - 0.25 * index;
-  return `${value > 0 ? '+' : ''}${value.toFixed(2)}`;
-});
+export const SPHERICAL_VALUES = Array.from(
+  { length: 161 },
+  (_, index) => 20 - 0.25 * index
+);
 
-export const SPHERICAL_VALUES = Array.from({ length: 161 }, (_, index) => {
-  const value = 20 - 0.25 * index;
-  return `${value > 0 ? '+' : ''}${value.toFixed(2)}`;
-});
+export const AXIS_VALUES = Array.from({ length: 181 }, (_, index) => 0 + index);
+
+export const ADDITIONAL_VALUES_LEGEND = ADDITIONAL_VALUES.reduce(
+  (acc, value) => ({
+    ...acc,
+    [value]: value.toFixed(2).replace('+', '').replace('.', ','),
+  }),
+  {}
+);
+
+export const CYLINDER_VALUES_LEGEND = CYLINDER_VALUES.reduce(
+  (acc, value) => ({
+    ...acc,
+    [value]: value.toFixed(2).replace('+', '').replace('.', ','),
+  }),
+  {}
+);
+
+export const SPHERICAL_VALUES_LEGEND = SPHERICAL_VALUES.reduce(
+  (acc, value) => ({
+    ...acc,
+    [value]: value.toFixed(2).replace('+', '').replace('.', ','),
+  }),
+  {}
+);
+
+export const AXIS_VALUES_LEGEND = AXIS_VALUES.reduce(
+  (acc, value) => ({
+    ...acc,
+    [value]: `${value}º`,
+  }),
+  {}
+);
 
 export const TREATMENT_VALUES = ['HMC', 'SHMC', 'UC', 'HC'];
 

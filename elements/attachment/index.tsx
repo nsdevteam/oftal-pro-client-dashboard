@@ -8,7 +8,7 @@ const Attachment: FC<AttachmentProps> = ({ label, files, onChange }) => {
     onChange(e.target.files ?? ([] as unknown as FileList));
 
   return (
-    <Box>
+    <Box as="label">
       <input
         multiple
         type="file"
@@ -20,22 +20,18 @@ const Attachment: FC<AttachmentProps> = ({ label, files, onChange }) => {
       />
       <Box display="flex" columnGap="8px" alignItems="center">
         <Box
-          as="label"
           color="#FFF"
-          fontWeight="bold"
-          fontSize="12px"
-          height="40px"
-          width="200px"
+          bg="#4763E4"
           padding="1rem"
+          display="flex"
           cursor="pointer"
+          fontWeight="bold"
+          fontSize="0.75rem"
+          alignItems="center"
+          borderRadius="0.8rem"
+          justifyContent="center"
           nHover={{ opacity: 0.8 }}
           aria-label="add attachment"
-          backgroundSize="contain"
-          backgroundRepeat="no-repeat"
-          backgroundImage="url(/add-an-attachment.png)"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
         >
           {label}
         </Box>
