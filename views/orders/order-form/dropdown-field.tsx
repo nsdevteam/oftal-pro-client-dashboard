@@ -4,7 +4,12 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { Box, Dropdown, Typography } from '../../../elements';
 import { DropdownFieldProps, IOrderForm } from './order-form.types';
 
-const DropdownField: FC<DropdownFieldProps> = ({ label, name, ...props }) => {
+const DropdownField: FC<DropdownFieldProps> = ({
+  label,
+  name,
+  isBoolean,
+  ...props
+}) => {
   const { control, setValue } = useFormContext<IOrderForm>();
 
   const fieldValue = useWatch({ control, name });
@@ -14,9 +19,9 @@ const DropdownField: FC<DropdownFieldProps> = ({ label, name, ...props }) => {
       <Typography>{label}</Typography>
       <Dropdown
         {...props}
-        defaultValue={fieldValue}
+        defaultValue={String(fieldValue ?? '')}
         onSelect={(value: string) => {
-          setValue(name, value);
+          setValue(name, isBoolean ? Boolean(value) : value);
         }}
       />
     </Box>

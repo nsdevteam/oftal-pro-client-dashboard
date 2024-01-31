@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FC } from 'react';
 
-import { Box, Typography } from '../index';
+import { Box, Button, Typography } from '../index';
 import { AttachmentProps } from './attachment.types';
 
 const Attachment: FC<AttachmentProps> = ({ label, files, onChange }) => {
@@ -19,22 +19,7 @@ const Attachment: FC<AttachmentProps> = ({ label, files, onChange }) => {
         accept=".doc,.pdf,.jpg,.jpeg,.png"
       />
       <Box display="flex" columnGap="8px" alignItems="center">
-        <Box
-          color="#FFF"
-          bg="#4763E4"
-          padding="1rem"
-          display="flex"
-          cursor="pointer"
-          fontWeight="bold"
-          fontSize="0.75rem"
-          alignItems="center"
-          borderRadius="0.8rem"
-          justifyContent="center"
-          nHover={{ opacity: 0.8 }}
-          aria-label="add attachment"
-        >
-          {label}
-        </Box>
+        <Button aria-label="add attachment">{label}</Button>
         {!!files.length && (
           <Typography color="white">{files.length}</Typography>
         )}

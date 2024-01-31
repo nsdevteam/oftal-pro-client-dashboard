@@ -17,8 +17,8 @@ export interface IOrderForm {
   rightEye: IEye;
   diameter: number;
   minimumHeight: string;
-  prisma: 'true' | 'false';
-  precal: 'true' | 'false';
+  prisma: boolean;
+  precal: boolean;
   coloring: 'true' | 'false';
   refractiveIndex: string | undefined;
   treatment: 'HMC' | 'SHMC' | 'UC' | 'HC';
@@ -41,4 +41,5 @@ export interface EyeFieldsProps {
 export interface DropdownFieldProps
   extends Pick<DropdownProps, 'label' | 'values' | 'legend' | 'disabled'> {
   name: keyof Omit<IOrderForm, 'leftEye' | 'rightEye'>;
+  isBoolean?: boolean;
 }

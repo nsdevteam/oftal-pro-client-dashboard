@@ -19,6 +19,7 @@ import {
   TYPE_VALUES,
 } from './order-form.data';
 import { IOrderForm, OrderFormProps } from './order-form.types';
+import OrderFormSubmit from './order-form-submit';
 
 const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
   const form = useForm<IOrderForm>({
@@ -134,18 +135,21 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                 values={['13', '15', '19', '21']}
               />
               <DropdownField
+                isBoolean
                 name="coloring"
                 label="Coloração"
                 values={['true', 'false']}
                 legend={{ true: 'Sim', false: 'Não' }}
               />
               <DropdownField
+                isBoolean
                 name="prisma"
                 label="Prisma"
                 values={['true', 'false']}
                 legend={{ true: 'Sim', false: 'Não' }}
               />
               <DropdownField
+                isBoolean
                 name="precal"
                 label="Precal"
                 values={['true', 'false']}
@@ -153,6 +157,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               />
             </Box>
           </Box>
+          <OrderFormSubmit />
         </Box>
       </Box>
     </FormProvider>
