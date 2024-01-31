@@ -106,20 +106,8 @@ const Sidebar: FC = () => {
           <Typography padding="0.5rem">{userData?.fullName}</Typography>
           <Typography padding="0.5rem">{userData?.email}</Typography>
           <Button
-            type="button"
-            effect="hover"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            variant="primary"
-            fontWeight="bold"
-            color="#FFF"
-            borderRadius="M"
-            border="none"
-            padding="0.8rem"
-            margin="0.5rem"
-            minWidth="90%"
             bg="#DC2626"
+            width="calc(100% - 2rem)"
             onClick={handleSubmit(handleLogout)}
           >
             Terminar a sessão

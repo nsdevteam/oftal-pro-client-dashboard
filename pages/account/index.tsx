@@ -225,26 +225,7 @@ const AccountPage: FC = () => (
               />
             </Box>
           </Box>
-          <Button
-            p="L"
-            type="submit"
-            effect="hover"
-            variant="primary"
-            fontWeight="bold"
-            color="#FFF"
-            width={['10rem', 'NONE']}
-            borderRadius="M"
-            border="none"
-            bg="#4763E4"
-            ml="1rem"
-            mt="2rem"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            minWidth={['100%', '10rem']}
-          >
-            Salvar
-          </Button>
+          <Button minWidth={['100%', '10rem']}>Salvar</Button>
         </Box>
       </Box>
     </Box>

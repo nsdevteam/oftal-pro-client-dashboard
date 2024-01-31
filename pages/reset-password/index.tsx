@@ -74,25 +74,7 @@ const ResetPasswordPage: FC = () => {
             </Typography>
           )}
         </Box>
-        <Button
-          p={['0.5rem', 'L']}
-          fontSize={['0.5rem', '1rem']}
-          type="submit"
-          effect="hover"
-          display="flex"
-          variant="primary"
-          fontWeight="bold"
-          color="#FFF"
-          my={['0.5rem', 'L']}
-          width={['18rem', '30rem']}
-          borderRadius="M"
-          border="none"
-          bg="#4763E4"
-          justifyContent="center"
-          alignItems="center"
-        >
-          Prosseguir &rarr;
-        </Button>
+        <Button>Prosseguir &rarr;</Button>
       </form>
       <Box
         as="div"

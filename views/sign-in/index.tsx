@@ -181,25 +181,7 @@ const Home: FC = () => {
         >
           Próximo passo
         </Typography>
-        <Button
-          p={['0.5rem', 'L']}
-          fontSize={['0.5rem', '1rem']}
-          type="submit"
-          effect="hover"
-          display="flex"
-          variant="primary"
-          fontWeight="bold"
-          color="#FFF"
-          my={['0.5rem', 'L']}
-          width={['18rem', '30rem']}
-          borderRadius="M"
-          border="none"
-          bg="#4763E4"
-          justifyContent="center"
-          alignItems="center"
-        >
-          Entrar &rarr;
-        </Button>
+        <Button width="100%">Entrar &rarr;</Button>
       </form>
       <Box
         as="div"

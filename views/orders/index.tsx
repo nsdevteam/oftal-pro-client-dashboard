@@ -63,20 +63,7 @@ const Orders: FC = () => {
               />
             </Box>
           </Box>
-          <Button
-            p="L"
-            my="M"
-            color="#FFF"
-            bg="#4763E4"
-            border="none"
-            display="flex"
-            borderRadius="M"
-            variant="primary"
-            fontWeight="bold"
-            alignItems="center"
-            justifyContent="center"
-            onClick={() => setOpen(true)}
-          >
+          <Button mt="L" onClick={() => setOpen(true)}>
             <Typography as="span">Novo pedido</Typography>
             <Typography as="span" ml="M">
               <FiPlus size={18} color="#FFF" />
@@ -89,43 +76,11 @@ const Orders: FC = () => {
         <Typography as="h4">Total de resultados: {orders.length}</Typography>
         {!!orders.length && (
           <Box display="flex" justifyContent="center" alignItems="center">
-            <Button
-              my="M"
-              p="0.3rem"
-              type="button"
-              effect="hover"
-              display="flex"
-              variant="primary"
-              color="#27272A"
-              bg="transparent"
-              alignItems="center"
-              border="0.5px solid #E4E4E7"
-              justifyContent="center"
-              active={{
-                background: '#4763E4',
-                color: '#FFF',
-              }}
-            >
+            <Button>
               <FiChevronLeft size={16} color="#27272A" />
               <Typography>Anterior</Typography>
             </Button>
-            <Button
-              my="M"
-              p="0.3rem"
-              type="button"
-              effect="hover"
-              display="flex"
-              variant="primary"
-              color="#27272A"
-              bg="transparent"
-              border="0.5px solid #E4E4E7"
-              justifyContent="center"
-              alignItems="center"
-              active={{
-                background: '#4763E4',
-                color: '#FFF',
-              }}
-            >
+            <Button>
               <Typography>Seguinte</Typography>
               <FiChevronRight size={16} color="#27272A" />
             </Button>
