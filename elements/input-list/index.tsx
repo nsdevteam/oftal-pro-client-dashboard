@@ -42,7 +42,7 @@ const InputList: FC<InputListProps> = ({
       />
       <Box id={listId} as="datalist">
         {values.map((value) => (
-          <option key={v4()} value={Number(value)}>
+          <option key={v4()} value={legend?.[value] ?? value}>
             {legend?.[value] ?? value}
           </option>
         ))}
