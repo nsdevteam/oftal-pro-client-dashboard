@@ -39,7 +39,7 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
         gap="0.5rem"
         display="grid"
         alignItems="center"
-        gridTemplateColumns="1rem 1fr 1fr 1fr 1fr"
+        gridTemplateColumns={['1rem 1fr 1fr', '1rem 1fr 1fr 1fr 1fr']}
       >
         <input
           type="checkbox"
@@ -96,6 +96,7 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
             setValue(`${name}.cylinder`, Number(value) ? value : undefined);
           }}
         />
+        <Box display={['block', 'none']} />
         {eye.cylinder && (
           <InputList
             label="Eixo"

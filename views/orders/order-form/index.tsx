@@ -41,15 +41,16 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
     <FormProvider {...form}>
       <Box
         inset="0"
-        p="2rem"
         bg="#0003"
         display="flex"
         position="fixed"
         onClick={closeForm}
         alignItems="center"
+        p={['1rem', '2rem']}
         justifyContent="center"
       >
         <Box
+          bg="white"
           top="2.5rem"
           width="3rem"
           height="3rem"
@@ -58,8 +59,9 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
           cursor="pointer"
           position="absolute"
           alignItems="center"
-          alignSelf="flex-start"
+          onClick={closeForm}
           borderRadius="0.5rem"
+          alignSelf="flex-start"
           justifyContent="center"
           border="1px solid #0002"
           nHover={{ borderColor: '#0005' }}
@@ -70,7 +72,6 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
         </Box>
         <Box
           py="XL"
-          px="4rem"
           bg="#fff"
           gap="3rem"
           width="100%"
@@ -79,6 +80,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
           overflowY="auto"
           borderRadius="1rem"
           flexDirection="column"
+          px={['1rem', '1rem', '4rem']}
           onClick={(e) => e.stopPropagation()}
         >
           <Typography>Novo Pedido</Typography>
@@ -88,11 +90,47 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
             rowGap="1.25rem"
             columnGap="2rem"
             alignItems="start"
-            gridTemplateColumns="1fr 1fr"
+            gridTemplateColumns={['1fr', '1fr', '1fr 1fr']}
           >
             <Box display="flex" gap="1.25rem" flexDirection="column">
               <EyeFields label="Olho Direito" name="rightEye" />
               <EyeFields label="Olho Esquerdo" name="leftEye" />
+            </Box>
+            <Box
+              display="grid"
+              rowGap="1.25rem"
+              columnGap="2rem"
+              gridTemplateColumns={['1fr 1fr', '1fr 1fr', '1fr 1fr 1fr 1fr']}
+            >
+              <Box gridColumn="2 span">
+                <DropdownField
+                  name="treatment"
+                  defaultValue="HMC"
+                  label="Tratamento"
+                  values={TREATMENT_VALUES}
+                />
+              </Box>
+              <Box gridColumn="2 span">
+                <DropdownField
+                  label="Tipo"
+                  name="type"
+                  values={TYPE_VALUES}
+                  legend={TYPE_LEGEND}
+                />
+              </Box>
+              <Box gridColumn="2 span">
+                <DropdownField
+                  label="Cor"
+                  name="color"
+                  values={COLOR_VALUES}
+                  legend={COLOR_LEGEND}
+                />
+              </Box>
+              <Box gridColumn="2 span">
+                <DropdownRefractiveField />
+              </Box>
+            </Box>
+            <Box display="flex" gap="1.25rem" flexDirection="column">
               <Box display="flex" flexDirection="column" gap="1rem">
                 <Typography>Nome do paciente/Referência</Typography>
                 <Input
@@ -136,35 +174,8 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               display="grid"
               rowGap="1.25rem"
               columnGap="2rem"
-              gridTemplateColumns="1fr 1fr 1fr 1fr"
+              gridTemplateColumns={['1fr 1fr', '1fr 1fr', '1fr 1fr 1fr 1fr']}
             >
-              <Box gridColumn="2 span">
-                <DropdownField
-                  name="treatment"
-                  defaultValue="HMC"
-                  label="Tratamento"
-                  values={TREATMENT_VALUES}
-                />
-              </Box>
-              <Box gridColumn="2 span">
-                <DropdownField
-                  label="Tipo"
-                  name="type"
-                  values={TYPE_VALUES}
-                  legend={TYPE_LEGEND}
-                />
-              </Box>
-              <Box gridColumn="2 span">
-                <DropdownField
-                  label="Cor"
-                  name="color"
-                  values={COLOR_VALUES}
-                  legend={COLOR_LEGEND}
-                />
-              </Box>
-              <Box gridColumn="2 span">
-                <DropdownRefractiveField />
-              </Box>
               <Box display="flex" flexDirection="column" gap="1rem">
                 <Typography>Diâmetro</Typography>
                 <Input
@@ -178,7 +189,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               </Box>
               <DropdownField
                 name="minimumHeight"
-                label="Altura mínima"
+                label="Altura mín"
                 values={['13', '15', '17', '19', '21']}
               />
               <DropdownField
@@ -195,7 +206,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                 values={['true', 'false']}
                 legend={{ true: 'Sim', false: 'Não' }}
               />
-              <Box gridColumn="1/-1" mt="7rem">
+              <Box gridColumn="1/-1" mt={['1rem', '7rem']}>
                 <OrderFormSubmit />
               </Box>
             </Box>
