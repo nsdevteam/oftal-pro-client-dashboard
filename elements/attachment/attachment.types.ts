@@ -1,5 +1,5 @@
 export interface AttachmentProps {
   label: string;
-  files: FileList;
+  files?: FileList;
   onChange: (file: FileList) => void;
 }

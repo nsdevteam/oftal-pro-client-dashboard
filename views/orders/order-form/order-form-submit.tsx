@@ -47,7 +47,9 @@ const OrderFormSubmit: FC = () => {
 
   return (
     <Box display="flex" flexDirection="column" alignItems="flex-end" gap="2rem">
-      <Typography>Subtotal: {formatMoney(total)} AOA</Typography>
+      <Typography fontSize="1.5rem">
+        Subtotal: {formatMoney(total)} AOA
+      </Typography>
       <Button>Prosseguir</Button>
     </Box>
   );

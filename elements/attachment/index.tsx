@@ -20,7 +20,7 @@ const Attachment: FC<AttachmentProps> = ({ label, files, onChange }) => {
       />
       <Box display="flex" columnGap="8px" alignItems="center">
         <Button aria-label="add attachment">{label}</Button>
-        {!!files.length && (
+        {!!files?.length && (
           <Typography color="white">{files.length}</Typography>
         )}
       </Box>

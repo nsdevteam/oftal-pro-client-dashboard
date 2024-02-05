@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import {
@@ -22,10 +22,18 @@ import { IOrderForm, OrderFormProps } from './order-form.types';
 import OrderFormSubmit from './order-form-submit';
 
 const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
+  const [precal, setPrecal] = useState<FileList>();
+  const [attachment, setAttachment] = useState<FileList>();
+
   const form = useForm<IOrderForm>({
     defaultValues: {
       rightEye: { active: true },
       leftEye: { active: true },
+      diameter: 70,
+      prisma: false,
+      coloring: false,
+      treatment: 'HMC',
+      minimumHeight: '17',
     },
   });
 
@@ -41,6 +49,25 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
         alignItems="center"
         justifyContent="center"
       >
+        <Box
+          top="2.5rem"
+          width="3rem"
+          height="3rem"
+          right="3.5rem"
+          display="flex"
+          cursor="pointer"
+          position="absolute"
+          alignItems="center"
+          alignSelf="flex-start"
+          borderRadius="0.5rem"
+          justifyContent="center"
+          border="1px solid #0002"
+          nHover={{ borderColor: '#0005' }}
+        >
+          <Box fontSize="2rem" transform="scaleY(0.8)">
+            X
+          </Box>
+        </Box>
         <Box
           py="XL"
           px="4rem"
@@ -74,15 +101,31 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                   placeholder="Firmino Miguel"
                 />
               </Box>
-              <Box display="flex" flexDirection="column" gap="1rem">
-                <Typography>Anexar Receita (Opcional com acréscimo)</Typography>
-                <Attachment
-                  label="Adicionar ficheiro"
-                  files={[] as unknown as FileList}
-                  onChange={() => {
-                    console.log();
-                  }}
-                />
+              <Box display="grid" gridTemplateColumns="1fr 1fr">
+                <Box display="flex" flexDirection="column" gap="1rem">
+                  <Typography>
+                    Anexar Receita (Opcional com acréscimo)
+                  </Typography>
+                  <Attachment
+                    files={attachment}
+                    label="Adicionar ficheiro"
+                    onChange={(files) => {
+                      setAttachment(files);
+                    }}
+                  />
+                </Box>
+                <Box display="flex" flexDirection="column" gap="1rem">
+                  <Typography>
+                    Anexar Precal (Opcional com acréscimo)
+                  </Typography>
+                  <Attachment
+                    files={precal}
+                    label="Adicionar ficheiro"
+                    onChange={(files) => {
+                      setPrecal(files);
+                    }}
+                  />
+                </Box>
               </Box>
               <Box display="flex" flexDirection="column" gap="1rem">
                 <Typography>Observações</Typography>
@@ -98,6 +141,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               <Box gridColumn="2 span">
                 <DropdownField
                   name="treatment"
+                  defaultValue="HMC"
                   label="Tratamento"
                   values={TREATMENT_VALUES}
                 />
@@ -124,6 +168,9 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               <Box display="flex" flexDirection="column" gap="1rem">
                 <Typography>Diâmetro</Typography>
                 <Input
+                  min="50"
+                  max="80"
+                  type="number"
                   borderRadius="0.8rem"
                   border="1px solid #CDCDCD"
                   {...form.register('diameter')}
@@ -132,7 +179,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               <DropdownField
                 name="minimumHeight"
                 label="Altura mínima"
-                values={['13', '15', '19', '21']}
+                values={['13', '15', '17', '19', '21']}
               />
               <DropdownField
                 isBoolean
@@ -148,16 +195,11 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                 values={['true', 'false']}
                 legend={{ true: 'Sim', false: 'Não' }}
               />
-              <DropdownField
-                isBoolean
-                name="precal"
-                label="Precal"
-                values={['true', 'false']}
-                legend={{ true: 'Sim', false: 'Não' }}
-              />
+              <Box gridColumn="1/-1" mt="7rem">
+                <OrderFormSubmit />
+              </Box>
             </Box>
           </Box>
-          <OrderFormSubmit />
         </Box>
       </Box>
     </FormProvider>

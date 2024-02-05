@@ -21,7 +21,7 @@ const DropdownField: FC<DropdownFieldProps> = ({
         {...props}
         defaultValue={String(fieldValue ?? '')}
         onSelect={(value: string) => {
-          setValue(name, isBoolean ? Boolean(value) : value);
+          setValue(name, isBoolean ? JSON.parse(value) : value);
         }}
       />
     </Box>

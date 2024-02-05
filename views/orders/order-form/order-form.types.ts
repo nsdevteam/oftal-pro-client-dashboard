@@ -15,11 +15,11 @@ interface IEye {
 export interface IOrderForm {
   leftEye: IEye;
   rightEye: IEye;
-  diameter: number;
-  minimumHeight: string;
+  precal: string;
   prisma: boolean;
-  precal: boolean;
-  coloring: 'true' | 'false';
+  diameter: number;
+  coloring: boolean;
+  minimumHeight: string;
   refractiveIndex: string | undefined;
   treatment: 'HMC' | 'SHMC' | 'UC' | 'HC';
   color: 'white' | 'photochromatic' | 'transitions' | 'polarised';
@@ -39,7 +39,10 @@ export interface EyeFieldsProps {
 }
 
 export interface DropdownFieldProps
-  extends Pick<DropdownProps, 'label' | 'values' | 'legend' | 'disabled'> {
+  extends Pick<
+    DropdownProps,
+    'label' | 'values' | 'legend' | 'disabled' | 'defaultValue'
+  > {
   name: keyof Omit<IOrderForm, 'leftEye' | 'rightEye'>;
   isBoolean?: boolean;
 }

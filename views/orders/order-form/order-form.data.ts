@@ -131,7 +131,7 @@ export const BASE_PRICE: Record<
 > = {
   //LENTE: [UNIFOCAL, BOOST, DYNAMIC, EXTENDED, OFFICE, INVISBLE, BIFOCAL]
   '0:1.5': [8_000, 15_000, 16_000, 17_000, 16_000, 16_000, 13_500],
-  '0:1.5 Lenticular+': [8_000, null, null, null, null, null, null],
+  '0:1.5 Lenticular+': [25_000, null, null, null, null, null, null],
   '0:1.56': [9_000, 16_000, 17_000, 18_000, 17_000, 17_000, 14_500],
   '0:1.56 UV420 Blue Cut': [
     17_000,
@@ -220,7 +220,7 @@ export const EXTRA_PRICE = {
   UC: -2000,
   HC: -1000,
   prisma: 2000,
-  offset: 2000,
   cil: 2000,
   precal: 2000,
+  receita: 5000,
 };
