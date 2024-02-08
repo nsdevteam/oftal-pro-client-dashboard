@@ -1,14 +1,13 @@
-import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 import { FiBell, FiX } from 'react-icons/fi';
 
 import { notification } from '../../../constants';
+import colors from '../../../design-system/light-theme/colors';
 import { Box, ModalNotification, Typography } from '../../../elements';
-import { ChevronRightSVG } from '../../svg';
-import { BREADCRUMB_DATA } from './header.data';
+import { LogoSVG, MenuSVG } from '../../svg';
+import { HeaderProps } from '../layout.types';
 
-const Header: FC = () => {
-  const { pathname } = useRouter();
+const Header: FC<HeaderProps> = ({ setOpenMenu }) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = () => setModalOpen(true);
@@ -17,33 +16,28 @@ const Header: FC = () => {
 
   return (
     <Box
+      px="1rem"
       as="header"
       width="100%"
       display="flex"
-      justifyContent="space-between"
       alignItems="center"
-      padding="1rem"
+      justifyContent="space-between"
     >
-      <Box display="flex" alignItems="center" gap="1rem">
-        {BREADCRUMB_DATA[pathname]?.map((item, index) => (
-          <>
-            {!!index && (
-              <ChevronRightSVG
-                maxWidth="0.6rem"
-                maxHeight="0.6rem"
-                width="100%"
-              />
-            )}
-            <Typography
-              as="span"
-              p="0.5rem"
-              key={index}
-              color={index ? '#4658AC' : 'inherit'}
-            >
-              {item}
-            </Typography>
-          </>
-        ))}
+      <Box
+        cursor="pointer"
+        display={['block', 'block', 'none']}
+        onClick={() => setOpenMenu((v) => !v)}
+      >
+        <MenuSVG maxWidth="1.5rem" maxHeight="1.5rem" width="100%%" />
+      </Box>
+      <Box
+        py="2rem"
+        height={35}
+        display="inline-flex"
+        alignItems="center"
+        background={colors.foreground}
+      >
+        <LogoSVG width={200} height={30} />
       </Box>
       <Box>
         <Box

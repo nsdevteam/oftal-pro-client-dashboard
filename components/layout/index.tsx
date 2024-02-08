@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { useUser } from '../../context/user';
 import { Box } from '../../elements';
@@ -11,6 +11,7 @@ import Sidebar from './sidebar';
 const Layout: FC<LayoutProps> = ({ pageTitle = '', children }) => {
   const { push } = useRouter();
   const { userAuth, loading } = useUser();
+  const [isOpenMenu, setOpenMenu] = useState(false);
   const title = `${pageTitle} | Dashboard do cliente`;
 
   useEffect(() => {
@@ -23,16 +24,10 @@ const Layout: FC<LayoutProps> = ({ pageTitle = '', children }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{title}</title>
       </Head>
-      <Box height="100vh" display="flex">
-        <Sidebar />
-        <Box
-          width="100%"
-          height="100vh"
-          display="flex"
-          flexDirection="column"
-          justifyContent="flex-start"
-        >
-          <Header />
+      <Box height="100vh" display="flex" flexDirection="column">
+        <Header setOpenMenu={setOpenMenu} />
+        <Box width="100%" display="flex" flex="1" overflow="hidden">
+          <Sidebar isOpenMenu={isOpenMenu} />
           <Box
             flex="1"
             p="2rem"
