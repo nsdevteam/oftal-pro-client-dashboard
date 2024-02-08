@@ -29,6 +29,8 @@ const Sidebar: FC<SidebarProps> = ({ isOpenMenu }) => {
   return (
     <Box
       as="aside"
+      top="4rem"
+      bottom="0"
       flexDirection="column"
       alignItems="flex-start"
       color={colors.foreground}
