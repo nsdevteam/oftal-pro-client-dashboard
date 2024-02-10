@@ -43,6 +43,10 @@ export interface DropdownFieldProps
     DropdownProps,
     'label' | 'values' | 'legend' | 'disabled' | 'defaultValue'
   > {
-  name: keyof Omit<IOrderForm, 'leftEye' | 'rightEye'>;
   isBoolean?: boolean;
+  name: keyof Omit<IOrderForm, 'leftEye' | 'rightEye'>;
+  allowed?: [
+    keyof Omit<IOrderForm, 'leftEye' | 'rightEye'>,
+    ReadonlyArray<string | number>
+  ];
 }

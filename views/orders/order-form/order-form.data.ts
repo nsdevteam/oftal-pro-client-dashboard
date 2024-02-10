@@ -223,4 +223,8 @@ export const EXTRA_PRICE = {
   cil: 2000,
   precal: 2000,
   receita: 5000,
+  'color_1.5': 3000,
+  'color_1.56': 3000,
+  'color_1.6': 4000,
+  'color_1.67': 5000,
 };

@@ -14,12 +14,12 @@ import EyeFields from './eye-fields';
 import {
   COLOR_LEGEND,
   COLOR_VALUES,
-  TREATMENT_VALUES,
   TYPE_LEGEND,
   TYPE_VALUES,
 } from './order-form.data';
 import { IOrderForm, OrderFormProps } from './order-form.types';
 import OrderFormSubmit from './order-form-submit';
+import TreatmentDropdownField from './treatment-dropdown-field';
 
 const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
   const [precal, setPrecal] = useState<FileList>();
@@ -103,12 +103,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               gridTemplateColumns={['1fr 1fr', '1fr 1fr', '1fr 1fr 1fr 1fr']}
             >
               <Box gridColumn="2 span">
-                <DropdownField
-                  name="treatment"
-                  defaultValue="HMC"
-                  label="Tratamento"
-                  values={TREATMENT_VALUES}
-                />
+                <TreatmentDropdownField />
               </Box>
               <Box gridColumn="2 span">
                 <DropdownField
@@ -198,6 +193,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                 label="Coloração"
                 values={['true', 'false']}
                 legend={{ true: 'Sim', false: 'Não' }}
+                allowed={['refractiveIndex', ['1.5', '1.56', '1.6', '1.67']]}
               />
               <DropdownField
                 isBoolean

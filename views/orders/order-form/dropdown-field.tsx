@@ -1,18 +1,32 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Box, Dropdown, Typography } from '../../../elements';
 import { DropdownFieldProps, IOrderForm } from './order-form.types';
 
 const DropdownField: FC<DropdownFieldProps> = ({
-  label,
   name,
+  label,
+  allowed,
   isBoolean,
   ...props
 }) => {
   const { control, setValue } = useFormContext<IOrderForm>();
 
   const fieldValue = useWatch({ control, name });
+
+  const validatorValues = useWatch({
+    control,
+    name: allowed?.[0] as keyof Omit<IOrderForm, 'leftEye' | 'rightEye'>,
+  });
+
+  useEffect(() => {
+    if (allowed && validatorValues) {
+      if (!allowed[1].includes(validatorValues as string | number)) {
+        setValue(name, false);
+      }
+    }
+  }, [fieldValue, validatorValues]);
 
   return (
     <Box display="flex" flexDirection="column" gap="1rem">

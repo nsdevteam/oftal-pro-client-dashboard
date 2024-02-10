@@ -20,6 +20,7 @@ const OrderFormSubmit: FC = () => {
     treatment,
     refractiveIndex,
     color,
+    coloring,
     type,
     precal,
     prisma,
@@ -43,6 +44,11 @@ const OrderFormSubmit: FC = () => {
     (hasCylinderGreaterThan4 ? EXTRA_PRICE.cil : 0) +
     (precal ? EXTRA_PRICE.precal : 0) +
     (prisma ? EXTRA_PRICE.prisma : 0) +
+    (coloring
+      ? EXTRA_PRICE[
+          `color_${refractiveIndex as '1.5' | '1.56' | '1.6' | '1.67'}`
+        ] ?? 0
+      : 0) +
     (EXTRA_PRICE[treatment as keyof typeof EXTRA_PRICE] ?? 0);
 
   return (
