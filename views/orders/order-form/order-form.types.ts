@@ -13,6 +13,7 @@ interface IEye {
 }
 
 export interface IOrderForm {
+  ref: string;
   leftEye: IEye;
   rightEye: IEye;
   precal: string;

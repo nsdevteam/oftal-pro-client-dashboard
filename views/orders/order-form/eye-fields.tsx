@@ -97,21 +97,19 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
           }}
         />
         <Box display={['block', 'none']} />
-        {eye.cylinder && (
-          <InputList
-            label="Eixo"
-            values={AXIS_VALUES}
-            disabled={!eye.active}
-            defaultValue={eye.axis}
-            legend={AXIS_VALUES_LEGEND}
-            onSelect={(value: string) => {
-              setValue(
-                `${name}.axis`,
-                Number(value.slice(0, -1)) ? value : undefined
-              );
-            }}
-          />
-        )}
+        <InputList
+          label="Eixo"
+          values={AXIS_VALUES}
+          disabled={!eye.active}
+          defaultValue={eye.axis}
+          legend={AXIS_VALUES_LEGEND}
+          onSelect={(value: string) => {
+            setValue(
+              `${name}.axis`,
+              Number(value.slice(0, -1)) ? value : undefined
+            );
+          }}
+        />
         {type !== 'single-focal' && isAddition && (
           <InputList
             label="Adição"

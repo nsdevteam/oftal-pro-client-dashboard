@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import {
@@ -129,9 +129,15 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               <Box display="flex" flexDirection="column" gap="1rem">
                 <Typography>Nome do paciente/Referência</Typography>
                 <Input
+                  max="21"
                   borderRadius="0.8rem"
                   border="1px solid #CDCDCD"
                   placeholder="Firmino Miguel"
+                  {...form.register('ref', {
+                    onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                      form.setValue('ref', e.target?.value.slice(0, 21));
+                    },
+                  })}
                 />
               </Box>
               <Box display="grid" gridTemplateColumns="1fr 1fr">
