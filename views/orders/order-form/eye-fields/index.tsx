@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import { Box, InputList, Typography } from '../../../elements';
+import { Box, InputList, Typography } from '../../../../elements';
 import {
   ADDITION_VALUES,
   ADDITION_VALUES_LEGEND,
@@ -9,10 +9,9 @@ import {
   AXIS_VALUES_LEGEND,
   CYLINDER_VALUES,
   CYLINDER_VALUES_LEGEND,
-  SPHERICAL_VALUES,
-  SPHERICAL_VALUES_LEGEND,
-} from './order-form.data';
-import { EyeFieldsProps, IOrderForm } from './order-form.types';
+} from '../order-form.data';
+import { EyeFieldsProps, IOrderForm } from '../order-form.types';
+import EyeSpherical from './eye-spherical';
 
 const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
   const [isAddition, setAddition] = useState(true);
@@ -46,46 +45,7 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
           defaultChecked={eye.active}
           onClick={() => setValue(name, { active: !eye.active })}
         />
-        <Box display="flex" flexDirection="column" gap="0.5rem">
-          <InputList
-            disabled={!eye.active}
-            values={SPHERICAL_VALUES}
-            defaultValue={eye.spherical}
-            legend={SPHERICAL_VALUES_LEGEND}
-            label={`Esférico ${isAddition ? '' : '(longe)'}`}
-            onSelect={(value: string) => {
-              setValue(`${name}.spherical`, value ?? undefined);
-            }}
-          />
-          {!isAddition && (
-            <InputList
-              disabled={!eye.active}
-              legend={SPHERICAL_VALUES_LEGEND}
-              min={Number(eye.spherical) + 0.5}
-              max={Number(eye.spherical) + 3.5}
-              label={`Esférico ${isAddition ? '' : '(perto)'}`}
-              defaultValue={String(
-                Number(eye.spherical?.replace('+', '').replace(',', '.')) +
-                  Number(eye.addition?.replace('+', '').replace(',', '.'))
-              )}
-              values={SPHERICAL_VALUES.filter(
-                (value) =>
-                  value >=
-                    Number(eye.spherical?.replace('+', '').replace(',', '.')) +
-                      0.5 &&
-                  value <=
-                    Number(eye.spherical?.replace('+', '').replace(',', '.')) +
-                      3.5
-              )}
-              onSelect={(value: string) => {
-                setValue(
-                  `${name}.addition`,
-                  `${Math.abs(Number(eye.spherical) - Number(value))}`
-                );
-              }}
-            />
-          )}
-        </Box>
+        <EyeSpherical name={name} isAddition={isAddition} />
         <InputList
           label="Cilindro"
           disabled={!eye.active}
@@ -93,7 +53,13 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
           legend={CYLINDER_VALUES_LEGEND}
           defaultValue={eye.cylinder?.replace('+', '').replace(',', '.')}
           onSelect={(value: string) => {
-            setValue(`${name}.cylinder`, Number(value) ? value : undefined);
+            const validValue = Number(value) - (Number(value) % 0.25);
+            const isPositive = validValue > 0;
+
+            setValue(
+              `${name}.cylinder`,
+              `${isPositive ? '+' : ''}${validValue.toFixed(2)}`
+            );
           }}
         />
         <Box display={['block', 'none']} />
@@ -118,7 +84,9 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
             defaultValue={eye.addition}
             legend={ADDITION_VALUES_LEGEND}
             onSelect={(value: string) => {
-              setValue(`${name}.addition`, value);
+              const validValue = Number(value) - (Number(value) % 0.25);
+
+              setValue(`${name}.addition`, `+${validValue.toFixed(2)}`);
             }}
           />
         )}
