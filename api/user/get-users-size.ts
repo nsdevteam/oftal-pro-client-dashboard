@@ -1,8 +1,7 @@
 import { getCollectionSize } from 'burnbase/firestore';
 
 import { TGetUsersSize } from './user.protocol';
-
-const userCollectionName = 'client';
+import { userCollectionName } from './user.utils';
 
 const getEntitiesSize: TGetUsersSize = (setter, queryParams) =>
   getCollectionSize(userCollectionName, setter, queryParams);

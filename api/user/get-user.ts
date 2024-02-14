@@ -1,11 +1,10 @@
 import { getDocument } from 'burnbase/firestore';
 
 import { TGetUser } from './user.protocol';
-
-const collectionName = 'client';
+import { userCollectionName } from './user.utils';
 
 const getUser: TGetUser = (docId) =>
-  getDocument(collectionName, docId)
+  getDocument(userCollectionName, docId)
     .then((snapshot) => snapshot.data())
     .catch((error) => error);
 

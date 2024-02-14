@@ -1,10 +1,11 @@
 import { User } from 'firebase/auth';
 
-import { IClient } from '../../interface';
+import { IClient, IUserPrices } from '../../interface';
 
 export interface IUserContext {
   loading: boolean;
-  userData: IClient;
   userAuth: User | null;
+  userData: IClient | null;
+  prices: IUserPrices | null;
   forceVerifyLogin: () => void;
 }

@@ -2,8 +2,7 @@ import { getPagination } from 'burnbase/firestore';
 
 import { IClient } from '../../interface';
 import { TGetUsers } from './user.protocol';
-
-const userCollectionName = 'client';
+import { userCollectionName } from './user.utils';
 
 const getUsers: TGetUsers = getPagination<IClient>(
   userCollectionName

@@ -1,17 +1,14 @@
 import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
+import { useUser } from '../../../context/user';
 import { Box, Button, Typography } from '../../../elements';
 import { formatMoney } from '../../../utils';
-import {
-  BASE_PRICE,
-  COLOR_VALUES,
-  EXTRA_PRICE,
-  TYPE_VALUES,
-} from './order-form.data';
+import { COLOR_VALUES, TYPE_VALUES } from './order-form.data';
 import { IOrderForm } from './order-form.types';
 
 const OrderFormSubmit: FC = () => {
+  const { prices } = useUser();
   const { control } = useFormContext<IOrderForm>();
 
   const {
@@ -38,18 +35,19 @@ const OrderFormSubmit: FC = () => {
       Number(rightEye?.cylinder ?? 0) > 4 ||
       Number(rightEye?.cylinder ?? 0) < -4);
 
-  const total =
-    (BASE_PRICE[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0) +
-    (BASE_PRICE[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0) +
-    (hasCylinderGreaterThan4 ? EXTRA_PRICE.cil : 0) +
-    (precal ? EXTRA_PRICE.precal : 0) +
-    (prisma ? EXTRA_PRICE.prisma : 0) +
-    (coloring
-      ? EXTRA_PRICE[
-          `color_${refractiveIndex as '1.5' | '1.56' | '1.6' | '1.67'}`
-        ] ?? 0
-      : 0) +
-    (EXTRA_PRICE[treatment as keyof typeof EXTRA_PRICE] ?? 0);
+  const total = prices
+    ? (prices.lens[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0) +
+      (prices.lens[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0) +
+      (hasCylinderGreaterThan4 ? prices.extra.cil : 0) +
+      (precal ? prices.extra.precal : 0) +
+      (prisma ? prices.extra.prisma : 0) +
+      (coloring
+        ? prices.extra[
+            `color_${refractiveIndex as '1.5' | '1.56' | '1.6' | '1.67'}`
+          ] ?? 0
+        : 0) +
+      (prices.extra[treatment as keyof typeof prices.extra] ?? 0)
+    : 0;
 
   return (
     <Box display="flex" flexDirection="column" alignItems="flex-end" gap="2rem">

@@ -81,17 +81,14 @@ export type TRowData = ReadonlyArray<
 >;
 
 export interface IClient {
-  id?: string;
-  fullName?: string;
-  email?: string;
-  password?: string;
+  email: string;
+  fullName: string;
+  clientId: `CL${number}`;
 }
 
-export interface IOrder {
-  id?: string;
-  fullName?: string;
-  email?: string;
-  password?: string;
+export interface IUserPrices {
+  extra: Record<string, number>;
+  lens: Record<string, ReadonlyArray<number | null>>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
