@@ -1,8 +1,17 @@
 import React, { FC } from 'react';
 
 import { TableProps } from '../../interface';
+import {
+  COLOR_LEGEND,
+  TYPE_LEGEND,
+} from '../../views/orders/order-form/order-form.data';
 import Box from '../box';
 import Typography from '../typography';
+
+const legends = {
+  type: TYPE_LEGEND,
+  color: COLOR_LEGEND,
+};
 
 const Table: FC<TableProps> = ({ data, columns }) => {
   const columnKeys = Object.keys(columns);
@@ -46,7 +55,7 @@ const Table: FC<TableProps> = ({ data, columns }) => {
                     borderBottom="1px solid #E4E4E7"
                     key={cellIndex}
                   >
-                    {item[columnKey]}
+                    {legends[columnKey]?.[item[columnKey]] ?? item[columnKey]}
                   </Box>
                 ))}
               </Box>

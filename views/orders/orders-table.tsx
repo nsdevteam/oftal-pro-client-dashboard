@@ -4,9 +4,9 @@ import { Box, Table, Typography } from '../../elements';
 import { IOrder, TRowData } from '../../interface';
 
 const HEADINGS: Record<string, string> = {
-  patientName: 'Nome de pacitente',
-  geometry: 'Geometria',
-  indiceOfRefraction: 'Índice de refração',
+  ref: 'Ref/Nome de pacitente',
+  type: 'Tipo',
+  refractiveIndex: 'Índice de refração',
   color: 'Cor',
   treatment: 'Tratamento',
   diameter: 'Diâmetro',

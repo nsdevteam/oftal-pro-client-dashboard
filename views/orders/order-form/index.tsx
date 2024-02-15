@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import {
@@ -22,9 +22,6 @@ import OrderFormSubmit from './order-form-submit';
 import TreatmentDropdownField from './treatment-dropdown-field';
 
 const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
-  const [precal, setPrecal] = useState<FileList>();
-  const [attachment, setAttachment] = useState<FileList>();
-
   const form = useForm<IOrderForm>({
     defaultValues: {
       rightEye: { active: true },
@@ -146,11 +143,9 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                     Anexar Receita (Opcional com acréscimo)
                   </Typography>
                   <Attachment
-                    files={attachment}
                     label="Adicionar ficheiro"
-                    onChange={(files) => {
-                      setAttachment(files);
-                    }}
+                    files={form.getValues('recipe')}
+                    onChange={(files) => form.setValue('recipe', files)}
                   />
                 </Box>
                 <Box display="flex" flexDirection="column" gap="1rem">
@@ -158,17 +153,17 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                     Anexar Precal (Opcional com acréscimo)
                   </Typography>
                   <Attachment
-                    files={precal}
                     label="Adicionar ficheiro"
-                    onChange={(files) => {
-                      setPrecal(files);
-                    }}
+                    files={form.getValues('precal')}
+                    onChange={(files) => form.setValue('precal', files)}
                   />
                 </Box>
               </Box>
               <Box display="flex" flexDirection="column" gap="1rem">
                 <Typography>Observações</Typography>
-                <Textarea />
+                <Textarea
+                  onChange={(e) => form.setValue('observation', e.target.value)}
+                />
               </Box>
             </Box>
             <Box
@@ -185,7 +180,19 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                   type="number"
                   borderRadius="0.8rem"
                   border="1px solid #CDCDCD"
-                  {...form.register('diameter')}
+                  {...form.register('diameter', {
+                    onBlur: (e) => {
+                      const numericValue = Number(e.target.value);
+                      form.setValue(
+                        'diameter',
+                        numericValue > 80
+                          ? 80
+                          : numericValue < 50
+                          ? 50
+                          : numericValue
+                      );
+                    },
+                  })}
                 />
               </Box>
               <DropdownField

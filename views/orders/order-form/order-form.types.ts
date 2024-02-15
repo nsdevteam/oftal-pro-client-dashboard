@@ -14,12 +14,14 @@ interface IEye {
 
 export interface IOrderForm {
   ref: string;
-  leftEye: IEye;
-  rightEye: IEye;
-  precal: string;
+  leftEye?: IEye;
+  rightEye?: IEye;
   prisma: boolean;
+  precal?: FileList;
+  recipe?: FileList;
   diameter: number;
   coloring: boolean;
+  observation: string;
   minimumHeight: string;
   refractiveIndex: string | undefined;
   treatment: 'HMC' | 'SHMC' | 'UC' | 'HC';

@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Box, InputList } from '../../../../elements';
-import { SPHERICAL_VALUES, SPHERICAL_VALUES_LEGEND } from '../order-form.data';
 import { IOrderForm } from '../order-form.types';
 
 const EyeSpherical: FC<{
@@ -19,9 +18,7 @@ const EyeSpherical: FC<{
     <Box display="flex" flexDirection="column" gap="0.5rem">
       <InputList
         disabled={!active}
-        values={SPHERICAL_VALUES}
         defaultValue={spherical}
-        legend={SPHERICAL_VALUES_LEGEND}
         label={`Esférico ${isAddition ? '' : '(longe)'}`}
         onSelect={(value: string) => {
           const validValue = Number(value) - (Number(value) % 0.25);
@@ -36,27 +33,29 @@ const EyeSpherical: FC<{
       {!isAddition && (
         <InputList
           disabled={!active}
-          legend={SPHERICAL_VALUES_LEGEND}
-          min={Number(spherical) + 0.5}
-          max={Number(spherical) + 3.5}
           label={`Esférico ${isAddition ? '' : '(perto)'}`}
           defaultValue={String(
-            Number(spherical?.replace('+', '').replace(',', '.')) +
-              Number(addition?.replace('+', '').replace(',', '.'))
-          )}
-          values={SPHERICAL_VALUES.filter(
-            (value) =>
-              value >=
-                Number(spherical?.replace('+', '').replace(',', '.')) + 0.5 &&
-              value <=
-                Number(spherical?.replace('+', '').replace(',', '.')) + 3.5
+            (
+              Number(spherical?.replace('+', '').replace(',', '.') ?? '0') +
+              Number(addition?.replace('+', '').replace(',', '.') ?? '0')
+            ).toFixed(2)
           )}
           onSelect={(value: string) => {
+            const validSpherical = Number(
+              spherical?.replace('+', '').replace(',', '.')
+            );
             const validValue = Number(value) - (Number(value) % 0.25);
+
+            const additionRaw = Math.abs(validSpherical - validValue);
 
             setValue(
               `${name}.addition`,
-              `${Math.abs(Number(spherical) - validValue)}`
+              `+${(additionRaw > 3.5
+                ? 3.5
+                : additionRaw < 0.5
+                ? 0.5
+                : additionRaw - (additionRaw % 0.25)
+              ).toFixed(2)}`
             );
           }}
         />

@@ -1,23 +1,27 @@
 import { FC, useEffect, useState } from 'react';
 import {
-  FiChevronLeft,
-  FiChevronRight,
+  // FiChevronLeft,
+  // FiChevronRight,
   FiPlus,
   FiSearch,
 } from 'react-icons/fi';
 
 import getAllOrders from '../../api/orders/get-all-orders';
+import { useUser } from '../../context/user';
 import { Box, Button, Input, Typography } from '../../elements';
 import { IOrder } from '../../interface';
 import OrderForm from './order-form';
 import OrderTable from './orders-table';
 
 const Orders: FC = () => {
+  const { userData } = useUser();
   const [isOpen, setOpen] = useState(false);
   const [orders, setOrders] = useState<ReadonlyArray<IOrder>>([]);
 
   useEffect(() => {
-    getAllOrders().then(setOrders);
+    getAllOrders({ conditions: [['clientId', '==', userData?.clientId]] }).then(
+      setOrders
+    );
   }, []);
 
   return (
@@ -74,7 +78,7 @@ const Orders: FC = () => {
       </Box>
       <Box p="0.5rem" display="flex" justifyContent="space-between">
         <Typography as="h4">Total de resultados: {orders.length}</Typography>
-        {!!orders.length && (
+        {/* {!!orders.length && (
           <Box display="flex" justifyContent="center" alignItems="center">
             <Button>
               <FiChevronLeft size={16} color="#27272A" />
@@ -85,7 +89,7 @@ const Orders: FC = () => {
               <FiChevronRight size={16} color="#27272A" />
             </Button>
           </Box>
-        )}
+        )} */}
       </Box>
       {isOpen && <OrderForm closeForm={() => setOpen(false)} />}
     </Box>

@@ -2,14 +2,6 @@ import { FC, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Box, InputList, Typography } from '../../../../elements';
-import {
-  ADDITION_VALUES,
-  ADDITION_VALUES_LEGEND,
-  AXIS_VALUES,
-  AXIS_VALUES_LEGEND,
-  CYLINDER_VALUES,
-  CYLINDER_VALUES_LEGEND,
-} from '../order-form.data';
 import { EyeFieldsProps, IOrderForm } from '../order-form.types';
 import EyeSpherical from './eye-spherical';
 
@@ -49,9 +41,7 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
         <InputList
           label="Cilindro"
           disabled={!eye.active}
-          values={CYLINDER_VALUES}
-          legend={CYLINDER_VALUES_LEGEND}
-          defaultValue={eye.cylinder?.replace('+', '').replace(',', '.')}
+          defaultValue={eye.cylinder}
           onSelect={(value: string) => {
             const validValue = Number(value) - (Number(value) % 0.25);
             const isPositive = validValue > 0;
@@ -65,14 +55,18 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
         <Box display={['block', 'none']} />
         <InputList
           label="Eixo"
-          values={AXIS_VALUES}
           disabled={!eye.active}
           defaultValue={eye.axis}
-          legend={AXIS_VALUES_LEGEND}
           onSelect={(value: string) => {
+            const validValue = Number(value.replace('°', ''));
+
             setValue(
               `${name}.axis`,
-              Number(value.slice(0, -1)) ? value : undefined
+              validValue > 180
+                ? '180°'
+                : validValue < 0
+                ? '0°'
+                : `${validValue}°`
             );
           }}
         />
@@ -80,13 +74,19 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
           <InputList
             label="Adição"
             disabled={!eye.active}
-            values={ADDITION_VALUES}
             defaultValue={eye.addition}
-            legend={ADDITION_VALUES_LEGEND}
             onSelect={(value: string) => {
               const validValue = Number(value) - (Number(value) % 0.25);
 
-              setValue(`${name}.addition`, `+${validValue.toFixed(2)}`);
+              setValue(
+                `${name}.addition`,
+                `+${(validValue > 3.5
+                  ? 3.5
+                  : validValue < 0.5
+                  ? 0.5
+                  : validValue - (validValue % 0.25)
+                ).toFixed(2)}`
+              );
             }}
           />
         )}
