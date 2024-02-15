@@ -55,7 +55,8 @@ const Table: FC<TableProps> = ({ data, columns }) => {
                     borderBottom="1px solid #E4E4E7"
                     key={cellIndex}
                   >
-                    {legends[columnKey]?.[item[columnKey]] ?? item[columnKey]}
+                    {(legends as any)[columnKey]?.[item[columnKey] as any] ??
+                      item[columnKey]}
                   </Box>
                 ))}
               </Box>
