@@ -34,14 +34,14 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
       >
         <input
           type="checkbox"
-          defaultChecked={eye.active}
-          onClick={() => setValue(name, { active: !eye.active })}
+          defaultChecked={eye?.active}
+          onClick={() => setValue(name, { active: !eye?.active })}
         />
         <EyeSpherical name={name} isAddition={isAddition} />
         <InputList
           label="Cilindro"
-          disabled={!eye.active}
-          defaultValue={eye.cylinder}
+          disabled={!eye?.active}
+          defaultValue={eye?.cylinder}
           onSelect={(value: string) => {
             const validValue = Number(value) - (Number(value) % 0.25);
             const isPositive = validValue > 0;
@@ -55,8 +55,8 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
         <Box display={['block', 'none']} />
         <InputList
           label="Eixo"
-          disabled={!eye.active}
-          defaultValue={eye.axis}
+          disabled={!eye?.active}
+          defaultValue={eye?.axis}
           onSelect={(value: string) => {
             const validValue = Number(value.replace('°', ''));
 
@@ -73,8 +73,8 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
         {type !== 'single-focal' && isAddition && (
           <InputList
             label="Adição"
-            disabled={!eye.active}
-            defaultValue={eye.addition}
+            disabled={!eye?.active}
+            defaultValue={eye?.addition}
             onSelect={(value: string) => {
               const validValue = Number(value) - (Number(value) % 0.25);
 
