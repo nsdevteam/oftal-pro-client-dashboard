@@ -5,6 +5,7 @@ import { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
+import { updateUser } from '../../api/user';
 import { EyeSlashSVG, EyeSVG } from '../../components/svg';
 import LogoSVG from '../../components/svg/logo';
 import { RoutePaths, RoutesEnum } from '../../constants/routes';
@@ -32,7 +33,9 @@ const Home: FC = () => {
     try {
       const { email, password } = getValues();
 
-      await loginWithEmailAndPassword(email, password);
+      await loginWithEmailAndPassword(email, password).then((credential) =>
+        updateUser(credential.user.uid, { lastLoginAt: Date.now() })
+      );
 
       forceVerifyLogin();
       reset();

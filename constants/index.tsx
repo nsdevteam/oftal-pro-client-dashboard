@@ -1,4 +1,4 @@
-import { FiCreditCard, FiFileText, FiSettings } from 'react-icons/fi';
+import { FiCreditCard, FiFileText } from 'react-icons/fi';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -23,12 +23,6 @@ export const menuLink: MenuProps[] = [
     url: '/account',
     title: 'Contas',
     icon: <FiCreditCard size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
-  },
-  {
-    id: 3,
-    url: '/setting',
-    title: 'Configurações',
-    icon: <FiSettings size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
   },
 ];
 
