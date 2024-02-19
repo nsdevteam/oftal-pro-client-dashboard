@@ -39,8 +39,12 @@ const OrderFormSubmit: FC = () => {
       Number(rightEye?.cylinder ?? 0) < -4);
 
   const total = prices
-    ? (prices.lens[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0) +
-      (prices.lens[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0) +
+    ? (leftEye?.active
+        ? prices.lens[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0
+        : 0) +
+      (rightEye?.active
+        ? prices.lens[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0
+        : 0) +
       (hasCylinderGreaterThan4 ? prices.extra.cil : 0) +
       (recipe?.length ? prices.extra.receita : 0) +
       (precal?.length ? prices.extra.precal : 0) +
