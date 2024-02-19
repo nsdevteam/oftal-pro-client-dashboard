@@ -39,22 +39,18 @@ const OrderFormSubmit: FC = () => {
       Number(rightEye?.cylinder ?? 0) < -4);
 
   const total = prices
-    ? (leftEye?.active
-        ? prices.lens[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0
-        : 0) +
-      (rightEye?.active
-        ? prices.lens[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0
-        : 0) +
-      (hasCylinderGreaterThan4 ? prices.extra.cil : 0) +
-      (recipe?.length ? prices.extra.receita : 0) +
-      (precal?.length ? prices.extra.precal : 0) +
-      (prisma ? prices.extra.prisma : 0) +
-      (coloring
-        ? prices.extra[
-            `color_${refractiveIndex as '1.5' | '1.56' | '1.6' | '1.67'}`
-          ] ?? 0
-        : 0) +
-      (prices.extra[treatment as keyof typeof prices.extra] ?? 0)
+    ? ((prices.lens[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0) +
+        (hasCylinderGreaterThan4 ? prices.extra.cil : 0) +
+        (recipe?.length ? prices.extra.receita : 0) +
+        (precal?.length ? prices.extra.precal : 0) +
+        (prisma ? prices.extra.prisma : 0) +
+        (coloring
+          ? prices.extra[
+              `color_${refractiveIndex as '1.5' | '1.56' | '1.6' | '1.67'}`
+            ] ?? 0
+          : 0) +
+        (prices.extra[treatment as keyof typeof prices.extra] ?? 0)) *
+      ((leftEye?.active ? 1 : 0) + (rightEye?.active ? 1 : 0))
     : 0;
 
   const handleSubmit = async () => {

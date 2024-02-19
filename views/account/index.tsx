@@ -7,19 +7,19 @@ import { Box, Button, Input, Typography } from '../../elements';
 
 const Account: FC = () => {
   const { userData, userAuth } = useUser();
-  const allNames = userData!.fullName.split(' ');
+  const allNames = userData?.fullName.split(' ') ?? [''];
   const { register, getValues } = useForm({
     defaultValues: {
       firstName:
         allNames.length < 4 ? allNames[0] : allNames.slice(0, -2).join(' '),
       lastName:
         allNames.length < 3 ? allNames[1] ?? '' : allNames.slice(-2).join(' '),
-      email: userData!.email,
-      phone: userData!.phoneNumber,
-      lastLoginAt: userData!.lastLoginAt
-        ? new Date(userData!.lastLoginAt)
+      email: userData?.email ?? '',
+      phone: userData?.phoneNumber ?? '',
+      lastLoginAt: userData?.lastLoginAt
+        ? new Date(userData.lastLoginAt)
         : '--',
-      createdAt: userData!.createdAt ? new Date(userData!.createdAt) : '--',
+      createdAt: userData?.createdAt ? new Date(userData.createdAt) : '--',
     },
   });
 
