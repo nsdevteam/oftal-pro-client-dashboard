@@ -195,11 +195,15 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                   })}
                 />
               </Box>
-              <DropdownField
-                name="minimumHeight"
-                label="Altura mín"
-                values={['13', '15', '17', '19', '21']}
-              />
+              {!['single-focal', 'bifocal'].includes(
+                form.getValues('type')
+              ) && (
+                <DropdownField
+                  name="minimumHeight"
+                  label="Altura mín"
+                  values={['13', '15', '17', '19', '21']}
+                />
+              )}
               <DropdownField
                 isBoolean
                 name="coloring"
