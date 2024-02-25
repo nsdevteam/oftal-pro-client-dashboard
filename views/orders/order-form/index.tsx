@@ -11,6 +11,7 @@ import {
 import DropdownField from './dropdown-field';
 import DropdownRefractiveField from './dropdown-refractive-field';
 import EyeFields from './eye-fields';
+import MinimumHeightField from './min-height-field';
 import {
   COLOR_LEGEND,
   COLOR_VALUES,
@@ -195,15 +196,6 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                   })}
                 />
               </Box>
-              {!['single-focal', 'bifocal'].includes(
-                form.getValues('type')
-              ) && (
-                <DropdownField
-                  name="minimumHeight"
-                  label="Altura mín"
-                  values={['13', '15', '17', '19', '21']}
-                />
-              )}
               <DropdownField
                 isBoolean
                 name="coloring"
@@ -219,6 +211,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                 values={['true', 'false']}
                 legend={{ true: 'Sim', false: 'Não' }}
               />
+              <MinimumHeightField />
               <Box gridColumn="1/-1" mt={['1rem', '7rem']}>
                 <OrderFormSubmit />
               </Box>
