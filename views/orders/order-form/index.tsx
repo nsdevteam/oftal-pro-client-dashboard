@@ -127,13 +127,12 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               <Box display="flex" flexDirection="column" gap="1rem">
                 <Typography>Nome do paciente/Referência</Typography>
                 <Input
-                  max="21"
                   borderRadius="0.8rem"
                   border="1px solid #CDCDCD"
                   placeholder="Firmino Miguel"
                   {...form.register('ref', {
                     onChange: (e: ChangeEvent<HTMLInputElement>) => {
-                      form.setValue('ref', e.target?.value.slice(0, 21));
+                      form.setValue('ref', e.target?.value.slice(0, 30));
                     },
                   })}
                 />
