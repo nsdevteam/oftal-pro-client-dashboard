@@ -82,7 +82,6 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
           onClick={(e) => e.stopPropagation()}
         >
           <Typography>Novo Pedido</Typography>
-          <Typography>Refracção</Typography>
           <Box
             display="grid"
             rowGap="1.25rem"
@@ -90,19 +89,12 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
             alignItems="start"
             gridTemplateColumns={['1fr', '1fr', '1fr 1fr']}
           >
-            <Box display="flex" gap="1.25rem" flexDirection="column">
-              <EyeFields label="Olho Direito" name="rightEye" />
-              <EyeFields label="Olho Esquerdo" name="leftEye" />
-            </Box>
             <Box
               display="grid"
               rowGap="1.25rem"
               columnGap="2rem"
               gridTemplateColumns={['1fr 1fr', '1fr 1fr', '1fr 1fr 1fr 1fr']}
             >
-              <Box gridColumn="2 span">
-                <TreatmentDropdownField />
-              </Box>
               <Box gridColumn="2 span">
                 <DropdownField
                   label="Tipo"
@@ -112,6 +104,12 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                 />
               </Box>
               <Box gridColumn="2 span">
+                <TreatmentDropdownField />
+              </Box>
+              <Box gridColumn="2 span">
+                <DropdownRefractiveField />
+              </Box>
+              <Box gridColumn="2 span">
                 <DropdownField
                   label="Cor"
                   name="color"
@@ -119,9 +117,10 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                   legend={COLOR_LEGEND}
                 />
               </Box>
-              <Box gridColumn="2 span">
-                <DropdownRefractiveField />
-              </Box>
+            </Box>
+            <Box display="flex" gap="1.25rem" flexDirection="column">
+              <EyeFields label="Olho Direito" name="rightEye" />
+              <EyeFields label="Olho Esquerdo" name="leftEye" />
             </Box>
             <Box display="flex" gap="1.25rem" flexDirection="column">
               <Box display="flex" flexDirection="column" gap="1rem">
