@@ -122,49 +122,6 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
               <EyeFields label="Olho Direito" name="rightEye" />
               <EyeFields label="Olho Esquerdo" name="leftEye" />
             </Box>
-            <Box display="flex" gap="1.25rem" flexDirection="column">
-              <Box display="flex" flexDirection="column" gap="1rem">
-                <Typography>Nome do paciente/Referência</Typography>
-                <Input
-                  borderRadius="0.8rem"
-                  border="1px solid #CDCDCD"
-                  placeholder="Firmino Miguel"
-                  {...form.register('ref', {
-                    onChange: (e: ChangeEvent<HTMLInputElement>) => {
-                      form.setValue('ref', e.target?.value.slice(0, 30));
-                    },
-                  })}
-                />
-              </Box>
-              <Box display="grid" gridTemplateColumns="1fr 1fr">
-                <Box display="flex" flexDirection="column" gap="1rem">
-                  <Typography>
-                    Anexar Receita (Opcional com acréscimo)
-                  </Typography>
-                  <Attachment
-                    label="Adicionar ficheiro"
-                    files={form.getValues('recipe')}
-                    onChange={(files) => form.setValue('recipe', files)}
-                  />
-                </Box>
-                <Box display="flex" flexDirection="column" gap="1rem">
-                  <Typography>
-                    Anexar Precal (Opcional com acréscimo)
-                  </Typography>
-                  <Attachment
-                    label="Adicionar ficheiro"
-                    files={form.getValues('precal')}
-                    onChange={(files) => form.setValue('precal', files)}
-                  />
-                </Box>
-              </Box>
-              <Box display="flex" flexDirection="column" gap="1rem">
-                <Typography>Observações</Typography>
-                <Textarea
-                  onChange={(e) => form.setValue('observation', e.target.value)}
-                />
-              </Box>
-            </Box>
             <Box
               display="grid"
               rowGap="1.25rem"
@@ -210,7 +167,50 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                 legend={{ true: 'Sim', false: 'Não' }}
               />
               <MinimumHeightField />
-              <Box gridColumn="1/-1" mt={['1rem', '7rem']}>
+            </Box>
+            <Box display="flex" gap="1.25rem" flexDirection="column">
+              <Box display="flex" flexDirection="column" gap="1rem">
+                <Typography>Nome do paciente/Referência</Typography>
+                <Input
+                  borderRadius="0.8rem"
+                  border="1px solid #CDCDCD"
+                  placeholder="Firmino Miguel"
+                  {...form.register('ref', {
+                    onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                      form.setValue('ref', e.target?.value.slice(0, 30));
+                    },
+                  })}
+                />
+              </Box>
+              <Box display="grid" gridTemplateColumns="1fr 1fr">
+                <Box display="flex" flexDirection="column" gap="1rem">
+                  <Typography>
+                    Anexar Receita (Opcional com acréscimo)
+                  </Typography>
+                  <Attachment
+                    label="Adicionar ficheiro"
+                    files={form.getValues('recipe')}
+                    onChange={(files) => form.setValue('recipe', files)}
+                  />
+                </Box>
+                <Box display="flex" flexDirection="column" gap="1rem">
+                  <Typography>
+                    Anexar Precal (Opcional com acréscimo)
+                  </Typography>
+                  <Attachment
+                    label="Adicionar ficheiro"
+                    files={form.getValues('precal')}
+                    onChange={(files) => form.setValue('precal', files)}
+                  />
+                </Box>
+              </Box>
+              <Box display="flex" flexDirection="column" gap="1rem">
+                <Typography>Observações</Typography>
+                <Textarea
+                  onChange={(e) => form.setValue('observation', e.target.value)}
+                />
+              </Box>
+              <Box gridColumn="1/-1">
                 <OrderFormSubmit />
               </Box>
             </Box>
