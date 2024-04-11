@@ -13,7 +13,4 @@ export type TUpdateUser = (
   docData: UpdateData<IClient>
 ) => Promise<void>;
 
-export type TGetUsersSize = (
-  setter: Dispatch<SetStateAction<number>>,
-  queryParams?: IQueryParams
-) => void;
+export type TGetUsersSize = (queryParams?: IQueryParams) => void;
