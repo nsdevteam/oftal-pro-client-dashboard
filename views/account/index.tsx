@@ -20,6 +20,7 @@ const Account: FC = () => {
         ? new Date(userData.lastLoginAt)
         : '--',
       createdAt: userData?.createdAt ? new Date(userData.createdAt) : '--',
+      type: userData?.type ? 'Tipo 2' : 'Tipo 1',
     },
   });
 
@@ -258,6 +259,44 @@ const Account: FC = () => {
                 disabled
                 {...register('lastLoginAt')}
                 placeholder="20-03-2020"
+                nFocus={{
+                  borderColor: '#4763E4',
+                }}
+              />
+            </Box>
+          </Box>
+          <Box
+            as="div"
+            display="flex"
+            alignItems="flex-start"
+            justifyContent="flex-start"
+          >
+            <Box
+              as="div"
+              margin="0.5rem"
+              display="flex"
+              flexDirection="column"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+            >
+              <Typography textAlign="left" padding="0.5rem">
+                Tipo da Conta
+              </Typography>
+              <Input
+                p="L"
+                type="date"
+                outline="none"
+                borderRadius="M"
+                border="1px solid #E4E4E7"
+                color="textInverted"
+                mr={['NONE', 'S']}
+                ml={['NONE', 'S']}
+                disabled
+                minWidth={['100%', '10rem']}
+                width={['30rem']}
+                bg="transparent"
+                placeholder="10-02-2019"
+                {...register('type')}
                 nFocus={{
                   borderColor: '#4763E4',
                 }}

@@ -54,6 +54,8 @@ const OrderFormSubmit: FC = () => {
     : 0;
 
   const handleSubmit = async () => {
+    if (!userData?.type) return;
+
     await addOrder({ ...getValues(), total, clientId: userData!.clientId });
   };
 
@@ -73,7 +75,14 @@ const OrderFormSubmit: FC = () => {
       <Typography fontSize="1.5rem">
         Subtotal: {formatMoney(total)} AOA
       </Typography>
-      <Button onClick={onSubmit}>Submeter</Button>
+      <Box>
+        {!userData?.type && (
+          <Typography fontSize="0.75rem">Só depois do pagamento</Typography>
+        )}
+        <Button onClick={onSubmit} disabled={!userData?.type}>
+          Submeter
+        </Button>
+      </Box>
     </Box>
   );
 };

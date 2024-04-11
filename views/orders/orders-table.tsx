@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
 import { Box, Table, Typography } from '../../elements';
-import { IOrder, TRowData } from '../../interface';
+import { TRowData } from '../../interface';
+import { OrdersTableProps } from './orders.types';
 
 const HEADINGS: Record<string, string> = {
   ref: 'Ref/Nome de pacitente',
@@ -12,7 +13,7 @@ const HEADINGS: Record<string, string> = {
   diameter: 'Diâmetro',
 };
 
-const OrderTable: FC<{ data: ReadonlyArray<IOrder> }> = ({ data }) => (
+const OrderTable: FC<OrdersTableProps> = ({ data }) => (
   <Box width="100%">
     <Typography as="h2">Listagem de pedidos</Typography>
     <Table data={data as unknown as TRowData} columns={HEADINGS} />

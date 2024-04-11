@@ -81,6 +81,7 @@ export type TRowData = ReadonlyArray<
 >;
 
 export interface IClient {
+  type: number;
   email: string;
   fullName: string;
   createdAt?: number;
