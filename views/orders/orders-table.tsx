@@ -1,7 +1,8 @@
+import { WithUid } from 'burnbase/firestore';
 import { FC } from 'react';
 
 import { Box, Table, Typography } from '../../elements';
-import { TRowData } from '../../interface';
+import { IOrder, TRowData } from '../../interface';
 import { OrdersTableProps } from './orders.types';
 
 const HEADINGS: Record<string, string> = {
@@ -13,10 +14,14 @@ const HEADINGS: Record<string, string> = {
   diameter: 'Diâmetro',
 };
 
-const OrderTable: FC<OrdersTableProps> = ({ data }) => (
+const OrderTable: FC<OrdersTableProps> = ({ data, setSelectedDoc }) => (
   <Box width="100%">
     <Typography as="h2">Listagem de pedidos</Typography>
-    <Table data={data as unknown as TRowData} columns={HEADINGS} />
+    <Table
+      columns={HEADINGS}
+      data={data as unknown as TRowData}
+      onSelect={(item) => setSelectedDoc(item as unknown as WithUid<IOrder>)}
+    />
   </Box>
 );
 

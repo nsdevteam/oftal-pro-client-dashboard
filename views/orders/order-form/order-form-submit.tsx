@@ -3,15 +3,16 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import addOrder from '../../../api/orders/add-order';
+import updateOrder from '../../../api/orders/update-order';
 import { useUser } from '../../../context/user';
 import { Box, Button, Typography } from '../../../elements';
+import { IOrder } from '../../../interface';
 import { formatMoney } from '../../../utils';
 import { COLOR_VALUES, TYPE_VALUES } from './order-form.data';
-import { IOrderForm } from './order-form.types';
 
-const OrderFormSubmit: FC = () => {
+const OrderFormSubmit: FC<{ docId?: string }> = ({ docId }) => {
   const { prices, userData } = useUser();
-  const { control, getValues, formState } = useFormContext<IOrderForm>();
+  const { control, getValues, formState } = useFormContext<IOrder>();
 
   const {
     leftEye,
@@ -54,6 +55,8 @@ const OrderFormSubmit: FC = () => {
     : 0;
 
   const handleSubmit = async () => {
+    if (docId) return await updateOrder({ ...getValues(), total, docId });
+
     if (!userData?.type) return;
 
     await addOrder({ ...getValues(), total, clientId: userData!.clientId });

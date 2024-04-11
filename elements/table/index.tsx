@@ -13,7 +13,7 @@ const legends = {
   color: COLOR_LEGEND,
 };
 
-const Table: FC<TableProps> = ({ data, columns }) => {
+const Table: FC<TableProps> = ({ data, columns, onSelect }) => {
   const columnKeys = Object.keys(columns);
   const columnValues = Object.values(columns);
 
@@ -47,7 +47,7 @@ const Table: FC<TableProps> = ({ data, columns }) => {
             </Box>
           ) : (
             data.map((item, rowIndex) => (
-              <Box as="tr" key={rowIndex}>
+              <Box as="tr" key={rowIndex} onClick={() => onSelect(item)}>
                 {columnKeys.map((columnKey, cellIndex) => (
                   <Box
                     as="td"

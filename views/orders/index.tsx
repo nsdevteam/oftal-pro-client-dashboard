@@ -1,3 +1,4 @@
+import { WithUid } from 'burnbase/firestore';
 import { FC, useEffect, useState } from 'react';
 import {
   // FiChevronLeft,
@@ -17,6 +18,7 @@ const Orders: FC = () => {
   const { userData } = useUser();
   const [isOpen, setOpen] = useState(false);
   const [orders, setOrders] = useState<ReadonlyArray<IOrder>>([]);
+  const [selectDoc, setSelectedDoc] = useState<WithUid<IOrder> | null>(null);
 
   useEffect(() => {
     getAllOrders({ conditions: [['clientId', '==', userData?.clientId]] }).then(
@@ -74,7 +76,7 @@ const Orders: FC = () => {
             </Typography>
           </Button>
         </Box>
-        <OrderTable data={orders} />
+        <OrderTable data={orders} setSelectedDoc={setSelectedDoc} />
       </Box>
       <Box p="0.5rem" display="flex" justifyContent="space-between">
         <Typography as="h4">Total de resultados: {orders.length}</Typography>
@@ -91,7 +93,15 @@ const Orders: FC = () => {
           </Box>
         )} */}
       </Box>
-      {isOpen && <OrderForm closeForm={() => setOpen(false)} />}
+      {isOpen && (
+        <OrderForm
+          doc={selectDoc}
+          closeForm={() => {
+            setOpen(false);
+            setSelectedDoc(null);
+          }}
+        />
+      )}
     </Box>
   );
 };

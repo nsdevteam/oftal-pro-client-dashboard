@@ -8,9 +8,10 @@ import {
   Textarea,
   Typography,
 } from '../../../elements';
+import { IOrder } from '../../../interface';
 import DropdownField from './dropdown-field';
 import DropdownRefractiveField from './dropdown-refractive-field';
-import EyeFields from './eye-fields';
+import Eyes from './eye-fields';
 import MinimumHeightField from './min-height-field';
 import {
   COLOR_LEGEND,
@@ -18,13 +19,13 @@ import {
   TYPE_LEGEND,
   TYPE_VALUES,
 } from './order-form.data';
-import { IOrderForm, OrderFormProps } from './order-form.types';
+import { OrderFormProps } from './order-form.types';
 import OrderFormSubmit from './order-form-submit';
 import TreatmentDropdownField from './treatment-dropdown-field';
 
-const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
-  const form = useForm<IOrderForm>({
-    defaultValues: {
+const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
+  const form = useForm<IOrder>({
+    defaultValues: doc ?? {
       rightEye: { active: true },
       leftEye: { active: true },
       diameter: 70,
@@ -118,10 +119,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                 />
               </Box>
             </Box>
-            <Box display="flex" gap="1.25rem" flexDirection="column">
-              <EyeFields label="Olho Direito" name="rightEye" />
-              <EyeFields label="Olho Esquerdo" name="leftEye" />
-            </Box>
+            <Eyes />
             <Box
               display="grid"
               rowGap="1.25rem"
@@ -211,7 +209,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm }) => {
                 />
               </Box>
               <Box gridColumn="1/-1">
-                <OrderFormSubmit />
+                <OrderFormSubmit docId={doc?.uid} />
               </Box>
             </Box>
           </Box>

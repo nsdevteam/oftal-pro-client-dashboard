@@ -2,12 +2,17 @@ import { FC, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Box, InputList, Typography } from '../../../../elements';
-import { EyeFieldsProps, IOrderForm } from '../order-form.types';
+import { IOrder } from '../../../../interface';
+import { EyeFieldsProps } from './eye-fields.types';
 import EyeSpherical from './eye-spherical';
 
-const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
-  const [isAddition, setAddition] = useState(true);
-  const { control, setValue } = useFormContext<IOrderForm>();
+const EyeFields: FC<EyeFieldsProps> = ({
+  label,
+  name,
+  isAddition,
+  setAddition,
+}) => {
+  const { control, setValue } = useFormContext<IOrder>();
   const eye = useWatch({ control, name: name });
   const type = useWatch({ control, name: 'type' });
 
@@ -95,4 +100,25 @@ const EyeFields: FC<EyeFieldsProps> = ({ label, name }) => {
   );
 };
 
-export default EyeFields;
+const Eyes: FC = () => {
+  const [isAddition, setAddition] = useState(true);
+
+  return (
+    <Box display="flex" gap="1.25rem" flexDirection="column">
+      <EyeFields
+        label="Olho Direito"
+        name="rightEye"
+        isAddition={isAddition}
+        setAddition={setAddition}
+      />
+      <EyeFields
+        label="Olho Esquerdo"
+        name="leftEye"
+        isAddition={isAddition}
+        setAddition={setAddition}
+      />
+    </Box>
+  );
+};
+
+export default Eyes;
