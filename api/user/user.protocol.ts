@@ -1,6 +1,5 @@
 import { IQueryParams, IResponse, TOnSnapshot } from 'burnbase/firestore';
 import { UpdateData } from 'firebase/firestore';
-import { Dispatch, SetStateAction } from 'react';
 
 import { IClient } from '../../interface';
 
