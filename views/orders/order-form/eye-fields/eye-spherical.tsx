@@ -2,13 +2,13 @@ import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Box, InputList } from '../../../../elements';
-import { IOrderForm } from '../order-form.types';
+import { IOrder } from '../../../../interface';
 
 const EyeSpherical: FC<{
   isAddition: boolean;
   name: 'leftEye' | 'rightEye';
 }> = ({ name, isAddition }) => {
-  const { control, setValue } = useFormContext<IOrderForm>();
+  const { control, setValue } = useFormContext<IOrder>();
 
   const active = useWatch({ control, name: `${name}.active` });
   const addition = useWatch({ control, name: `${name}.addition` });
