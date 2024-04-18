@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
+import { IOrder } from '../../../interface';
 import DropdownField from './dropdown-field';
 import { REFRACTIVE_VALUES } from './order-form.data';
-import { IOrderForm } from './order-form.types';
 
 const DropdownRefractiveField: FC = () => {
-  const { control, setValue } = useFormContext<IOrderForm>();
+  const { control, setValue } = useFormContext<IOrder>();
   const color = useWatch({ control, name: 'color' });
   const type = useWatch({ control, name: 'type' });
 
