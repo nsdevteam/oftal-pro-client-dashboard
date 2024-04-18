@@ -39,7 +39,6 @@ export interface IClient {
 }
 
 export interface IOrder {
-  status: 'pending' | 'solved';
   ref: string;
   leftEye?: IEye;
   rightEye?: IEye;
@@ -50,6 +49,7 @@ export interface IOrder {
   recipe?: FileList;
   observation: string;
   minimumHeight: string;
+  status: 0 | 1 | 2 | 3;
   precals?: ReadonlyArray<string>;
   recipes?: ReadonlyArray<string>;
   refractiveIndex: string | undefined;

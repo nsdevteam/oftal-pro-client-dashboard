@@ -6,18 +6,22 @@ import {
   FiPlus,
   FiSearch,
 } from 'react-icons/fi';
+import { v4 } from 'uuid';
 
 import getAllOrders from '../../api/orders/get-all-orders';
 import { useUser } from '../../context/user';
 import { Box, Button, Input, Typography } from '../../elements';
 import { IOrder } from '../../interface';
 import OrderForm from './order-form';
+import { TYPE_LEGEND } from './order-form/order-form.data';
 import OrderTable from './orders-table';
 
 const Orders: FC = () => {
   const { userData } = useUser();
   const [isOpen, setOpen] = useState(false);
+  const [filter, setFilter] = useState('');
   const [orders, setOrders] = useState<ReadonlyArray<IOrder>>([]);
+  const [statuses, setStatuses] = useState<ReadonlyArray<number>>([]);
   const [selectDoc, setSelectedDoc] = useState<WithUid<IOrder> | null>(null);
 
   useEffect(() => {
@@ -59,15 +63,42 @@ const Orders: FC = () => {
             <Box display="flex" flexDirection="column" flex="1">
               <Input
                 p="L"
+                // eslint-disable-next-line jsx-a11y/no-autofocus
+                autoFocus
                 type="search"
                 name="search"
+                value={filter}
                 mr={['0', 'S']}
                 ml={['0', 'S']}
                 borderRadius="M"
                 backgroundColor="transparent"
-                placeholder="Procurar por pedidos..."
+                placeholder="Filtrar pedidos..."
+                onChange={(e) => setFilter(e.target.value)}
               />
             </Box>
+          </Box>
+          <Box display="flex" gap="0.5rem" my="1rem">
+            {['Encomendado', 'Pendente', 'Processado', 'Fechado'].map(
+              (item, index) => (
+                <Button
+                  key={v4()}
+                  p="0.5rem"
+                  bg="transparent"
+                  border="1px solid"
+                  borderRadius="2rem"
+                  color={statuses.includes(index) ? '#686868' : '#4256d0'}
+                  onClick={() =>
+                    setStatuses(
+                      statuses.includes(index)
+                        ? statuses.filter((status) => status !== index)
+                        : [...statuses, index]
+                    )
+                  }
+                >
+                  {item}
+                </Button>
+              )
+            )}
           </Box>
           <Button mt="L" onClick={() => setOpen(true)}>
             <Typography as="span">Novo pedido</Typography>
@@ -76,7 +107,16 @@ const Orders: FC = () => {
             </Typography>
           </Button>
         </Box>
-        <OrderTable data={orders} setSelectedDoc={setSelectedDoc} />
+        <OrderTable
+          setSelectedDoc={setSelectedDoc}
+          data={orders.filter(
+            ({ ref, type, status }) =>
+              ref.includes(filter) ||
+              TYPE_LEGEND[type].includes(filter) ||
+              !statuses.length ||
+              statuses.includes(status)
+          )}
+        />
       </Box>
       <Box p="0.5rem" display="flex" justifyContent="space-between">
         <Typography as="h4">Total de resultados: {orders.length}</Typography>
