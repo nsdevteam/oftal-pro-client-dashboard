@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
+import { IOrder } from '../../../interface';
 import DropdownField from './dropdown-field';
-import { IOrderForm } from './order-form.types';
 
 const MinimumHeightField: FC = () => {
-  const { control, setValue } = useFormContext<IOrderForm>();
+  const { control, setValue } = useFormContext<IOrder>();
   const type = useWatch({ control, name: 'type' });
 
   if (['single-focal', 'bifocal'].includes(type)) {
