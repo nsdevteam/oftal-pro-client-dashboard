@@ -2,15 +2,15 @@ import { FC, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Box, Dropdown, Typography } from '../../../elements';
+import { IOrder } from '../../../interface';
 import { TREATMENT_VALUES } from './order-form.data';
-import { IOrderForm } from './order-form.types';
 
 const TreatmentDropdownField: FC = () => {
   const defaultValue = 'HMC';
   const label = 'Tratamento';
   const values = TREATMENT_VALUES;
 
-  const { control, setValue } = useFormContext<IOrderForm>();
+  const { control, setValue } = useFormContext<IOrder>();
 
   const fieldValue = useWatch({ control, name: 'treatment' });
   const color = useWatch({ control, name: 'color' });
@@ -31,10 +31,7 @@ const TreatmentDropdownField: FC = () => {
         )}
         defaultValue={String(fieldValue ?? '') || defaultValue}
         onSelect={(value) => {
-          setValue(
-            'treatment',
-            (value as IOrderForm['treatment']) ?? defaultValue
-          );
+          setValue('treatment', (value as IOrder['treatment']) ?? defaultValue);
         }}
       />
     </Box>
