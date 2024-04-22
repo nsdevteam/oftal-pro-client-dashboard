@@ -41,38 +41,38 @@ const OrderTable: FC<OrdersTableProps> = ({ data, setSelectedDoc }) => (
             status: status ? STATUS_LEGEND[status] : 'Encomendado',
             spherical: (
               <>
-                <strong>E: </strong>
-                {leftEye?.spherical || '--'}
-                <br />
                 <strong>D: </strong>
                 {rightEye?.spherical || '--'}
+                <br />
+                <strong>E: </strong>
+                {leftEye?.spherical || '--'}
               </>
             ),
             cylinder: (
               <>
-                <strong>E: </strong>
-                {leftEye?.cylinder || '--'}
-                <br />
                 <strong>D: </strong>
                 {rightEye?.cylinder || '--'}
+                <br />
+                <strong>E: </strong>
+                {leftEye?.cylinder || '--'}
               </>
             ),
             addition: (
               <>
-                <strong>E: </strong>
-                {leftEye?.addition || '--'}
-                <br />
                 <strong>D: </strong>
                 {rightEye?.addition || '--'}
+                <br />
+                <strong>E: </strong>
+                {leftEye?.addition || '--'}
               </>
             ),
             axis: (
               <>
-                <strong>E: </strong>
-                {leftEye?.axis || '--'}
-                <br />
                 <strong>D: </strong>
                 {rightEye?.axis || '--'}
+                <br />
+                <strong>E: </strong>
+                {leftEye?.axis || '--'}
               </>
             ),
           })
