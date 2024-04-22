@@ -15,7 +15,7 @@ const Orders: FC = () => {
   const { userData } = useUser();
   const [isOpen, setOpen] = useState(false);
   const [filter, setFilter] = useState('');
-  const [orders, setOrders] = useState<ReadonlyArray<IOrder>>([]);
+  const [orders, setOrders] = useState<ReadonlyArray<WithUid<IOrder>>>([]);
   const [selectDoc, setSelectedDoc] = useState<WithUid<IOrder> | null>(null);
   const [statuses, setStatuses] = useState<ReadonlyArray<number>>([0, 1, 2]);
 

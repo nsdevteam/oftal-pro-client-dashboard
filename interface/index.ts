@@ -72,7 +72,7 @@ export interface TableProps {
   data: TRowData;
   columns: Record<string, string>;
   special?: Record<string, 'date'>;
-  onSelect: (item: Record<string, string | number | undefined>) => void;
+  onSelect: (index: number) => void;
 }
 
 export interface IUserPrices {

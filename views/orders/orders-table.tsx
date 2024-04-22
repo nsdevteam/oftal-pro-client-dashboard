@@ -1,8 +1,7 @@
-import { WithUid } from 'burnbase/firestore';
 import { FC } from 'react';
 
 import { Box, Table, Typography } from '../../elements';
-import { IOrder, TRowData } from '../../interface';
+import { TRowData } from '../../interface';
 import { STATUS_LEGEND } from './order-form/order-form.data';
 import { OrdersTableProps } from './orders.types';
 
@@ -23,7 +22,7 @@ const OrderTable: FC<OrdersTableProps> = ({ data, setSelectedDoc }) => (
     <Typography as="h2">Listagem de pedidos</Typography>
     <Table
       columns={HEADINGS}
-      onSelect={(item) => setSelectedDoc(item as unknown as WithUid<IOrder>)}
+      onSelect={(index) => setSelectedDoc(data[index])}
       data={
         data.map(
           ({
