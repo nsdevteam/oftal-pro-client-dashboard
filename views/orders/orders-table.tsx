@@ -6,7 +6,7 @@ import { STATUS_LEGEND } from './order-form/order-form.data';
 import { OrdersTableProps } from './orders.types';
 
 const HEADINGS: Record<string, string> = {
-  ref: 'Ref/Nome de pacitente',
+  ref: 'Ref/Nome de paciente',
   type: 'Tipo',
   refractiveIndex: 'Índice de refração',
   color: 'Cor',
