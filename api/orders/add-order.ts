@@ -24,7 +24,7 @@ const addOrder = async ({
     ...order,
     precals,
     recipes,
-    status: 1,
+    status: 0,
     createdAt: Date.now(),
   });
 };

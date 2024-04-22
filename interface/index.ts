@@ -65,7 +65,7 @@ export interface IOrder {
     | 'bifocal';
 }
 export type TRowData = ReadonlyArray<
-  Record<string, string | number | undefined>
+  Record<string, ReactNode | string | number | undefined>
 >;
 
 export interface TableProps {
