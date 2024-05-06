@@ -2,12 +2,13 @@ import { FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Layout } from '../../components';
+import { IOrder } from '../../interface';
 import Orders from '../../views/orders';
 
 const OrdersPage: FC = () => {
-  const form = useForm({
+  const form = useForm<IOrder>({
     defaultValues: {
-      eyes: { right: 0, left: 0 },
+      color: 'white',
     },
   });
 

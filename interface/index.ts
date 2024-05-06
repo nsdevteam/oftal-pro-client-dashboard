@@ -40,6 +40,7 @@ export interface IClient {
 
 export interface IOrder {
   ref: string;
+  status: 0 | 1;
   leftEye?: IEye;
   rightEye?: IEye;
   prisma: boolean;
@@ -49,7 +50,6 @@ export interface IOrder {
   recipe?: FileList;
   observation: string;
   minimumHeight: string;
-  status: 0 | 1 | 2 | 3;
   precals?: ReadonlyArray<string>;
   recipes?: ReadonlyArray<string>;
   refractiveIndex: string | undefined;

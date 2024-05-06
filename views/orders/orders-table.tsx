@@ -38,7 +38,7 @@ const OrderTable: FC<OrdersTableProps> = ({ data, setSelectedDoc }) => (
             type,
             refractiveIndex,
             color,
-            status: status ? STATUS_LEGEND[status] : 'Encomendado',
+            status: status ? STATUS_LEGEND[status] : 'Pendente',
             spherical: (
               <>
                 <strong>D: </strong>

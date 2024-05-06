@@ -83,12 +83,7 @@ export const COLOR_LEGEND = {
   polarised: 'Polarizada',
 };
 
-export const STATUS_LEGEND = [
-  'Encomendado',
-  'Pendente',
-  'Processado',
-  'Fechado',
-];
+export const STATUS_LEGEND = ['Pendente', 'Encomendado'];
 
 export const REFRACTIVE_VALUES: Record<
   string,
