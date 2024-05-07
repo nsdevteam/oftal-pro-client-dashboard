@@ -94,15 +94,13 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
   return (
     <Box display="flex" flexDirection="column" alignItems="flex-end" gap="2rem">
       <Typography fontSize="1.5rem">
-        Subtotal: {formatMoney(total)} AOAs
+        Subtotal: {formatMoney(total)} AOA
       </Typography>
       <Box>
         {!doc?.uid && !userData?.type && (
           <Typography fontSize="0.75rem">Só depois do pagamento</Typography>
         )}
-        <Button onClick={onSubmit}>
-          {doc?.uid ? 'Atualizar' : 'Submeter'}
-        </Button>
+        <Button onClick={onSubmit}>{doc?.uid ? 'Atualizar' : 'Pedir'}</Button>
       </Box>
     </Box>
   );
