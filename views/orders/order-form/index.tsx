@@ -25,14 +25,15 @@ import TreatmentDropdownField from './treatment-dropdown-field';
 
 const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
   const form = useForm<IOrder>({
-    defaultValues: doc ?? {
-      rightEye: { active: true },
-      leftEye: { active: true },
+    defaultValues: {
       diameter: 70,
       prisma: false,
       coloring: false,
       treatment: 'HMC',
       minimumHeight: '17',
+      leftEye: { active: true },
+      rightEye: { active: true },
+      ...doc,
     },
   });
 
@@ -209,7 +210,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
                 />
               </Box>
               <Box gridColumn="1/-1">
-                <OrderFormSubmit doc={doc} />
+                <OrderFormSubmit doc={doc} closeForm={closeForm} />
               </Box>
             </Box>
           </Box>

@@ -1,4 +1,3 @@
-import { WithUid } from 'burnbase/firestore';
 import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -10,10 +9,15 @@ import { Box, Button, Typography } from '../../../elements';
 import { IOrder } from '../../../interface';
 import { formatMoney } from '../../../utils';
 import { COLOR_VALUES, TYPE_VALUES } from './order-form.data';
+import { OrderFormSubmitProps } from './order-form.types';
 
-const OrderFormSubmit: FC<{ doc: WithUid<IOrder> | null }> = ({ doc }) => {
+const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
   const { prices, userData } = useUser();
-  const { control, getValues, formState } = useFormContext<IOrder>();
+  const {
+    control,
+    getValues,
+    formState: { errors },
+  } = useFormContext<IOrder>();
 
   const {
     leftEye,
@@ -56,17 +60,29 @@ const OrderFormSubmit: FC<{ doc: WithUid<IOrder> | null }> = ({ doc }) => {
     : 0;
 
   const handleSubmit = async () => {
-    if (doc?.uid)
-      return await updateOrder({ ...getValues(), total, docId: doc.uid });
+    try {
+      if (doc?.uid)
+        return await updateOrder({
+          ...getValues(),
+          total,
+          docId: doc.uid,
+        }).catch((e) => {
+          console.log({ e });
+          throw e;
+        });
 
-    if (!userData?.type) return;
+      if (!userData?.type) return;
 
-    await addOrder({ ...getValues(), total, clientId: userData!.clientId });
+      await addOrder({ ...getValues(), total, clientId: userData!.clientId });
+    } finally {
+      closeForm();
+    }
   };
 
   const onSubmit = () => {
-    if (!formState.isValid)
-      return toast.error('Preencha o formulário corretamente');
+    const errorsList = Object.values(errors);
+    if (errorsList.length)
+      return toast.error(`Preencha o formulário corretamente :: ${errorsList}`);
 
     toast.promise(handleSubmit(), {
       loading: `A ${doc?.uid ? 'atualizar' : 'submeter'} pedido...`,
@@ -84,7 +100,7 @@ const OrderFormSubmit: FC<{ doc: WithUid<IOrder> | null }> = ({ doc }) => {
         {!doc?.uid && !userData?.type && (
           <Typography fontSize="0.75rem">Só depois do pagamento</Typography>
         )}
-        <Button onClick={onSubmit} disabled={!doc?.uid || !userData?.type}>
+        <Button onClick={onSubmit}>
           {doc?.uid ? 'Atualizar' : 'Submeter'}
         </Button>
       </Box>

@@ -20,3 +20,8 @@ export interface DropdownFieldProps
     ReadonlyArray<string | number>
   ];
 }
+
+export interface OrderFormSubmitProps {
+  doc: WithUid<IOrder> | null;
+  closeForm: () => void;
+}
