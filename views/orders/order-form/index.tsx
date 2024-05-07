@@ -82,7 +82,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
           px={['1rem', '1rem', '4rem']}
           onClick={(e) => e.stopPropagation()}
         >
-          <Typography>Novo Pedido</Typography>
+          <Typography>{doc ? 'Atualizar' : 'Novo'} Pedido</Typography>
           <Box
             display="grid"
             rowGap="1.25rem"

@@ -84,7 +84,7 @@ const OrderFormSubmit: FC<{ doc: WithUid<IOrder> | null }> = ({ doc }) => {
         {!doc?.uid && !userData?.type && (
           <Typography fontSize="0.75rem">Só depois do pagamento</Typography>
         )}
-        <Button onClick={onSubmit} disabled={!userData?.type}>
+        <Button onClick={onSubmit} disabled={!doc?.uid || !userData?.type}>
           {doc?.uid ? 'Atualizar' : 'Submeter'}
         </Button>
       </Box>
