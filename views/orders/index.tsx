@@ -123,7 +123,7 @@ const Orders: FC = () => {
       <Typography as="h4" mt="2rem">
         Total de resultados: {orders.length}
       </Typography>
-      {isOpen && (
+      {(isOpen || selectDoc) && (
         <OrderForm
           doc={selectDoc}
           closeForm={() => {

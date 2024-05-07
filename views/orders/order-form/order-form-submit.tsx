@@ -1,3 +1,4 @@
+import { WithUid } from 'burnbase/firestore';
 import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -10,7 +11,7 @@ import { IOrder } from '../../../interface';
 import { formatMoney } from '../../../utils';
 import { COLOR_VALUES, TYPE_VALUES } from './order-form.data';
 
-const OrderFormSubmit: FC<{ docId?: string }> = ({ docId }) => {
+const OrderFormSubmit: FC<{ doc: WithUid<IOrder> | null }> = ({ doc }) => {
   const { prices, userData } = useUser();
   const { control, getValues, formState } = useFormContext<IOrder>();
 
@@ -55,7 +56,8 @@ const OrderFormSubmit: FC<{ docId?: string }> = ({ docId }) => {
     : 0;
 
   const handleSubmit = async () => {
-    if (docId) return await updateOrder({ ...getValues(), total, docId });
+    if (doc?.uid)
+      return await updateOrder({ ...getValues(), total, docId: doc.uid });
 
     if (!userData?.type) return;
 
@@ -64,26 +66,26 @@ const OrderFormSubmit: FC<{ docId?: string }> = ({ docId }) => {
 
   const onSubmit = () => {
     if (!formState.isValid)
-      return toast.error('Preencha o formulário correctamente');
+      return toast.error('Preencha o formulário corretamente');
 
     toast.promise(handleSubmit(), {
-      loading: 'A submeter pedido...',
-      success: 'Pedido submetido com sucesso!',
-      error: 'Erro ao submeter o pedido',
+      loading: `A ${doc?.uid ? 'atualizar' : 'submeter'} pedido...`,
+      success: `Pedido ${doc?.uid ? 'atualizado' : 'submetido'} com sucesso!`,
+      error: `Erro ao ${doc?.uid ? 'atualizar' : 'submeter'} o pedido`,
     });
   };
 
   return (
     <Box display="flex" flexDirection="column" alignItems="flex-end" gap="2rem">
       <Typography fontSize="1.5rem">
-        Subtotal: {formatMoney(total)} AOA
+        Subtotal: {formatMoney(total)} AOAs
       </Typography>
       <Box>
-        {!userData?.type && (
+        {!doc?.uid && !userData?.type && (
           <Typography fontSize="0.75rem">Só depois do pagamento</Typography>
         )}
         <Button onClick={onSubmit} disabled={!userData?.type}>
-          Submeter
+          {doc?.uid ? 'Atualizar' : 'Submeter'}
         </Button>
       </Box>
     </Box>

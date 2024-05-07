@@ -108,15 +108,15 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
                 <TreatmentDropdownField />
               </Box>
               <Box gridColumn="2 span">
-                <DropdownRefractiveField />
-              </Box>
-              <Box gridColumn="2 span">
                 <DropdownField
                   label="Cor"
                   name="color"
                   values={COLOR_VALUES}
                   legend={COLOR_LEGEND}
                 />
+              </Box>
+              <Box gridColumn="2 span">
+                <DropdownRefractiveField />
               </Box>
             </Box>
             <Eyes />
@@ -209,7 +209,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
                 />
               </Box>
               <Box gridColumn="1/-1">
-                <OrderFormSubmit docId={doc?.uid} />
+                <OrderFormSubmit doc={doc} />
               </Box>
             </Box>
           </Box>

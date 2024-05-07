@@ -50,6 +50,7 @@ export interface IOrder {
   recipe?: FileList;
   observation: string;
   minimumHeight: string;
+  clientId: `CL${number}`;
   precals?: ReadonlyArray<string>;
   recipes?: ReadonlyArray<string>;
   refractiveIndex: string | undefined;
