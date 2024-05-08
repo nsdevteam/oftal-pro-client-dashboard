@@ -4,7 +4,6 @@ import { ReactNode } from 'react';
 export interface IEmptyObject {}
 
 export interface MenuProps {
-  id: number;
   url: string;
   title: string;
   icon: ReactNode;

@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { v4 } from 'uuid';
 
-import { menuLink } from '../../../constants';
+import { MENU_ITEMS } from '../../../constants';
 import { useUser } from '../../../context/user';
 import colors from '../../../design-system/light-theme/colors';
 import { Box, Button, Typography } from '../../../elements';
@@ -45,12 +46,12 @@ const Sidebar: FC<SidebarProps> = ({ isOpenMenu }) => {
       ]}
     >
       <Box as="ul" width="100%">
-        {menuLink.map(({ id, url, title, icon }) => (
+        {MENU_ITEMS.map(({ url, title, icon }) => (
           <Box
             as="div"
             display="flex"
             flexDirection="column"
-            key={id}
+            key={v4()}
             p="0.5rem"
           >
             <Box as="ul">
