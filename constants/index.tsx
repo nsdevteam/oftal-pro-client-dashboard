@@ -5,8 +5,14 @@ import { MenuProps } from '../interface';
 export const menuLink: MenuProps[] = [
   {
     id: 1,
-    url: '/orders',
+    url: '/cart',
     title: 'Pedido',
+    icon: <FiFileText size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
+  },
+  {
+    id: 1,
+    url: '/orders',
+    title: 'Encomendas',
     icon: <FiFileText size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
   },
   {
