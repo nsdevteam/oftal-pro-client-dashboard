@@ -14,8 +14,8 @@ const OrdersPage: FC = () => {
 
   return (
     <FormProvider {...form}>
-      <Layout pageTitle="Encomendas">
-        <Orders status={orderStatusEnum.Encomendado} />
+      <Layout pageTitle="Pedidos">
+        <Orders status={orderStatusEnum.Pendente} />
       </Layout>
     </FormProvider>
   );

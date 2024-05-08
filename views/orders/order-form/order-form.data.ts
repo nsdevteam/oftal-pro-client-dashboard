@@ -1,3 +1,5 @@
+import { orderStatusEnum } from '../../../interface';
+
 export const ADDITION_VALUES = Array.from(
   { length: 13 },
   (_, index) => 0.5 + 0.25 * index
@@ -73,17 +75,20 @@ export const COLOR_VALUES = [
   'white',
   'photochromatic',
   'transitions',
-  'polarised',
+  'polarized',
 ];
 
 export const COLOR_LEGEND = {
   white: 'Branca',
   photochromatic: 'Fotocromática',
   transitions: 'Transitions',
-  polarised: 'Polarizada',
+  polarized: 'Polarizada',
 };
 
-export const STATUS_LEGEND = ['Pendente', 'Encomendado'];
+export const STATUS_LEGEND = {
+  [orderStatusEnum.Pendente]: 'Pendente',
+  [orderStatusEnum.Encomendado]: 'Encomendado',
+};
 
 export const REFRACTIVE_VALUES: Record<
   string,

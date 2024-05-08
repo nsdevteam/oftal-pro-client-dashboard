@@ -10,6 +10,11 @@ export interface MenuProps {
   icon: ReactNode;
 }
 
+export enum orderStatusEnum {
+  Pendente,
+  Encomendado,
+}
+
 export interface OrderFormProps {
   closeForm: () => void;
 }
@@ -40,7 +45,6 @@ export interface IClient {
 
 export interface IOrder {
   ref: string;
-  status: 0 | 1;
   leftEye?: IEye;
   rightEye?: IEye;
   prisma: boolean;
@@ -51,6 +55,7 @@ export interface IOrder {
   observation: string;
   minimumHeight: string;
   clientId: `CL${number}`;
+  status: orderStatusEnum;
   precals?: ReadonlyArray<string>;
   recipes?: ReadonlyArray<string>;
   refractiveIndex: string | undefined;
@@ -65,6 +70,7 @@ export interface IOrder {
     | 'invisible'
     | 'bifocal';
 }
+
 export type TRowData = ReadonlyArray<
   Record<string, ReactNode | string | number | undefined>
 >;

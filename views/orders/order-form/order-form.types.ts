@@ -4,6 +4,7 @@ import { DropdownProps } from '../../../elements/dropdown/dropdown.types';
 import { IOrder } from '../../../interface';
 
 export interface OrderFormProps {
+  isEditable: boolean;
   closeForm: () => void;
   doc: WithUid<IOrder> | null;
 }

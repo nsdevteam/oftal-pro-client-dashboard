@@ -1,28 +1,30 @@
 import { WithUid } from 'burnbase/firestore';
 import { FC, useEffect, useState } from 'react';
 import { FiPlus, FiSearch } from 'react-icons/fi';
-import { v4 } from 'uuid';
 
 import getAllOrders from '../../api/orders/get-all-orders';
 import { useUser } from '../../context/user';
 import { Box, Button, Input, Typography } from '../../elements';
-import { IOrder } from '../../interface';
+import { IOrder, orderStatusEnum } from '../../interface';
 import OrderForm from './order-form';
-import { STATUS_LEGEND, TYPE_LEGEND } from './order-form/order-form.data';
+import { TYPE_LEGEND } from './order-form/order-form.data';
+import { OrdersProps } from './orders.types';
 import OrderTable from './orders-table';
 
-const Orders: FC = () => {
+const Orders: FC<OrdersProps> = ({ status }) => {
   const { userData } = useUser();
   const [isOpen, setOpen] = useState(false);
   const [filter, setFilter] = useState('');
   const [orders, setOrders] = useState<ReadonlyArray<WithUid<IOrder>>>([]);
   const [selectDoc, setSelectedDoc] = useState<WithUid<IOrder> | null>(null);
-  const [statuses, setStatuses] = useState<ReadonlyArray<number>>([0, 1, 2]);
 
   useEffect(() => {
-    getAllOrders({ conditions: [['clientId', '==', userData?.clientId]] }).then(
-      setOrders
-    );
+    getAllOrders({
+      conditions: [
+        ['clientId', '==', userData?.clientId],
+        ['status', '==', status],
+      ],
+    }).then(setOrders);
   }, []);
 
   return (
@@ -72,49 +74,24 @@ const Orders: FC = () => {
               />
             </Box>
           </Box>
-          <Box display="flex" gap="0.5rem" my="1rem">
-            {STATUS_LEGEND.map((item, index) => (
-              <Button
-                key={v4()}
-                p="0.5rem"
-                bg="transparent"
-                border="1px solid"
-                borderRadius="2rem"
-                color={statuses.includes(index) ? '#4256d0' : '#686868'}
-                onClick={() =>
-                  setStatuses(
-                    statuses.includes(index)
-                      ? statuses.filter((status) => status !== index)
-                      : [...statuses, index]
-                  )
-                }
-              >
-                {item}
-              </Button>
-            ))}
-          </Box>
-          <Button mt="L" onClick={() => setOpen(true)}>
-            <Typography as="span">Novo pedido</Typography>
-            <Typography as="span" ml="M">
-              <FiPlus size={18} color="#FFF" />
-            </Typography>
-          </Button>
+          {status === orderStatusEnum.Pendente && (
+            <Button mt="L" onClick={() => setOpen(true)}>
+              <Typography as="span">Novo pedido</Typography>
+              <Typography as="span" ml="M">
+                <FiPlus size={18} color="#FFF" />
+              </Typography>
+            </Button>
+          )}
         </Box>
         <OrderTable
           setSelectedDoc={setSelectedDoc}
-          data={orders.filter(({ ref, type, status }) => {
+          data={orders.filter(({ ref, type }) => {
             if (
               filter &&
               !ref.includes(filter) &&
               !TYPE_LEGEND[type].includes(filter)
             )
               return false;
-
-            if (statuses.length && !statuses.includes(status ?? 0)) {
-              console.log({ statuses });
-
-              return false;
-            }
 
             return true;
           })}
@@ -126,6 +103,7 @@ const Orders: FC = () => {
       {(isOpen || selectDoc) && (
         <OrderForm
           doc={selectDoc}
+          isEditable={status === orderStatusEnum.Pendente}
           closeForm={() => {
             setOpen(false);
             setSelectedDoc(null);
