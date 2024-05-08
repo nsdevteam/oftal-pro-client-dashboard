@@ -45,7 +45,7 @@ const Home: FC = () => {
   };
 
   useEffect(() => {
-    if (userAuth && !loading) push('/orders');
+    if (userAuth && !loading) push('/cart');
   }, [userAuth, loading]);
 
   const togglePasswordVisibility = () => {
@@ -176,14 +176,6 @@ const Home: FC = () => {
             </Typography>
           )}
         </Box>
-        <Typography
-          fontSize={['0.5rem', '1rem']}
-          p={['0.5rem', 'L']}
-          my={['0.5rem', 'L']}
-          textAlign="center"
-        >
-          Próximo passo
-        </Typography>
         <Button width="100%">Entrar &rarr;</Button>
       </form>
       <Box
