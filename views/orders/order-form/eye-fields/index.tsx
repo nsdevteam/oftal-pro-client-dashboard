@@ -7,8 +7,9 @@ import { EyeFieldsProps } from './eye-fields.types';
 import EyeSpherical from './eye-spherical';
 
 const EyeFields: FC<EyeFieldsProps> = ({
-  label,
   name,
+  label,
+  disabled,
   isAddition,
   setAddition,
 }) => {
@@ -24,6 +25,7 @@ const EyeFields: FC<EyeFieldsProps> = ({
           <Typography as="label" fontSize="0.8rem">
             <input
               type="checkbox"
+              disabled={disabled}
               defaultChecked={!isAddition}
               onClick={() => setAddition(!isAddition)}
             />{' '}
@@ -39,14 +41,19 @@ const EyeFields: FC<EyeFieldsProps> = ({
       >
         <input
           type="checkbox"
+          disabled={disabled}
           defaultChecked={eye?.active}
           onClick={() => setValue(name, { active: !eye?.active })}
         />
-        <EyeSpherical name={name} isAddition={isAddition} />
+        <EyeSpherical
+          name={name}
+          isAddition={isAddition}
+          disabled={disabled || !eye?.active}
+        />
         <InputList
           label="Cilindro"
-          disabled={!eye?.active}
           defaultValue={eye?.cylinder}
+          disabled={disabled || !eye?.active}
           onSelect={(value: string) => {
             const validValue = Number(value) - (Number(value) % 0.25);
             const isPositive = validValue > 0;
@@ -60,8 +67,8 @@ const EyeFields: FC<EyeFieldsProps> = ({
         <Box display={['block', 'none']} />
         <InputList
           label="Eixo"
-          disabled={!eye?.active}
           defaultValue={eye?.axis}
+          disabled={disabled || !eye?.active}
           onSelect={(value: string) => {
             const validValue = Number(value.replace('°', ''));
 
@@ -78,8 +85,8 @@ const EyeFields: FC<EyeFieldsProps> = ({
         {type !== 'single-focal' && isAddition && (
           <InputList
             label="Adição"
-            disabled={!eye?.active}
             defaultValue={eye?.addition}
+            disabled={disabled || !eye?.active}
             onSelect={(value: string) => {
               const validValue = Number(value) - (Number(value) % 0.25);
 
@@ -100,20 +107,22 @@ const EyeFields: FC<EyeFieldsProps> = ({
   );
 };
 
-const Eyes: FC = () => {
+const Eyes: FC<{ disabled: boolean }> = ({ disabled }) => {
   const [isAddition, setAddition] = useState(true);
 
   return (
     <Box display="flex" gap="1.25rem" flexDirection="column">
       <EyeFields
-        label="Olho Direito"
         name="rightEye"
+        disabled={disabled}
+        label="Olho Direito"
         isAddition={isAddition}
         setAddition={setAddition}
       />
       <EyeFields
-        label="Olho Esquerdo"
         name="leftEye"
+        disabled={disabled}
+        label="Olho Esquerdo"
         isAddition={isAddition}
         setAddition={setAddition}
       />

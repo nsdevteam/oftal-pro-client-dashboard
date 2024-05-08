@@ -3,7 +3,12 @@ import { ChangeEventHandler, FC, useId } from 'react';
 import { Box, Typography } from '../index';
 import { AttachmentProps } from './attachment.types';
 
-const Attachment: FC<AttachmentProps> = ({ label, files, onChange }) => {
+const Attachment: FC<AttachmentProps> = ({
+  label,
+  files,
+  onChange,
+  disabled,
+}) => {
   const id = useId();
 
   const handleOnChangeFile: ChangeEventHandler<HTMLInputElement> = (e) =>
@@ -16,11 +21,17 @@ const Attachment: FC<AttachmentProps> = ({ label, files, onChange }) => {
         multiple
         type="file"
         name="attachment"
+        disabled={disabled}
         style={{ display: 'none' }}
         onChange={handleOnChangeFile}
         accept=".doc,.pdf,.jpg,.jpeg,.png"
       />
-      <Box display="flex" columnGap="8px" alignItems="center">
+      <Box
+        display="flex"
+        columnGap="8px"
+        alignItems="center"
+        {...(disabled && { opacity: 0.7 })}
+      >
         <Box
           aria-label="add attachment"
           color="#FFF"

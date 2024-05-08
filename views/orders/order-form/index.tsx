@@ -23,7 +23,7 @@ import { OrderFormProps } from './order-form.types';
 import OrderFormSubmit from './order-form-submit';
 import TreatmentDropdownField from './treatment-dropdown-field';
 
-const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
+const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
   const form = useForm<IOrder>({
     defaultValues: {
       diameter: 70,
@@ -83,7 +83,9 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
           px={['1rem', '1rem', '4rem']}
           onClick={(e) => e.stopPropagation()}
         >
-          <Typography>{doc ? 'Atualizar' : 'Novo'} Pedido</Typography>
+          <Typography>
+            {!isEditable ? 'Visualizer' : doc ? 'Atualizar' : 'Novo'} Pedido
+          </Typography>
           <Box
             display="grid"
             rowGap="1.25rem"
@@ -103,10 +105,11 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
                   name="type"
                   values={TYPE_VALUES}
                   legend={TYPE_LEGEND}
+                  disabled={!isEditable}
                 />
               </Box>
               <Box gridColumn="2 span">
-                <TreatmentDropdownField />
+                <TreatmentDropdownField disabled={!isEditable} />
               </Box>
               <Box gridColumn="2 span">
                 <DropdownField
@@ -114,13 +117,14 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
                   name="color"
                   values={COLOR_VALUES}
                   legend={COLOR_LEGEND}
+                  disabled={!isEditable}
                 />
               </Box>
               <Box gridColumn="2 span">
-                <DropdownRefractiveField />
+                <DropdownRefractiveField disabled={!isEditable} />
               </Box>
             </Box>
-            <Eyes />
+            <Eyes disabled={!isEditable} />
             <Box
               display="grid"
               rowGap="1.25rem"
@@ -134,6 +138,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
                   max="80"
                   type="number"
                   borderRadius="0.8rem"
+                  disabled={!isEditable}
                   border="1px solid #CDCDCD"
                   {...form.register('diameter', {
                     onBlur: (e) => {
@@ -154,6 +159,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
                 isBoolean
                 name="coloring"
                 label="Coloração"
+                disabled={!isEditable}
                 values={['true', 'false']}
                 legend={{ true: 'Sim', false: 'Não' }}
                 allowed={['refractiveIndex', ['1.5', '1.56', '1.6', '1.67']]}
@@ -162,16 +168,18 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
                 isBoolean
                 name="prisma"
                 label="Prisma"
+                disabled={!isEditable}
                 values={['true', 'false']}
                 legend={{ true: 'Sim', false: 'Não' }}
               />
-              <MinimumHeightField />
+              <MinimumHeightField disabled={!isEditable} />
             </Box>
             <Box display="flex" gap="1.25rem" flexDirection="column">
               <Box display="flex" flexDirection="column" gap="1rem">
                 <Typography>Nome do paciente/Referência</Typography>
                 <Input
                   borderRadius="0.8rem"
+                  disabled={!isEditable}
                   border="1px solid #CDCDCD"
                   placeholder="Firmino Miguel"
                   {...form.register('ref', {
@@ -187,6 +195,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
                     Anexar Receita (Opcional com acréscimo)
                   </Typography>
                   <Attachment
+                    disabled={!isEditable}
                     label="Adicionar ficheiro"
                     files={form.getValues('recipe')}
                     onChange={(files) => form.setValue('recipe', files)}
@@ -197,6 +206,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
                     Anexar Precal (Opcional com acréscimo)
                   </Typography>
                   <Attachment
+                    disabled={!isEditable}
                     label="Adicionar ficheiro"
                     files={form.getValues('precal')}
                     onChange={(files) => form.setValue('precal', files)}
@@ -206,12 +216,15 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc }) => {
               <Box display="flex" flexDirection="column" gap="1rem">
                 <Typography>Observações</Typography>
                 <Textarea
+                  disabled={!isEditable}
                   onChange={(e) => form.setValue('observation', e.target.value)}
                 />
               </Box>
-              <Box gridColumn="1/-1">
-                <OrderFormSubmit doc={doc} closeForm={closeForm} />
-              </Box>
+              {isEditable && (
+                <Box gridColumn="1/-1">
+                  <OrderFormSubmit doc={doc} closeForm={closeForm} />
+                </Box>
+              )}
             </Box>
           </Box>
         </Box>

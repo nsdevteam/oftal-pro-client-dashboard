@@ -5,7 +5,7 @@ import { Box, Dropdown, Typography } from '../../../elements';
 import { IOrder } from '../../../interface';
 import { TREATMENT_VALUES } from './order-form.data';
 
-const TreatmentDropdownField: FC = () => {
+const TreatmentDropdownField: FC<{ disabled: boolean }> = ({ disabled }) => {
   const defaultValue = 'HMC';
   const label = 'Tratamento';
   const values = TREATMENT_VALUES;
@@ -25,6 +25,7 @@ const TreatmentDropdownField: FC = () => {
     <Box display="flex" flexDirection="column" gap="1rem">
       <Typography>{label}</Typography>
       <Dropdown
+        disabled={disabled}
         values={values.filter(
           (value) =>
             value !== 'UC' || (refractiveIndex === '1.5' && color === 'white')
