@@ -1,6 +1,6 @@
 import { WithUid } from 'burnbase/firestore';
 import { FC, useEffect, useState } from 'react';
-import { FiPlus, FiSearch } from 'react-icons/fi';
+import { FiPlus, FiSearch, FiShoppingCart } from 'react-icons/fi';
 
 import getAllOrders from '../../api/orders/get-all-orders';
 import { useUser } from '../../context/user';
@@ -75,12 +75,20 @@ const Orders: FC<OrdersProps> = ({ status }) => {
             </Box>
           </Box>
           {status === orderStatusEnum.Pendente && (
-            <Button mt="L" onClick={() => setOpen(true)}>
-              <Typography as="span">Novo pedido</Typography>
-              <Typography as="span" ml="M">
-                <FiPlus size={18} color="#FFF" />
-              </Typography>
-            </Button>
+            <Box display="flex" gap="1rem">
+              <Button mt="L" onClick={() => setOpen(true)}>
+                <Typography as="span">Novo pedido</Typography>
+                <Typography as="span" ml="M">
+                  <FiPlus size={18} color="#FFF" />
+                </Typography>
+              </Button>
+              <Button mt="L" onClick={() => setOpen(true)}>
+                <Typography as="span">Encomendar</Typography>
+                <Typography as="span" ml="M">
+                  <FiShoppingCart size={18} color="#FFF" />
+                </Typography>
+              </Button>
+            </Box>
           )}
         </Box>
         <OrderTable

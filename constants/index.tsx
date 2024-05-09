@@ -10,7 +10,7 @@ export const MENU_ITEMS: MenuProps[] = [
   },
   {
     url: '/orders',
-    title: 'Encomendas',
+    title: 'Concluidos',
     icon: <FiFileText size={18} color="#FFF" style={{ margin: '0.5rem' }} />,
   },
   {

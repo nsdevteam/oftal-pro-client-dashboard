@@ -37,6 +37,7 @@ export interface IClient {
   email: string;
   fullName: string;
   createdAt?: number;
+  updateAt?: number;
   lastLoginAt?: number;
   phoneNumber?: string;
   clientId: `CL${number}`;

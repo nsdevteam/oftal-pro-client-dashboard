@@ -1,5 +1,3 @@
-import '../init';
-
 import { updateDocument } from 'burnbase/firestore';
 import { addFile, deleteFile } from 'burnbase/storage';
 
