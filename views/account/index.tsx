@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import { updateUser } from '../../api/user';
 import { useUser } from '../../context/user';
@@ -19,29 +20,41 @@ const Account: FC = () => {
       email: userData?.email ?? '',
       phoneNumber: userData?.phoneNumber ?? '',
       lastLoginAt: userData?.lastLoginAt
-        ? new Date(userData.lastLoginAt)
+        ? new Date(userData.lastLoginAt).toUTCString()
         : '--',
-      createdAt: userData?.createdAt ? new Date(userData.createdAt) : '--',
+      createdAt: userData?.createdAt
+        ? new Date(userData.createdAt).toUTCString()
+        : '--',
       type: userData?.type == 1 ? 'Tipo 2' : 'Tipo 1',
     },
   });
 
   const { register, getValues } = form;
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
       const { firstName, lastName, phoneNumber } = getValues();
 
       const fullName = `${firstName} ${lastName}`;
 
-      updateUser(userAuth!.uid, {
+      await updateUser(userAuth!.uid, {
         fullName,
         phoneNumber,
       });
+
+      return;
     } catch (e) {
       console.log(e);
+      throw e;
     }
   };
+
+  const onSubmit = () =>
+    toast.promise(handleSubmit(), {
+      loading: 'A atualizar conta...',
+      success: 'Conta atualizado com sucesso!',
+      error: 'Erro ao atualizar a conta',
+    });
 
   return (
     <FormProvider {...form}>
@@ -61,7 +74,6 @@ const Account: FC = () => {
         <Box as="div" width="80%" padding="0.5rem" marginTop="2rem">
           <Typography padding="1rem">Actualizar os seus dados</Typography>
           <Box
-            as="form"
             width="100%"
             display="flex"
             flexDirection="column"
@@ -220,7 +232,7 @@ const Account: FC = () => {
                 </Typography>
                 <Input
                   p="L"
-                  type="date"
+                  type="text"
                   outline="none"
                   borderRadius="M"
                   border="1px solid #E4E4E7"
@@ -251,7 +263,7 @@ const Account: FC = () => {
                 </Typography>
                 <Input
                   p="L"
-                  type="date"
+                  type="text"
                   outline="none"
                   borderRadius="M"
                   border="1px solid #E4E4E7"
@@ -285,7 +297,7 @@ const Account: FC = () => {
                 legend={ACCOUNT_TYPE_LEGEND}
               />
             </Box>
-            <Button minWidth={['100%', '10rem']} onClick={handleSubmit}>
+            <Button minWidth={['100%', '10rem']} onClick={onSubmit}>
               Salvar
             </Button>
           </Box>

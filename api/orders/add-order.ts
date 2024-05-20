@@ -2,7 +2,7 @@ import { addDocument } from 'burnbase/firestore';
 import { addFile } from 'burnbase/storage';
 
 import { IClient, IOrder } from '../../interface';
-import { orderCollectionName } from './orders.utis';
+import { orderCollectionName } from './orders.utils';
 
 const addOrder = async ({
   precal,
