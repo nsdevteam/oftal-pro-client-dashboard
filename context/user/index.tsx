@@ -36,7 +36,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     if (userData)
       (async () => {
-        const prices = await getPrices(userData.clientId);
+        const prices = await getPrices(userData.priceId);
 
         setUserPrices(prices);
       })();

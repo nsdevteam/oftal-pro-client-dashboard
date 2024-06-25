@@ -13,7 +13,7 @@ const legends = {
   color: COLOR_LEGEND,
 };
 
-const Table: FC<TableProps> = ({ data, columns, onSelect }) => {
+const Table: FC<TableProps> = ({ data, columns, onSelect, special }) => {
   const columnKeys = Object.keys(columns);
   const columnValues = Object.values(columns);
 
@@ -56,7 +56,9 @@ const Table: FC<TableProps> = ({ data, columns, onSelect }) => {
                     key={cellIndex}
                   >
                     {(legends as any)[columnKey]?.[item[columnKey] as any] ??
-                      item[columnKey]}
+                      (special?.[columnKey] === 'date'
+                        ? new Date(item[columnKey] as number).toLocaleString()
+                        : item[columnKey])}
                   </Box>
                 ))}
               </Box>

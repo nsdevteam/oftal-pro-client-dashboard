@@ -71,17 +71,11 @@ export const TYPE_LEGEND = {
   ['bifocal']: 'Bifocal',
 };
 
-export const COLOR_VALUES = [
-  'white',
-  'photochromatic',
-  'transitions',
-  'polarized',
-];
+export const COLOR_VALUES = ['white', 'photochromatic', 'polarized'];
 
 export const COLOR_LEGEND = {
   white: 'Branca',
   photochromatic: 'Fotocromática',
-  transitions: 'Transitions',
   polarized: 'Polarizada',
 };
 
@@ -116,11 +110,6 @@ export const REFRACTIVE_VALUES: Record<
     '1.6 UV420 Blue Cut': TYPE_VALUES.slice(0, -1),
     '1.67': TYPE_VALUES.slice(0, -1),
     '1.67 UV420 Blue Cut': TYPE_VALUES.slice(0, -1),
-  },
-  transitions: {
-    '1.5': TYPE_VALUES.slice(0, -1),
-    '1.6': TYPE_VALUES.slice(0, -1),
-    '1.67': TYPE_VALUES.slice(0, -1),
   },
   polarised: {
     '1.5': TYPE_VALUES.slice(0, -1),

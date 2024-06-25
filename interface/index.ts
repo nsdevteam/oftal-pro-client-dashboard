@@ -35,6 +35,7 @@ export interface IAdmin {
 export interface IClient {
   type: number;
   email: string;
+  priceId: string;
   fullName: string;
   createdAt?: number;
   updateAt?: number;
@@ -60,7 +61,7 @@ export interface IOrder {
   recipes?: ReadonlyArray<string>;
   refractiveIndex: string | undefined;
   treatment: 'HMC' | 'SHMC' | 'UC' | 'HC';
-  color: 'white' | 'photochromatic' | 'transitions' | 'polarised';
+  color: 'white' | 'photochromatic' | 'polarised';
   type:
     | 'single-focal'
     | 'boost'
@@ -84,5 +85,5 @@ export interface TableProps {
 
 export interface IUserPrices {
   extra: Record<string, number>;
-  lens: Record<string, ReadonlyArray<number | null>>;
+  lens: Record<string, Record<string, ReadonlyArray<number | null>>>;
 }

@@ -8,7 +8,7 @@ import { useUser } from '../../../context/user';
 import { Box, Button, Typography } from '../../../elements';
 import { IOrder } from '../../../interface';
 import { formatMoney } from '../../../utils';
-import { COLOR_VALUES, TYPE_VALUES } from './order-form.data';
+import { TYPE_VALUES } from './order-form.data';
 import { OrderFormSubmitProps } from './order-form.types';
 
 const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
@@ -32,8 +32,6 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
     recipe,
   } = useWatch({ control });
 
-  const colorIndex = COLOR_VALUES.findIndex((key) => key === color);
-
   const typeIndex = TYPE_VALUES.findIndex((key) => key === type);
 
   const hasCylinderGreaterThan4 =
@@ -45,7 +43,7 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
       Number(rightEye?.cylinder ?? 0) < -4);
 
   const total = prices
-    ? ((prices.lens[`${colorIndex}:${refractiveIndex}`]?.[typeIndex] ?? 0) +
+    ? ((prices.lens[color!]?.[refractiveIndex!]?.[typeIndex] ?? 0) +
         (hasCylinderGreaterThan4 ? prices.extra.cil : 0) +
         (recipe?.length ? prices.extra.receita : 0) +
         (precal?.length ? prices.extra.precal : 0) +
