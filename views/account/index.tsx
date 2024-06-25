@@ -113,7 +113,7 @@ const Account: FC = () => {
                   placeholder="john"
                   {...register('firstName')}
                   nFocus={{
-                    borderColor: '#4763E4',
+                    borderColor: '#50ADE5',
                   }}
                 />
               </Box>
@@ -143,7 +143,7 @@ const Account: FC = () => {
                   placeholder="Doe"
                   {...register('lastName')}
                   nFocus={{
-                    borderColor: '#4763E4',
+                    borderColor: '#50ADE5',
                   }}
                 />
               </Box>
@@ -181,7 +181,7 @@ const Account: FC = () => {
                   {...register('email')}
                   placeholder="johndoe@oftalpro.com"
                   nFocus={{
-                    borderColor: '#4763E4',
+                    borderColor: '#50ADE5',
                   }}
                 />
               </Box>
@@ -209,7 +209,7 @@ const Account: FC = () => {
                   bg="transparent"
                   {...register('phoneNumber')}
                   placeholder="(+244) 945 000 000"
-                  nFocus={{ borderColor: '#4763E4' }}
+                  nFocus={{ borderColor: '#50ADE5' }}
                 />
               </Box>
             </Box>
@@ -246,7 +246,7 @@ const Account: FC = () => {
                   placeholder="10-02-2019"
                   {...register('createdAt')}
                   nFocus={{
-                    borderColor: '#4763E4',
+                    borderColor: '#50ADE5',
                   }}
                 />
               </Box>
@@ -278,7 +278,7 @@ const Account: FC = () => {
                   {...register('lastLoginAt')}
                   placeholder="20-03-2020"
                   nFocus={{
-                    borderColor: '#4763E4',
+                    borderColor: '#50ADE5',
                   }}
                 />
               </Box>

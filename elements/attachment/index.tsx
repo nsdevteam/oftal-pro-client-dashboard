@@ -35,7 +35,7 @@ const Attachment: FC<AttachmentProps> = ({
         <Box
           aria-label="add attachment"
           color="#FFF"
-          bg="#4763E4"
+          bg="#50ADE5"
           padding="1rem"
           display="flex"
           cursor="pointer"
