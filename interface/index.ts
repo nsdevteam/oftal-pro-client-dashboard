@@ -46,6 +46,7 @@ export interface IClient {
 
 export interface IOrder {
   ref: string;
+  total: number;
   leftEye?: IEye;
   rightEye?: IEye;
   prisma: boolean;
@@ -80,7 +81,9 @@ export interface TableProps {
   data: TRowData;
   columns: Record<string, string>;
   special?: Record<string, 'date'>;
-  onSelect: (index: number) => void;
+  onClick: (index: number) => void;
+  onSelect?: (index: number) => void;
+  selectList: ReadonlyArray<number>;
 }
 
 export interface IUserPrices {

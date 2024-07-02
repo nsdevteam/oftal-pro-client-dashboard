@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import invariant from 'tiny-invariant';
 
 import addOrder from '../../../api/orders/add-order';
 import updateOrder from '../../../api/orders/update-order';
@@ -58,23 +59,66 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
     : 0;
 
   const handleSubmit = async () => {
-    try {
-      if (doc?.uid)
-        return await updateOrder({
-          ...getValues(),
-          total,
-          docId: doc.uid,
-        }).catch((e) => {
-          console.log({ e });
-          throw e;
-        });
+    const {
+      ref,
+      leftEye,
+      rightEye,
+      minimumHeight,
+      refractiveIndex,
+      treatment,
+      color,
+      type,
+      ...others
+    } = getValues();
 
-      if (!userData?.type) return;
+    invariant(ref, 'Preencha a referência');
+    invariant(leftEye || rightEye, 'Deve preencher pelo menos 1 olho');
+    invariant(minimumHeight, 'Deve ter altura mínima');
+    invariant(refractiveIndex, 'Deve preencher o indice de refração');
+    invariant(treatment, 'Deve preencher o tratamento');
+    invariant(color, 'Deve preencher a cor das lentes');
+    invariant(type, 'Deve preencher o tipo de lentes');
 
-      await addOrder({ ...getValues(), total, clientId: userData!.clientId });
-    } finally {
-      closeForm();
-    }
+    if (doc?.uid)
+      return await updateOrder({
+        ...others,
+        ref,
+        leftEye,
+        rightEye,
+        prisma,
+        coloring,
+        precal,
+        recipe,
+        minimumHeight,
+        clientId: userData!.clientId,
+        refractiveIndex,
+        treatment,
+        color,
+        type,
+        total,
+        docId: doc.uid,
+      }).catch((e) => {
+        console.log({ e });
+        throw e;
+      });
+
+    if (!userData?.type) return;
+
+    await addOrder({
+      ...others,
+      ref,
+      leftEye,
+      rightEye,
+      precal,
+      recipe,
+      minimumHeight,
+      refractiveIndex,
+      treatment,
+      color,
+      type,
+      total,
+      clientId: userData!.clientId,
+    });
   };
 
   const onSubmit = () => {
@@ -84,8 +128,12 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
 
     toast.promise(handleSubmit(), {
       loading: `A ${doc?.uid ? 'atualizar' : 'submeter'} pedido...`,
-      success: `Pedido ${doc?.uid ? 'atualizado' : 'submetido'} com sucesso!`,
-      error: `Erro ao ${doc?.uid ? 'atualizar' : 'submeter'} o pedido`,
+      success: () => {
+        closeForm();
+        return `Pedido ${doc?.uid ? 'atualizado' : 'submetido'} com sucesso!`;
+      },
+      error: (e) =>
+        e.message ?? `Erro ao ${doc?.uid ? 'atualizar' : 'submeter'} o pedido`,
     });
   };
 

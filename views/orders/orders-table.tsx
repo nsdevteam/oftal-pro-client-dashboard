@@ -17,12 +17,25 @@ const HEADINGS: Record<string, string> = {
   addition: 'Adição',
 };
 
-const OrderTable: FC<OrdersTableProps> = ({ data, setSelectedDoc }) => (
+const OrderTable: FC<OrdersTableProps> = ({
+  data,
+  onSelect,
+  selectedList,
+  setSelectedDoc,
+}) => (
   <Box width="100%">
     <Typography as="h2">Listagem de pedidos</Typography>
     <Table
       columns={HEADINGS}
-      onSelect={(index) => setSelectedDoc(data[index])}
+      onSelect={onSelect && ((index) => onSelect(data[index].uid))}
+      onClick={(index) => setSelectedDoc(data[index])}
+      selectList={
+        selectedList
+          ? selectedList.map((docId) =>
+              data.findIndex(({ uid }) => uid === docId)
+            )
+          : []
+      }
       data={
         data.map(
           ({

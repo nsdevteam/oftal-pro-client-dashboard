@@ -1,10 +1,14 @@
 import { WithUid } from 'burnbase/firestore';
 import { FC, useEffect, useState } from 'react';
-import { FiPlus, FiSearch, FiShoppingCart } from 'react-icons/fi';
+import toast from 'react-hot-toast';
+import { FiPlus, FiSearch, FiShoppingCart, FiTrash } from 'react-icons/fi';
 
+import { updateOrder } from '../../api/orders';
+import deleteOrder from '../../api/orders/delete-order';
 import getAllOrders from '../../api/orders/get-all-orders';
 import { useUser } from '../../context/user';
 import { Box, Button, Input, Typography } from '../../elements';
+import useRerender from '../../hooks/use-rerender';
 import { IOrder, orderStatusEnum } from '../../interface';
 import OrderForm from './order-form';
 import { TYPE_LEGEND } from './order-form/order-form.data';
@@ -13,10 +17,19 @@ import OrderTable from './orders-table';
 
 const Orders: FC<OrdersProps> = ({ status }) => {
   const { userData } = useUser();
+  const { renderer, rerender } = useRerender();
   const [isOpen, setOpen] = useState(false);
   const [filter, setFilter] = useState('');
   const [orders, setOrders] = useState<ReadonlyArray<WithUid<IOrder>>>([]);
   const [selectDoc, setSelectedDoc] = useState<WithUid<IOrder> | null>(null);
+  const [selectedList, setSelectedList] = useState<ReadonlyArray<string>>([]);
+
+  const onSelect = (docId: string) =>
+    setSelectedList(
+      selectedList.includes(docId)
+        ? selectedList.filter((id) => id !== docId)
+        : [...selectedList, docId]
+    );
 
   useEffect(() => {
     getAllOrders({
@@ -25,7 +38,36 @@ const Orders: FC<OrdersProps> = ({ status }) => {
         ['status', '==', status],
       ],
     }).then(setOrders);
-  }, []);
+  }, [renderer]);
+
+  const bulkDelete = () =>
+    toast.promise(Promise.all(selectedList.map(deleteOrder)), {
+      loading: 'Encomendando pedidos',
+      success: () => {
+        setSelectedList([]);
+        rerender();
+        return 'Pedidos encomendados com sucesso';
+      },
+      error: 'Ocorreu um erro ao encomendar pedidos',
+    });
+
+  const ordering = () =>
+    toast.promise(
+      Promise.all(
+        selectedList.map((uid) =>
+          updateOrder({ docId: uid, status: orderStatusEnum.Encomendado })
+        )
+      ),
+      {
+        loading: 'Apagando pedidos',
+        success: () => {
+          setSelectedList([]);
+          rerender();
+          return 'Pedidos apagados com sucesso';
+        },
+        error: 'Ocorreu um erro ao apagar pedidos',
+      }
+    );
 
   return (
     <Box
@@ -82,10 +124,24 @@ const Orders: FC<OrdersProps> = ({ status }) => {
                   <FiPlus size={18} color="#FFF" />
                 </Typography>
               </Button>
-              <Button mt="L" onClick={() => setOpen(true)}>
+              <Button
+                mt="L"
+                bg={selectedList.length ? '#50ADE5' : '#686868'}
+                onClick={() => selectedList.length && ordering()}
+              >
                 <Typography as="span">Encomendar</Typography>
                 <Typography as="span" ml="M">
                   <FiShoppingCart size={18} color="#FFF" />
+                </Typography>
+              </Button>
+              <Button
+                mt="L"
+                bg={selectedList.length ? '#DC2626' : '#686868'}
+                onClick={() => selectedList.length && bulkDelete()}
+              >
+                <Typography as="span">Apagar</Typography>
+                <Typography as="span" ml="M">
+                  <FiTrash size={18} color="#FFF" />
                 </Typography>
               </Button>
             </Box>
@@ -103,6 +159,10 @@ const Orders: FC<OrdersProps> = ({ status }) => {
 
             return true;
           })}
+          {...(status === orderStatusEnum.Pendente && {
+            onSelect,
+            selectedList,
+          })}
         />
       </Box>
       <Typography as="h4" mt="2rem">
@@ -113,6 +173,7 @@ const Orders: FC<OrdersProps> = ({ status }) => {
           doc={selectDoc}
           isEditable={status === orderStatusEnum.Pendente}
           closeForm={() => {
+            rerender();
             setOpen(false);
             setSelectedDoc(null);
           }}

@@ -9,8 +9,7 @@ const updateOrder = async ({
   precal,
   recipe,
   ...order
-}: Partial<IOrder> & {
-  total: number;
+}: Partial<IOrder & { total: number }> & {
   docId: string;
 }): Promise<void> => {
   const recipes = await Promise.all(

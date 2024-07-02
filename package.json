@@ -33,7 +33,7 @@
     "@emotion/styled": "^11.10.5",
     "@styled-system/css": "^5.1.5",
     "@stylin.js/react": "^1.0.5-alpha.0",
-    "burnbase": "^0.2.0-alpha.3",
+    "burnbase": "^0.3.0-alpha.0",
     "commitlint": "^17.7.1",
     "next": "^13.0.2",
     "ramda": "^0.28.0",
@@ -49,6 +49,7 @@
     "react-tooltip": "^5.21.1",
     "styled-system": "^5.1.5",
     "stylin": "^5.1.3",
+    "tiny-invariant": "^1.3.3",
     "use-debounce": "^9.0.4",
     "uuid": "^9.0.0"
   },
