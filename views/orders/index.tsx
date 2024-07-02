@@ -42,13 +42,13 @@ const Orders: FC<OrdersProps> = ({ status }) => {
 
   const bulkDelete = () =>
     toast.promise(Promise.all(selectedList.map(deleteOrder)), {
-      loading: 'Encomendando pedidos',
+      loading: 'Apagando pedidos',
       success: () => {
         setSelectedList([]);
         rerender();
-        return 'Pedidos encomendados com sucesso';
+        return 'Pedidos apagados com sucesso';
       },
-      error: 'Ocorreu um erro ao encomendar pedidos',
+      error: 'Ocorreu um erro ao apagar pedidos',
     });
 
   const ordering = () =>
@@ -59,13 +59,13 @@ const Orders: FC<OrdersProps> = ({ status }) => {
         )
       ),
       {
-        loading: 'Apagando pedidos',
+        loading: 'Encomendando pedidos',
         success: () => {
           setSelectedList([]);
           rerender();
-          return 'Pedidos apagados com sucesso';
+          return 'Pedidos encomendados com sucesso';
         },
-        error: 'Ocorreu um erro ao apagar pedidos',
+        error: 'Ocorreu um erro ao encomendar pedidos',
       }
     );
 
