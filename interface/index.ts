@@ -51,6 +51,7 @@ export interface IOrder {
   rightEye?: IEye;
   prisma: boolean;
   diameter: number;
+  createdAt: number;
   coloring: boolean;
   precal?: FileList;
   recipe?: FileList;

@@ -45,9 +45,14 @@ const OrderTable: FC<OrdersTableProps> = ({
             status,
             leftEye,
             rightEye,
+            clientId,
+            createdAt,
             refractiveIndex,
           }) => ({
-            ref,
+            ref: `${new Date(createdAt!)
+              .toISOString()
+              .split('T')[0]
+              .replaceAll('-', '')}-${clientId}-${ref || createdAt}`,
             type,
             color,
             refractiveIndex,

@@ -71,7 +71,6 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
       ...others
     } = getValues();
 
-    invariant(ref, 'Preencha a referência');
     invariant(leftEye || rightEye, 'Deve preencher pelo menos 1 olho');
     invariant(minimumHeight, 'Deve ter altura mínima');
     invariant(refractiveIndex, 'Deve preencher o indice de refração');
@@ -97,9 +96,6 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
         type,
         total,
         docId: doc.uid,
-      }).catch((e) => {
-        console.log({ e });
-        throw e;
       });
 
     if (!userData?.type) return;
