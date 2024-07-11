@@ -18,7 +18,6 @@ const Attachment: FC<AttachmentProps> = ({
     <Box as="label">
       <input
         id={id}
-        multiple
         type="file"
         name="attachment"
         disabled={disabled}

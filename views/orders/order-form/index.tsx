@@ -197,8 +197,8 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                   <Attachment
                     disabled={!isEditable}
                     label="Adicionar ficheiro"
-                    files={form.getValues('recipe')}
-                    onChange={(files) => form.setValue('recipe', files)}
+                    files={form.getValues('recipes')}
+                    onChange={(files) => form.setValue('recipes', files)}
                   />
                 </Box>
                 <Box display="flex" flexDirection="column" gap="1rem">
@@ -208,8 +208,8 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                   <Attachment
                     disabled={!isEditable}
                     label="Adicionar ficheiro"
-                    files={form.getValues('precal')}
-                    onChange={(files) => form.setValue('precal', files)}
+                    files={form.getValues('precals')}
+                    onChange={(files) => form.setValue('precals', files)}
                   />
                 </Box>
               </Box>

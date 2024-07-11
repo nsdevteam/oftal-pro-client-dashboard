@@ -28,9 +28,9 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
     color,
     coloring,
     type,
-    precal,
+    precals,
     prisma,
-    recipe,
+    recipes,
   } = useWatch({ control });
 
   const typeIndex = TYPE_VALUES.findIndex((key) => key === type);
@@ -46,8 +46,8 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
   const total = prices
     ? ((prices.lens[color!]?.[refractiveIndex!]?.[typeIndex] ?? 0) +
         (hasCylinderGreaterThan4 ? prices.extra.cil : 0) +
-        (recipe?.length ? prices.extra.receita : 0) +
-        (precal?.length ? prices.extra.precal : 0) +
+        (recipes?.length ? prices.extra.receita : 0) +
+        (precals?.length ? prices.extra.precal : 0) +
         (prisma ? prices.extra.prisma : 0) +
         (coloring
           ? prices.extra[
@@ -86,8 +86,8 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
         rightEye,
         prisma,
         coloring,
-        precal,
-        recipe,
+        precals,
+        recipes,
         minimumHeight,
         clientId: userData!.clientId,
         refractiveIndex,
@@ -105,8 +105,8 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
       ref,
       leftEye,
       rightEye,
-      precal,
-      recipe,
+      precals,
+      recipes,
       minimumHeight,
       refractiveIndex,
       treatment,

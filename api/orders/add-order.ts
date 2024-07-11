@@ -5,26 +5,31 @@ import { IClient, IOrder } from '../../interface';
 import { orderCollectionName } from './orders.utils';
 
 const addOrder = async ({
-  precal,
-  recipe,
+  precals,
+  recipes,
   ...order
 }: IOrder & Pick<IClient, 'clientId'> & { total: number }): Promise<void> => {
-  const recipes = await Promise.all(
-    Array.from(recipe ?? []).map((file) =>
-      addFile(file, 'recipes', { prefix: '', suffix: '' })
-    )
-  );
-  const precals = await Promise.all(
-    Array.from(precal ?? []).map((file) =>
-      addFile(file, 'precals', { prefix: '', suffix: '' })
-    )
-  );
+  const recipe =
+    recipes && Array.from(recipes)[0]
+      ? await addFile(Array.from(recipes)[0], 'recipes', {
+          prefix: '',
+          suffix: '',
+        })
+      : undefined;
+
+  const precal =
+    precals && Array.from(precals)[0]
+      ? await addFile(Array.from(precals)[0], 'precals', {
+          prefix: '',
+          suffix: '',
+        })
+      : undefined;
 
   addDocument(orderCollectionName, {
     ...order,
-    precals,
-    recipes,
     status: 0,
+    recipe: recipe ?? '',
+    precal: precal ?? '',
     createdAt: Date.now(),
   });
 };

@@ -6,38 +6,40 @@ import { orderCollectionName } from './orders.utils';
 
 const updateOrder = async ({
   docId,
-  precal,
-  recipe,
+  precals,
+  recipes,
   ...order
 }: Partial<IOrder & { total: number }> & {
   docId: string;
 }): Promise<void> => {
-  const recipes = await Promise.all(
-    Array.from(recipe ?? []).map((file) =>
-      addFile(file, 'recipes', { prefix: '', suffix: '' })
-    )
-  ).then((response) => {
-    if (order.recipes)
-      Promise.all(order.recipes.map((file) => deleteFile(file)));
+  const recipe =
+    recipes && Array.from(recipes)[0]
+      ? await addFile(Array.from(recipes)[0], 'recipes', {
+          prefix: '',
+          suffix: '',
+        }).then((response) => {
+          if (order.recipe) deleteFile(order.recipe);
 
-    return response;
-  });
+          return response;
+        })
+      : order.recipe ?? '';
 
-  const precals = await Promise.all(
-    Array.from(precal ?? []).map((file) =>
-      addFile(file, 'precals', { prefix: '', suffix: '' })
-    )
-  ).then((response) => {
-    if (order.precals)
-      Promise.all(order.precals.map((file) => deleteFile(file)));
+  const precal =
+    precals && Array.from(precals)[0]
+      ? await addFile(Array.from(precals)[0], 'precals', {
+          prefix: '',
+          suffix: '',
+        }).then((response) => {
+          if (order.precal) deleteFile(order.precal);
 
-    return response;
-  });
+          return response;
+        })
+      : order.precal ?? '';
 
   await updateDocument(orderCollectionName, docId, {
     ...order,
-    precals,
-    recipes,
+    ...(recipe && { recipe }),
+    ...(precal && { precal }),
     updatedAt: Date.now(),
   });
 };

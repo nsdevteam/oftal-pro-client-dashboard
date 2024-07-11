@@ -65,7 +65,7 @@ const Orders: FC<OrdersProps> = ({ status }) => {
           rerender();
           return 'Pedidos encomendados com sucesso';
         },
-        error: 'Ocorreu um erro ao encomendar pedidos',
+        error: (e) => e.message ?? 'Ocorreu um erro ao encomendar pedidos',
       }
     );
 
