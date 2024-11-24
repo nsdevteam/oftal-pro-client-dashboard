@@ -8,7 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import { UserProvider } from '../context/user';
 import { LightTheme } from '../design-system';
 import GlobalStyles from '../design-system/global-styles';
-
+import '../styles/global.css';   
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
   <StrictMode>
     <UserProvider>

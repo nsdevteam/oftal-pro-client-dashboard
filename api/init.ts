@@ -1,4 +1,6 @@
 import { init } from 'burnbase/app';
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
@@ -9,4 +11,9 @@ export const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || '',
 };
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
 init(firebaseConfig);
+
+export { auth };  
