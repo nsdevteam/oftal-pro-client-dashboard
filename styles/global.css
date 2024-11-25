@@ -1,6 +1,96 @@
-* {
-    box-sizing: border-box;   
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;900&display=swap');
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .dropDownLink {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    margin-left: 2rem;
+    width: 80%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: #fff;   
+  }
+
+  .tableRequest {
+    border-collapse: collapse;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  }
+
+  .tableRequest thead {
+    background: #f6f6f7;
+    font-weight: bold;
+  }
+
+  .tableRequest tr:nth-of-type(even) {
+    background-color: #f6f6f7;
+  }
+
+  .tableRequest tr:hover {
+    background-color: #f6f6f7;
+  }
+
+  .inputFile::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .inputFile::before {
+    content: 'Adicionar Receita';
+    display: inline-block;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+  }
+  .inputFile:hover::before {
+    border-color: #4763e4;
+  }
+  .inputFile:active::before {
+    background: transparent;
+  }
+  .selectType {
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+    min-width: 100%;
+    width: 20rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e4e4e7;
+    background: transparent;
+  }
+  .selectAdition {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    min-width: 100%;
+    width: 7.5rem;
+    background: transparent;
+    border: 1px solid #e4e4e7;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  .alertDanger {
+    font-size: 0.75rem;
+    margin: 0.5rem;
+    color: #dc2626;
+  }
 .wa-icon{
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='58px' width='58px' version='1.1' id='Capa_1' viewBox='0 0 58 58' xml:space='preserve'%3E%3Cg%3E%3Cpath style='fill:%232CB742;' d='M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5 S45.24,57,29.5,57c-4.789,0-9.299-1.187-13.26-3.273L0,58z'/%3E%3Cpath style='fill:%23FFFFFF;' d='M47.683,37.985c-1.316-2.487-6.169-5.331-6.169-5.331c-1.098-0.626-2.423-0.696-3.049,0.42 c0,0-1.577,1.891-1.978,2.163c-1.832,1.241-3.529,1.193-5.242-0.52l-3.981-3.981l-3.981-3.981c-1.713-1.713-1.761-3.41-0.52-5.242 c0.272-0.401,2.163-1.978,2.163-1.978c1.116-0.627,1.046-1.951,0.42-3.049c0,0-2.844-4.853-5.331-6.169 c-1.058-0.56-2.357-0.364-3.203,0.482l-1.758,1.758c-5.577,5.577-2.831,11.873,2.746,17.45l5.097,5.097l5.097,5.097 c5.577,5.577,11.873,8.323,17.45,2.746l1.758-1.758C48.048,40.341,48.243,39.042,47.683,37.985z'/%3E%3C/g%3E%3C/svg%3E");
     height: 38px;
@@ -27,3 +117,8 @@
     display: inline-block;   
     margin-top: 70px;   
 }
+/*Header CSS */
+.dash-header{
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+}
+/*Header CSS */

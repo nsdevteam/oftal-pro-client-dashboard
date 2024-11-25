@@ -85,37 +85,9 @@ const Orders: FC<OrdersProps> = ({ status }) => {
           alignItems="flex-start"
           justifyContent="space-between"
         >
-          <Box
-            width="100%"
-            display="flex"
-            mr={['0', 'S']}
-            borderRadius="M"
-            overflow="hidden"
-            alignItems="center"
-            color="textInverted"
-            border="1px solid #E4E4E7"
-            justifyContent="flex-start"
-          >
-            <Box cursor="pointer" padding="0.5rem" paddingRight="0">
-              <FiSearch size={24} />
-            </Box>
-            <Box display="flex" flexDirection="column" flex="1">
-              <Input
-                p="L"
-                // eslint-disable-next-line jsx-a11y/no-autofocus
-                autoFocus
-                type="search"
-                name="search"
-                value={filter}
-                mr={['0', 'S']}
-                ml={['0', 'S']}
-                borderRadius="M"
-                backgroundColor="transparent"
-                placeholder="Filtrar pedidos..."
-                onChange={(e) => setFilter(e.target.value)}
-              />
-            </Box>
-          </Box>
+        <Typography as="h2" mb={30}>
+        {status===orderStatusEnum.Pendente ? 'Pedidos Pendentes' : 'Pedidos Concluídos / Ocorrência'}
+      </Typography>
           {status === orderStatusEnum.Pendente && (
             <Box display="flex" gap="1rem">
               <Button mt="L" onClick={() => setOpen(true)}>
@@ -149,15 +121,15 @@ const Orders: FC<OrdersProps> = ({ status }) => {
         </Box>
         <OrderTable
           setSelectedDoc={setSelectedDoc}
-          data={orders.filter(({ ref, type }) => {
-            if (
+          data={orders.filter((order) => {
+            if(status===order?.status) return true;  
+            else if (
               filter &&
-              !ref.includes(filter) &&
-              !TYPE_LEGEND[type].includes(filter)
+              !order?.ref.includes(filter) &&
+              !TYPE_LEGEND[order?.type].includes(filter)    
             )
-              return false;
-
-            return true;
+              return false;  
+             
           })}
           {...(status === orderStatusEnum.Pendente && {
             onSelect,
@@ -165,9 +137,6 @@ const Orders: FC<OrdersProps> = ({ status }) => {
           })}
         />
       </Box>
-      <Typography as="h4" mt="2rem">
-        Total de resultados: {orders.length}
-      </Typography>
       {(isOpen || selectDoc) && (
         <OrderForm
           doc={selectDoc}

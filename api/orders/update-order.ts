@@ -1,9 +1,6 @@
-import { updateDocument } from 'firebase/firestore';
-
-
 import { IOrder } from '../../interface';
 import { orderCollectionName } from './orders.utils';
-import { addFile, deleteFile } from '../../utils/helpers';
+import { addFile, deleteFile, updateDocument } from '../../utils/helpers';
 
 const updateOrder = async ({
   docId,
@@ -43,6 +40,6 @@ const updateOrder = async ({
     ...(precal && { precal }),
     updatedAt: Date.now(),
   });
-};
+};     
 
 export default updateOrder;

@@ -9,8 +9,7 @@
     padding: 30px;    
     background-color: #fff;    
 }
-.authBtn{
-    all: initial;   
+.authBtn{  
     box-sizing: border-box !important;   
     width: calc(100% - 10px) !important;     
     margin-top: 30px !important;  

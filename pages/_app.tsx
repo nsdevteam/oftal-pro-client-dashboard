@@ -12,11 +12,9 @@ import '../styles/global.css';
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
   <StrictMode>
     <UserProvider>
-      <ThemeProvider theme={LightTheme}>
         <Global styles={GlobalStyles} />
         <Component {...pageProps} />
         <Toaster />
-      </ThemeProvider>
     </UserProvider>
   </StrictMode>
 );

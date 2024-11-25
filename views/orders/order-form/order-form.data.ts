@@ -77,6 +77,7 @@ export const COLOR_LEGEND = {
   white: 'Branca',
   photochromatic: 'Fotocromática',
   polarized: 'Polarizada',
+  polarised: 'Polarizada'
 };
 
 export const STATUS_LEGEND = {
