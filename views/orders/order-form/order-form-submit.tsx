@@ -78,7 +78,9 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
     invariant(color, 'Deve preencher a cor das lentes');
     invariant(type, 'Deve preencher o tipo de lentes');
 
-    if (doc?.uid)
+    console.log("Document Order Pending ::: ",doc);   
+    //@ts-ignore   
+    if (doc?.uid || doc?.id)
       return await updateOrder({
         ...others,
         ref,
@@ -95,7 +97,11 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
         color,
         type,
         total,
-        docId: doc.uid,
+        status: 1,
+        //@ts-ignore
+        uid: doc?.uid || doc?.id,      
+        //@ts-ignore
+        docId: doc?.uid || doc?.id,   
       });
 
     if (!userData?.type) return;

@@ -7,6 +7,7 @@ export interface OrdersTableProps {
   selectedList?: ReadonlyArray<string>;
   data: ReadonlyArray<WithUid<IOrder>>;
   setSelectedDoc: (data: WithUid<IOrder>) => void;
+  customData?:any;
 }
 
 export interface OrdersProps {

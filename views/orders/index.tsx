@@ -121,6 +121,7 @@ const Orders: FC<OrdersProps> = ({ status }) => {
         </Box>
         <OrderTable
           setSelectedDoc={setSelectedDoc}
+          customData={orders}   
           data={orders.filter((order) => {
             if(status===order?.status) return true;  
             else if (

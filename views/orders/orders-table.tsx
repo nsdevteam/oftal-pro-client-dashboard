@@ -90,6 +90,7 @@ const columns: GridColDef[] = [
 
 const OrderTable: React.FC<OrdersTableProps> = ({
   data,
+  customData,
   onSelect,
   selectedList,
   setSelectedDoc,
@@ -97,41 +98,37 @@ const OrderTable: React.FC<OrdersTableProps> = ({
   const [rows,setRows] = React.useState<any>([]);
 
   React.useEffect(()=>{
-    setRows(data.map(
-      ({
-        //@ts-ignore   
-        id,
-        ref,
-        type,
-        color,
-        status,
-        leftEye,
-        rightEye,
-        clientId,
-        createdAt,
-        refractiveIndex,
-        recipe,
-        precal
-      }) => ({
-        id: id || 1,   
-        ref: `${new Date(createdAt!)
+    const _data = [...data].map((item:any)=>{
+      return {
+        ...item,
+        uid: item?.uid,
+        id: item?.id || item?.uid,   
+        ref: `${new Date(item?.createdAt!)
           .toISOString()
           .split('T')[0]
-          .replaceAll('-', '')}-${clientId}-${ref || createdAt}`,
-        type: type ? TYPE_LEGEND[type] : '',
-        color: color ? COLOR_LEGEND[color] : '',   
-        refractiveIndex,
-        status: status ? STATUS_LEGEND[status] : 'Pendente',
-        leftEye,
-        rightEye,
-        recipe,
-        precal      
-      })
-  ))
-  },[data])
+          .replaceAll('-', '')}-${item?.clientId}-${item?.ref || item?.createdAt}`,
+          //@ts-ignore
+        type: item?.type ? TYPE_LEGEND[item?.type] : '',
+        //@ts-ignore
+        color: item?.color ? COLOR_LEGEND[item?.color] : '',   
+        refractiveIndex:item?.refractiveIndex,
+        //@ts-ignore
+        status: item?.status ? STATUS_LEGEND[item?.status] : 'Pendente',    
+      }    
+    }
 
+  );
+  setRows(_data);
+  },[data]);
+  
+  const paginationModel = { page: 0, pageSize: 8 };
 
-    const paginationModel = { page: 0, pageSize: 8 };
+  const getOrder = (id:string)=>{
+    //@ts-ignore
+    const _doc = customData?.filter(item=>item?.id===id || item?.uid === id)?.[0] || {};     
+    console.log("Requested Document ::: ",_doc);   
+    return _doc;   
+  }   
 
   return <>
     <Box width="100%">
@@ -146,7 +143,7 @@ const OrderTable: React.FC<OrdersTableProps> = ({
         sx={{ border: 0 }}
         rowHeight={80}
         localeText={ptPT.components.MuiDataGrid.defaultProps.localeText}  
-        onRowClick={(params)=>setSelectedDoc(params?.row|| {})}       
+        onRowClick={(params)=>setSelectedDoc(getOrder(params?.row?.id || params?.row?.uid))}           
         onRowSelectionModelChange={(params:any)=>{onSelect && onSelect(params?.row?.id || '')}}   
       />
     </Paper>
