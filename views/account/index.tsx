@@ -69,10 +69,11 @@ const Account: FC = () => {
         alignItems="flex-start"
         alignContent="flex-start"
         padding="1rem"
+        className='page-form'
       >
-        <Typography padding="0.5rem">Dados do usuário</Typography>
-        <Box as="div" width="80%" padding="0.5rem" marginTop="2rem">
-          <Typography padding="1rem">Actualizar os seus dados</Typography>
+        <Typography className='page-title' padding="0.5rem">Dados do Usuário</Typography>
+        <Box as="div" width="80%" padding="0.5rem" >
+          <Typography className='page-subtitle' padding="1rem">Actualizar os seus dados</Typography>
           <Box
             width="100%"
             display="flex"
@@ -95,7 +96,7 @@ const Account: FC = () => {
                 justifyContent="flex-start"
                 alignItems="flex-start"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Primeiro nome
                 </Typography>
                 <Input
@@ -125,7 +126,7 @@ const Account: FC = () => {
                 justifyContent="flex-start"
                 alignItems="flex-start"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Sobrenome
                 </Typography>
                 <Input
@@ -162,7 +163,7 @@ const Account: FC = () => {
                 justifyContent="flex-start"
                 alignItems="flex-start"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Endereço de email
                 </Typography>
                 <Input
@@ -193,7 +194,7 @@ const Account: FC = () => {
                 justifyContent="flex-start"
                 alignItems="flex-start"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Número de telefone
                 </Typography>
                 <Input
@@ -227,7 +228,7 @@ const Account: FC = () => {
                 justifyContent="flex-start"
                 alignItems="flex-start"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Data de criação de conta
                 </Typography>
                 <Input
@@ -258,7 +259,7 @@ const Account: FC = () => {
                 justifyContent="flex-start"
                 alignItems="flex-start"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Última data de login
                 </Typography>
                 <Input

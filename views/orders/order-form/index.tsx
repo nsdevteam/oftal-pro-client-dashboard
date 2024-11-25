@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC, useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import {
@@ -22,6 +22,7 @@ import {
 import { OrderFormProps } from './order-form.types';
 import OrderFormSubmit from './order-form-submit';
 import TreatmentDropdownField from './treatment-dropdown-field';
+import { downloadFirebaseFile } from '../../../utils/helpers';
 
 const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
   const form = useForm<IOrder>({
@@ -37,6 +38,10 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
     },
   });
 
+  useEffect(()=>{
+    console.log("Document Order ::: ",doc);   
+  },[doc])
+
   return (
     <FormProvider {...form}>
       <Box
@@ -48,6 +53,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
         alignItems="center"
         p={['1rem', '2rem']}
         justifyContent="center"
+        className='order-form'
       >
         <Box
           bg="white"
@@ -83,7 +89,10 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
           px={['1rem', '1rem', '4rem']}
           onClick={(e) => e.stopPropagation()}
         >
-          <Typography>
+          <Typography
+          className='page-title'
+          mt={"20px"}
+          >
             {!isEditable ? 'Visualizer' : doc ? 'Atualizar' : 'Novo'} Pedido
           </Typography>
           <Box
@@ -137,6 +146,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                   min="50"
                   max="80"
                   type="number"
+                  className='c-input'
                   borderRadius="0.8rem"
                   disabled={!isEditable}
                   border="1px solid #CDCDCD"
@@ -180,6 +190,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                 <Input
                   borderRadius="0.8rem"
                   disabled={!isEditable}
+                  className='c-input'
                   border="1px solid #CDCDCD"
                   placeholder="Firmino Miguel"
                   {...form.register('ref', {
@@ -200,6 +211,8 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                     files={form.getValues('recipes')}
                     onChange={(files) => form.setValue('recipes', files)}
                   />
+                  {/*@ts-ignore*/}
+                  {doc?.recipe?.length > 0 && <button onClick={()=>downloadFirebaseFile(doc?.recipe || '')} className='c-download-file-btn'><span className='link'>Descarregar <span className='icon'></span></span></button>}
                 </Box>
                 <Box display="flex" flexDirection="column" gap="1rem">
                   <Typography>
@@ -211,6 +224,8 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                     files={form.getValues('precals')}
                     onChange={(files) => form.setValue('precals', files)}
                   />
+                    {/*@ts-ignore*/}   
+                    {doc?.precal?.length > 0 && <button onClick={()=>downloadFirebaseFile(doc?.recipe || '')} className='c-download-file-btn'><span className='link'>Descarregar <span className='icon'></span></span></button>}
                 </Box>
               </Box>
               <Box display="flex" flexDirection="column" gap="1rem">

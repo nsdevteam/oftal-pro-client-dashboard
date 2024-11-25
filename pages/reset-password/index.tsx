@@ -44,7 +44,7 @@ const ResetPasswordPage: FC = () => {
     justifyContent="center"
     alignItems="center"
     alignContent="center"
-    className={`${styles?.authWrapper}`}
+    className={`${styles?.authWrapper} page-form`}
   >
     <div className={`${styles?.contentWrapper}`}>
       <Box
@@ -60,7 +60,7 @@ const ResetPasswordPage: FC = () => {
       </Box>
       <form>
         <Box pt="1rem">
-          <Typography fontSize={['0.5rem', '1rem']} textAlign="left" py="0.5rem">
+          <Typography className='label' fontSize={['0.5rem', '1rem']} textAlign="left" py="0.5rem">
             Endereço de email
           </Typography>
           <Input

@@ -122,3 +122,168 @@
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
 }
 /*Header CSS */
+/*Sidebar CSS */
+.dash-sidebar{    
+  box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.076);  
+}
+.dash-sidebar .list .listItem{
+  transition: background-color 150ms ease-in-out;
+}
+.dash-sidebar .list .listItem:hover{
+  background-color: #316b8f;
+  cursor: pointer;  
+}   
+.dash-sidebar .list .listItemActive{
+  background-color: #316b8f;
+  cursor: pointer;  
+  font-weight: bold;
+}   
+.dash-sidebar .auth-info{
+  background-color: #316b8f;
+}
+.dash-sidebar .auth-info .auth-info-email{
+margin: 0px;
+padding-top: 0px;
+margin-bottom: 30px;
+font-size: 14px;
+}
+.dash-sidebar .auth-info .auth-info-user{
+margin-bottom: 0px ;
+padding-bottom: 0px;
+font-weight: bold;
+}
+.dash-sidebar .auth-info .auth-info-logout-btn{
+border-radius: 0px;
+background-color: #ffffff;
+color: black;
+transition: opacity 150ms ease-in-out;
+}
+.page-title{
+  font-size: 32px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  color: #316b8f;
+}
+.page-subtitle{
+  color: #5c5c5c;
+  font-size: 18px;
+  padding-left: 0px;
+  padding-top: 0px;
+}
+.dashboard-main-view{
+  overflow: hidden;
+  overflow-y:  auto;   
+}
+/* .dashboard-main-view .MuiDataGrid-row--borderBottom{
+  background: #50ADE5 !important;  
+  color: #fff !important;
+  border-color: #fff !important;
+} */
+/*Sidebar CSS */
+
+/*Account Page */
+
+/*Account Page */
+
+/* Misc */
+.page-form input,
+.page-form .input-wrapper   
+{
+  height: 40px;
+  padding: 5px;   
+  border-radius: 2px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.page-form input{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.page-form input:disabled{
+  background-color: #d9d9d9;
+}
+.page-form .label{
+  font-size: 14px;
+  padding-left: 0px;
+  font-weight: normal;
+}
+.badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  color: #fff;
+  height: 25px;
+}
+.badge-wrapper{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.badge-success {
+  background-color: #4caf50;
+}
+.badge-error {
+  background-color: #f44336;
+}
+.badge-warning {
+  background-color: #ff9800;
+}
+.badge-ongoing {
+  background-color: #212121;
+
+}
+.c-input-list{
+
+}
+.c-input-list,
+.c-input{
+  padding: 0.8rem;
+  min-height: 55.6px;
+  border-color: #CDCDCD;  
+}
+.c-input:disabled,
+.c-input-list:disabled
+{
+ opacity: 0.5;
+}
+.order-form{
+  z-index: 500
+}
+.c-download-file-btn{
+  background: none;
+  border: none;
+  width: 150px;
+  display: flex !important;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  cursor: pointer;
+  transition: 150ms ease-in-out;   
+}
+.c-download-file-btn:hover{
+  color: #316b8f;
+  opacity: 0.5;
+  text-decoration: underline;
+}
+.c-download-file-btn .icon{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px' viewBox='0 0 24 24' fill='none'%3E%3Cpath opacity='0.5' fill-rule='evenodd' clip-rule='evenodd' d='M3 14.25C3.41421 14.25 3.75 14.5858 3.75 15C3.75 16.4354 3.75159 17.4365 3.85315 18.1919C3.9518 18.9257 4.13225 19.3142 4.40901 19.591C4.68577 19.8678 5.07435 20.0482 5.80812 20.1469C6.56347 20.2484 7.56459 20.25 9 20.25H15C16.4354 20.25 17.4365 20.2484 18.1919 20.1469C18.9257 20.0482 19.3142 19.8678 19.591 19.591C19.8678 19.3142 20.0482 18.9257 20.1469 18.1919C20.2484 17.4365 20.25 16.4354 20.25 15C20.25 14.5858 20.5858 14.25 21 14.25C21.4142 14.25 21.75 14.5858 21.75 15V15.0549C21.75 16.4225 21.75 17.5248 21.6335 18.3918C21.5125 19.2919 21.2536 20.0497 20.6517 20.6516C20.0497 21.2536 19.2919 21.5125 18.3918 21.6335C17.5248 21.75 16.4225 21.75 15.0549 21.75H8.94513C7.57754 21.75 6.47522 21.75 5.60825 21.6335C4.70814 21.5125 3.95027 21.2536 3.34835 20.6517C2.74643 20.0497 2.48754 19.2919 2.36652 18.3918C2.24996 17.5248 2.24998 16.4225 2.25 15.0549C2.25 15.0366 2.25 15.0183 2.25 15C2.25 14.5858 2.58579 14.25 3 14.25Z' fill='%231C274C'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12 16.75C12.2106 16.75 12.4114 16.6615 12.5535 16.5061L16.5535 12.1311C16.833 11.8254 16.8118 11.351 16.5061 11.0715C16.2004 10.792 15.726 10.8132 15.4465 11.1189L12.75 14.0682V3C12.75 2.58579 12.4142 2.25 12 2.25C11.5858 2.25 11.25 2.58579 11.25 3V14.0682L8.55353 11.1189C8.27403 10.8132 7.79963 10.792 7.49393 11.0715C7.18823 11.351 7.16698 11.8254 7.44648 12.1311L11.4465 16.5061C11.5886 16.6615 11.7894 16.75 12 16.75Z' fill='%231C274C'/%3E%3C/svg%3E");
+  height: 20px;
+  width: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;   
+  position: relative;
+  top: 5px;
+}
+.c-download-file-btn .link{
+  display: inline-block;
+
+}
+
+/* Misc */

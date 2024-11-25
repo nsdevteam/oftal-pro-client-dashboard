@@ -85,7 +85,7 @@ const Orders: FC<OrdersProps> = ({ status }) => {
           alignItems="flex-start"
           justifyContent="space-between"
         >
-        <Typography as="h2" mb={30}>
+        <Typography className='page-title' as="h2" mb={30}>
         {status===orderStatusEnum.Pendente ? 'Pedidos Pendentes' : 'Pedidos Concluídos / Ocorrência'}
       </Typography>
           {status === orderStatusEnum.Pendente && (

@@ -70,7 +70,7 @@ const Home: FC = () => {
       justifyContent="center"
       alignItems="center"
       alignContent="center"
-      className={`${styles?.authWrapper}`}      
+      className={`${styles?.authWrapper} page-form`}        
     >
       <div className={`${styles?.contentWrapper}`}>
       <Box
@@ -90,6 +90,7 @@ const Home: FC = () => {
             fontSize={['0.5rem', '1rem']}
             textAlign="left"
             py="0.5rem"
+             className='label'
           >
             Email
           </Typography>
@@ -126,6 +127,7 @@ const Home: FC = () => {
             fontSize={['0.5rem', '1rem']}
             textAlign="left"
             py="0.5rem"
+            className='label'
           >
             Senha
           </Typography>
@@ -141,6 +143,7 @@ const Home: FC = () => {
             overflow="hidden"
             alignItems="center"
             justifyContent="stretch"
+            className='input-wrapper'
           >
             <Input
               width={['18rem', '30rem']}

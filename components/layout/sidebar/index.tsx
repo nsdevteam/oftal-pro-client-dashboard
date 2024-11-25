@@ -10,10 +10,12 @@ import colors from '../../../design-system/light-theme/colors';
 import { Box, Button, Typography } from '../../../elements';
 import { SidebarProps } from '../layout.types';
 import { logout } from '../../../utils/helpers';
+import { useRouter } from 'next/router';
 
 const Sidebar: FC<SidebarProps> = ({ isOpenMenu }) => {
   const { handleSubmit } = useForm();
   const { userData, forceVerifyLogin } = useUser();
+  const router = useRouter();
 
   const signOut = async () => {
     await logout();    
@@ -26,6 +28,8 @@ const Sidebar: FC<SidebarProps> = ({ isOpenMenu }) => {
       success: 'Sessão terminada com sucesso',
       error: 'Error ao terminar sessão',
     });
+
+
 
   return (
     <Box
@@ -44,8 +48,9 @@ const Sidebar: FC<SidebarProps> = ({ isOpenMenu }) => {
         isOpenMenu ? 'flex' : 'none',
         'flex',
       ]}
+      className='dash-sidebar'
     >
-      <Box as="ul" width="100%">
+      <Box as="ul" width="100%" className='list'>
         {MENU_ITEMS.map(({ url, title, icon }) => (
           <Box
             as="div"
@@ -53,6 +58,8 @@ const Sidebar: FC<SidebarProps> = ({ isOpenMenu }) => {
             flexDirection="column"
             key={v4()}
             p="0.5rem"
+            className={`listItem ${url === router.pathname ? 'listItemActive' : ''}`}
+            onClick={()=>router.push(url)}   
           >
             <Box as="ul">
               <Typography
@@ -87,10 +94,12 @@ const Sidebar: FC<SidebarProps> = ({ isOpenMenu }) => {
         flexDirection="column"
         alignItems="flex-start"
         justifyContent="flex-start"
+        className='auth-info'
       >
-        <Typography padding="0.5rem">{userData?.fullName}</Typography>
-        <Typography padding="0.5rem">{userData?.email}</Typography>
+        <Typography className='auth-info-user' padding="0.5rem">{userData?.fullName}</Typography>
+        <Typography className='auth-info-email' padding="0.5rem">{userData?.email}</Typography>
         <Button
+          className='auth-info-logout-btn'
           bg="#DC2626"
           width="calc(100% - 2rem)"
           onClick={handleSubmit(handleLogout)}

@@ -7,7 +7,6 @@ import { ptPT } from '@mui/x-data-grid/locales';
 //@ts-ignore
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import { Stack } from '@mui/material';
    
 const columns: GridColDef[] = [
   { field: 'ref', headerName: 'Ref/Nome de pacicente', width: 300 },
@@ -19,7 +18,17 @@ const columns: GridColDef[] = [
     type: 'string',
     width: 90,
   },
-  { field: 'status', headerName: 'Estado', width: 130 },
+  { field: 'status',
+    headerName: 'Estado',
+    width: 130,
+    renderCell: (params)=>(
+      <>
+      <div className='badge-wrapper'>
+      <span className={`badge ${params?.row?.status==='Encomendado' ? 'badge-ongoing' : 'badge-warning'}`}>{params?.row?.status}</span>
+      </div>
+      </>
+    )
+   },
   {
     field: 'spherical',
     headerName: 'Esférico',
@@ -85,9 +94,10 @@ const OrderTable: React.FC<OrdersTableProps> = ({
   selectedList,
   setSelectedDoc,
 }) => {
+  const [rows,setRows] = React.useState<any>([]);
 
-  const rows = 
-    data.map(
+  React.useEffect(()=>{
+    setRows(data.map(
       ({
         //@ts-ignore   
         id,
@@ -100,6 +110,8 @@ const OrderTable: React.FC<OrdersTableProps> = ({
         clientId,
         createdAt,
         refractiveIndex,
+        recipe,
+        precal
       }) => ({
         id: id || 1,   
         ref: `${new Date(createdAt!)
@@ -111,14 +123,14 @@ const OrderTable: React.FC<OrdersTableProps> = ({
         refractiveIndex,
         status: status ? STATUS_LEGEND[status] : 'Pendente',
         leftEye,
-        rightEye   
+        rightEye,
+        recipe,
+        precal      
       })
-    );
+  ))
+  },[data])
 
-    React.useEffect(()=>{
-        console.log("Rows ::: ",rows);   
-    },[rows])
-  
+
     const paginationModel = { page: 0, pageSize: 8 };
 
   return <>
