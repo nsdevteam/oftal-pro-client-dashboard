@@ -1,4 +1,3 @@
-import { logout } from 'burnbase/auth';
 import Link from 'next/link';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
@@ -10,13 +9,14 @@ import { useUser } from '../../../context/user';
 import colors from '../../../design-system/light-theme/colors';
 import { Box, Button, Typography } from '../../../elements';
 import { SidebarProps } from '../layout.types';
+import { logout } from '../../../utils/helpers';
 
 const Sidebar: FC<SidebarProps> = ({ isOpenMenu }) => {
   const { handleSubmit } = useForm();
   const { userData, forceVerifyLogin } = useUser();
 
   const signOut = async () => {
-    await logout();
+    await logout();    
     forceVerifyLogin();
   };
 

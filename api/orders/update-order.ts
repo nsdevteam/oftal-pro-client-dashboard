@@ -1,8 +1,9 @@
-import { updateDocument } from 'burnbase/firestore';
-import { addFile, deleteFile } from 'burnbase/storage';
+import { updateDocument } from 'firebase/firestore';
+
 
 import { IOrder } from '../../interface';
 import { orderCollectionName } from './orders.utils';
+import { addFile, deleteFile } from '../../utils/helpers';
 
 const updateOrder = async ({
   docId,

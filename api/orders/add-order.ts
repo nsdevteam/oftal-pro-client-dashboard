@@ -1,8 +1,7 @@
-import { addDocument } from 'burnbase/firestore';
-import { addFile } from 'burnbase/storage';
+import { addDoc } from 'firebase/firestore';
 
-import { IClient, IOrder } from '../../interface';
-import { orderCollectionName } from './orders.utils';
+import { IClient, IOrder } from '../../interface';   
+import { addFile, ordersDatabase } from '../../utils/helpers';
 
 const addOrder = async ({
   precals,
@@ -15,7 +14,7 @@ const addOrder = async ({
           prefix: '',
           suffix: '',
         })
-      : undefined;
+      : undefined;    
 
   const precal =
     precals && Array.from(precals)[0]
@@ -25,7 +24,7 @@ const addOrder = async ({
         })
       : undefined;
 
-  addDocument(orderCollectionName, {
+  addDoc(ordersDatabase, {
     ...order,
     status: 0,
     recipe: recipe ?? '',

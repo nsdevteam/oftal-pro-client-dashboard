@@ -1,4 +1,3 @@
-import { loginWithEmailAndPassword } from 'burnbase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
@@ -12,6 +11,7 @@ import { RoutePaths, RoutesEnum } from '../../constants/routes';
 import { useUser } from '../../context/user';
 import { Box, Button, Input, Typography } from '../../elements';
 import styles from '../../styles/auth/auth.module.css';
+import { loginWithEmailAndPassword } from '../../utils/helpers';
 
 const Home: FC = () => {
   const [loading, setLoading] = useState(false);
@@ -34,8 +34,8 @@ const Home: FC = () => {
     try {
       const { email, password } = getValues();
 
-      await loginWithEmailAndPassword(email, password).then((credential) =>
-        updateUser(credential.user.uid, { lastLoginAt: Date.now() })
+      await loginWithEmailAndPassword(email, password).then((credential:any) =>
+        updateUser(credential.uid, { lastLoginAt: Date.now() })
       );
 
       forceVerifyLogin();
