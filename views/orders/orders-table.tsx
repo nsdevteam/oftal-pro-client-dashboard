@@ -1,13 +1,11 @@
 import * as React from 'react';
-
 import { Box } from '../../elements';
-import { OrdersTableProps } from './orders.types';   
-import { COLOR_LEGEND, COLOR_VALUES, STATUS_LEGEND, TYPE_LEGEND } from './order-form/order-form.data';
+import { OrdersTableProps } from './orders.types';
+import { COLOR_LEGEND, STATUS_LEGEND, TYPE_LEGEND } from './order-form/order-form.data';
 import { ptPT } from '@mui/x-data-grid/locales';
-//@ts-ignore
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowSelectionModel, useGridApiRef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-   
+
 const columns: GridColDef[] = [
   { field: 'ref', headerName: 'Ref/Nome de pacicente', width: 300 },
   { field: 'type', headerName: 'Tipo', width: 130 },
@@ -18,17 +16,22 @@ const columns: GridColDef[] = [
     type: 'string',
     width: 90,
   },
-  { field: 'status',
+  {   
+    field: 'status',
     headerName: 'Estado',
     width: 130,
-    renderCell: (params)=>(
-      <>
-      <div className='badge-wrapper'>
-      <span className={`badge ${params?.row?.status==='Encomendado' ? 'badge-ongoing' : 'badge-warning'}`}>{params?.row?.status}</span>
+    renderCell: (params) => (
+      <div className="badge-wrapper">
+        <span
+          className={`badge ${
+            params?.row?.status === 'Encomendado' ? 'badge-ongoing' : 'badge-warning'
+          }`}
+        >
+          {params?.row?.status}
+        </span>
       </div>
-      </>
-    )
-   },
+    ),
+  },
   {
     field: 'spherical',
     headerName: 'Esférico',
@@ -39,10 +42,10 @@ const columns: GridColDef[] = [
         <strong>D: </strong>
         {params?.row?.rightEye?.spherical || '--'}
         <strong> E: </strong>
-        {params?.row?.leftEye?.spherical || '--'}    
+        {params?.row?.leftEye?.spherical || '--'}
       </>
     ),
-  },       
+  },
   {
     field: 'cylinder',
     headerName: 'Cilindro',
@@ -52,11 +55,10 @@ const columns: GridColDef[] = [
       <>
         <strong>D: </strong>
         {params?.row?.rightEye?.cylinder || '--'}
-
         <strong> E: </strong>
-        {params?.row?.leftEye?.cylinder || '--'}    
+        {params?.row?.leftEye?.cylinder || '--'}
       </>
-    ),   
+    ),
   },
   {
     field: 'addition',
@@ -68,10 +70,10 @@ const columns: GridColDef[] = [
         <strong>D: </strong>
         {params?.row?.rightEye?.addition || '--'}
         <strong> E: </strong>
-        {params?.row?.leftEye?.addition || '--'}       
+        {params?.row?.leftEye?.addition || '--'}
       </>
     ),
-  },       
+  },
   {
     field: 'axis',
     headerName: 'Eixo',
@@ -80,76 +82,84 @@ const columns: GridColDef[] = [
     renderCell: (params) => (
       <>
         <strong>D: </strong>
-        {params?.row?.rightEye?.axis || '--'}  
+        {params?.row?.rightEye?.axis || '--'}
         <strong> E: </strong>
-        {params?.row?.leftEye?.axis || '--'}    
+        {params?.row?.leftEye?.axis || '--'}
       </>
-    ),   
-  }    
+    ),
+  },
 ];
 
 const OrderTable: React.FC<OrdersTableProps> = ({
   data,
   customData,
-  onSelect,
+  setSelectedList,
   selectedList,
   setSelectedDoc,
+  displaySelectCheckbox
 }) => {
-  const [rows,setRows] = React.useState<any>([]);
+  const apiRef = useGridApiRef();
+  const rows = React.useMemo(() => {
+    return data.map((item) => ({
+      ...item,
+      uid: item.uid,
+      //@ts-ignore
+      id: item?.id || item.uid,
+      ref: `${new Date(item.createdAt)
+        .toISOString()
+        .split('T')[0]
+        .replace(/-/g, '')}-${item.clientId}-${item.ref || item.createdAt}`,
+      type: TYPE_LEGEND[item.type] || '',
+      color: COLOR_LEGEND[item.color] || '',
+      refractiveIndex: item.refractiveIndex,
+      status: STATUS_LEGEND[item.status] || 'Pendente',
+    }));
+  }, [data]);
 
-  React.useEffect(()=>{
-    const _data = [...data].map((item:any)=>{
-      return {
-        ...item,
-        uid: item?.uid,
-        id: item?.id || item?.uid,   
-        ref: `${new Date(item?.createdAt!)
-          .toISOString()
-          .split('T')[0]
-          .replaceAll('-', '')}-${item?.clientId}-${item?.ref || item?.createdAt}`,
-          //@ts-ignore
-        type: item?.type ? TYPE_LEGEND[item?.type] : '',
-        //@ts-ignore
-        color: item?.color ? COLOR_LEGEND[item?.color] : '',   
-        refractiveIndex:item?.refractiveIndex,
-        //@ts-ignore
-        status: item?.status ? STATUS_LEGEND[item?.status] : 'Pendente',    
-      }    
-    }
-
+  const paginationModel = React.useMemo(
+    () => ({
+      page: 0,
+      pageSize: 8,
+    }),
+    []
   );
-  setRows(_data);
-  },[data]);
-  
-  const paginationModel = { page: 0, pageSize: 8 };
 
-  const getOrder = (id:string)=>{
-    //@ts-ignore
-    const _doc = customData?.filter(item=>item?.id===id || item?.uid === id)?.[0] || {};     
-    console.log("Requested Document ::: ",_doc);   
-    return _doc;   
-  }   
+  const getOrder = React.useCallback(
+    (id: string) => {
+      return customData?.find((item:any) => item.id === id || item.uid === id) || {};
+    },
+    [customData]
+  );
 
-  return <>
+  const handleRowClick = React.useCallback(
+    (params: any) => {
+      setSelectedDoc(getOrder(params?.row?.id || params?.row?.uid));
+    },
+    [getOrder, setSelectedDoc]
+  );  
+
+
+  return (
     <Box width="100%">
-    <Paper sx={{ height: "100%", width: '100%' }}>
-      <DataGrid
-        className='orders-table'
-        rows={rows}
-        columns={columns}     
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[8, 16, 32, 50]}
-        checkboxSelection   
-        sx={{ border: 0 }}
-        rowHeight={80}
-        localeText={ptPT.components.MuiDataGrid.defaultProps.localeText}  
-        onRowClick={(params)=>setSelectedDoc(getOrder(params?.row?.id || params?.row?.uid))}           
-        onRowSelectionModelChange={(params:any)=>{onSelect && onSelect(params?.row?.id || '')}}   
-      />
-    </Paper>
-  </Box>
-  </>     
-}
+      <Paper sx={{ height: '100%', width: '100%' }}>
+        <DataGrid
+          className="orders-table"
+          rows={rows}
+          columns={columns}
+          initialState={{ pagination: { paginationModel } }}
+          pageSizeOptions={[8, 16, 32, 50]}
+          checkboxSelection={displaySelectCheckbox}
+          sx={{ border: 0 }}
+          rowHeight={80}
+          localeText={ptPT.components.MuiDataGrid.defaultProps.localeText}
+          onRowClick={handleRowClick}     
+          onRowSelectionModelChange={(newRows)=>setSelectedList(newRows)}    
+          rowSelectionModel={selectedList}    
+          apiRef={apiRef}
+        />
+      </Paper>
+    </Box>   
+  );
+};
 
-
-export default OrderTable;
+export default React.memo(OrderTable);

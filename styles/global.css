@@ -125,6 +125,7 @@
 /*Sidebar CSS */
 .dash-sidebar{    
   box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.076);  
+  z-index: 500;
 }
 .dash-sidebar .list .listItem{
   transition: background-color 150ms ease-in-out;
@@ -285,5 +286,40 @@ transition: opacity 150ms ease-in-out;
   display: inline-block;
 
 }
+.order-options .option-btn{
+  font-size: 10px;
+  width: auto;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+.order-options .option-btn svg{
+  height: 14px;
+  width: 14px;
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .order-options .option-btn{
+    font-size: 8px;
+    width: auto;
+    padding: 4px 12px;
+    border-radius: 5px;
+  }
+  .order-options .option-btn svg{
+    height: 12px;
+    width: 12px;
+    margin-left: 10px;
+  }
+  .page-title{
+    font-size: 24px;
+  }
+  .account-page input{
+    width: 100%;
+  }
+  .account-page .content{
+    width: 100%;   
+  }
+}
+
 
 /* Misc */
