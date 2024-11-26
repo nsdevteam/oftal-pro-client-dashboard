@@ -1,8 +1,6 @@
-import { updateDocument } from 'burnbase/firestore';
-import { addFile, deleteFile } from 'burnbase/storage';
-
 import { IOrder } from '../../interface';
 import { orderCollectionName } from './orders.utils';
+import { addFile, deleteFile, updateDocument } from '../../utils/helpers';
 
 const updateOrder = async ({
   docId,
@@ -42,6 +40,6 @@ const updateOrder = async ({
     ...(precal && { precal }),
     updatedAt: Date.now(),
   });
-};
+};     
 
 export default updateOrder;

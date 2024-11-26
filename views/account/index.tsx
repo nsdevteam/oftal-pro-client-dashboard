@@ -69,21 +69,24 @@ const Account: FC = () => {
         alignItems="flex-start"
         alignContent="flex-start"
         padding="1rem"
+        className='page-form account-page'   
       >
-        <Typography padding="0.5rem">Dados do usuário</Typography>
-        <Box as="div" width="80%" padding="0.5rem" marginTop="2rem">
-          <Typography padding="1rem">Actualizar os seus dados</Typography>
+        <Typography className='page-title' padding="0.5rem">Dados do Usuário</Typography>
+        <Box className='content' as="div" width="80%" padding="0.5rem" >
+          <Typography className='page-subtitle' padding="1rem">Actualizar os seus dados</Typography>
           <Box
             width="100%"
             display="flex"
             flexDirection="column"
             alignItems="flex-start"
             justifyContent="flex-start"
+            flexWrap="wrap"
           >
             <Box
               as="div"
-              width="100vw"
+              width="100%"
               display="flex"
+              flexWrap="wrap"
               alignItems="flex-start"
               justifyContent="flex-start"
             >
@@ -91,11 +94,12 @@ const Account: FC = () => {
                 as="div"
                 margin="0.5rem"
                 display="flex"
+                flexWrap="wrap"
                 flexDirection="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Primeiro nome
                 </Typography>
                 <Input
@@ -124,8 +128,9 @@ const Account: FC = () => {
                 flexDirection="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
+                flexWrap="wrap"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Sobrenome
                 </Typography>
                 <Input
@@ -153,6 +158,7 @@ const Account: FC = () => {
               display="flex"
               alignItems="flex-start"
               justifyContent="flex-start"
+              flexWrap="wrap"
             >
               <Box
                 as="div"
@@ -162,7 +168,7 @@ const Account: FC = () => {
                 justifyContent="flex-start"
                 alignItems="flex-start"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Endereço de email
                 </Typography>
                 <Input
@@ -192,8 +198,9 @@ const Account: FC = () => {
                 flexDirection="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
+                flexWrap="wrap"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Número de telefone
                 </Typography>
                 <Input
@@ -218,6 +225,7 @@ const Account: FC = () => {
               display="flex"
               alignItems="flex-start"
               justifyContent="flex-start"
+              flexWrap="wrap"
             >
               <Box
                 as="div"
@@ -226,8 +234,9 @@ const Account: FC = () => {
                 flexDirection="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
+                flexWrap="wrap"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Data de criação de conta
                 </Typography>
                 <Input
@@ -257,8 +266,9 @@ const Account: FC = () => {
                 flexDirection="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
+                flexWrap="wrap"
               >
-                <Typography textAlign="left" padding="0.5rem">
+                <Typography className='label' textAlign="left" padding="0.5rem">
                   Última data de login
                 </Typography>
                 <Input
@@ -267,7 +277,7 @@ const Account: FC = () => {
                   outline="none"
                   borderRadius="M"
                   border="1px solid #E4E4E7"
-                  marginLeft="0.5rem"
+                  marginLeft="0px"
                   color="textInverted"
                   mr={['NONE', 'S']}
                   ml={['NONE', 'S']}
