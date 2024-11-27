@@ -225,7 +225,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                     onChange={(files) => form.setValue('precals', files)}
                   />
                     {/*@ts-ignore*/}   
-                    {doc?.precal?.length > 0 && <button onClick={()=>downloadFirebaseFile(doc?.recipe || '')} className='c-download-file-btn'><span className='link'>Descarregar <span className='icon'></span></span></button>}
+                    {doc?.precal?.length > 0 && <button onClick={()=>downloadFirebaseFile(doc?.precal || '')} className='c-download-file-btn'><span className='link'>Descarregar <span className='icon'></span></span></button>}
                 </Box>
               </Box>
               <Box display="flex" flexDirection="column" gap="1rem">
