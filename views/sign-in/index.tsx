@@ -95,7 +95,7 @@ const Home: FC = () => {
             Email
           </Typography>
           <Input
-            width={['18rem', '30rem']}
+            width={"100%"}
             p={['0.5rem', 'L']}
             fontSize={['0.5rem', '1rem']}
             type="email"
@@ -132,7 +132,7 @@ const Home: FC = () => {
             Senha
           </Typography>
           <Box
-            width={['18rem', '30rem']}
+            width={"100%"}
             height={['2rem', '3.5rem']}
             color="textInverted"
             borderRadius="M"
@@ -143,14 +143,15 @@ const Home: FC = () => {
             overflow="hidden"
             alignItems="center"
             justifyContent="stretch"
-            className='input-wrapper'
+            className={`${styles?.passwordInputWrapper}`}
           >
             <Input
-              width={['18rem', '30rem']}
+              width={"100%"}
               height={['100%']}
               p={['M', 'L']}
               fontSize={['0.5rem', '1rem']}
               type={showPassword ? 'text' : 'password'}
+              className={`${styles?.passwordInput}`} 
               bg="transparent"
               border="none"
               borderRadius="M"

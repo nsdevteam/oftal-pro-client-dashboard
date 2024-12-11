@@ -286,6 +286,11 @@ transition: opacity 150ms ease-in-out;
   display: inline-block;
 
 }
+.order-options{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
 .order-options .option-btn{
   font-size: 10px;
   width: auto;
@@ -297,12 +302,41 @@ transition: opacity 150ms ease-in-out;
   width: 14px;
   margin-left: 10px;
 }
+.dis-dk{
+  display: block;
+  }
+  .dis-mb{
+  display: none;
+  }
+  .view-header{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  .view-header input{
+    margin-right: 10px;
+  }
+  .view-header button{
+    height: auto;
+    width: auto;
+    padding: 8px 12px;
+    border-radius: 2px;
+  }
+  .view-header .export-btn{
+    background-color: #212121;   
+  }  
+  .view-header .action-btn{
+    background-color: #212121;  
+    height: auto;
+    width: auto;
+    padding: 8px 12px;
+  }
 
 @media screen and (max-width: 1024px) {
   .order-options .option-btn{
     font-size: 8px;
     width: auto;
-    padding: 4px 12px;
+    padding: 6px 12px;
     border-radius: 5px;
   }
   .order-options .option-btn svg{
@@ -319,7 +353,32 @@ transition: opacity 150ms ease-in-out;
   .account-page .content{
     width: 100%;   
   }
-}
+  .menu-trigger-wrapper{
+  
+  }
+  .menu-trigger-icon{
+    filter: invert();
+  }
+  .dis-dk{
+    display: none;
+    }
+  .dis-mb{
+    display: block;
+  }
+  .order-form-content {
+    padding-bottom: 50px;
+  }
+  .order-card-wrapper{
+    position: relative;
+  }
+  .order-select-box{
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}      
 
 
 /* Misc */
