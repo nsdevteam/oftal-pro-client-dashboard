@@ -88,6 +88,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
           flexDirection="column"
           px={['1rem', '1rem', '4rem']}
           onClick={(e) => e.stopPropagation()}
+          className='order-form-content'
         >
           <Typography
           className='page-title'
