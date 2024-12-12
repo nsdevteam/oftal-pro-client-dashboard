@@ -293,7 +293,7 @@ const Account: FC = () => {
                 />
               </Box>
             </Box>
-            <Box
+         {/*    <Box
               display="flex"
               margin="0 1rem 2rem"
               flexDirection="column"
@@ -306,8 +306,8 @@ const Account: FC = () => {
                 values={ACCOUNT_TYPE}
                 legend={ACCOUNT_TYPE_LEGEND}
               />
-            </Box>
-            <Button minWidth={['100%', '10rem']} onClick={onSubmit}>
+            </Box> */}
+            <Button marginTop={"30px"} minWidth={['100%', '10rem']} onClick={onSubmit}>
               Salvar
             </Button>
           </Box>
