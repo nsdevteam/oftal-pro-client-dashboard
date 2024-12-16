@@ -148,7 +148,8 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
         {!doc?.uid && !userData?.type && (
           <Typography fontSize="0.75rem">Só depois do pagamento</Typography>
         )}
-        <Button onClick={onSubmit}>{doc?.uid ? 'Atualizar' : 'Pedir'}</Button>
+        {/*@ts-ignore*/}
+        <Button onClick={onSubmit}>{(doc?.uid || doc?.id) ? 'Atualizar e Encomendar' : 'Adicionar ao Carrinho'}</Button>
       </Box>
     </Box>
   );
