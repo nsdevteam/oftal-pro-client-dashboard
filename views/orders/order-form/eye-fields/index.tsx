@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Box, InputList, Typography } from '../../../../elements';
@@ -13,10 +13,11 @@ const EyeFields: FC<EyeFieldsProps> = ({
   isAddition,
   setAddition,
 }) => {
-  const { control, setValue } = useFormContext<IOrder>();
+  const { control, setValue, watch } = useFormContext<IOrder>();
   const eye = useWatch({ control, name: name });
   const type = useWatch({ control, name: 'type' });
-
+  const cylinder = useWatch({control,name:`${name}.cylinder`});   
+  
   return (
     <Box display="flex" flexDirection="column" gap="1rem">
       <Box display="flex" gap="1rem" alignItems="flex-end">
@@ -65,7 +66,7 @@ const EyeFields: FC<EyeFieldsProps> = ({
           }}
         />
         <Box display={['block', 'none']} />
-        <InputList
+        {cylinder && cylinder != "0.00" && <InputList
           label="Eixo"
           defaultValue={eye?.axis}
           disabled={disabled || !eye?.active}
@@ -81,7 +82,7 @@ const EyeFields: FC<EyeFieldsProps> = ({
                 : `${validValue}°`
             );
           }}
-        />
+        />}   
         {type !== 'single-focal' && isAddition && (
           <InputList
             label="Adição"

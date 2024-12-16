@@ -36,11 +36,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
       rightEye: { active: true },
       ...doc,
     },
-  });
-
-  useEffect(()=>{
-    console.log("Document Order ::: ",doc);   
-  },[doc])
+  });  
 
   return (
     <FormProvider {...form}>
@@ -71,6 +67,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
           justifyContent="center"
           border="1px solid #0002"
           nHover={{ borderColor: '#0005' }}
+          zIndex={20}   
         >
           <Box fontSize="2rem" transform="scaleY(0.8)">
             X

@@ -15,6 +15,14 @@ const OrderCards: React.FC<{
   onSelection
 }) => {  
 
+  const handleOnClick = ($event: React.MouseEvent<HTMLDivElement, MouseEvent>,id:string)=>{
+    onClick(id);   
+  }
+  const handleOnSelection = ($event: React.MouseEvent<HTMLDivElement, MouseEvent>,id:string)=>{
+    $event.stopPropagation();    
+    onSelection(id);   
+  }
+
   return (
     <Card
       variant="outlined"
@@ -24,11 +32,11 @@ const OrderCards: React.FC<{
         boxShadow: 1,
         cursor: 'pointer',
       }}
-      onClick={() => onClick(order.id)}
+      onClick={($event) => handleOnClick($event,order?.id)}
     >
       <CardContent className='order-card-wrapper'>
         {order?.status=="Pendente" && <div className='order-select-box'>    
-          <input onClick={()=>onSelection(order?.id || order?.uid)} type='checkbox' className='order-select-item' name='order-card-item-selector' />
+          <input onClick={($event)=>handleOnSelection($event,order?.id || order?.uid)} type='checkbox' className='order-select-item' name='order-card-item-selector' />
         </div>}     
         <Typography color='#316b8f' sx={{ mb: 1, fontWeight: 'bold' }}>
           Ref/Nome de Paciente: {order.ref}

@@ -156,6 +156,7 @@ const OrderTable: React.FC<OrdersTableProps> = ({
           onRowSelectionModelChange={(newRows)=>setSelectedList(newRows)}    
           rowSelectionModel={selectedList}    
           apiRef={apiRef}
+          disableRowSelectionOnClick
         />
       </Paper>
     </Box>   
