@@ -45,18 +45,20 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
 
   const total = prices
     ? ((prices.lens[color!]?.[refractiveIndex!]?.[typeIndex] ?? 0) +
-        (hasCylinderGreaterThan4 ? prices.extra.cil : 0) +
-        (recipes?.length ? prices.extra.receita : 0) +
-        (precals?.length ? prices.extra.precal : 0) +
-        (prisma ? prices.extra.prisma : 0) +
-        (coloring
-          ? prices.extra[
-              `color_${refractiveIndex as '1.5' | '1.56' | '1.6' | '1.67'}`
-            ] ?? 0
-          : 0) +
-        (prices.extra[treatment as keyof typeof prices.extra] ?? 0)) *
-      ((leftEye?.active ? 1 : 0) + (rightEye?.active ? 1 : 0))
+      (hasCylinderGreaterThan4 ? prices.extra.cil : 0) +
+      (recipes?.length ? prices.extra.receita : 0) +
+      (precals?.length ? prices.extra.precal : 0) +
+      (prisma ? prices.extra.prisma : 0) +
+      (coloring
+        ? prices.extra[
+        `color_${refractiveIndex as '1.5' | '1.56' | '1.6' | '1.67'}`
+        ] ?? 0
+        : 0) +
+      (prices.extra[treatment as keyof typeof prices.extra] ?? 0)) *
+    ((leftEye?.active ? 1 : 0) + (rightEye?.active ? 1 : 0))
     : 0;
+
+
 
   const handleSubmit = async () => {
     const {
@@ -78,7 +80,7 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
     invariant(color, 'Deve preencher a cor das lentes');
     invariant(type, 'Deve preencher o tipo de lentes');
 
-    console.log("Document Order Pending ::: ",doc);   
+    console.log("Document Order Pending ::: ", doc);
     //@ts-ignore   
     if (doc?.uid || doc?.id)
       return await updateOrder({
@@ -99,9 +101,9 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
         total,
         status: 1,
         //@ts-ignore
-        uid: doc?.uid || doc?.id,      
+        uid: doc?.uid || doc?.id,
         //@ts-ignore
-        docId: doc?.uid || doc?.id,   
+        docId: doc?.uid || doc?.id,
       });
 
     if (!userData?.type) return;

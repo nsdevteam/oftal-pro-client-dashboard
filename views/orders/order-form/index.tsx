@@ -4,6 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import {
   Attachment,
   Box,
+  Button,
   Input,
   Textarea,
   Typography,
@@ -23,8 +24,9 @@ import { OrderFormProps } from './order-form.types';
 import OrderFormSubmit from './order-form-submit';
 import TreatmentDropdownField from './treatment-dropdown-field';
 import { downloadFirebaseFile } from '../../../utils/helpers';
+import { formatMoney } from '../../../utils';
 
-const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
+const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable, requestPayment }) => {
   const form = useForm<IOrder>({
     defaultValues: {
       diameter: 70,
@@ -36,7 +38,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
       rightEye: { active: true },
       ...doc,
     },
-  });  
+  });
 
   return (
     <FormProvider {...form}>
@@ -67,7 +69,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
           justifyContent="center"
           border="1px solid #0002"
           nHover={{ borderColor: '#0005' }}
-          zIndex={20}   
+          zIndex={20}
         >
           <Box fontSize="2rem" transform="scaleY(0.8)">
             X
@@ -88,10 +90,10 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
           className='order-form-content'
         >
           <Typography
-          className='page-title'
-          mt={"20px"}
+            className='page-title'
+            mt={"20px"}
           >
-            {!isEditable ? 'Visualizer' : doc ? 'Atualizar' : 'Novo'} Pedido
+            {!isEditable ? 'Visualizar' : doc ? 'Atualizar' : 'Novo'} Pedido
           </Typography>
           <Box
             display="grid"
@@ -156,8 +158,8 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                         numericValue > 80
                           ? 80
                           : numericValue < 50
-                          ? 50
-                          : numericValue
+                            ? 50
+                            : numericValue
                       );
                     },
                   })}
@@ -210,7 +212,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                     onChange={(files) => form.setValue('recipes', files)}
                   />
                   {/*@ts-ignore*/}
-                  {doc?.recipe?.length > 0 && <button onClick={()=>downloadFirebaseFile(doc?.recipe || '')} className='c-download-file-btn'><span className='link'>Descarregar <span className='icon'></span></span></button>}
+                  {doc?.recipe?.length > 0 && <button onClick={() => downloadFirebaseFile(doc?.recipe || '')} className='c-download-file-btn'><span className='link'>Descarregar <span className='icon'></span></span></button>}
                 </Box>
                 <Box display="flex" flexDirection="column" gap="1rem">
                   <Typography>
@@ -222,8 +224,8 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                     files={form.getValues('precals')}
                     onChange={(files) => form.setValue('precals', files)}
                   />
-                    {/*@ts-ignore*/}   
-                    {doc?.precal?.length > 0 && <button onClick={()=>downloadFirebaseFile(doc?.precal || '')} className='c-download-file-btn'><span className='link'>Descarregar <span className='icon'></span></span></button>}
+                  {/*@ts-ignore*/}
+                  {doc?.precal?.length > 0 && <button onClick={() => downloadFirebaseFile(doc?.precal || '')} className='c-download-file-btn'><span className='link'>Descarregar <span className='icon'></span></span></button>}
                 </Box>
               </Box>
               <Box display="flex" flexDirection="column" gap="1rem">
@@ -233,6 +235,14 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable }) => {
                   onChange={(e) => form.setValue('observation', e.target.value)}
                 />
               </Box>
+              {
+                /*@ts-ignore*/
+                (doc?.uid || doc?.id) && (!doc?.payment?.id && doc?.payment?.isPaid!==true) && <>
+                  <Typography color={"red"} fontSize="0.75rem">Pagamento não efectuado! {formatMoney(doc?.total)} AOA</Typography>
+                  {/*@ts-ignore*/}
+                  <Button  onClick={()=>{requestPayment && requestPayment(doc?.uid || doc?.id,doc?.total)}}>Efectuar Pagamento</Button>
+                </>
+              }
               {isEditable && (
                 <Box gridColumn="1/-1">
                   <OrderFormSubmit doc={doc} closeForm={closeForm} />

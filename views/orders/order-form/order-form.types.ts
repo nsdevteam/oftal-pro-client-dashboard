@@ -5,6 +5,7 @@ import { IOrder } from '../../../interface';
 
 export interface OrderFormProps {
   isEditable: boolean;
+  requestPayment?: (orderId:string,total:number)=> void;
   closeForm: () => void;
   doc: WithUid<IOrder> | null;
 }
