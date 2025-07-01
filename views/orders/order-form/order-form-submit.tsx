@@ -12,7 +12,7 @@ import { formatMoney } from '../../../utils';
 import { TYPE_VALUES } from './order-form.data';
 import { OrderFormSubmitProps } from './order-form.types';
 
-const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
+const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm, requestPayment }) => {
   const { prices, userData } = useUser();
   const {
     control,
@@ -60,7 +60,7 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
 
 
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (paymentProcedure?: 0 | 1) => {
     const {
       ref,
       leftEye,
@@ -80,9 +80,9 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
     invariant(color, 'Deve preencher a cor das lentes');
     invariant(type, 'Deve preencher o tipo de lentes');
 
-    console.log("Document Order Pending ::: ", doc);
+    //Updates Order Only and Requests Payment [Payment will be provided a callback in backend to update status of payment and order status]
     //@ts-ignore   
-    if (doc?.uid || doc?.id)
+    if (doc?.status === 0)
       return await updateOrder({
         ...others,
         ref,
@@ -99,15 +99,15 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
         color,
         type,
         total,
-        status: 1,
-        //@ts-ignore
-        uid: doc?.uid || doc?.id,
-        //@ts-ignore
-        docId: doc?.uid || doc?.id,
+        ...((paymentProcedure === 1) && { status: 1 }),//Client requests payment after order
+        uid: userData?.id,
+        docId: doc?.id || ""
       });
 
     if (!userData?.type) return;
 
+
+    //Creates new order
     await addOrder({
       ...others,
       ref,
@@ -125,20 +125,31 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
     });
   };
 
-  const onSubmit = () => {
+  const onSubmit = (paymentProcedure?: 0 | 1) => {
     const errorsList = Object.values(errors);
     if (errorsList.length)
       return toast.error(`Preencha o formulário corretamente :: ${errorsList}`);
 
-    toast.promise(handleSubmit(), {
-      loading: `A ${doc?.uid ? 'atualizar' : 'submeter'} pedido...`,
-      success: () => {
-        closeForm();
-        return `Pedido ${doc?.uid ? 'atualizado' : 'submetido'} com sucesso!`;
-      },
-      error: (e) =>
-        e.message ?? `Erro ao ${doc?.uid ? 'atualizar' : 'submeter'} o pedido`,
-    });
+    if (paymentProcedure === 1 || (!paymentProcedure && paymentProcedure !== 0)) {
+      toast.promise(handleSubmit(paymentProcedure), {
+        loading: `A ${doc?.uid ? 'atualizar' : 'submeter'} pedido...`,
+        success: () => {
+          closeForm();
+          return `Pedido ${doc?.uid ? 'atualizado' : 'submetido'} com sucesso!`;
+        },
+        error: (e) =>
+          e.message ?? `Erro ao ${doc?.uid ? 'atualizar' : 'submeter'} o pedido`,
+      });
+    } else {
+      handleSubmit(paymentProcedure).then((res) => {
+        console.log("Response In Submit :: ",res);  
+        //Request Payment Before Updating Status to 'Ordered' (Backend Callback Task)
+        requestPayment && requestPayment(doc?.uid || "", doc?.total || 0);
+      }).catch((error)=>{
+        console.error("Failed to request payment before order ::: ",error);
+      })
+    }
+
   };
 
   return (
@@ -146,12 +157,10 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm }) => {
       <Typography fontSize="1.5rem">
         Subtotal: {formatMoney(total)} AOA
       </Typography>
-      <Box>
-        {!doc?.uid && !userData?.type && (
-          <Typography fontSize="0.75rem">Só depois do pagamento</Typography>
-        )}
-        {/*@ts-ignore*/}
-        <Button onClick={onSubmit}>{(doc?.uid || doc?.id) ? 'Atualizar e Encomendar' : 'Adicionar ao Carrinho'}</Button>
+      <Box display={"flex"} gap={15}>
+        {!doc?.status && doc?.status !== 0 && <Button onClick={() => onSubmit()}>Adicionar ao Carrinho</Button>}
+        {doc?.status === 0 && <Button onClick={() => onSubmit(0)}>Pagar Agora e Encomendar </Button>}
+        {doc?.status === 0 && <Button onClick={() => onSubmit(1)}>Encomendar e Pagar Depois</Button>}
       </Box>
     </Box>
   );

@@ -83,6 +83,8 @@ export const COLOR_LEGEND = {
 export const STATUS_LEGEND = {
   [orderStatusEnum.Pendente]: 'Pendente',
   [orderStatusEnum.Encomendado]: 'Encomendado',
+  [orderStatusEnum.Finalizado]: 'Finalizado',
+  [orderStatusEnum.Cancelado]: 'Cancelado'
 };
 
 export const REFRACTIVE_VALUES: Record<

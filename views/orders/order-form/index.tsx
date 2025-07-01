@@ -237,15 +237,15 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable, requestPaym
               </Box>
               {
                 /*@ts-ignore*/
-                (doc?.uid || doc?.id) && (!doc?.payment?.id && doc?.payment?.isPaid!==true) && <>
-                  <Typography color={"red"} fontSize="0.75rem">Pagamento não efectuado! {formatMoney(doc?.total)} AOA</Typography>
+                 ([1].includes(doc?.status) &&  doc?.payment?.isPaid!==true) && <>
+                  <Typography color={"red"} fontSize="0.75rem">Pagamento não efectuado! {formatMoney(doc?.total || 0)} AOA</Typography>
                   {/*@ts-ignore*/}
-                  <Button  onClick={()=>{requestPayment && requestPayment(doc?.uid || doc?.id,doc?.total)}}>Efectuar Pagamento</Button>
+                  <Button  onClick={()=>{requestPayment && requestPayment(doc?.uid,doc?.total)}}>Efectuar Pagamento</Button>
                 </>
               }
               {isEditable && (
                 <Box gridColumn="1/-1">
-                  <OrderFormSubmit doc={doc} closeForm={closeForm} />
+                  <OrderFormSubmit doc={doc} closeForm={closeForm} requestPayment={requestPayment} />
                 </Box>
               )}
             </Box>

@@ -12,6 +12,8 @@ export interface MenuProps {
 export enum orderStatusEnum {
   Pendente,
   Encomendado,
+  Finalizado,
+  Cancelado
 }
 
 export interface OrderFormProps {
@@ -33,6 +35,7 @@ export interface IAdmin {
 }
 
 export interface IClient {
+  id:string;
   type: number;
   email: string;
   priceId: string;
@@ -45,6 +48,8 @@ export interface IClient {
 }
 
 export interface IOrder {
+  id?:string;
+  uid?:string;
   ref: string;
   total: number;
   leftEye?: IEye;
@@ -61,6 +66,13 @@ export interface IOrder {
   minimumHeight: string;
   clientId: `CL${number}`;
   status: orderStatusEnum;
+  payment?:{
+    isPaid:boolean;
+    createdDate:number;
+    updatedDate:number;
+    tokenId:string;
+    reference:string;
+  },
   refractiveIndex: string | undefined;
   treatment: 'HMC' | 'SHMC' | 'UC' | 'HC';
   color: 'white' | 'photochromatic' | 'polarised';

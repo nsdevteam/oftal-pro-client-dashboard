@@ -25,5 +25,6 @@ export interface DropdownFieldProps
 
 export interface OrderFormSubmitProps {
   doc: WithUid<IOrder> | null;
+  requestPayment?: (orderId:string,total:number)=> void;
   closeForm: () => void;
 }
