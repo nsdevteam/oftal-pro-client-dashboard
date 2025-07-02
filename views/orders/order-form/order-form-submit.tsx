@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import invariant from 'tiny-invariant';
@@ -11,14 +11,23 @@ import { IOrder } from '../../../interface';
 import { formatMoney } from '../../../utils';
 import { TYPE_VALUES } from './order-form.data';
 import { OrderFormSubmitProps } from './order-form.types';
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 
 const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm, requestPayment }) => {
+  const [isLoadingPaymentFrame, setIsLoadingPaymentFrame] = useState<boolean>(false);
   const { prices, userData } = useUser();
   const {
     control,
     getValues,
     formState: { errors },
   } = useFormContext<IOrder>();
+
+
+  useEffect(()=>{
+    console.log("Document Opened ::: ",userData);    
+  },[])
 
   const {
     leftEye,
@@ -104,7 +113,7 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm, requestPaym
         docId: doc?.id || ""
       });
 
-    if (!userData?.type) return;
+    if (!userData?.type && userData?.type!==0) return;
 
 
     //Creates new order
@@ -125,6 +134,10 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm, requestPaym
     });
   };
 
+
+
+
+
   const onSubmit = (paymentProcedure?: 0 | 1) => {
     const errorsList = Object.values(errors);
     if (errorsList.length)
@@ -132,22 +145,27 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm, requestPaym
 
     if (paymentProcedure === 1 || (!paymentProcedure && paymentProcedure !== 0)) {
       toast.promise(handleSubmit(paymentProcedure), {
-        loading: `A ${doc?.uid ? 'atualizar' : 'submeter'} pedido...`,
+        loading: `A ${doc?.id ? 'atualizar' : 'submeter'} pedido...`,
         success: () => {
           closeForm();
-          return `Pedido ${doc?.uid ? 'atualizado' : 'submetido'} com sucesso!`;
+          return `Pedido ${doc?.id ? 'atualizado' : 'submetido'} com sucesso!`;
         },
         error: (e) =>
-          e.message ?? `Erro ao ${doc?.uid ? 'atualizar' : 'submeter'} o pedido`,
+          e.message ?? `Erro ao ${doc?.id ? 'atualizar' : 'submeter'} o pedido`,
       });
     } else {
-      handleSubmit(paymentProcedure).then((res) => {
-        console.log("Response In Submit :: ",res);  
+      setIsLoadingPaymentFrame(true);
+      handleSubmit(paymentProcedure).then(async (res) => {
         //Request Payment Before Updating Status to 'Ordered' (Backend Callback Task)
-        requestPayment && requestPayment(doc?.uid || "", doc?.total || 0);
-      }).catch((error)=>{
-        console.error("Failed to request payment before order ::: ",error);
-      })
+        //@ts-ignore
+        requestPayment && requestPayment(doc?.id, doc?.total).finally(() => {
+          setTimeout(() => {
+            setIsLoadingPaymentFrame(false);
+          }, 350)
+        })
+      }).catch((error) => {
+        console.error("Failed to request payment before order ::: ", error);
+      });
     }
 
   };
@@ -159,8 +177,11 @@ const OrderFormSubmit: FC<OrderFormSubmitProps> = ({ doc, closeForm, requestPaym
       </Typography>
       <Box display={"flex"} gap={15}>
         {!doc?.status && doc?.status !== 0 && <Button onClick={() => onSubmit()}>Adicionar ao Carrinho</Button>}
-        {doc?.status === 0 && <Button onClick={() => onSubmit(0)}>Pagar Agora e Encomendar </Button>}
-        {doc?.status === 0 && <Button onClick={() => onSubmit(1)}>Encomendar e Pagar Depois</Button>}
+        {doc?.status === 0 && !isLoadingPaymentFrame && <Button onClick={() => onSubmit(0)}>Pagar Agora e Encomendar </Button>}
+        {doc?.status === 0 && isLoadingPaymentFrame && <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+          <CircularProgress />
+        </Box>}
+        {doc?.status === 0 && userData?.type===1 && <Button onClick={() => onSubmit(1)}>Encomendar e Pagar Depois</Button>}
       </Box>
     </Box>
   );

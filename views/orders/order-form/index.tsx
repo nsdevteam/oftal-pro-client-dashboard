@@ -1,5 +1,6 @@
-import { ChangeEvent, FC, useEffect } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import {
   Attachment,
@@ -25,8 +26,22 @@ import OrderFormSubmit from './order-form-submit';
 import TreatmentDropdownField from './treatment-dropdown-field';
 import { downloadFirebaseFile } from '../../../utils/helpers';
 import { formatMoney } from '../../../utils';
+import { alignItems } from 'styled-system';
 
 const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable, requestPayment }) => {
+
+  const [isLoadingPaymentFrame, setIsLoadingPaymentFrame] = useState<boolean>(false);
+
+  const handleRequestPayment = async () => {
+    setIsLoadingPaymentFrame(true);
+    //@ts-ignore
+    requestPayment && requestPayment(doc?.id, doc?.total).finally(() => {
+      setTimeout(() => {
+        setIsLoadingPaymentFrame(false);
+      }, 350)
+    });
+  }
+
   const form = useForm<IOrder>({
     defaultValues: {
       diameter: 70,
@@ -237,10 +252,13 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable, requestPaym
               </Box>
               {
                 /*@ts-ignore*/
-                 ([1].includes(doc?.status) &&  doc?.payment?.isPaid!==true) && <>
+                ([1].includes(doc?.status) && doc?.payment?.isPaid !== true) && <>
                   <Typography color={"red"} fontSize="0.75rem">Pagamento não efectuado! {formatMoney(doc?.total || 0)} AOA</Typography>
                   {/*@ts-ignore*/}
-                  <Button  onClick={()=>{requestPayment && requestPayment(doc?.uid,doc?.total)}}>Efectuar Pagamento</Button>
+                  {!isLoadingPaymentFrame && <Button onClick={handleRequestPayment}>Efectuar Pagamento</Button>}
+                  {isLoadingPaymentFrame && <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+                    <CircularProgress />
+                  </Box>}
                 </>
               }
               {isEditable && (
@@ -252,7 +270,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable, requestPaym
           </Box>
         </Box>
       </Box>
-    </FormProvider>
+    </FormProvider >
   );
 };
 

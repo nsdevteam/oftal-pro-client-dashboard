@@ -8,6 +8,20 @@ type PaymentsFrameProps = {
     paymentsFrameId: string | null;
 }
 const PaymentsFrame = ({ closeForm, paymentsFrameId }: PaymentsFrameProps) => {
+    //Receive Event Information Regarding Success or Failure of Payment
+    useEffect(() => {
+        const GPO_EVENT_HANDLER = ($event: any) => {
+            if ($event?.origin !== 'https://cerpagamentonline.emis.co.ao') { return; }
+            console.log("GPO_EVENT_INFORMATION ::: ", $event?.data);
+        }
+
+        window.addEventListener('message', GPO_EVENT_HANDLER, false);
+
+        return () => {
+            window.removeEventListener('message', GPO_EVENT_HANDLER);
+        }
+    }, []);
+
     return (
 
         <Box
@@ -64,7 +78,7 @@ const PaymentsFrame = ({ closeForm, paymentsFrameId }: PaymentsFrameProps) => {
                     Efectuar Pagamento
                 </Typography>
                 <Box height={"100%"} width={"100%"}>
-                   {paymentsFrameId && <iframe height={"90%"} width={"100%"} src={`https://cerpagamentonline.emis.co.ao/online-payment-gateway/webframe?token=${paymentsFrameId}`}></iframe>}
+                    {paymentsFrameId && <iframe onError={($event) => console.log("Failed to execute payment ::: ", $event)} height={"90%"} width={"100%"} src={`https://cerpagamentonline.emis.co.ao/online-payment-gateway/webframe?token=${paymentsFrameId}`}></iframe>}
                 </Box>
             </Box>
         </Box>

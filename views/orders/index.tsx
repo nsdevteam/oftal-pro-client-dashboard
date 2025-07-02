@@ -22,7 +22,6 @@ const Orders: FC<OrdersProps> = ({ status }) => {
   const { renderer, rerender } = useRerender();
   const [isOpen, setOpen] = useState(false);
   const [isPaymentFrameOpened, setIsPaymentFrameOpened] = useState<boolean>(false);
-  const [isLoadingPaymentsFrame, setIsLoadingPaymentsFrame] = useState<boolean>(false);
   const [paymentsFrameId, setPaymenstFrameId] = useState<string | null>(null);
   const [orders, setOrders] = useState<ReadonlyArray<WithUid<IOrder>>>([]);
   const [filterOrders, setFilterOrders] = useState<any>([]);
@@ -105,8 +104,7 @@ const Orders: FC<OrdersProps> = ({ status }) => {
   }
 
   const onRequestPayment = async (orderId:string,amount:number) => {
-    setIsLoadingPaymentsFrame(true);
-    await fetch(`http://localhost:3200/api/payments/web/frame`,{
+    return fetch(`http://localhost:3200/api/payments/web/frame`,{
       method: "POST",
       headers:{
         "Accept":"application/json",
@@ -114,10 +112,10 @@ const Orders: FC<OrdersProps> = ({ status }) => {
       },
       body: JSON.stringify({
         amount,
+        orderId
       })
     }).then(res => res.json()).then(res => {
       if (res?.data?.id) {
-        setIsLoadingPaymentsFrame(false);
         setPaymenstFrameId(res?.data?.id);
         setTimeout(() => {
           setIsPaymentFrameOpened(true);
