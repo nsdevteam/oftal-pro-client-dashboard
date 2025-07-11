@@ -1,5 +1,5 @@
 import { WithUid } from 'burnbase/firestore';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState, memo } from 'react';
 import toast from 'react-hot-toast';
 import { FiPlus, FiShoppingCart, FiTrash } from 'react-icons/fi';
 import { updateOrder } from '../../api/orders';
@@ -16,6 +16,7 @@ import OrdersMobile from './orders-mobile';
 import FilterInput from '../../elements/filter-input';
 import { COLOR_LEGEND, STATUS_LEGEND, TYPE_LEGEND } from './order-form/order-form.data';
 import PaymentsFrame from '../payments/payments-frame';
+import PaymentsOnTime from '../payments/payments-on-time';
 
 const Orders: FC<OrdersProps> = ({ status }) => {
   const { userData } = useUser();
@@ -103,12 +104,12 @@ const Orders: FC<OrdersProps> = ({ status }) => {
     setFilterOrders(result);
   }
 
-  const onRequestPayment = async (orderId:string,amount:number) => {
-    return fetch(`http://localhost:3200/api/payments/web/frame`,{
+  const onRequestPayment = async (orderId: string, amount: number) => {
+    return fetch(`http://localhost:3200/api/payments/web/frame`, {
       method: "POST",
-      headers:{
-        "Accept":"application/json",
-        "Content-Type":"application/json"
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         amount,
@@ -124,6 +125,11 @@ const Orders: FC<OrdersProps> = ({ status }) => {
     }).catch((error) => {
       console.error("Failed to retrieve payment's frame", error);
     })
+  }
+  const onRequestPaymentOnTime = async () => {
+    setTimeout(() => {
+      setIsPaymentFrameOpened(true);
+    }, 2000)
   }
 
   return (
@@ -197,13 +203,19 @@ const Orders: FC<OrdersProps> = ({ status }) => {
               setOpen(false);
               setSelectedDoc(null);
             }}
-            requestPayment={(orderId:string,total:number)=>onRequestPayment(orderId,total)}
+            requestPayment={(orderId: string, total: number) => onRequestPaymentOnTime()}
           />
         )}
       </div>
       <div className='view-modal-silent'>
         {
-          isPaymentFrameOpened && paymentsFrameId && (<PaymentsFrame paymentsFrameId={paymentsFrameId} closeForm={() => {
+          isPaymentFrameOpened  && (<PaymentsOnTime data={
+            {
+              amount: selectDoc?.total || 0,
+              clientId: userData?.id || "",
+              orderId: selectDoc?.id || ""
+            }
+          } closeForm={() => {
             setIsPaymentFrameOpened(false);
             setPaymenstFrameId(null);
           }} />)
@@ -213,4 +225,4 @@ const Orders: FC<OrdersProps> = ({ status }) => {
   );
 };
 
-export default Orders;
+export default memo(Orders);

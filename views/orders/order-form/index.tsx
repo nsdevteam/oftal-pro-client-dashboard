@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState,memo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -38,7 +38,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable, requestPaym
     requestPayment && requestPayment(doc?.id, doc?.total).finally(() => {
       setTimeout(() => {
         setIsLoadingPaymentFrame(false);
-      }, 350)
+      }, 3000)
     });
   }
 
@@ -274,4 +274,4 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable, requestPaym
   );
 };
 
-export default OrderForm;
+export default memo(OrderForm);

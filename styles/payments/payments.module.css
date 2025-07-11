@@ -1,0 +1,131 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.formWrapper {
+    max-width: 400px;
+    width: 100%;
+    background-size: cover;
+    background-image: url("../../assets/images/iphone-mask.png");
+    background-repeat: no-repeat;
+    min-height: 400px;
+    height: 100%;
+
+}
+
+.content {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.topInfo {}
+
+.artwork {
+    height: 50px;
+    width: 50px;
+    margin: 40px 0;
+    background-size: contain;
+    background-image: url("../../assets/images/payment-icon-express.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.btnWrapper,
+.inputWrapper {
+    max-width: 200px;
+    width: 100%;
+}
+
+.phoneNumberInput {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ececec;
+    box-sizing: border-box;
+}
+
+.phoneNumberInput:focus {
+    outline: none;
+}
+
+.submitBtn {
+    display: block;
+    margin-top: 30px;
+    width: 120px;
+    margin: 30px auto 0;
+    padding: 6px;
+    background-color: orange;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 2px;
+    transition: 150ms ease-in-out;
+}
+
+.submitBtn:hover {
+    background-color: rgb(245, 160, 2);
+}
+
+.btnWrapper {
+    height: 58px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.paymentsOnTimeModalWrapper {
+    padding: 1rem;
+    inset: 0;
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background: #0003;
+    z-index: 600;
+}
+
+.paymentsOnTimeModalCloseBtn {
+    background-color: white;
+    top: 2.5rem;
+    width: 3rem;
+    height: 3rem;
+    right: 3.5rem;
+    display: flex;
+    cursor: pointer;
+    position: absolute;
+    align-items: center;
+    border-radius: 0.5rem;
+    align-self: flex-start;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    z-index: 20;
+    transition: border-color 0.2s ease;
+}
+
+.paymentsOnTimeModalContent {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    background-color: #fff;
+    gap: 3rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow-y: auto;
+    border-radius: 1rem;
+    flex-direction: column;
+}
