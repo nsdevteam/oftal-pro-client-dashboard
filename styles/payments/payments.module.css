@@ -1,3 +1,15 @@
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
 .wrapper {
     display: flex;
     justify-content: center;
@@ -128,4 +140,28 @@
     overflow-y: auto;
     border-radius: 1rem;
     flex-direction: column;
+}
+.dynamicList {
+    text-align: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 50px;
+}
+
+.dynamicListItem {
+    animation: fade 0.5s ease-in-out;
+    color: #5A5A5A;
+}
+.totalHeader{
+    font-size: 36px;
+    font-weight: lighter;
+    text-align: center;
+    line-height: 0.8;
+}
+.totalHeader span{
+    font-size: 12px;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight:500;
 }

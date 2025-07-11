@@ -7,6 +7,7 @@ import {
 import styles from '../../styles/payments/payments.module.css';
 import CircularProgress from '@mui/material/CircularProgress';
 import toast from 'react-hot-toast';
+import { formatMoney } from '../../utils';
 
 
 const PhoneInput = memo(({ phoneNumber, onChange }: any) => {
@@ -27,7 +28,23 @@ const PaymentsOnTime = ({ closeForm, data }: PaymentsOnTimeProps) => {
     const [phoneNumber, setPhoneNumber] = useState<string>("");
     const [isFormValid, setIsFormValid] = useState<boolean>(true);
     const [isLoadingPaymentOnTime, setIsLoadingPaymentOnTime] = useState<boolean>(false);
+    const [index, setIndex] = useState(0);
     const phoneNumberRegExp = /^[0-9]{9}$/;
+    useEffect(() => {
+        const interval = setInterval(() => {
+          setIndex((prevIndex) => (prevIndex + 1) % messages.length);
+        }, 3000);
+    
+        return () => clearInterval(interval);
+      }, []);
+
+    const messages = [
+        "1. Insere o teu número do multicaixa express.",
+        "2. Abrir o aplicativo no seu telemóvel ou celular!",
+        "3. Vai em *Operações em Curso* e Faça o Pagamento.",
+        "✅ Prontos o seu pedido será analisado e enviado em breve."
+    ];
+
 
     const submit = async () => {
         //Verify Input
@@ -53,7 +70,7 @@ const PaymentsOnTime = ({ closeForm, data }: PaymentsOnTimeProps) => {
                     console.log("Payment Response ::: ", res);
                     if (res?.error) {
                         //Alert user of failure on payment
-                        toast.error("Ocorreu um problema, não foi possível concluir o seu pagamento.");  
+                        toast.error("Ocorreu um problema, não foi possível concluir o seu pagamento.");
                     } else {
                         //Close Modal
                         //Toastify
@@ -109,6 +126,14 @@ const PaymentsOnTime = ({ closeForm, data }: PaymentsOnTimeProps) => {
                 >
                     Efectuar Pagamento
                 </Typography>
+                <ul className={styles?.dynamicList}>
+                    <li
+                        key={index}
+                        className={styles.dynamicListItem}
+                        dangerouslySetInnerHTML={{ __html: messages[index] }}
+                    />
+                </ul>
+                <h6 className={styles?.totalHeader}>Kz {formatMoney(data?.amount)}<br/><span>{data?.orderId}</span></h6>
                 <div>
                     <div className={styles?.wrapper}>
                         <form className={styles?.formWrapper}>
