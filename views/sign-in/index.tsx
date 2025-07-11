@@ -35,11 +35,14 @@ const Home: FC = () => {
       const { email, password } = getValues();
 
       await loginWithEmailAndPassword(email, password).then((credential:any) =>
-        updateUser(credential.uid, { lastLoginAt: Date.now() })
+        updateUser(credential?.uid, { lastLoginAt: Date.now() })
       );
 
       forceVerifyLogin();
       reset();
+    }catch(error){
+      console.error("Authentication Failed ::: ",error); 
+      throw new Error("Email ou senha inválidos!") 
     } finally {
       setLoading(false);
     }

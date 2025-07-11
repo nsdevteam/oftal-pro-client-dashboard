@@ -230,8 +230,7 @@ async function loginWithEmailAndPassword(
     console.log('Logged in as:', user.email); // Log user email or other user data
     return user;
   } catch (error) {
-    console.error('Error logging in:', error);
-    throw new Error('Failed to login.');
+    throw error;
   }
 }
 async function downloadFirebaseFile(
