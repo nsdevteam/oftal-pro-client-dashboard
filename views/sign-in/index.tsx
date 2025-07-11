@@ -100,6 +100,7 @@ const Home: FC = () => {
             fontSize={['0.5rem', '1rem']}
             type="email"
             bg="transparent"
+            className={styles?.emailInput}   
             outline="none"
             borderRadius="M"
             border="1px solid #E4E4E7"
@@ -133,7 +134,7 @@ const Home: FC = () => {
           </Typography>
           <Box
             width={"100%"}
-            height={['2rem', '3.5rem']}
+            height={"40px"}
             color="textInverted"
             borderRadius="M"
             border="1px solid #E4E4E7"

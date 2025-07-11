@@ -15,7 +15,8 @@
     box-sizing: border-box !important;     
     margin-top: 30px !important;  
     margin-bottom: 10px !important;         
-    transition: background-color,filter,opacity 150ms ease-in-out !important;      
+    transition: background-color,filter,opacity 150ms ease-in-out !important;     
+    width: 100% !important;    
 }
 .optionalLink{
     text-decoration: none !important; 
@@ -34,4 +35,13 @@
 }
 .authWrapper .passwordInput{   
     width: 100%;      
+}
+.emailInput:focus{
+    outline: none !important;
+    border: 1px solid #E4E4E7 !important;
+}
+
+.passwordInputWrapper .passwordInput:focus{
+    outline: none !important;
+    border: none !important;
 }

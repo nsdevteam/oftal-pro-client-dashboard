@@ -73,6 +73,7 @@ const ResetPasswordPage: FC = () => {
             borderRadius="M"
             border="1px solid #E4E4E7"
             color="textInverted"
+            className={styles?.emailInput}
             placeholder="johndoe@oftalpro.com"
             nFocus={{
               border: '1px solid #50ADE5',
