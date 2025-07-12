@@ -64,17 +64,23 @@ const OrdersView = ({ closeForm, data, requestPayment }: OrderViewProps) => {
                             {/* <img src="" className='page-a4-logo' alt='company-logo' /> */}
                             <LogoSVG className='page-a4-logo' width={200} height={30} />
                             <h4 className='page-a4-block-title'>Pedido N°: <span>{data?.id}</span></h4>
-                            <h4 className='page-a4-block-title'>Data: <span>{new Date(data?.createdAt).toLocaleDateString()}</span></h4>
+                            <h4 className='page-a4-block-title'>Data: <span>{new Date(data?.createdAt).toLocaleDateString('pt-PT', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                            })}</span></h4>
                             <h4 className='page-a4-block-title'>Total: <span>Kz {formatMoney(data?.total)}</span></h4>
-                            {data?.payment?.isPaid === true && <h4 className='page-a4-block-title'>Data de Pagamento: <span>{new Date(data?.payment?.createdDate).toLocaleDateString()}</span></h4>}
+                            {data?.payment?.isPaid === true && <h4 className='page-a4-block-title'>Data de Pagamento: <span>{new Date(data?.payment?.createdDate).toLocaleDateString('pt-PT', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                            })}</span></h4>}
                             {data?.payment?.isPaid === true && <h4 className='page-a4-block-title paid-status'>Pago</h4>}
                             {!data?.payment?.isPaid && <h4 className='page-a4-block-title not-paid-status'>Não Pago</h4>}
                             {!data?.payment?.isPaid && !isLoadingPaymentFrame && <button className='page-a4-action-btn' onClick={handleRequestPayment}>Efectuar Pagamento</button>}
                             {!data?.payment?.isPaid && isLoadingPaymentFrame && <div style={{ display: "flex", justifyContent: "center", alignItems: "center", maxWidth: "150px", width: "100%", margin: "10px 0" }}>
                                 <CircularProgress size={20} style={{ color: "orange" }} />
                             </div>}
-
-
                         </div>
                         <div className='page-a4-body'>
                             <hr className='page-a4-seperator' />

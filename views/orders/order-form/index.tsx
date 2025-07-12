@@ -107,6 +107,7 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable, requestPaym
           px={['1rem', '1rem', '4rem']}
           onClick={(e) => e.stopPropagation()}
           className='order-form-content'
+          paddingBottom={30}
         >
           <Typography
             className='page-title'
@@ -251,7 +252,11 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable, requestPaym
                 <Typography>Observações</Typography>
                 <Textarea
                   disabled={!isEditable}
-                  onChange={(e) => form.setValue('observation', e.target.value)}
+                  {...form.register('observation', {
+                    onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                      form.setValue('observation', e.target.value);
+                    },
+                  })}
                 />
               </Box>
               {
