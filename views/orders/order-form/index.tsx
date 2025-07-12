@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState,memo } from 'react';
+import { ChangeEvent, FC, useEffect, useState,memo, use } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -54,6 +54,10 @@ const OrderForm: FC<OrderFormProps> = ({ closeForm, doc, isEditable, requestPaym
       ...doc,
     },
   });
+
+  useEffect(()=>{
+    console.log("Form Information ::: ",form.getValues());
+  },[])
 
   return (
     <FormProvider {...form}>

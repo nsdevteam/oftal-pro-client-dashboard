@@ -17,11 +17,13 @@ import FilterInput from '../../elements/filter-input';
 import { COLOR_LEGEND, STATUS_LEGEND, TYPE_LEGEND } from './order-form/order-form.data';
 import PaymentsFrame from '../payments/payments-frame';
 import PaymentsOnTime from '../payments/payments-on-time';
+import OrdersView from './orders-view';
 
 const Orders: FC<OrdersProps> = ({ status }) => {
   const { userData } = useUser();
   const { renderer, rerender } = useRerender();
-  const [isOpen, setOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isViewOrderOpen, setIsViewOrderOpen] = useState(false);
   const [isPaymentFrameOpened, setIsPaymentFrameOpened] = useState<boolean>(false);
   const [paymentsFrameId, setPaymenstFrameId] = useState<string | null>(null);
   const [orders, setOrders] = useState<ReadonlyArray<WithUid<IOrder>>>([]);
@@ -132,6 +134,22 @@ const Orders: FC<OrdersProps> = ({ status }) => {
     }, 2000)
   }
 
+  //Function handles type of modal to be opened; 
+  //If an order is not completed or not ordered it will open an editable modal; 
+  //If Ordered it will open a read-only modal with commercial options
+  const handleViewOrderSelection = (order: WithUid<IOrder>) => {
+    if (order?.id) {
+      setSelectedDoc(order);
+    }
+    if (order?.status === orderStatusEnum.Pendente) {
+      //Order has not been placed
+      //Order is editable
+      setIsFormOpen(true);
+    } else {
+      setIsViewOrderOpen(true);
+    }
+  }
+
   return (
     <div className='view-wrapper orders-wrapper'>
       <div>
@@ -140,7 +158,7 @@ const Orders: FC<OrdersProps> = ({ status }) => {
         </Typography>
         {status === orderStatusEnum.Pendente && (
           <div className='order-options'>
-            <Button className='option-btn' mt="L" onClick={() => setOpen(true)}>
+            <Button className='option-btn' mt="L" onClick={() => setIsFormOpen(true)}>
               <Typography as="span">Novo pedido</Typography>
               <Typography as="span" ml="M">
                 <FiPlus size={18} color="#FFF" />
@@ -174,7 +192,7 @@ const Orders: FC<OrdersProps> = ({ status }) => {
       <div className='view-content orders-content'>
         <div className='dis-dk'>
           <OrderTable
-            setSelectedDoc={setSelectedDoc}
+            setSelectedDoc={handleViewOrderSelection}
             customData={orders}
             data={ordersByStatus}
             setSelectedList={setSelectedList}
@@ -188,28 +206,45 @@ const Orders: FC<OrdersProps> = ({ status }) => {
             setSelectedList={setSelectedList}
             selectedList={selectedList}
             customData={orders}
-            setSelectedDoc={setSelectedDoc}
+            setSelectedDoc={handleViewOrderSelection}
             data={filterOrders}
           />
         </div>
       </div>
+      {/* New Order */}
       <div className='view-modal-silent'>
-        {(isOpen || selectDoc) && (
+        {isFormOpen && (
           <OrderForm
             doc={selectDoc}
             isEditable={status === orderStatusEnum.Pendente}
             closeForm={() => {
               rerender();
-              setOpen(false);
+              setIsFormOpen(false);
               setSelectedDoc(null);
             }}
             requestPayment={(orderId: string, total: number) => onRequestPaymentOnTime()}
           />
         )}
       </div>
+      {/* View Order Read-Only */}
+      <div className='view-modal-silent'>
+        {isViewOrderOpen && (
+          <OrdersView
+            /*@ts-ignore*/
+            data={selectDoc}
+            closeForm={() => {
+              rerender();
+              setIsViewOrderOpen(false);
+              setSelectedDoc(null);
+            }}
+            requestPayment={() => onRequestPaymentOnTime()}
+          />
+        )}
+
+      </div>
       <div className='view-modal-silent'>
         {
-          isPaymentFrameOpened  && (<PaymentsOnTime data={
+          isPaymentFrameOpened && (<PaymentsOnTime data={
             {
               amount: selectDoc?.total || 0,
               clientId: userData?.id || "",
