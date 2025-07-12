@@ -17,7 +17,7 @@ const PhoneInput = memo(({ phoneNumber, onChange }: any) => {
 })
 
 type PaymentsOnTimeProps = {
-    closeForm: () => void;
+    closeForm: (successOnPayment?:boolean) => void;
     data: {
         amount: number;
         orderId: string;
@@ -53,7 +53,7 @@ const PaymentsOnTime = ({ closeForm, data }: PaymentsOnTimeProps) => {
             return;
         } else {
             setIsLoadingPaymentOnTime(true);
-            await fetch("http://localhost:3200/api/payments", {
+            await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/payments`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -72,9 +72,8 @@ const PaymentsOnTime = ({ closeForm, data }: PaymentsOnTimeProps) => {
                         //Alert user of failure on payment
                         toast.error("Ocorreu um problema, não foi possível concluir o seu pagamento.");
                     } else {
-                        //Close Modal
-                        //Toastify
-                        //Backend will handle update of order and client
+                        toast.success("O seu pagamento foi efectuado com sucesso !");
+                        closeForm(true);   
                     }
 
                 })
@@ -103,12 +102,12 @@ const PaymentsOnTime = ({ closeForm, data }: PaymentsOnTimeProps) => {
     return (
 
         <div
-            onClick={closeForm}
+            onClick={()=>closeForm(false)}
             className={styles?.paymentsOnTimeModalWrapper}
         >
             <Box
                 className={styles?.paymentsOnTimeModalCloseBtn}
-                onClick={closeForm}
+                onClick={()=>closeForm(false)}
 
             >
                 <Box fontSize="2rem" transform="scaleY(0.8)">

@@ -222,7 +222,7 @@ const Orders: FC<OrdersProps> = ({ status }) => {
               setIsFormOpen(false);
               setSelectedDoc(null);
             }}
-            requestPayment={(orderId: string, total: number) => onRequestPaymentOnTime()}
+            requestPayment={() => onRequestPaymentOnTime()}
           />
         )}
       </div>
@@ -250,9 +250,18 @@ const Orders: FC<OrdersProps> = ({ status }) => {
               clientId: userData?.id || "",
               orderId: selectDoc?.id || ""
             }
-          } closeForm={() => {
-            setIsPaymentFrameOpened(false);
-            setPaymenstFrameId(null);
+          } closeForm={(successOnPayment) => {
+            if(successOnPayment===true){
+              setIsFormOpen(false);   
+              setIsPaymentFrameOpened(false);
+              setPaymenstFrameId(null);
+              setIsViewOrderOpen(false);   
+              setSelectedDoc(null);
+              rerender();    
+            }else{
+              setIsPaymentFrameOpened(false);
+              setPaymenstFrameId(null);
+            }   
           }} />)
         }
       </div>
